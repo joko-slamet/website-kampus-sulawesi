@@ -51,11 +51,6 @@ export default function HeroSection() {
           position: 'absolute', inset: 0,
           background: 'linear-gradient(135deg, rgba(7,26,64,0.90) 0%, rgba(15,45,107,0.78) 45%, rgba(15,45,107,0.40) 100%)',
         }} />
-        {/* Bottom fade */}
-        <div style={{
-          position: 'absolute', bottom: 0, left: 0, right: 0, height: '12%',
-          background: 'linear-gradient(to top, #ffffff 0%, transparent 100%)',
-        }} />
       </div>
 
       {/* Decorative Blobs */}
