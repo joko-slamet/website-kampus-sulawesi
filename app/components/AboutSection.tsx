@@ -1,0 +1,234 @@
+'use client';
+
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+
+export default function AboutSection() {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold: 0.15 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const milestones = [
+    { year: '1996', label: 'Didirikan' },
+    { year: '2008', label: 'Akreditasi A' },
+    { year: '2015', label: 'Kampus Baru' },
+    { year: '2024', label: '12.000+ Alumni' },
+  ];
+
+  const values = [
+    {
+      icon: '🎯', title: 'Relevansi Industri',
+      desc: 'Kurikulum kami didesain bersama mitra industri terkemuka untuk memastikan keterserapan lulusan.'
+    },
+    {
+      icon: '🔬', title: 'Riset & Inovasi',
+      desc: 'Fasilitas lab modern mendukung penelitian mahasiswa yang berdampak nyata bagi masyarakat.'
+    },
+    {
+      icon: '🌐', title: 'Jaringan Global',
+      desc: 'Kemitraan dengan 50+ perusahaan dan universitas dalam & luar negeri membuka pintu peluang karier.'
+    },
+  ];
+
+  return (
+    <section id="tentang" ref={ref} style={{ padding: '6rem 0', background: '#f8fafc', overflow: 'hidden' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
+        {/* Section Label */}
+        <div style={{
+          display: 'flex', justifyContent: 'center', marginBottom: '1rem',
+          opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(20px)',
+          transition: 'all 0.6s ease',
+        }}>
+          <span className="section-label">✦ Tentang Kami</span>
+        </div>
+
+        <div style={{
+          display: 'grid', gridTemplateColumns: '1fr 1fr',
+          gap: '5rem', alignItems: 'center',
+        }} className="about-grid">
+          {/* Left: Image collage */}
+          <div style={{
+            position: 'relative',
+            opacity: visible ? 1 : 0,
+            transform: visible ? 'translateX(0)' : 'translateX(-40px)',
+            transition: 'all 0.75s ease 0.15s',
+          }}>
+            <div style={{ position: 'relative', height: '480px', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 24px 64px rgba(15,45,107,0.18)' }}>
+              <Image
+                src="/students-campus.png"
+                alt="Mahasiswa STIMIK Nusantara Sulawesi"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div style={{
+                position: 'absolute', inset: 0,
+                background: 'linear-gradient(to top, rgba(7,26,64,0.45) 0%, transparent 60%)',
+              }} />
+            </div>
+
+            {/* Floating card: Akreditasi */}
+            <div style={{
+              position: 'absolute', top: '-1.5rem', right: '-1.5rem',
+              background: 'white', borderRadius: '16px',
+              padding: '1.25rem 1.5rem',
+              boxShadow: '0 12px 40px rgba(15,45,107,0.18)',
+              border: '1px solid rgba(15,45,107,0.08)',
+              minWidth: '160px',
+              animation: 'float 5s ease-in-out infinite',
+            }}>
+              <div style={{ fontSize: '2.25rem', fontWeight: 900, color: '#0f2d6b', lineHeight: 1 }}>A</div>
+              <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '0.25rem', fontWeight: 500 }}>Akreditasi BAN-PT</div>
+              <div style={{ fontSize: '0.7rem', color: '#10b981', fontWeight: 600, marginTop: '0.2rem' }}>✓ Terverifikasi</div>
+            </div>
+
+            {/* Floating card: Alumni */}
+            <div style={{
+              position: 'absolute', bottom: '-1.5rem', left: '-1.5rem',
+              background: 'linear-gradient(135deg, #0f2d6b 0%, #1a4aad 100%)',
+              borderRadius: '16px',
+              padding: '1.25rem 1.5rem',
+              boxShadow: '0 12px 40px rgba(15,45,107,0.35)',
+              minWidth: '180px',
+              animation: 'float 6s ease-in-out infinite 1s',
+            }}>
+              <div style={{ fontSize: '1.75rem', fontWeight: 900, color: '#fbbf24', lineHeight: 1 }}>12.000+</div>
+              <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', marginTop: '0.25rem' }}>Alumni Berprestasi</div>
+              <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', marginTop: '0.2rem' }}>di seluruh Indonesia</div>
+            </div>
+
+            {/* Milestone timeline */}
+            <div style={{
+              position: 'absolute', bottom: '2rem', right: '-1.5rem',
+              background: 'white', borderRadius: '16px',
+              padding: '1rem 1.25rem',
+              boxShadow: '0 8px 32px rgba(15,45,107,0.14)',
+              border: '1px solid rgba(15,45,107,0.06)',
+            }}>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#0f2d6b', letterSpacing: '0.06em', marginBottom: '0.6rem' }}>PERJALANAN KAMI</div>
+              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                {milestones.map((m, i) => (
+                  <div key={i} style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#0f2d6b' }}>{m.year}</div>
+                    <div style={{ width: '6px', height: '6px', background: '#f5a623', borderRadius: '50%', margin: '4px auto' }} />
+                    <div style={{ fontSize: '0.6rem', color: '#64748b', whiteSpace: 'nowrap' }}>{m.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Content */}
+          <div style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? 'translateX(0)' : 'translateX(40px)',
+            transition: 'all 0.75s ease 0.25s',
+          }}>
+            <h2 style={{
+              fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
+              fontWeight: 800, color: '#0f2d6b',
+              lineHeight: 1.2, marginBottom: '1rem',
+              fontFamily: 'Plus Jakarta Sans, sans-serif',
+            }}>
+              Lebih dari Sekadar{' '}
+              <span style={{
+                background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>Kampus</span>
+            </h2>
+
+            <div style={{ width: '3rem', height: '3px', background: 'linear-gradient(90deg, #f5a623, #fbbf24)', borderRadius: '2px', marginBottom: '1.5rem' }} />
+
+            <p style={{ color: '#475569', lineHeight: 1.8, marginBottom: '1.5rem', fontSize: '1rem' }}>
+              Berdiri sejak <strong style={{ color: '#0f2d6b' }}>1996</strong>, STIMIK Nusantara Sulawesi adalah institusi pendidikan tinggi
+              swasta terdepan di Sulawesi. Kami berkomitmen melahirkan lulusan yang tidak hanya
+              kompeten secara akademik, tetapi juga siap menghadapi tantangan industri global.
+            </p>
+
+            <p style={{ color: '#475569', lineHeight: 1.8, marginBottom: '2rem', fontSize: '1rem' }}>
+              Dengan <strong style={{ color: '#0f2d6b' }}>120+ dosen</strong> berpengalaman, fasilitas modern berstandar internasional,
+              dan kurikulum yang terus diperbarui bersama industri — kami menjamin pendidikan
+              yang relevan, inovatif, dan berdaya saing tinggi.
+            </p>
+
+            {/* Value pillars */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
+              {values.map((v, i) => (
+                <div key={i} style={{
+                  display: 'flex', gap: '1rem', alignItems: 'flex-start',
+                  padding: '1rem 1.25rem',
+                  background: 'white', borderRadius: '12px',
+                  border: '1px solid #e2e8f0',
+                  boxShadow: '0 2px 8px rgba(15,45,107,0.05)',
+                  transition: 'all 0.25s ease',
+                  cursor: 'default',
+                }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(15,45,107,0.25)';
+                    (e.currentTarget as HTMLDivElement).style.transform = 'translateX(4px)';
+                    (e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 24px rgba(15,45,107,0.1)';
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLDivElement).style.borderColor = '#e2e8f0';
+                    (e.currentTarget as HTMLDivElement).style.transform = 'translateX(0)';
+                    (e.currentTarget as HTMLDivElement).style.boxShadow = '0 2px 8px rgba(15,45,107,0.05)';
+                  }}
+                >
+                  <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{v.icon}</span>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0f2d6b', marginBottom: '0.2rem' }}>{v.title}</div>
+                    <div style={{ fontSize: '0.8rem', color: '#64748b', lineHeight: 1.6 }}>{v.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href="#tentang-lengkap"
+              id="about-learn-more"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                padding: '0.75rem 1.75rem',
+                background: '#0f2d6b',
+                color: 'white', fontWeight: 600, fontSize: '0.9rem',
+                borderRadius: '999px', textDecoration: 'none',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLAnchorElement).style.background = '#1a4aad';
+                (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)';
+                (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 8px 24px rgba(15,45,107,0.3)';
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLAnchorElement).style.background = '#0f2d6b';
+                (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
+                (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none';
+              }}
+            >
+              Pelajari Lebih Lanjut
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .about-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
