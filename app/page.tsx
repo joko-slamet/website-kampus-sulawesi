@@ -5,6 +5,7 @@ import ProgramsSection from './components/ProgramsSection';
 import WhyChooseUsSection from './components/WhyChooseUsSection';
 import TestimonialsSection from './components/TestimonialsSection';
 import NewsSection from './components/NewsSection';
+import ArticlesSection from './components/ArticlesSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import FloatingCTA from './components/FloatingCTA';
@@ -20,6 +21,7 @@ export default function Home() {
         <WhyChooseUsSection />
         <TestimonialsSection />
         <NewsSection />
+        <ArticlesSection />
         <CTASection />
       </main>
       <Footer />
