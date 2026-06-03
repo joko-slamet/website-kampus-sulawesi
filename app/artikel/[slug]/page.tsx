@@ -4,8 +4,7 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import FloatingCTA from '../../components/FloatingCTA';
 import { allArticles } from '../data';
-import { getArticleContent } from '../content';
-import ArticleBody from './ArticleBody';
+import ArticleContent from './ArticleContent';
 import ArticleSidebar from './ArticleSidebar';
 import ArticleHero from './ArticleHero';
 
@@ -36,7 +35,6 @@ export default async function ArticleDetailPage({ params }: Props) {
   const article = allArticles.find(a => a.id === slug);
   if (!article) notFound();
 
-  const content = getArticleContent(slug);
   const related = allArticles
     .filter(a => a.id !== slug && a.category === article.category)
     .slice(0, 3);
@@ -50,14 +48,15 @@ export default async function ArticleDetailPage({ params }: Props) {
           categoryColor={article.categoryColor}
           tag={article.tag}
           tagColor={article.tagColor}
-          title={article.title}
+          titleId={article.title}
+          titleEn={article.en.title}
           date={article.date}
           readTime={article.readTime}
         />
 
         <section style={{ background: '#f8fafc', padding: '2.5rem 1.5rem 6rem' }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gap: '2.5rem' }} className="artikel-detail-layout">
-            <ArticleBody article={article} content={content} />
+            <ArticleContent article={article} />
             <ArticleSidebar related={related} />
           </div>
         </section>

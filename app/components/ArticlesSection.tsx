@@ -16,7 +16,7 @@ const categoryKeyMap: Record<string, string> = {
 };
 
 export default function ArticlesSection() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [visible, setVisible] = useState(false);
   const [activeCategory, setActiveCategory] = useState('Semua');
   const ref = useRef<HTMLDivElement>(null);
@@ -183,7 +183,7 @@ export default function ArticlesSection() {
                 fontSize: '1.05rem', fontWeight: 800,
                 color: '#0f2d6b', lineHeight: 1.4, margin: 0,
               }}>
-                {article.title}
+                {lang === 'en' ? article.en.title : article.title}
               </h3>
 
               {/* Excerpt */}
@@ -191,7 +191,7 @@ export default function ArticlesSection() {
                 color: '#64748b', fontSize: '0.875rem',
                 lineHeight: 1.7, margin: 0,
               }}>
-                {article.excerpt}
+                {lang === 'en' ? article.en.excerpt : article.excerpt}
               </p>
 
               {/* Read more */}

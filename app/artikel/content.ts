@@ -1,4 +1,4 @@
-type Block =
+export type Block =
   | { type: 'heading'; text: string }
   | { type: 'subheading'; text: string }
   | { type: 'paragraph'; text: string }
@@ -194,17 +194,72 @@ export const articleContent: Record<string, Block[]> = {
   ],
 };
 
-export function getArticleContent(id: string): Block[] {
+export const articleContentEn: Record<string, Block[]> = {
+  'tips-lulus-cepat': [
+    { type: 'paragraph', text: 'Graduating on time with a high GPA is every student\'s dream. In reality, many get caught between academic demands, organizational activities, and social life. The good news — it is not impossible, as long as you have the right strategy.' },
+    { type: 'heading', text: '1. Understand the Credit System from Day One' },
+    { type: 'paragraph', text: 'One of the biggest mistakes new students make is taking too few credits early out of fear of being overwhelmed, then panicking in later semesters. Ideally, take 20–24 credits in semesters 1–4 when your energy is high, and reduce in upper semesters when focusing on your thesis.' },
+    { type: 'callout', icon: '💡', text: 'Tip: Ask senior students for class schedules and syllabi before enrollment. Choose subject combinations that do not clash and have separate exam dates.' },
+    { type: 'heading', text: '2. Master Effective Study Techniques' },
+    { type: 'paragraph', text: 'Studying for hours without the right method is counterproductive. Use the Pomodoro Technique (25 minutes focus, 5 minutes break), active recall, and spaced repetition for material that requires memorization.' },
+    { type: 'list', items: ['Active recall: Close your book and try to remember what you just studied', 'Mind mapping: Visualize connections between concepts', 'Pomodoro technique: Structured study sessions with scheduled breaks', 'Peer teaching: Explain material to a friend — if you can teach it, you truly understand it'] },
+    { type: 'heading', text: '3. Build Good Relationships with Lecturers' },
+    { type: 'paragraph', text: 'This is often underestimated. Lecturers who know you not only grade you more fairly — they can become mentors, work references, and even doors to paid research opportunities. Be active in class, attend consultations, and do not be afraid to ask questions.' },
+    { type: 'heading', text: '4. Prioritize Tasks with the Eisenhower Matrix' },
+    { type: 'paragraph', text: 'Not all assignments carry the same urgency. Categorize tasks into four quadrants: important & urgent (do now), important & not urgent (schedule), not important & urgent (delegate if possible), not important & not urgent (eliminate).' },
+    { type: 'heading', text: '5. Maintain Physical and Mental Health' },
+    { type: 'paragraph', text: 'A sick student cannot study. Sleeping at least 7 hours, eating regularly, and light exercise 3 times a week are not luxuries — they are investments in academic performance. Burnout is the most commonly ignored GPA killer.' },
+    { type: 'heading', text: '6. Plan Your Thesis from Semester 5' },
+    { type: 'paragraph', text: 'The thesis is the leading cause of delayed graduation. Start reading journals and searching for topics from semester 5. In semester 6, try submitting a preliminary proposal to a lecturer you want as your supervisor. You will be far more at ease in semesters 7–8.' },
+    { type: 'divider' },
+    { type: 'callout', icon: '🎓', text: 'Remember: graduating on time is not about being the busiest student, but the most organized one. Start today — one small step at a time.' },
+  ],
+  'prospek-kerja-it': [
+    { type: 'paragraph', text: 'Amid global economic turbulence, one industry that keeps growing is technology. LinkedIn\'s Work Intelligence Report 2025 states that demand for IT talent in Southeast Asia rose 34% compared to the previous year. For Informatics graduates, this is the best news they could hear.' },
+    { type: 'heading', text: 'Most In-Demand IT Roles in 2025' },
+    { type: 'list', items: ['AI/ML Engineer — average salary IDR 15–30 million/month for junior-mid level', 'Backend Developer (Node.js, Go, Python) — demand up 45% YoY', 'Cloud Engineer (AWS, GCP, Azure) — almost every company is migrating to cloud', 'Cybersecurity Analyst — demand surging with rising cyber threats', 'Data Analyst / Data Scientist — even small companies are going data-driven', 'Mobile Developer (Android/iOS/Flutter) — smartphone penetration keeps growing'] },
+    { type: 'callout', icon: '📊', text: 'Jobstreet Indonesia Q1 2025: IT job postings grew 41% YoY, while talent supply only grew 18%. This means a favorable gap for IT job seekers.' },
+    { type: 'heading', text: 'Impact of AI on IT Careers' },
+    { type: 'paragraph', text: 'Many worry that AI will replace programmers. The reality is actually the opposite — AI is creating more new roles. What is changing is the type of skills required. Developers who can collaborate with AI tools (GitHub Copilot, Cursor, etc.) are far more productive, not replaced.' },
+    { type: 'subheading', text: 'Skills That Remain Relevant in the AI Era:' },
+    { type: 'list', items: ['System design & software architecture', 'Problem solving & computational thinking', 'Business understanding & domain knowledge', 'Technical communication and presentation skills', 'Effective debugging & code review'] },
+    { type: 'heading', text: 'How to Prepare from Your First Semester' },
+    { type: 'ordered', items: ['Master 1 programming language deeply before jumping to another', 'Build an active GitHub portfolio — at least 3 meaningful projects', 'Participate in hackathons or programming contests at least twice a year', 'Intern in semester 5-6, or even part-time earlier', 'Learn one cloud platform (AWS Free Tier is available for free)', 'Be active in local tech communities'] },
+    { type: 'callout', icon: '🚀', text: 'STIMIK Nusantara alumni who actively build portfolios typically get hired 3 months before graduation. Start today.' },
+  ],
+  'beasiswa-mahasiswa-baru': [
+    { type: 'paragraph', text: 'Tuition costs should not be a barrier to your education. STIMIK Nusantara Sulawesi provides various scholarship pathways that can reduce or fully cover your education costs. Here is a complete guide.' },
+    { type: 'heading', text: '1. KIP Kuliah (Smart Indonesia Card for Higher Education)' },
+    { type: 'paragraph', text: 'This government program provides full education funding plus monthly living allowances. KIP Kuliah is the most comprehensive scholarship available.' },
+    { type: 'list', items: ['Education costs: fully covered (up to IDR 12 million/semester)', 'Living costs: IDR 700,000–1,400,000/month depending on region cluster', 'Main requirement: classified as underprivileged family (based on DTKS)', 'Registration: through kip-kuliah.kemdikbud.go.id'] },
+    { type: 'callout', icon: '📅', text: 'KIP Kuliah 2025 Schedule: Account registration opens February–June 2025. Register before it closes!' },
+    { type: 'heading', text: '2. STIMIK Academic Achievement Scholarship' },
+    { type: 'paragraph', text: 'Exclusively for new students with outstanding report card or UTBK scores. No economic requirements.' },
+    { type: 'list', items: ['50% tuition discount for rank 1–10 in the department', '25% tuition discount for rank 11–25', 'Requirement: average report card score of at least 85 for grades 10–12', 'Evaluated each semester — maintain GPA ≥ 3.50'] },
+    { type: 'heading', text: '3. 3T Region Scholarship (Frontier, Outermost, Underdeveloped)' },
+    { type: 'paragraph', text: 'STIMIK cooperates with several district governments in Sulawesi to provide full scholarships for outstanding young people from 3T regions.' },
+    { type: 'heading', text: 'Tips to Get Your Scholarship Approved' },
+    { type: 'ordered', items: ['Complete all documents — SKTM, family card, diploma, transcripts', 'Write an honest and specific motivation essay, not generic', 'Apply for more than one scholarship pathway at the same time', 'Contact the STIMIK Student Affairs Office for free consultation', 'Do not wait until the semester starts — apply before enrollment'] },
+    { type: 'callout', icon: '📞', text: 'Need help? Contact the STIMIK Nusantara Student Affairs Office at WA: 0811-XXXX-XXXX (Monday–Friday, 08:00–16:00 WITA).' },
+  ],
+};
+
+export function getArticleContent(id: string, lang: 'id' | 'en' = 'id'): Block[] {
+  const contentMap = lang === 'en' ? articleContentEn : articleContent;
   return (
-    articleContent[id] ?? [
+    contentMap[id] ?? [
       {
         type: 'paragraph',
-        text: 'Konten lengkap artikel ini sedang dalam proses penulisan. Pantau terus untuk update terbaru dari tim STIMIK Nusantara Sulawesi.',
+        text: lang === 'en'
+          ? 'Full content for this article is being written. Stay tuned for the latest updates from the STIMIK Nusantara Sulawesi team.'
+          : 'Konten lengkap artikel ini sedang dalam proses penulisan. Pantau terus untuk update terbaru dari tim STIMIK Nusantara Sulawesi.',
       },
       {
         type: 'callout',
         icon: '🔔',
-        text: 'Ingin artikel ini segera hadir? Hubungi kami melalui WhatsApp dan kami akan memprioritaskannya.',
+        text: lang === 'en'
+          ? 'Want this article sooner? Contact us via WhatsApp and we will prioritize it.'
+          : 'Ingin artikel ini segera hadir? Hubungi kami melalui WhatsApp dan kami akan memprioritaskannya.',
       },
     ]
   );

@@ -7,13 +7,15 @@ type Props = {
   categoryColor: string;
   tag: string | null;
   tagColor: string | null;
-  title: string;
+  titleId: string;
+  titleEn: string;
   date: string;
   readTime: string;
 };
 
-export default function ArticleHero({ category, categoryColor, tag, title, date, readTime }: Props) {
-  const { t } = useLanguage();
+export default function ArticleHero({ category, categoryColor, tag, titleId, titleEn, date, readTime }: Props) {
+  const { t, lang } = useLanguage();
+  const title = lang === 'en' ? titleEn : titleId;
 
   return (
     <section style={{ background: '#f8fafc', padding: '8rem 1.5rem 2.5rem' }}>

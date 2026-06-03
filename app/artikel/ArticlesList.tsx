@@ -16,7 +16,7 @@ const categoryKeyMap: Record<string, string> = {
 };
 
 export default function ArticlesList() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('Semua');
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
@@ -28,12 +28,14 @@ export default function ArticlesList() {
     }
     if (search.trim()) {
       const q = search.toLowerCase();
-      result = result.filter(
-        a => a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q)
-      );
+      result = result.filter(a => {
+        const title = lang === 'en' ? a.en.title : a.title;
+        const excerpt = lang === 'en' ? a.en.excerpt : a.excerpt;
+        return title.toLowerCase().includes(q) || excerpt.toLowerCase().includes(q);
+      });
     }
     return result;
-  }, [activeCategory, search]);
+  }, [activeCategory, search, lang]);
 
   const paginated = filtered.slice(0, page * PAGE_SIZE);
   const hasMore = paginated.length < filtered.length;
@@ -186,7 +188,7 @@ export default function ArticlesList() {
               fontSize: '1.05rem', fontWeight: 800,
               color: '#0f2d6b', lineHeight: 1.4, margin: 0,
             }}>
-              {article.title}
+              {lang === 'en' ? article.en.title : article.title}
             </h2>
 
             {/* Excerpt */}
@@ -194,7 +196,7 @@ export default function ArticlesList() {
               color: '#64748b', fontSize: '0.875rem',
               lineHeight: 1.7, margin: 0, flex: 1,
             }}>
-              {article.excerpt}
+              {lang === 'en' ? article.en.excerpt : article.excerpt}
             </p>
 
             {/* Footer */}
