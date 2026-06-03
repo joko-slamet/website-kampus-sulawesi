@@ -17,10 +17,12 @@ const LanguageContext = createContext<ContextType>({
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>('id');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem('stimik_lang') as Lang | null;
     if (stored === 'en' || stored === 'id') setLangState(stored);
+    setMounted(true);
   }, []);
 
   const setLang = (l: Lang) => {
@@ -28,8 +30,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('stimik_lang', l);
   };
 
+  // Always use 'id' on first render to match SSR, switch after hydration
+  const effectiveLang = mounted ? lang : 'id';
+
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t: translations[lang] }}>
+    <LanguageContext.Provider value={{ lang: effectiveLang, setLang, t: translations[effectiveLang] }}>
       {children}
     </LanguageContext.Provider>
   );
