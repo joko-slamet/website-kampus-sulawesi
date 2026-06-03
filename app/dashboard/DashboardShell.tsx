@@ -6,9 +6,7 @@ import { usePathname } from 'next/navigation';
 const sidebarLinks = [
   { icon: '🏠', label: 'Overview', href: '/dashboard' },
   { icon: '📝', label: 'Artikel', href: '/dashboard/artikel' },
-  { icon: '📰', label: 'Berita', href: '/dashboard/berita' },
   { icon: '🎓', label: 'Program Studi', href: '/dashboard/program' },
-  { icon: '👥', label: 'Mahasiswa', href: '/dashboard/mahasiswa' },
   { icon: '⚙️', label: 'Pengaturan', href: '/dashboard/pengaturan' },
 ];
 
