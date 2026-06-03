@@ -19,12 +19,12 @@ export const metadata: Metadata = {
 export default function ArtikelPage() {
   return (
     <>
-      <Navbar />
+      <Navbar variant="dark" />
       <main>
         {/* Page Hero */}
         <section style={{
           background: 'linear-gradient(135deg, #071a40 0%, #0f2d6b 60%, #1a4aad 100%)',
-          padding: '9rem 1.5rem 5rem',
+          padding: '6rem 1.5rem 3.5rem',
           position: 'relative',
           overflow: 'hidden',
         }}>

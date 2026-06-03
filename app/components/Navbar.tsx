@@ -2,20 +2,28 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { label: 'Beranda', href: '#hero' },
   { label: 'Tentang', href: '#tentang' },
   { label: 'Program Studi', href: '#program' },
   { label: 'Fasilitas', href: '#fasilitas' },
+  { label: 'Artikel', href: '/artikel' },
   { label: 'Berita', href: '#berita' },
   { label: 'Kontak', href: '#kontak' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ variant = 'transparent' }: { variant?: 'transparent' | 'dark' }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const pathname = usePathname();
+  const isLanding = pathname === '/';
+
+  // When variant='dark', navbar starts with dark blue bg; both variants turn white on scroll
+  const atTop = !scrolled;
+  const darkAtTop = atTop && variant === 'dark';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,7 +44,15 @@ export default function Navbar() {
 
   const handleLinkClick = (href: string) => {
     setMenuOpen(false);
+    if (!href.startsWith('#')) {
+      window.location.href = href;
+      return;
+    }
     const id = href.replace('#', '');
+    if (!isLanding) {
+      window.location.href = `/${href}`;
+      return;
+    }
     setActiveSection(id);
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -54,10 +70,10 @@ export default function Navbar() {
           zIndex: 1000,
           transition: 'all 0.35s ease',
           padding: scrolled ? '0.65rem 0' : '1.1rem 0',
-          background: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent',
+          background: scrolled ? 'rgba(255,255,255,0.95)' : darkAtTop ? 'rgba(7,26,64,0.97)' : 'transparent',
           backdropFilter: scrolled ? 'blur(24px)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(24px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(15,45,107,0.08)' : '1px solid transparent',
+          borderBottom: scrolled ? '1px solid rgba(15,45,107,0.08)' : darkAtTop ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
           boxShadow: scrolled ? '0 4px 24px rgba(15,45,107,0.06)' : 'none',
         }}
       >
@@ -100,7 +116,7 @@ export default function Navbar() {
                   padding: '0.5rem 0.85rem',
                   fontSize: '0.875rem', fontWeight: 500,
                   color: scrolled
-                    ? (activeSection === link.href.replace('#', '') ? '#0f2d6b' : '#475569')
+                    ? (activeSection === link.href.replace('#', '') || pathname.startsWith(link.href) && !link.href.startsWith('#') ? '#0f2d6b' : '#475569')
                     : 'rgba(255,255,255,0.9)',
                   borderRadius: '8px',
                   transition: 'all 0.2s',

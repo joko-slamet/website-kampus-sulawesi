@@ -36,22 +36,6 @@ export default function ArticleBody({ article, content }: { article: Article; co
 
   return (
     <article>
-      {/* Excerpt callout */}
-      <div style={{
-        background: 'white',
-        border: '1px solid #e2e8f0',
-        borderLeft: `4px solid ${article.categoryColor}`,
-        borderRadius: '12px',
-        padding: '1.25rem 1.5rem',
-        marginBottom: '2rem',
-        color: '#334155',
-        fontSize: '1rem',
-        lineHeight: 1.75,
-        fontStyle: 'italic',
-      }}>
-        {article.excerpt}
-      </div>
-
       {/* Body */}
       <div style={{
         background: 'white',
