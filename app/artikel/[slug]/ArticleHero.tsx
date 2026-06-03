@@ -1,0 +1,64 @@
+'use client';
+
+import { useLanguage } from '../../i18n/LanguageContext';
+
+type Props = {
+  category: string;
+  categoryColor: string;
+  tag: string | null;
+  tagColor: string | null;
+  title: string;
+  date: string;
+  readTime: string;
+};
+
+export default function ArticleHero({ category, categoryColor, tag, title, date, readTime }: Props) {
+  const { t } = useLanguage();
+
+  return (
+    <section style={{ background: '#f8fafc', padding: '8rem 1.5rem 2.5rem' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        {/* Breadcrumb */}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem', fontSize: '0.8rem' }}>
+          <a href="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>{t.articleDetail.home}</a>
+          <span style={{ color: '#cbd5e1' }}>›</span>
+          <a href="/artikel" style={{ color: '#94a3b8', textDecoration: 'none' }}>{t.articleDetail.articles}</a>
+          <span style={{ color: '#cbd5e1' }}>›</span>
+          <span style={{ color: '#0f2d6b', fontWeight: 600 }}>{category}</span>
+        </nav>
+
+        {/* Badges */}
+        <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+          <span style={{ padding: '0.3rem 0.9rem', background: categoryColor + '12', color: categoryColor, borderRadius: '999px', fontSize: '0.75rem', fontWeight: 700, border: `1px solid ${categoryColor}30` }}>
+            {category}
+          </span>
+          {tag && (
+            <span style={{ padding: '0.3rem 0.9rem', background: 'rgba(245,166,35,0.12)', color: '#d97706', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 700, border: '1px solid rgba(245,166,35,0.3)' }}>
+              ✦ {tag}
+            </span>
+          )}
+        </div>
+
+        {/* Title */}
+        <h1 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.875rem)', fontWeight: 800, color: '#0f172a', lineHeight: 1.25, marginBottom: '1.5rem' }}>
+          {title}
+        </h1>
+
+        {/* Meta */}
+        <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+          {[
+            { icon: '📅', text: date },
+            { icon: '⏱', text: `${readTime} ${t.articleDetail.readTime}` },
+            { icon: '✍️', text: t.articleDetail.author },
+          ].map(m => (
+            <span key={m.text} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.85rem', background: 'white', border: '1px solid #e2e8f0', borderRadius: '999px', fontSize: '0.8rem', color: '#64748b' }}>
+              {m.icon} {m.text}
+            </span>
+          ))}
+        </div>
+
+        <div style={{ borderBottom: '1px solid #e2e8f0', marginTop: '2.5rem' }} />
+      </div>
+    </section>
+  );
+}

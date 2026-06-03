@@ -1,5 +1,7 @@
 'use client';
 
+import { useLanguage } from '../../i18n/LanguageContext';
+
 type RelatedArticle = {
   id: string;
   title: string;
@@ -11,6 +13,7 @@ type Props = {
 };
 
 export default function ArticleSidebar({ related }: Props) {
+  const { t } = useLanguage();
   return (
     <aside>
       {/* CTA Card */}
@@ -22,10 +25,10 @@ export default function ArticleSidebar({ related }: Props) {
       }}>
         <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>🎓</div>
         <h3 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '0.75rem', lineHeight: 1.3 }}>
-          Tertarik Kuliah di STIMIK Nusantara?
+          {t.articleDetail.sidebarTitle}
         </h3>
         <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-          Bergabunglah bersama 5.200+ mahasiswa aktif. PMB 2025/2026 masih terbuka.
+          {t.articleDetail.sidebarDesc}
         </p>
         <a
           href="/#daftar"
@@ -37,7 +40,7 @@ export default function ArticleSidebar({ related }: Props) {
             borderRadius: '12px', textDecoration: 'none',
           }}
         >
-          Daftar Sekarang →
+          {t.articleDetail.sidebarCta}
         </a>
 
         {/* Related articles */}
@@ -48,7 +51,7 @@ export default function ArticleSidebar({ related }: Props) {
             borderTop: '1px solid rgba(255,255,255,0.15)',
           }}>
             <h3 style={{ fontSize: '0.9rem', fontWeight: 800, color: 'rgba(255,255,255,0.9)', marginBottom: '1rem' }}>
-              Artikel Terkait
+              {t.articleDetail.relatedTitle}
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {related.map(r => (
@@ -88,7 +91,7 @@ export default function ArticleSidebar({ related }: Props) {
                 textDecoration: 'none',
               }}
             >
-              Lihat semua artikel →
+              {t.articleDetail.viewAllArticles}
             </a>
           </div>
         )}

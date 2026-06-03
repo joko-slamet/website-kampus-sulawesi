@@ -1,8 +1,10 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function CTASection() {
+  const { t } = useLanguage();
   const [visible, setVisible] = useState(false);
   const [formData, setFormData] = useState({ nama: '', email: '', phone: '', program: '', pesan: '' });
   const [submitted, setSubmitted] = useState(false);
@@ -24,12 +26,8 @@ export default function CTASection() {
     setTimeout(() => { setLoading(false); setSubmitted(true); }, 1500);
   };
 
-  const steps = [
-    { num: '01', title: 'Isi Formulir', desc: 'Lengkapi data dirimu secara online dengan mudah', icon: '📝' },
-    { num: '02', title: 'Seleksi Berkas', desc: 'Tim kami memproses berkas dalam 1-2 hari kerja', icon: '📋' },
-    { num: '03', title: 'Ujian Masuk', desc: 'Ikuti tes online yang fleksibel sesuai jadwalmu', icon: '📚' },
-    { num: '04', title: 'Diterima!', desc: 'Selamat bergabung! Mulai perjalanan akademikmu', icon: '🎉' },
-  ];
+  const stepIcons = ['📝', '📋', '📚', '🎉'];
+  const steps = t.cta.steps.map((s, i) => ({ ...s, icon: stepIcons[i] }));
 
   return (
     <section id="daftar" ref={ref} style={{ padding: '6rem 0', background: '#f8fafc' }}>
@@ -41,21 +39,21 @@ export default function CTASection() {
           opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)',
           transition: 'all 0.6s ease',
         }}>
-          <span className="section-label" style={{ marginBottom: '0.75rem', display: 'inline-block' }}>✦ Pendaftaran</span>
+          <span className="section-label" style={{ marginBottom: '0.75rem', display: 'inline-block' }}>{t.cta.label}</span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
             fontWeight: 800, color: '#0f2d6b', lineHeight: 1.2, marginBottom: '0.75rem',
           }}>
-            Mulai Perjalananmu{' '}
+            {t.cta.title}{' '}
             <span style={{
               background: 'linear-gradient(135deg, #f5a623 0%, #fbbf24 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-            }}>Hari Ini</span>
+            }}>{t.cta.titleGradient}</span>
           </h2>
           <p style={{ color: '#64748b', maxWidth: '500px', margin: '0 auto', lineHeight: 1.75 }}>
-            Proses pendaftaran mudah, cepat, dan bisa dilakukan dari mana saja. Slot terbatas — daftar sekarang!
+            {t.cta.subtitle}
           </p>
         </div>
 
@@ -120,19 +118,13 @@ export default function CTASection() {
             }} />
 
             <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'white', marginBottom: '0.5rem' }}>
-              Informasi Pendaftaran
+              {t.cta.infoTitle}
             </h3>
             <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '2rem' }}>
-              Tahun akademik 2025/2026 — gelombang I
+              {t.cta.infoSubtitle}
             </p>
 
-            {[
-              { icon: '📅', label: 'Batas Pendaftaran', val: '30 Juli 2025' },
-              { icon: '💰', label: 'Biaya Pendaftaran', val: 'Rp 150.000' },
-              { icon: '📞', label: 'Hotline PMB', val: '0411-123456' },
-              { icon: '📧', label: 'Email', val: 'pmb@stimik-nusantara.ac.id' },
-              { icon: '📍', label: 'Lokasi Kampus', val: 'Jl. Nusantara No.1, Makassar' },
-            ].map((item) => (
+            {t.cta.infoItems.map((item) => (
               <div key={item.label} style={{
                 display: 'flex', gap: '1rem', alignItems: 'flex-start',
                 marginBottom: '1.25rem',
@@ -153,10 +145,10 @@ export default function CTASection() {
               borderRadius: '12px',
             }}>
               <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#fbbf24', marginBottom: '0.3rem' }}>
-                🎁 Bonus Pendaftar Gelombang I
+                🎁 {t.cta.bonusTitle}
               </div>
               <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.6 }}>
-                Diskon SPP 20% + Bebas biaya pendaftaran untuk 50 pendaftar pertama
+                {t.cta.bonusDesc}
               </div>
             </div>
 
@@ -186,7 +178,7 @@ export default function CTASection() {
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
               </svg>
-              Chat via WhatsApp
+              {t.cta.waButton}
             </a>
           </div>
 
@@ -200,10 +192,10 @@ export default function CTASection() {
               <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
                 <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🎉</div>
                 <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f2d6b', marginBottom: '0.75rem' }}>
-                  Terima Kasih!
+                  {t.cta.successTitle}
                 </h3>
                 <p style={{ color: '#64748b', lineHeight: 1.7, marginBottom: '1.5rem' }}>
-                  Data kamu berhasil dikirim. Tim kami akan menghubungi kamu dalam waktu 1x24 jam.
+                  {t.cta.successDesc}
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
@@ -215,23 +207,23 @@ export default function CTASection() {
                     fontFamily: 'Plus Jakarta Sans, sans-serif',
                   }}
                 >
-                  Kembali ke Formulir
+                  {t.cta.successBtn}
                 </button>
               </div>
             ) : (
               <>
                 <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#0f2d6b', marginBottom: '0.35rem' }}>
-                  Formulir Pendaftaran
+                  {t.cta.formTitle}
                 </h3>
                 <p style={{ color: '#64748b', fontSize: '0.875rem', marginBottom: '1.75rem' }}>
-                  Isi form di bawah dan tim kami akan segera menghubungi kamu.
+                  {t.cta.formSubtitle}
                 </p>
 
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
                   {[
-                    { id: 'form-nama', label: 'Nama Lengkap', type: 'text', key: 'nama', placeholder: 'Masukkan nama lengkap', required: true },
-                    { id: 'form-email', label: 'Email', type: 'email', key: 'email', placeholder: 'nama@email.com', required: true },
-                    { id: 'form-phone', label: 'Nomor WhatsApp', type: 'tel', key: 'phone', placeholder: '08xxxxxxxxxx', required: true },
+                    { id: 'form-nama', label: t.cta.fieldName, type: 'text', key: 'nama', placeholder: t.cta.fieldNamePlaceholder, required: true },
+                    { id: 'form-email', label: t.cta.fieldEmail, type: 'email', key: 'email', placeholder: t.cta.fieldEmailPlaceholder, required: true },
+                    { id: 'form-phone', label: t.cta.fieldPhone, type: 'tel', key: 'phone', placeholder: t.cta.fieldPhonePlaceholder, required: true },
                   ].map((field) => (
                     <div key={field.key}>
                       <label htmlFor={field.id} style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
@@ -257,7 +249,7 @@ export default function CTASection() {
 
                   <div>
                     <label htmlFor="form-program" style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
-                      Program Studi <span style={{ color: '#dc2626' }}>*</span>
+                      {t.cta.fieldProgram} <span style={{ color: '#dc2626' }}>*</span>
                     </label>
                     <select
                       id="form-program"
@@ -271,7 +263,7 @@ export default function CTASection() {
                         background: '#fafafa', cursor: 'pointer',
                       }}
                     >
-                      <option value="">-- Pilih Program Studi --</option>
+                      <option value="">{t.cta.fieldProgramDefault}</option>
                       <option value="SI">S1 Sistem Informasi</option>
                       <option value="TI">S1 Teknik Informatika</option>
                       <option value="MI">D3 Manajemen Informatika</option>
@@ -281,12 +273,12 @@ export default function CTASection() {
 
                   <div>
                     <label htmlFor="form-pesan" style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
-                      Pesan / Pertanyaan
+                      {t.cta.fieldMessage}
                     </label>
                     <textarea
                       id="form-pesan"
                       rows={3}
-                      placeholder="Ada yang ingin ditanyakan? (opsional)"
+                      placeholder={t.cta.fieldMessagePlaceholder}
                       value={formData.pesan}
                       onChange={(e) => setFormData({ ...formData, pesan: e.target.value })}
                       style={{
@@ -320,11 +312,11 @@ export default function CTASection() {
                           <circle cx="12" cy="12" r="10" strokeOpacity="0.3" />
                           <path d="M12 2a10 10 0 0 1 10 10" />
                         </svg>
-                        Mengirim...
+                        {t.cta.submitting}
                       </>
                     ) : (
                       <>
-                        Kirim Pendaftaran
+                        {t.cta.submit}
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                           <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
@@ -333,7 +325,7 @@ export default function CTASection() {
                   </button>
 
                   <p style={{ textAlign: 'center', fontSize: '0.75rem', color: '#94a3b8' }}>
-                    🔒 Data kamu aman dan tidak akan dibagikan kepada pihak ketiga
+                    🔒 {t.cta.privacy}
                   </p>
                 </form>
               </>

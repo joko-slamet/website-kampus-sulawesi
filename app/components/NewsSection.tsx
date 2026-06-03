@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const news = [
   {
@@ -58,6 +59,7 @@ const news = [
 ];
 
 export default function NewsSection() {
+  const { t } = useLanguage();
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -81,18 +83,18 @@ export default function NewsSection() {
           transition: 'all 0.6s ease',
         }}>
           <div>
-            <span className="section-label" style={{ marginBottom: '0.75rem', display: 'inline-block' }}>✦ Berita & Pengumuman</span>
+            <span className="section-label" style={{ marginBottom: '0.75rem', display: 'inline-block' }}>{t.news.label}</span>
             <h2 style={{
               fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
               fontWeight: 800, color: '#0f2d6b', lineHeight: 1.2,
             }}>
-              Update Terkini{' '}
+              {t.news.title}{' '}
               <span style={{
                 background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-              }}>Kampus Kami</span>
+              }}>{t.news.titleGradient}</span>
             </h2>
           </div>
           <a
@@ -115,7 +117,7 @@ export default function NewsSection() {
               (e.currentTarget as HTMLAnchorElement).style.color = '#0f2d6b';
             }}
           >
-            Lihat Semua Berita
+            {t.news.viewAll}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
@@ -180,7 +182,7 @@ export default function NewsSection() {
                 display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
                 marginTop: '1.25rem', color: '#0f2d6b', fontWeight: 600, fontSize: '0.875rem',
               }}>
-                Baca Selengkapnya
+                {t.news.readMore}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>

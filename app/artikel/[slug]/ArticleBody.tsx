@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 type Block =
   | { type: 'heading'; text: string }
@@ -24,6 +25,7 @@ type Article = {
 };
 
 export default function ArticleBody({ article, content }: { article: Article; content: Block[] }) {
+  const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -142,7 +144,7 @@ export default function ArticleBody({ article, content }: { article: Article; co
         borderRadius: '16px',
       }}>
         <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#64748b', marginRight: '0.25rem' }}>
-          Bagikan:
+          {t.articleDetail.shareLabel}
         </span>
 
         <a
@@ -176,7 +178,7 @@ export default function ArticleBody({ article, content }: { article: Article; co
             transition: 'all 0.2s ease',
           }}
         >
-          {copied ? '✓ Disalin!' : '🔗 Salin Link'}
+          {copied ? t.articleDetail.copied : `🔗 ${t.articleDetail.copyLink}`}
         </button>
 
         <a
@@ -188,7 +190,7 @@ export default function ArticleBody({ article, content }: { article: Article; co
             textDecoration: 'none',
           }}
         >
-          ← Semua Artikel
+          {t.articleDetail.backToAll}
         </a>
       </div>
     </article>

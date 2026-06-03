@@ -2,10 +2,21 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { allArticles, categories } from '../artikel/data';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const articles = allArticles.slice(0, 6);
 
+const categoryKeyMap: Record<string, string> = {
+  'Semua': 'all',
+  'Tips Kuliah': 'tipsKuliah',
+  'Dunia IT': 'duniaIT',
+  'Karier': 'karier',
+  'Beasiswa': 'beasiswa',
+  'Kehidupan Kampus': 'kehidupanKampus',
+};
+
 export default function ArticlesSection() {
+  const { t } = useLanguage();
   const [visible, setVisible] = useState(false);
   const [activeCategory, setActiveCategory] = useState('Semua');
   const ref = useRef<HTMLDivElement>(null);
@@ -40,22 +51,22 @@ export default function ArticlesSection() {
         }}>
           <div>
             <span className="section-label" style={{ marginBottom: '0.75rem', display: 'inline-block' }}>
-              ✦ Artikel & Insight
+              {t.articles.sectionLabel}
             </span>
             <h2 style={{
               fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
               fontWeight: 800, color: '#0f2d6b', lineHeight: 1.2,
             }}>
-              Wawasan untuk{' '}
+              {t.articles.sectionTitle}{' '}
               <span style={{
                 background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-              }}>Masa Depanmu</span>
+              }}>{t.articles.sectionGradient}</span>
             </h2>
             <p style={{ color: '#64748b', marginTop: '0.5rem', fontSize: '0.95rem' }}>
-              Tips kuliah, info karier, dan insight dunia IT — diperbarui setiap hari.
+              {t.articles.sectionDesc}
             </p>
           </div>
           <a
@@ -77,7 +88,7 @@ export default function ArticlesSection() {
               (e.currentTarget as HTMLAnchorElement).style.color = '#0f2d6b';
             }}
           >
-            Lihat Semua Artikel
+            {t.articles.viewAll}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
@@ -106,7 +117,7 @@ export default function ArticlesSection() {
                 color: activeCategory === cat ? 'white' : '#64748b',
               }}
             >
-              {cat}
+              {t.articles.categories[categoryKeyMap[cat] as keyof typeof t.articles.categories]}
             </button>
           ))}
         </div>
@@ -189,7 +200,7 @@ export default function ArticlesSection() {
                 color: '#0f2d6b', fontWeight: 600, fontSize: '0.82rem',
                 marginTop: '0.25rem',
               }}>
-                Baca Artikel
+                {t.articles.readBtn}
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
@@ -205,7 +216,7 @@ export default function ArticlesSection() {
           opacity: visible ? 1 : 0, transition: 'all 0.6s ease 0.5s',
         }}>
           <p style={{ color: '#64748b', marginBottom: '1rem', fontSize: '0.9rem' }}>
-            Artikel baru diterbitkan setiap hari. Jangan sampai ketinggalan.
+            {t.articles.newDaily}
           </p>
           <a
             href="/artikel"
@@ -227,7 +238,7 @@ export default function ArticlesSection() {
               (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 8px 24px rgba(15,45,107,0.25)';
             }}
           >
-            Jelajahi Semua Artikel
+            {t.articles.exploreAll}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>

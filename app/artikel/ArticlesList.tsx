@@ -2,10 +2,21 @@
 
 import { useState, useMemo } from 'react';
 import { allArticles, categories } from './data';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const PAGE_SIZE = 9;
 
+const categoryKeyMap: Record<string, string> = {
+  'Semua': 'all',
+  'Tips Kuliah': 'tipsKuliah',
+  'Dunia IT': 'duniaIT',
+  'Karier': 'karier',
+  'Beasiswa': 'beasiswa',
+  'Kehidupan Kampus': 'kehidupanKampus',
+};
+
 export default function ArticlesList() {
+  const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('Semua');
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
@@ -54,7 +65,7 @@ export default function ArticlesList() {
           </svg>
           <input
             type="text"
-            placeholder="Cari artikel..."
+            placeholder={t.articles.searchPlaceholder}
             value={search}
             onChange={e => handleSearch(e.target.value)}
             style={{
@@ -90,7 +101,7 @@ export default function ArticlesList() {
                 color: activeCategory === cat ? 'white' : '#64748b',
               }}
             >
-              {cat}
+              {t.articles.categories[categoryKeyMap[cat] as keyof typeof t.articles.categories]}
             </button>
           ))}
         </div>
@@ -98,17 +109,17 @@ export default function ArticlesList() {
 
       {/* Result count */}
       <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
-        Menampilkan <strong style={{ color: '#0f2d6b' }}>{filtered.length}</strong> artikel
-        {activeCategory !== 'Semua' && ` dalam kategori "${activeCategory}"`}
-        {search && ` untuk "${search}"`}
+        {t.articles.showing} <strong style={{ color: '#0f2d6b' }}>{filtered.length}</strong> {t.articles.articleWord}
+        {activeCategory !== 'Semua' && ` ${t.articles.inCategory} "${t.articles.categories[categoryKeyMap[activeCategory] as keyof typeof t.articles.categories]}"`}
+        {search && ` ${t.articles.forKeyword} "${search}"`}
       </p>
 
       {/* Empty state */}
       {filtered.length === 0 && (
         <div style={{ textAlign: 'center', padding: '5rem 0', color: '#94a3b8' }}>
           <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔍</div>
-          <p style={{ fontWeight: 600, color: '#64748b', marginBottom: '0.5rem' }}>Artikel tidak ditemukan</p>
-          <p style={{ fontSize: '0.875rem' }}>Coba kata kunci atau kategori lain.</p>
+          <p style={{ fontWeight: 600, color: '#64748b', marginBottom: '0.5rem' }}>{t.articles.notFound}</p>
+          <p style={{ fontSize: '0.875rem' }}>{t.articles.notFoundDesc}</p>
         </div>
       )}
 
@@ -197,7 +208,7 @@ export default function ArticlesList() {
                 display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
                 color: '#0f2d6b', fontWeight: 700, fontSize: '0.8rem',
               }}>
-                Baca
+                {t.articles.readBtn}
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
@@ -230,7 +241,7 @@ export default function ArticlesList() {
               (e.currentTarget as HTMLButtonElement).style.color = '#0f2d6b';
             }}
           >
-            Muat Lebih Banyak ({filtered.length - paginated.length} artikel lagi)
+            {t.articles.loadMore} ({filtered.length - paginated.length} {t.articles.moreArticles})
           </button>
         </div>
       )}

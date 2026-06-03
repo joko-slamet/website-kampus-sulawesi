@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function AboutSection() {
+  const { t } = useLanguage();
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -16,27 +18,10 @@ export default function AboutSection() {
     return () => observer.disconnect();
   }, []);
 
-  const milestones = [
-    { year: '1996', label: 'Didirikan' },
-    { year: '2008', label: 'Akreditasi A' },
-    { year: '2015', label: 'Kampus Baru' },
-    { year: '2024', label: '12.000+ Alumni' },
-  ];
+  const milestones = t.about.milestones;
 
-  const values = [
-    {
-      icon: '🎯', title: 'Relevansi Industri',
-      desc: 'Kurikulum kami didesain bersama mitra industri terkemuka untuk memastikan keterserapan lulusan.'
-    },
-    {
-      icon: '🔬', title: 'Riset & Inovasi',
-      desc: 'Fasilitas lab modern mendukung penelitian mahasiswa yang berdampak nyata bagi masyarakat.'
-    },
-    {
-      icon: '🌐', title: 'Jaringan Global',
-      desc: 'Kemitraan dengan 50+ perusahaan dan universitas dalam & luar negeri membuka pintu peluang karier.'
-    },
-  ];
+  const icons = ['🎯', '🔬', '🌐'];
+  const values = t.about.features.map((f, i) => ({ icon: icons[i], title: f.title, desc: f.desc }));
 
   return (
     <section id="tentang" ref={ref} style={{ padding: '6rem 0', background: '#f8fafc', overflow: 'hidden' }}>
@@ -47,7 +32,7 @@ export default function AboutSection() {
           opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(20px)',
           transition: 'all 0.6s ease',
         }}>
-          <span className="section-label">✦ Tentang Kami</span>
+          <span className="section-label">{t.about.label}</span>
         </div>
 
         <div style={{
@@ -86,8 +71,8 @@ export default function AboutSection() {
               animation: 'float 5s ease-in-out infinite',
             }}>
               <div style={{ fontSize: '2.25rem', fontWeight: 900, color: '#0f2d6b', lineHeight: 1 }}>A</div>
-              <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '0.25rem', fontWeight: 500 }}>Akreditasi BAN-PT</div>
-              <div style={{ fontSize: '0.7rem', color: '#10b981', fontWeight: 600, marginTop: '0.2rem' }}>✓ Terverifikasi</div>
+              <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '0.25rem', fontWeight: 500 }}>{t.about.floatAccred}</div>
+              <div style={{ fontSize: '0.7rem', color: '#10b981', fontWeight: 600, marginTop: '0.2rem' }}>✓ {t.about.floatAccredSub}</div>
             </div>
 
             {/* Floating card: Alumni */}
@@ -101,8 +86,8 @@ export default function AboutSection() {
               animation: 'float 6s ease-in-out infinite 1s',
             }}>
               <div style={{ fontSize: '1.75rem', fontWeight: 900, color: '#fbbf24', lineHeight: 1 }}>12.000+</div>
-              <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', marginTop: '0.25rem' }}>Alumni Berprestasi</div>
-              <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', marginTop: '0.2rem' }}>di seluruh Indonesia</div>
+              <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', marginTop: '0.25rem' }}>{t.about.floatAlumniLabel}</div>
+              <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', marginTop: '0.2rem' }}>{t.about.floatAlumniSub}</div>
             </div>
 
             {/* Milestone timeline */}
@@ -113,7 +98,7 @@ export default function AboutSection() {
               boxShadow: '0 8px 32px rgba(15,45,107,0.14)',
               border: '1px solid rgba(15,45,107,0.06)',
             }}>
-              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#0f2d6b', letterSpacing: '0.06em', marginBottom: '0.6rem' }}>PERJALANAN KAMI</div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#0f2d6b', letterSpacing: '0.06em', marginBottom: '0.6rem' }}>{t.about.journeyLabel}</div>
               <div style={{ display: 'flex', gap: '0.75rem' }}>
                 {milestones.map((m, i) => (
                   <div key={i} style={{ textAlign: 'center' }}>
@@ -138,27 +123,23 @@ export default function AboutSection() {
               lineHeight: 1.2, marginBottom: '1rem',
               fontFamily: 'Plus Jakarta Sans, sans-serif',
             }}>
-              Lebih dari Sekadar{' '}
+              {t.about.title}{' '}
               <span style={{
                 background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-              }}>Kampus</span>
+              }}>{t.about.titleGradient}</span>
             </h2>
 
             <div style={{ width: '3rem', height: '3px', background: 'linear-gradient(90deg, #f5a623, #fbbf24)', borderRadius: '2px', marginBottom: '1.5rem' }} />
 
             <p style={{ color: '#475569', lineHeight: 1.8, marginBottom: '1.5rem', fontSize: '1rem' }}>
-              Berdiri sejak <strong style={{ color: '#0f2d6b' }}>1996</strong>, STIMIK Nusantara Sulawesi adalah institusi pendidikan tinggi
-              swasta terdepan di Sulawesi. Kami berkomitmen melahirkan lulusan yang tidak hanya
-              kompeten secara akademik, tetapi juga siap menghadapi tantangan industri global.
+              {t.about.body1}
             </p>
 
             <p style={{ color: '#475569', lineHeight: 1.8, marginBottom: '2rem', fontSize: '1rem' }}>
-              Dengan <strong style={{ color: '#0f2d6b' }}>120+ dosen</strong> berpengalaman, fasilitas modern berstandar internasional,
-              dan kurikulum yang terus diperbarui bersama industri — kami menjamin pendidikan
-              yang relevan, inovatif, dan berdaya saing tinggi.
+              {t.about.body2}
             </p>
 
             {/* Value pillars */}
@@ -215,7 +196,7 @@ export default function AboutSection() {
                 (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none';
               }}
             >
-              Pelajari Lebih Lanjut
+              {t.about.cta}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>

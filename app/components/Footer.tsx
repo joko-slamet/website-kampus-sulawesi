@@ -1,29 +1,16 @@
 'use client';
 
-import Link from 'next/link';
+import { useLanguage } from '../i18n/LanguageContext';
 
-const footerLinks = {
-  'Program Studi': [
-    { label: 'S1 Sistem Informasi', href: '#program-si' },
-    { label: 'S1 Teknik Informatika', href: '#program-ti' },
-    { label: 'D3 Manajemen Informatika', href: '#program-manj' },
-    { label: 'D3 Komputerisasi Akuntansi', href: '#program-akun' },
-  ],
-  'Layanan': [
-    { label: 'Pendaftaran Online', href: '#daftar' },
-    { label: 'Informasi Beasiswa', href: '#beasiswa' },
-    { label: 'Career Center', href: '#karir' },
-    { label: 'E-Learning', href: '#elearning' },
-    { label: 'Perpustakaan Digital', href: '#perpustakaan' },
-  ],
-  'Institusi': [
-    { label: 'Tentang Kami', href: '#tentang' },
-    { label: 'Visi & Misi', href: '#visi' },
-    { label: 'Struktur Organisasi', href: '#struktur' },
-    { label: 'Akreditasi', href: '#akreditasi' },
-    { label: 'Kerjasama', href: '#kerjasama' },
-  ],
-};
+const programLinks = [
+  { label: 'S1 Sistem Informasi', href: '#program-si' },
+  { label: 'S1 Teknik Informatika', href: '#program-ti' },
+  { label: 'D3 Manajemen Informatika', href: '#program-manj' },
+  { label: 'D3 Komputerisasi Akuntansi', href: '#program-akun' },
+];
+
+const servicesHrefs = ['#daftar', '#beasiswa', '#karir', '#elearning', '#perpustakaan'];
+const institutionHrefs = ['#tentang', '#visi', '#struktur', '#akreditasi', '#kerjasama'];
 
 const socialLinks = [
   {
@@ -69,6 +56,7 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const { t } = useLanguage();
   return (
     <footer id="kontak" style={{ background: '#071a40', color: 'white' }}>
       {/* Top section */}
@@ -92,7 +80,7 @@ export default function Footer() {
             </div>
 
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem', lineHeight: 1.8, marginBottom: '1.5rem' }}>
-              Mencetak pemimpin digital Indonesia yang kompeten, berkarakter, dan berdaya saing global sejak 1996.
+              {t.footer.tagline}
             </p>
 
             {/* Social */}
@@ -138,44 +126,60 @@ export default function Footer() {
               border: '1px solid rgba(245,166,35,0.2)',
               borderRadius: '999px',
             }}>
-              <span style={{ color: '#fbbf24', fontSize: '0.8rem', fontWeight: 700 }}>🏅 Terakreditasi A — BAN-PT</span>
+              <span style={{ color: '#fbbf24', fontSize: '0.8rem', fontWeight: 700 }}>🏅 {t.footer.accred}</span>
             </div>
           </div>
 
-          {/* Link columns */}
-          {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title}>
-              <h4 style={{
-                fontWeight: 700, fontSize: '0.9rem', marginBottom: '1.25rem',
-                color: 'white', letterSpacing: '0.03em',
-              }}>{title}</h4>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      style={{
-                        color: 'rgba(255,255,255,0.55)',
-                        fontSize: '0.85rem', textDecoration: 'none',
-                        transition: 'color 0.2s, padding-left 0.2s',
-                        display: 'inline-block',
-                      }}
-                      onMouseEnter={e => {
-                        (e.currentTarget as HTMLAnchorElement).style.color = '#fbbf24';
-                        (e.currentTarget as HTMLAnchorElement).style.paddingLeft = '4px';
-                      }}
-                      onMouseLeave={e => {
-                        (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.55)';
-                        (e.currentTarget as HTMLAnchorElement).style.paddingLeft = '0';
-                      }}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Programs column */}
+          <div>
+            <h4 style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '1.25rem', color: 'white', letterSpacing: '0.03em' }}>
+              {t.footer.colPrograms}
+            </h4>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              {programLinks.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.85rem', textDecoration: 'none', transition: 'color 0.2s, padding-left 0.2s', display: 'inline-block' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#fbbf24'; (e.currentTarget as HTMLAnchorElement).style.paddingLeft = '4px'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.55)'; (e.currentTarget as HTMLAnchorElement).style.paddingLeft = '0'; }}
+                  >{link.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Services column */}
+          <div>
+            <h4 style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '1.25rem', color: 'white', letterSpacing: '0.03em' }}>
+              {t.footer.colServices}
+            </h4>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              {t.footer.services.map((label, i) => (
+                <li key={label}>
+                  <a href={servicesHrefs[i]} style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.85rem', textDecoration: 'none', transition: 'color 0.2s, padding-left 0.2s', display: 'inline-block' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#fbbf24'; (e.currentTarget as HTMLAnchorElement).style.paddingLeft = '4px'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.55)'; (e.currentTarget as HTMLAnchorElement).style.paddingLeft = '0'; }}
+                  >{label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Institution column */}
+          <div>
+            <h4 style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '1.25rem', color: 'white', letterSpacing: '0.03em' }}>
+              {t.footer.colInstitution}
+            </h4>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              {t.footer.institution.map((label, i) => (
+                <li key={label}>
+                  <a href={institutionHrefs[i]} style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.85rem', textDecoration: 'none', transition: 'color 0.2s, padding-left 0.2s', display: 'inline-block' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#fbbf24'; (e.currentTarget as HTMLAnchorElement).style.paddingLeft = '4px'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.55)'; (e.currentTarget as HTMLAnchorElement).style.paddingLeft = '0'; }}
+                  >{label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -190,7 +194,7 @@ export default function Footer() {
               { icon: '📍', label: 'Jl. Nusantara No.1, Makassar, Sulawesi Selatan' },
               { icon: '📞', label: '(0411) 123456' },
               { icon: '📧', label: 'info@stimik-nusantara.ac.id' },
-              { icon: '🕐', label: 'Senin–Jumat: 08.00–16.00 WITA' },
+              { icon: '🕐', label: t.footer.hours },
             ].map((c) => (
               <div key={c.label} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <span style={{ fontSize: '1rem' }}>{c.icon}</span>
@@ -209,10 +213,10 @@ export default function Footer() {
           flexWrap: 'wrap', gap: '0.75rem',
         }}>
           <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.8rem' }}>
-            © 2025 STIMIK Nusantara Sulawesi. Hak Cipta Dilindungi Undang-Undang.
+            {t.footer.copyright}
           </p>
           <div style={{ display: 'flex', gap: '1.5rem' }}>
-            {['Kebijakan Privasi', 'Syarat & Ketentuan', 'Sitemap'].map((link) => (
+            {[t.footer.privacy, t.footer.terms, t.footer.sitemap].map((link) => (
               <a key={link} href="#" style={{
                 color: 'rgba(255,255,255,0.35)', fontSize: '0.8rem',
                 textDecoration: 'none', transition: 'color 0.2s',

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const testimonials = [
   {
@@ -65,6 +66,7 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export default function TestimonialsSection() {
+  const { t } = useLanguage();
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -126,22 +128,22 @@ export default function TestimonialsSection() {
             color: '#fbbf24', borderRadius: '999px',
             fontSize: '0.75rem', fontWeight: 700,
             letterSpacing: '0.08em', marginBottom: '1rem',
-          }}>✦ CERITA ALUMNI</span>
+          }}>{t.testimonials.label}</span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
             fontWeight: 800, color: 'white',
             lineHeight: 1.2, marginBottom: '1rem',
           }}>
-            Kisah Sukses{' '}
+            {t.testimonials.title}{' '}
             <span style={{
               background: 'linear-gradient(90deg, #f5a623 0%, #fbbf24 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-            }}>Alumni Kami</span>
+            }}>{t.testimonials.titleGradient}</span>
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.65)', maxWidth: '520px', margin: '0 auto', lineHeight: 1.75 }}>
-            Lebih dari 12.000 alumni telah membuktikan bahwa STIMIK Nusantara adalah batu loncatan terbaik menuju karier impian.
+            {t.testimonials.subtitle}
           </p>
         </div>
 

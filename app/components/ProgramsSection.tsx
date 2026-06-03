@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { programs } from '../data/programs';
+import { useLanguage } from '../i18n/LanguageContext';
 
-function ProgramCard({ program, index, visible }: { program: typeof programs[0]; index: number; visible: boolean }) {
+function ProgramCard({ program, index, visible, alumniLabel, detailLabel }: { program: typeof programs[0]; index: number; visible: boolean; alumniLabel: string; detailLabel: string }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -102,7 +103,7 @@ function ProgramCard({ program, index, visible }: { program: typeof programs[0];
           borderTop: '1px solid #f1f5f9',
         }}>
           <div>
-            <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>Alumni Berhasil</div>
+            <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>{alumniLabel}</div>
             <div style={{ fontSize: '1rem', fontWeight: 800, color: program.color }}>{program.alumni}</div>
           </div>
           <a
@@ -118,7 +119,7 @@ function ProgramCard({ program, index, visible }: { program: typeof programs[0];
               boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
             }}
           >
-            Detail
+            {detailLabel}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
@@ -130,6 +131,7 @@ function ProgramCard({ program, index, visible }: { program: typeof programs[0];
 }
 
 export default function ProgramsSection() {
+  const { t } = useLanguage();
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -151,25 +153,24 @@ export default function ProgramsSection() {
           opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)',
           transition: 'all 0.6s ease',
         }}>
-          <span className="section-label" style={{ marginBottom: '1rem', display: 'inline-block' }}>✦ Program Studi</span>
+          <span className="section-label" style={{ marginBottom: '1rem', display: 'inline-block' }}>{t.programs.label}</span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
             fontWeight: 800, color: '#0f2d6b',
             lineHeight: 1.2, marginBottom: '1rem',
           }}>
-            Pilih Jalanmu,{' '}
+            {t.programs.title}{' '}
             <span style={{
               background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>
-              Raih Puncaknya
+              {t.programs.titleGradient}
             </span>
           </h2>
           <p style={{ color: '#64748b', maxWidth: '560px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
-            4 program studi unggulan dengan kurikulum berbasis industri,
-            dosen praktisi berpengalaman, dan jalur karier yang telah terbukti.
+            {t.programs.subtitle}
           </p>
         </div>
 
@@ -180,7 +181,7 @@ export default function ProgramsSection() {
           gap: '1.5rem',
         }} className="programs-grid">
           {programs.map((prog, i) => (
-            <ProgramCard key={prog.id} program={prog} index={i} visible={visible} />
+            <ProgramCard key={prog.id} program={prog} index={i} visible={visible} alumniLabel={t.programs.alumniLabel} detailLabel={t.programs.detail} />
           ))}
         </div>
 
@@ -190,7 +191,7 @@ export default function ProgramsSection() {
           opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease 0.5s',
         }}>
           <p style={{ color: '#64748b', marginBottom: '1rem', fontSize: '0.9rem' }}>
-            Belum menemukan program yang tepat?
+            {t.programs.noProgram}
           </p>
           <a
             href="#kontak"
@@ -213,7 +214,7 @@ export default function ProgramsSection() {
               (e.currentTarget as HTMLAnchorElement).style.color = '#0f2d6b';
             }}
           >
-            Konsultasi Gratis
+            {t.programs.consult}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <path d="M8 12h8M12 8l4 4-4 4" />
             </svg>
