@@ -3,7 +3,6 @@
 import { allArticles } from '../artikel/data';
 
 const stats = [
-  { icon: '👥', label: 'Mahasiswa Aktif', value: '5.284', change: '+124', changeType: 'up', sub: 'dari bulan lalu' },
   { icon: '📝', label: 'Total Artikel', value: String(allArticles.length), change: '+3', changeType: 'up', sub: 'hari ini' },
   { icon: '📬', label: 'Inquiry Masuk', value: '47', change: '+8', changeType: 'up', sub: '7 hari terakhir' },
   { icon: '👁️', label: 'Pengunjung Bulan Ini', value: '12.841', change: '+18%', changeType: 'up', sub: 'vs bulan lalu' },
@@ -34,7 +33,7 @@ export default function DashboardOverview() {
       </div>
 
       {/* Stats grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1.25rem', marginBottom: '2rem' }} className="stats-grid">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1.25rem', marginBottom: '2rem' }} className="stats-grid">
         {stats.map(s => (
           <div key={s.label} style={{
             background: 'white', border: '1px solid #e2e8f0',

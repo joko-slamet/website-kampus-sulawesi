@@ -7,7 +7,6 @@ const sidebarLinks = [
   { icon: '🏠', label: 'Overview', href: '/dashboard' },
   { icon: '📝', label: 'Artikel', href: '/dashboard/artikel' },
   { icon: '🎓', label: 'Program Studi', href: '/dashboard/program' },
-  { icon: '⚙️', label: 'Pengaturan', href: '/dashboard/pengaturan' },
 ];
 
 export default function DashboardShell({ children }: { children: React.ReactNode }) {
