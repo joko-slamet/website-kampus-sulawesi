@@ -20,11 +20,11 @@ export default function LoginForm() {
       localStorage.setItem('stimik_auth', JSON.stringify({ name: 'Admin STIMIK', email, role: 'Administrator' }));
       window.location.href = '/dashboard';
     } else {
-      setError('Email atau password salah. Coba: admin@stimik.ac.id / admin123');
+      setError('Email atau password salah');
       setLoading(false);
     }
   };
-
+  //admin@stimik.ac.id / admin123
   return (
     <div style={{
       background: 'white',
@@ -163,11 +163,6 @@ export default function LoginForm() {
           ) : 'Masuk ke Dashboard'}
         </button>
       </form>
-
-      <div style={{ marginTop: '1.5rem', padding: '0.85rem 1rem', background: '#f8fafc', borderRadius: '10px', border: '1px dashed #e2e8f0' }}>
-        <p style={{ fontSize: '0.75rem', color: '#94a3b8', marginBottom: '0.3rem', fontWeight: 600 }}>Demo credentials:</p>
-        <p style={{ fontSize: '0.75rem', color: '#64748b' }}>admin@stimik.ac.id / admin123</p>
-      </div>
 
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
