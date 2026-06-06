@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { api } from '../lib/api';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -9,22 +10,21 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: { preventDefault(): void }) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
-    await new Promise(r => setTimeout(r, 800));
-
-    if (email === 'admin@stimik.ac.id' && password === 'admin123') {
-      localStorage.setItem('stimik_auth', JSON.stringify({ name: 'Admin STIMIK', email, role: 'Administrator' }));
+    try {
+      const { token, user } = await api.auth.login(email, password);
+      localStorage.setItem('stimik_token', token);
+      localStorage.setItem('stimik_auth', JSON.stringify(user));
       window.location.href = '/dashboard';
-    } else {
-      setError('Email atau password salah');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Terjadi kesalahan');
       setLoading(false);
     }
   };
-  //admin@stimik.ac.id / admin123
   return (
     <div style={{
       background: 'white',

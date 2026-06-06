@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { api } from '../lib/api';
 
 const sidebarLinks = [
   { icon: '🏠', label: 'Overview', href: '/dashboard' },
@@ -15,15 +16,22 @@ export default function DashboardShell({ children }: { children: React.ReactNode
   const pathname = usePathname();
 
   useEffect(() => {
-    const stored = localStorage.getItem('stimik_auth');
-    if (!stored) {
+    const token = localStorage.getItem('stimik_token');
+    if (!token) {
       window.location.href = '/login';
       return;
     }
-    setUser(JSON.parse(stored));
+    api.auth.me()
+      .then(user => setUser(user))
+      .catch(() => {
+        localStorage.removeItem('stimik_token');
+        localStorage.removeItem('stimik_auth');
+        window.location.href = '/login';
+      });
   }, []);
 
   const handleLogout = () => {
+    localStorage.removeItem('stimik_token');
     localStorage.removeItem('stimik_auth');
     window.location.href = '/login';
   };
