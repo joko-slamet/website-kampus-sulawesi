@@ -8,6 +8,8 @@ import ArticleContent from './ArticleContent';
 import ArticleSidebar from './ArticleSidebar';
 import ArticleHero from './ArticleHero';
 
+const BASE_URL = 'https://stiaabdulharis.ac.id'
+
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
@@ -21,11 +23,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: article.title,
     description: article.excerpt,
-    alternates: { canonical: `https://stimik-nusantara.ac.id/artikel/${slug}` },
+    alternates: { canonical: `${BASE_URL}/artikel/${slug}` },
     openGraph: {
       title: article.title,
       description: article.excerpt,
-      url: `https://stimik-nusantara.ac.id/artikel/${slug}`,
+      url: `${BASE_URL}/artikel/${slug}`,
+      type: 'article',
     },
   };
 }
@@ -39,8 +42,35 @@ export default async function ArticleDetailPage({ params }: Props) {
     .filter(a => a.id !== slug && a.category === article.category)
     .slice(0, 3);
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: article.date,
+    url: `${BASE_URL}/artikel/${slug}`,
+    publisher: {
+      '@type': 'CollegeOrUniversity',
+      '@id': `${BASE_URL}/#organization`,
+      name: 'STIA YPA-AH "Abdul Haris" Makassar',
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/artikel/${slug}` },
+  };
+
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Artikel', item: `${BASE_URL}/artikel` },
+      { '@type': 'ListItem', position: 3, name: article.title, item: `${BASE_URL}/artikel/${slug}` },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Navbar variant="dark" />
       <main>
         <ArticleHero

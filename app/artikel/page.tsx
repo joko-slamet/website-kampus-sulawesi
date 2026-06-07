@@ -7,12 +7,12 @@ import ArtikelHero from './ArtikelHero';
 
 export const metadata: Metadata = {
   title: 'Artikel & Insight',
-  description: 'Tips kuliah, dunia IT, info karier, dan beasiswa — konten edukatif untuk calon dan mahasiswa aktif STIMIK Nusantara Sulawesi. Diperbarui setiap hari.',
-  alternates: { canonical: 'https://stimik-nusantara.ac.id/artikel' },
+  description: 'Tips kuliah, info karier, dan beasiswa — konten edukatif untuk calon dan mahasiswa aktif STIA Abdul Haris Makassar. Diperbarui setiap hari.',
+  alternates: { canonical: 'https://stiaabdulharis.ac.id/artikel' },
   openGraph: {
-    title: 'Artikel & Insight | STIMIK Nusantara Sulawesi',
-    description: 'Tips kuliah, dunia IT, info karier, dan beasiswa untuk mahasiswa STIMIK Nusantara.',
-    url: 'https://stimik-nusantara.ac.id/artikel',
+    title: 'Artikel & Insight | STIA Abdul Haris Makassar',
+    description: 'Tips kuliah, info karier, dan beasiswa untuk mahasiswa STIA Abdul Haris Makassar.',
+    url: 'https://stiaabdulharis.ac.id/artikel',
   },
 };
 

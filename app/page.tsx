@@ -1,4 +1,9 @@
+import type { Metadata } from 'next';
 import Navbar from './components/Navbar';
+
+export const metadata: Metadata = {
+  alternates: { canonical: 'https://stiaabdulharis.ac.id' },
+};
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import VisiMisiSection from './components/VisiMisiSection';
