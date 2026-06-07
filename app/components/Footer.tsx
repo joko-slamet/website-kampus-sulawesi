@@ -1,16 +1,15 @@
 'use client';
 
+import Image from 'next/image';
 import { useLanguage } from '../i18n/LanguageContext';
 
 const programLinks = [
-  { label: 'S1 Sistem Informasi', href: '#program-si' },
-  { label: 'S1 Teknik Informatika', href: '#program-ti' },
-  { label: 'D3 Manajemen Informatika', href: '#program-manj' },
-  { label: 'D3 Komputerisasi Akuntansi', href: '#program-akun' },
+  { label: 'S1 Ilmu Administrasi Negara', href: '#program-adm-negara' },
+  { label: 'S1 Ilmu Administrasi Niaga', href: '#program-adm-niaga' },
 ];
 
 const servicesHrefs = ['#daftar', '#beasiswa', '#karir', '#elearning', '#perpustakaan'];
-const institutionHrefs = ['#tentang', '#visi', '#struktur', '#akreditasi', '#kerjasama'];
+const institutionHrefs = ['/profil', '/profil#visi', '/profil#akreditasi', '#program', '#kontak'];
 
 const socialLinks = [
   {
@@ -65,17 +64,16 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
-              <div style={{
-                width: '48px', height: '48px', borderRadius: '12px',
-                background: 'linear-gradient(135deg, #1a4aad 0%, #2563eb 100%)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                boxShadow: '0 4px 16px rgba(26,74,173,0.4)',
-              }}>
-                <span style={{ color: 'white', fontWeight: 900, fontSize: '1.2rem' }}>S</span>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="Logo STIA YPA-AH Abdul Haris Makassar"
+                width={48}
+                height={48}
+                style={{ borderRadius: '8px', flexShrink: 0 }}
+              />
               <div>
-                <div style={{ fontWeight: 800, fontSize: '1.05rem', lineHeight: 1.1 }}>STIMIK Nusantara</div>
-                <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.06em' }}>SULAWESI</div>
+                <div style={{ fontWeight: 800, fontSize: '1.05rem', lineHeight: 1.1 }}>STIA Abdul Haris</div>
+                <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.06em' }}>MAKASSAR</div>
               </div>
             </div>
 
@@ -191,9 +189,9 @@ export default function Footer() {
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '1.5rem 1.5rem' }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', justifyContent: 'space-between', alignItems: 'center' }}>
             {[
-              { icon: '📍', label: 'Jl. Nusantara No.1, Makassar, Sulawesi Selatan' },
-              { icon: '📞', label: '(0411) 123456' },
-              { icon: '📧', label: 'info@stimik-nusantara.ac.id' },
+              { icon: '📍', label: 'Jl. Tanggul Patompo No. 19, Makassar 90224 (Kampus 1)' },
+              { icon: '📍', label: 'Jl. Gunung Bawakaraeng No. 72, Makassar (Kampus 2)' },
+              { icon: '📧', label: 'info@stia-abdulharis.ac.id' },
               { icon: '🕐', label: t.footer.hours },
             ].map((c) => (
               <div key={c.label} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

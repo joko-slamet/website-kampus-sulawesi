@@ -1,9 +1,10 @@
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
+import VisiMisiSection from './components/VisiMisiSection';
 import ProgramsSection from './components/ProgramsSection';
+import TujuanSection from './components/TujuanSection';
 import WhyChooseUsSection from './components/WhyChooseUsSection';
-import TestimonialsSection from './components/TestimonialsSection';
 import NewsSection from './components/NewsSection';
 import ArticlesSection from './components/ArticlesSection';
 import CTASection from './components/CTASection';
@@ -17,9 +18,10 @@ export default function Home() {
       <main>
         <HeroSection />
         <AboutSection />
+        <VisiMisiSection />
         <ProgramsSection />
+        <TujuanSection />
         <WhyChooseUsSection />
-        <TestimonialsSection />
         <NewsSection />
         <ArticlesSection />
         <CTASection />

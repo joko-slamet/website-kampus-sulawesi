@@ -160,29 +160,7 @@ export default function WhyChooseUsSection() {
           ))}
         </div>
 
-        {/* Partner logos strip */}
-        <div style={{
-          marginTop: '4rem',
-          opacity: visible ? 1 : 0,
-          transition: 'opacity 0.6s ease 0.6s',
-        }}>
-          <p style={{ textAlign: 'center', fontSize: '0.8rem', color: '#94a3b8', fontWeight: 500, letterSpacing: '0.08em', marginBottom: '1.5rem' }}>
-            {t.why.partnersLabel}
-          </p>
-          <div style={{
-            display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '0.75rem',
-          }}>
-            {['Telkom Indonesia', 'BNI', 'Pertamina', 'PLN', 'Bank Mandiri', 'Gojek', 'Tokopedia', 'Bukalapak', 'XL Axiata', 'Indosat'].map((company) => (
-              <div key={company} style={{
-                padding: '0.5rem 1.25rem',
-                background: 'white', border: '1px solid #e2e8f0',
-                borderRadius: '999px', fontSize: '0.8rem',
-                fontWeight: 600, color: '#475569',
-                boxShadow: '0 2px 8px rgba(15,45,107,0.05)',
-              }}>{company}</div>
-            ))}
-          </div>
-        </div>
+
       </div>
 
       <style>{`

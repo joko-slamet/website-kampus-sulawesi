@@ -19,7 +19,7 @@ export default function HeroSection() {
     <section id="hero" ref={ref} style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', overflow: 'hidden' }}>
       {/* Background */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-        <Image src="/hero-campus.png" alt="Kampus STIMIK Nusantara Sulawesi" fill priority quality={90} style={{ objectFit: 'cover', objectPosition: 'center 30%' }} sizes="100vw" />
+        <Image src="/hero-campus.png" alt='Kampus STIA YPA-AH "Abdul Haris" Makassar' fill priority quality={90} style={{ objectFit: 'cover', objectPosition: 'center 30%' }} sizes="100vw" />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(7,26,64,0.90) 0%, rgba(15,45,107,0.78) 45%, rgba(15,45,107,0.40) 100%)' }} />
       </div>
 

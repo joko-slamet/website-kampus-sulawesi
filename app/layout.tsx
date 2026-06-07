@@ -4,48 +4,49 @@ import ClientProviders from "./components/ClientProviders";
 
 export const metadata: Metadata = {
   title: {
-    default: "STIMIK Nusantara Sulawesi — Sekolah Tinggi Manajemen Informatika & Komputer",
-    template: "%s | STIMIK Nusantara Sulawesi",
+    default: 'STIA YPA-AH "Abdul Haris" Makassar — Sekolah Tinggi Ilmu Administrasi',
+    template: '%s | STIA Abdul Haris Makassar',
   },
   description:
-    "STIMIK Nusantara Sulawesi adalah perguruan tinggi terkemuka di Sulawesi yang mencetak lulusan kompeten di bidang Informatika, Manajemen, dan Teknologi. Daftar sekarang dan raih masa depan bersama kami.",
+    'STIA YPA-AH "Abdul Haris" Makassar adalah perguruan tinggi terakreditasi BAIK oleh BAN-PT yang mencetak sarjana profesional di bidang Ilmu Administrasi Negara (Publik) dan Ilmu Administrasi Niaga (Bisnis). Beroperasi sejak 2004, berlokasi di Makassar, Sulawesi Selatan.',
   keywords: [
-    "STIMIK Nusantara Sulawesi",
-    "sekolah tinggi sulawesi",
-    "kampus makassar",
-    "kuliah informatika sulawesi",
-    "pendaftaran mahasiswa baru",
-    "perguruan tinggi sulawesi",
-    "S1 informatika",
-    "S1 manajemen",
-    "kampus terbaik sulawesi",
+    "STIA Abdul Haris Makassar",
+    "STIA YPA-AH Makassar",
+    "sekolah tinggi ilmu administrasi makassar",
+    "kampus administrasi makassar",
+    "S1 administrasi negara makassar",
+    "S1 administrasi niaga makassar",
+    "perguruan tinggi makassar",
+    "kuliah administrasi sulawesi",
+    "pendaftaran mahasiswa baru makassar",
+    "akreditasi BAIK BAN-PT",
   ],
-  authors: [{ name: "STIMIK Nusantara Sulawesi" }],
-  creator: "STIMIK Nusantara Sulawesi",
-  publisher: "STIMIK Nusantara Sulawesi",
-  metadataBase: new URL("https://stimik-nusantara.ac.id"),
+  authors: [{ name: 'STIA YPA-AH "Abdul Haris" Makassar' }],
+  creator: 'STIA YPA-AH "Abdul Haris" Makassar',
+  publisher: 'STIA YPA-AH "Abdul Haris" Makassar',
+  metadataBase: new URL("https://stia-abdulharis.ac.id"),
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://stimik-nusantara.ac.id",
-    siteName: "STIMIK Nusantara Sulawesi",
-    title: "STIMIK Nusantara Sulawesi — Kampus Terbaik di Sulawesi",
+    url: "https://stia-abdulharis.ac.id",
+    siteName: 'STIA Abdul Haris Makassar',
+    title: 'STIA YPA-AH "Abdul Haris" Makassar — Terakreditasi BAIK BAN-PT',
     description:
-      "Bergabunglah bersama ribuan mahasiswa di STIMIK Nusantara Sulawesi. Raih karier impianmu dengan pendidikan berkualitas tinggi di jantung Sulawesi.",
+      'Bergabunglah bersama STIA YPA-AH "Abdul Haris" Makassar. Raih gelar Sarjana Administrasi Negara atau Niaga dengan pendidikan berkualitas, terakreditasi BAIK oleh BAN-PT, di jantung Kota Makassar.',
     images: [
       {
         url: "/hero-campus.png",
         width: 1200,
         height: 630,
-        alt: "Kampus STIMIK Nusantara Sulawesi",
+        alt: 'Kampus STIA YPA-AH "Abdul Haris" Makassar',
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "STIMIK Nusantara Sulawesi",
+    title: 'STIA Abdul Haris Makassar',
     description:
-      "Perguruan tinggi terkemuka di Sulawesi. Daftar sekarang!",
+      'Perguruan tinggi administrasi terakreditasi BAIK BAN-PT di Makassar. Daftar sekarang!',
   },
   robots: {
     index: true,
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://stimik-nusantara.ac.id",
+    canonical: "https://stia-abdulharis.ac.id",
   },
 };
 

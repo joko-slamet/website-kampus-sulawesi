@@ -4,119 +4,154 @@ import { useEffect, useRef, useState } from 'react';
 import { programs } from '../data/programs';
 import { useLanguage } from '../i18n/LanguageContext';
 
-function ProgramCard({ program, index, visible, alumniLabel, detailLabel }: { program: typeof programs[0]; index: number; visible: boolean; alumniLabel: string; detailLabel: string }) {
+const careerPaths: Record<string, string[]> = {
+  'adm-negara': ['Aparatur Sipil Negara (ASN)', 'Staf Pemerintah Daerah', 'Lembaga Negara & BUMN', 'Konsultan Kebijakan Publik'],
+  'adm-niaga':  ['Manajer Operasional', 'Staf Administrasi Perusahaan', 'Wirausahawan Digital', 'HRD & Manajemen SDM'],
+};
+
+function ProgramCard({ program, index, visible, detailLabel }: {
+  program: typeof programs[0]; index: number; visible: boolean; detailLabel: string;
+}) {
   const [hovered, setHovered] = useState(false);
+  const careers = careerPaths[program.id] ?? [];
 
   return (
     <div
       id={`program-card-${program.id}`}
       style={{
         background: 'white',
-        border: '1px solid #e2e8f0',
-        borderRadius: '20px',
+        borderRadius: '24px',
         overflow: 'hidden',
-        boxShadow: hovered ? '0 16px 48px rgba(15,45,107,0.16)' : '0 4px 24px rgba(15,45,107,0.07)',
-        transform: visible
-          ? (hovered ? 'translateY(-8px)' : 'translateY(0)')
-          : 'translateY(32px)',
+        boxShadow: hovered ? '0 24px 64px rgba(15,45,107,0.18)' : '0 6px 32px rgba(15,45,107,0.09)',
+        transform: visible ? (hovered ? 'translateY(-6px)' : 'translateY(0)') : 'translateY(36px)',
         opacity: visible ? 1 : 0,
-        transition: `all 0.5s ease ${index * 0.1}s`,
-        cursor: 'pointer',
+        transition: `all 0.55s ease ${index * 0.12}s`,
+        cursor: 'default',
         display: 'flex',
         flexDirection: 'column',
+        border: '1px solid rgba(15,45,107,0.07)',
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Card Top */}
+      {/* Colored header */}
       <div style={{
         background: program.bgGradient,
-        padding: '1.75rem 1.75rem 2.5rem',
+        padding: '2.25rem 2rem 2.75rem',
         position: 'relative',
         overflow: 'hidden',
       }}>
-        {/* Decorative circle */}
-        <div style={{
-          position: 'absolute', top: '-20px', right: '-20px',
-          width: '120px', height: '120px', borderRadius: '50%',
-          background: 'rgba(255,255,255,0.07)',
-          pointerEvents: 'none',
-        }} />
-        <div style={{
-          position: 'absolute', bottom: '-30px', left: '30%',
-          width: '80px', height: '80px', borderRadius: '50%',
-          background: 'rgba(255,255,255,0.05)',
-          pointerEvents: 'none',
-        }} />
+        {/* Decorative circles */}
+        <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(255,255,255,0.06)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: '-40px', left: '40%', width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-          <span style={{ fontSize: '2.25rem' }}>{program.icon}</span>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
           <div style={{
-            padding: '0.25rem 0.75rem',
-            background: program.badgeColor,
-            color: 'white',
-            borderRadius: '999px',
-            fontSize: '0.7rem', fontWeight: 700,
-            letterSpacing: '0.04em',
+            width: '56px', height: '56px', borderRadius: '16px',
+            background: 'rgba(255,255,255,0.15)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: '1.75rem',
           }}>
-            {program.badge}
+            {program.icon}
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.4rem' }}>
+            <span style={{
+              padding: '0.25rem 0.85rem',
+              background: program.badgeColor,
+              color: 'white',
+              borderRadius: '999px',
+              fontSize: '0.7rem', fontWeight: 700,
+              letterSpacing: '0.04em',
+            }}>
+              {program.badge}
+            </span>
+            <span style={{
+              padding: '0.2rem 0.75rem',
+              background: 'rgba(255,255,255,0.15)',
+              color: 'rgba(255,255,255,0.9)',
+              borderRadius: '999px',
+              fontSize: '0.68rem', fontWeight: 600,
+            }}>
+              ✓ {program.accreditation}
+            </span>
           </div>
         </div>
 
         <h3 style={{
-          fontSize: '1.2rem', fontWeight: 800, color: 'white',
-          marginBottom: '0.35rem', lineHeight: 1.2,
-        }}>{program.name}</h3>
-        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.75)' }}>{program.degree}</span>
-          <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.7rem' }}>|</span>
-          <span style={{
-            fontSize: '0.7rem', color: 'rgba(255,255,255,0.9)',
-            background: 'rgba(255,255,255,0.15)', padding: '0.15rem 0.6rem',
-            borderRadius: '999px', fontWeight: 600,
-          }}>{program.accreditation}</span>
+          fontSize: '1.35rem', fontWeight: 800, color: 'white',
+          marginBottom: '0.4rem', lineHeight: 1.2,
+        }}>
+          {program.name}
+        </h3>
+        <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', fontWeight: 500 }}>
+          {program.degree}
         </div>
       </div>
 
-      {/* Card Body */}
-      <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <p style={{ color: '#475569', lineHeight: 1.7, fontSize: '0.875rem', marginBottom: '1.25rem' }}>
+      {/* Body */}
+      <div style={{ padding: '1.75rem 2rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        {/* Description */}
+        <p style={{ color: '#475569', lineHeight: 1.75, fontSize: '0.9rem', margin: 0 }}>
           {program.description}
         </p>
 
         {/* Highlights */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.25rem' }}>
-          {program.highlights.map((h) => (
-            <span key={h} style={{
-              padding: '0.25rem 0.65rem',
-              background: '#f1f5f9',
-              color: '#475569',
-              borderRadius: '999px',
-              fontSize: '0.72rem', fontWeight: 500,
-            }}>{h}</span>
-          ))}
+        <div>
+          <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.07em', marginBottom: '0.6rem' }}>
+            BIDANG KAJIAN
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
+            {program.highlights.map((h) => (
+              <span key={h} style={{
+                padding: '0.3rem 0.8rem',
+                background: '#f1f5f9',
+                color: '#374151',
+                borderRadius: '999px',
+                fontSize: '0.75rem', fontWeight: 500,
+                border: '1px solid #e2e8f0',
+              }}>
+                {h}
+              </span>
+            ))}
+          </div>
         </div>
 
-        <div style={{
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          marginTop: 'auto', paddingTop: '1rem',
-          borderTop: '1px solid #f1f5f9',
-        }}>
-          <div>
-            <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>{alumniLabel}</div>
-            <div style={{ fontSize: '1rem', fontWeight: 800, color: program.color }}>{program.alumni}</div>
+        {/* Career Paths */}
+        <div>
+          <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.07em', marginBottom: '0.6rem' }}>
+            PROSPEK KARIER
           </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+            {careers.map((c) => (
+              <div key={c} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.82rem', color: '#475569' }}>
+                <span style={{ color: program.color, fontWeight: 700, fontSize: '0.8rem' }}>→</span>
+                {c}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer CTA */}
+        <div style={{ marginTop: 'auto', paddingTop: '1.25rem', borderTop: '1px solid #f1f5f9' }}>
           <a
-            href={`#program-${program.id}`}
+            href="/profil"
             id={`program-detail-${program.id}`}
             style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
-              padding: '0.5rem 1.1rem',
+              display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+              padding: '0.65rem 1.5rem',
               background: program.bgGradient,
-              color: 'white', fontWeight: 600, fontSize: '0.8rem',
+              color: 'white', fontWeight: 600, fontSize: '0.85rem',
               borderRadius: '999px', textDecoration: 'none',
               transition: 'all 0.2s',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 8px 24px rgba(0,0,0,0.22)';
+              (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-1px)';
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 4px 14px rgba(0,0,0,0.15)';
+              (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
             }}
           >
             {detailLabel}
@@ -147,17 +182,21 @@ export default function ProgramsSection() {
   return (
     <section id="program" ref={ref} style={{ padding: '6rem 0', background: 'white' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
+
         {/* Header */}
         <div style={{
           textAlign: 'center', marginBottom: '3.5rem',
           opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)',
           transition: 'all 0.6s ease',
         }}>
-          <span className="section-label" style={{ marginBottom: '1rem', display: 'inline-block' }}>{t.programs.label}</span>
+          <span className="section-label" style={{ marginBottom: '1rem', display: 'inline-block' }}>
+            {t.programs.label}
+          </span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
             fontWeight: 800, color: '#0f2d6b',
             lineHeight: 1.2, marginBottom: '1rem',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
           }}>
             {t.programs.title}{' '}
             <span style={{
@@ -169,26 +208,34 @@ export default function ProgramsSection() {
               {t.programs.titleGradient}
             </span>
           </h2>
-          <p style={{ color: '#64748b', maxWidth: '560px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
+          <p style={{ color: '#64748b', maxWidth: '580px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
             {t.programs.subtitle}
           </p>
         </div>
 
-        {/* Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '1.5rem',
-        }} className="programs-grid">
-          {programs.map((prog, i) => (
-            <ProgramCard key={prog.id} program={prog} index={i} visible={visible} alumniLabel={t.programs.alumniLabel} detailLabel={t.programs.detail} />
-          ))}
+        {/* 2-card grid — centered at 900px */}
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: '2rem',
+          }} className="programs-grid">
+            {programs.map((prog, i) => (
+              <ProgramCard
+                key={prog.id}
+                program={prog}
+                index={i}
+                visible={visible}
+                detailLabel={t.programs.detail}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Bottom CTA */}
         <div style={{
           textAlign: 'center', marginTop: '3rem',
-          opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease 0.5s',
+          opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease 0.4s',
         }}>
           <p style={{ color: '#64748b', marginBottom: '1rem', fontSize: '0.9rem' }}>
             {t.programs.noProgram}
@@ -223,8 +270,9 @@ export default function ProgramsSection() {
       </div>
 
       <style>{`
-        @media (max-width: 1024px) { .programs-grid { grid-template-columns: repeat(2, 1fr) !important; } }
-        @media (max-width: 600px)  { .programs-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 640px) {
+          .programs-grid { grid-template-columns: 1fr !important; }
+        }
       `}</style>
     </section>
   );

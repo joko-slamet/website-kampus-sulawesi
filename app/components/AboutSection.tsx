@@ -175,8 +175,9 @@ export default function AboutSection() {
             </div>
 
             <a
-              href="#tentang-lengkap"
+              href="#visi-misi"
               id="about-learn-more"
+              onClick={(e) => { e.preventDefault(); document.getElementById('visi-misi')?.scrollIntoView({ behavior: 'smooth' }); }}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                 padding: '0.75rem 1.75rem',

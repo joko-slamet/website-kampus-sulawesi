@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -17,7 +18,6 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
     { label: t.nav.home, href: '#hero' },
     { label: t.nav.about, href: '#tentang' },
     { label: t.nav.programs, href: '#program' },
-    { label: t.nav.facilities, href: '#fasilitas' },
     { label: t.nav.articles, href: '/artikel' },
     { label: t.nav.news, href: '#berita' },
     { label: t.nav.contact, href: '#kontak' },
@@ -71,20 +71,20 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           {/* Logo */}
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
-            <div style={{
-              width: '42px', height: '42px', borderRadius: '10px',
-              background: 'linear-gradient(135deg, #0f2d6b 0%, #1a4aad 100%)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 4px 12px rgba(15,45,107,0.25)', flexShrink: 0,
-            }}>
-              <span style={{ color: 'white', fontWeight: 800, fontSize: '1.1rem' }}>S</span>
-            </div>
+            <Image
+              src="/logo.png"
+              alt="Logo STIA YPA-AH Abdul Haris Makassar"
+              width={42}
+              height={42}
+              style={{ borderRadius: '6px', flexShrink: 0 }}
+              priority
+            />
             <div>
               <div style={{ fontWeight: 800, fontSize: '1rem', lineHeight: 1.1, color: scrolled ? '#0f2d6b' : 'white', transition: 'color 0.3s' }}>
-                STIMIK Nusantara
+                STIA Abdul Haris
               </div>
               <div style={{ fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.05em', color: scrolled ? '#64748b' : 'rgba(255,255,255,0.75)', transition: 'color 0.3s' }}>
-                SULAWESI
+                MAKASSAR
               </div>
             </div>
           </Link>
