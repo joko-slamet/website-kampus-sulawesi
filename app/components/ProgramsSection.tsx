@@ -4,16 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 import { programs } from '../data/programs';
 import { useLanguage } from '../i18n/LanguageContext';
 
-const careerPaths: Record<string, string[]> = {
-  'adm-negara': ['Aparatur Sipil Negara (ASN)', 'Staf Pemerintah Daerah', 'Lembaga Negara & BUMN', 'Konsultan Kebijakan Publik'],
-  'adm-niaga':  ['Manajer Operasional', 'Staf Administrasi Perusahaan', 'Wirausahawan Digital', 'HRD & Manajemen SDM'],
-};
-
 function ProgramCard({ program, index, visible, detailLabel }: {
   program: typeof programs[0]; index: number; visible: boolean; detailLabel: string;
 }) {
   const [hovered, setHovered] = useState(false);
-  const careers = careerPaths[program.id] ?? [];
+  const careers = program.careerPaths;
 
   return (
     <div
@@ -134,7 +129,7 @@ function ProgramCard({ program, index, visible, detailLabel }: {
         {/* Footer CTA */}
         <div style={{ marginTop: 'auto', paddingTop: '1.25rem', borderTop: '1px solid #f1f5f9' }}>
           <a
-            href="/profil"
+            href={`/program/${program.id}`}
             id={`program-detail-${program.id}`}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.4rem',

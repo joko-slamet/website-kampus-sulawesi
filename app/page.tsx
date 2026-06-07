@@ -7,7 +7,8 @@ import TujuanSection from './components/TujuanSection';
 import WhyChooseUsSection from './components/WhyChooseUsSection';
 import NewsSection from './components/NewsSection';
 import ArticlesSection from './components/ArticlesSection';
-import CTASection from './components/CTASection';
+import PMBSection from './components/PMBSection';
+import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import FloatingCTA from './components/FloatingCTA';
 
@@ -24,7 +25,8 @@ export default function Home() {
         <WhyChooseUsSection />
         <NewsSection />
         <ArticlesSection />
-        <CTASection />
+        <PMBSection />
+        <ContactSection />
       </main>
       <Footer />
       <FloatingCTA />

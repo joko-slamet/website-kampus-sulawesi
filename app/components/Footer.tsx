@@ -191,7 +191,8 @@ export default function Footer() {
             {[
               { icon: '📍', label: 'Jl. Tanggul Patompo No. 19, Makassar 90224 (Kampus 1)' },
               { icon: '📍', label: 'Jl. Gunung Bawakaraeng No. 72, Makassar (Kampus 2)' },
-              { icon: '📧', label: 'info@stia-abdulharis.ac.id' },
+              { icon: '📞', label: '089685894351 – 0882022506660' },
+              { icon: '📧', label: 'stiaabdulharis14@gmail.com' },
               { icon: '🕐', label: t.footer.hours },
             ].map((c) => (
               <div key={c.label} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

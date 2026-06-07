@@ -245,6 +245,33 @@ const id = {
     sasaranSpecsLabel: 'Spesifikasi Capaian',
     applyBtn: 'Daftar Sekarang',
   },
+  pmb: {
+    label: '✦ Penerimaan Mahasiswa Baru',
+    title: 'Jadwal & Persyaratan',
+    titleGradient: 'PMB 2026/2027',
+    subtitle: 'Informasi lengkap pendaftaran mahasiswa baru STIA YPA-AH "Abdul Haris" Makassar Tahun Akademik 2026/2027.',
+    scheduleLabel: 'Jadwal Penerimaan',
+    waves: [
+      { name: 'Gelombang I', period: 'Juni – Agustus 2026' },
+      { name: 'Gelombang II', period: 'September – November 2026' },
+    ],
+    reqLabel: 'Syarat Administrasi',
+    reqItems: [
+      'Mengisi Formulir Pendaftaran Mahasiswa Baru',
+      'Salinan Berkas KK & KTP, masing-masing 2 lembar',
+      'Salinan Berkas Ijazah SMA/Sederajat, 2 lembar',
+      'Foto latar biru ukuran 4×6, 2 lembar',
+      'Akun email & nomor telepon/WA aktif',
+    ],
+    costLabel: 'Biaya',
+    costItems: [
+      { label: 'Biaya Pendaftaran', amount: 'Rp 350.000', note: 'Dibayar saat mendaftar' },
+      { label: 'Biaya Kuliah per Semester', amount: 'Rp 1.500.000', note: 'Dibayar tiap semester' },
+      { label: 'Biaya SPP (Pengembangan)', amount: 'Rp 2.000.000', note: 'Sekali bayar' },
+    ],
+    registerBtn: 'Daftar Sekarang',
+    infoBtn: 'Tanya via WhatsApp',
+  },
 };
 
 const en: typeof id = {
@@ -491,6 +518,33 @@ const en: typeof id = {
     ],
     sasaranSpecsLabel: 'Achievement Specifications',
     applyBtn: 'Apply Now',
+  },
+  pmb: {
+    label: '✦ New Student Admission',
+    title: 'Schedule & Requirements',
+    titleGradient: 'PMB 2026/2027',
+    subtitle: 'Complete admission information for STIA YPA-AH "Abdul Haris" Makassar Academic Year 2026/2027.',
+    scheduleLabel: 'Admission Schedule',
+    waves: [
+      { name: 'Wave I', period: 'June – August 2026' },
+      { name: 'Wave II', period: 'September – November 2026' },
+    ],
+    reqLabel: 'Administrative Requirements',
+    reqItems: [
+      'Complete the New Student Registration Form',
+      'Copy of Family Card (KK) & ID Card (KTP), 2 copies each',
+      'Copy of High School Diploma (SMA/equivalent), 2 copies',
+      'Blue-background photo 4×6 cm, 2 copies',
+      'Active email account & phone/WhatsApp number',
+    ],
+    costLabel: 'Fees',
+    costItems: [
+      { label: 'Registration Fee', amount: 'IDR 350,000', note: 'Paid upon registration' },
+      { label: 'Tuition per Semester', amount: 'IDR 1,500,000', note: 'Paid each semester' },
+      { label: 'Development Fee (SPP)', amount: 'IDR 2,000,000', note: 'One-time payment' },
+    ],
+    registerBtn: 'Register Now',
+    infoBtn: 'Ask via WhatsApp',
   },
 };
 

@@ -4,7 +4,12 @@
       "Bash(./node_modules/.bin/prisma init *)",
       "Bash(./node_modules/.bin/prisma generate *)",
       "Bash(./node_modules/.bin/tsc --noEmit)",
-      "Bash(identify /home/joko/projects/website-kampus-sulawesi/public/logo.png)"
+      "Bash(identify /home/joko/projects/website-kampus-sulawesi/public/logo.png)",
+      "Bash(node -e \"console.log\\(require\\('/home/joko/projects/website-kampus-sulawesi/node_modules/next/package.json'\\).version\\)\")",
+      "Bash(mkdir -p /home/joko/projects/website-kampus-sulawesi/app/program/\\\\[id\\\\])"
+    ],
+    "additionalDirectories": [
+      "/home/joko/projects/website-kampus-sulawesi/app/program"
     ]
   }
 }
