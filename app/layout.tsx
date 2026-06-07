@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import ClientProviders from "./components/ClientProviders";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: {
@@ -77,7 +78,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" className="scroll-smooth">
-      <body className="min-h-screen antialiased"><ClientProviders>{children}</ClientProviders></body>
+      <body className="min-h-screen antialiased">
+        <ClientProviders>{children}</ClientProviders>
+        <GoogleAnalytics />
+      </body>
     </html>
   );
 }
