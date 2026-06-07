@@ -159,12 +159,13 @@ export default function VisiMisiSection() {
             </div>
           ))}
         </div>
+
       </div>
 
       <style>{`
         @media (max-width: 768px) {
           .visi-misi-grid { grid-template-columns: 1fr !important; }
-          .campus-grid { grid-template-columns: 1fr !important; }
+          .campus-grid    { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>

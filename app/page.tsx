@@ -9,6 +9,7 @@ import NewsSection from './components/NewsSection';
 import ArticlesSection from './components/ArticlesSection';
 import PMBSection from './components/PMBSection';
 import ContactSection from './components/ContactSection';
+import MapsSection from './components/MapsSection';
 import Footer from './components/Footer';
 import FloatingCTA from './components/FloatingCTA';
 
@@ -27,6 +28,7 @@ export default function Home() {
         <ArticlesSection />
         <PMBSection />
         <ContactSection />
+        <MapsSection />
       </main>
       <Footer />
       <FloatingCTA />
