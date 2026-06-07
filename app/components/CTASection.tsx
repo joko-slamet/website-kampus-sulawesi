@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { trackWA, WA_HREF } from '../lib/trackWA';
 
 export default function CTASection() {
   const { t } = useLanguage();
@@ -154,10 +155,11 @@ export default function CTASection() {
 
             {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/6281234567890"
+              href={WA_HREF}
               id="cta-whatsapp"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWA()}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem',
                 marginTop: '1.5rem', padding: '0.85rem',

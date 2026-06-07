@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { trackWA, WA_HREF } from '../lib/trackWA';
 
 function useVisible(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -205,9 +206,10 @@ export default function PMBSection() {
             {p.registerBtn} →
           </a>
           <a
-            href="https://wa.me/6289685894351"
+            href={WA_HREF}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWA()}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.9rem 2.25rem',

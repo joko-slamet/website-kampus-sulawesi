@@ -94,6 +94,16 @@ export const api = {
     runNow: () =>
       request<{ message: string }>('/api/scheduler/run', { method: 'POST' }),
   },
+  whatsapp: {
+    stats: (from?: Date, to?: Date) => {
+      const qs = new URLSearchParams();
+      if (from) qs.set('from', from.toISOString());
+      if (to) qs.set('to', to.toISOString());
+      return request<{ total: number; last7Days: number; last30Days: number; byPage: { page: string; count: number }[] }>(
+        `/api/whatsapp/stats?${qs}`
+      );
+    },
+  },
   programs: {
     list: () => request<unknown[]>('/api/programs'),
     get: (id: string) => request<unknown>(`/api/programs/${id}`),

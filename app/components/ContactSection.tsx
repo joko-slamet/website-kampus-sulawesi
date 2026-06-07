@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { trackWA, WA_HREF } from '../lib/trackWA';
 
 const contacts = [
   {
@@ -11,7 +12,7 @@ const contacts = [
     ),
     label: 'Telepon / WhatsApp',
     value: '089685894351 – 0882022506660',
-    href: 'https://wa.me/6289685894351',
+    href: WA_HREF,
     color: '#25D366',
     bg: 'rgba(37,211,102,0.08)',
     border: 'rgba(37,211,102,0.2)',
@@ -91,6 +92,7 @@ function ContactCard({ item, index, visible }: { item: typeof contacts[0]; index
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={() => { if (item.href.includes('wa.me')) trackWA(); }}
     >
       <div style={{
         width: '44px', height: '44px', borderRadius: '12px', flexShrink: 0,
