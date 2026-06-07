@@ -7,7 +7,6 @@ import { api } from '../lib/api';
 const sidebarLinks = [
   { icon: '🏠', label: 'Overview', href: '/dashboard' },
   { icon: '📝', label: 'Artikel', href: '/dashboard/artikel' },
-  { icon: '🎓', label: 'Program Studi', href: '/dashboard/program' },
 ];
 
 export default function DashboardShell({ children }: { children: React.ReactNode }) {

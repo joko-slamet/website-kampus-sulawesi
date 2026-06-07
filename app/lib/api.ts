@@ -1,5 +1,22 @@
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
 
+export interface GeneratedArticle {
+  suggestedId: string;
+  image: string | null;
+  title: string;
+  excerpt: string;
+  titleEn: string;
+  excerptEn: string;
+  category: string;
+  categoryColor: string;
+  tag: string;
+  tagColor: string;
+  readTime: string;
+  date: string;
+  views: number;
+  published: boolean;
+}
+
 function getToken(): string | null {
   if (typeof window === 'undefined') return null;
   return localStorage.getItem('stimik_token');
@@ -46,6 +63,25 @@ export const api = {
       request<unknown>(`/api/articles/${id}`, { method: 'PUT', body: JSON.stringify(body) }),
     delete: (id: string) =>
       request<{ message: string }>(`/api/articles/${id}`, { method: 'DELETE' }),
+    generate: () =>
+      request<GeneratedArticle>('/api/articles/generate', {
+        method: 'POST',
+        body: JSON.stringify({}),
+      }),
+    uploadImage: (file: File) => {
+      const token = getToken();
+      const form = new FormData();
+      form.append('image', file);
+      return fetch(`${BASE_URL}/api/articles/upload-image`, {
+        method: 'POST',
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        body: form,
+      }).then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message ?? 'Upload failed');
+        return data as { url: string; filename: string };
+      });
+    },
   },
   programs: {
     list: () => request<unknown[]>('/api/programs'),

@@ -2,10 +2,12 @@
 
 import { useState } from 'react';
 import { allArticles, categories } from '../../artikel/data';
+import GenerateArtikelModal from './GenerateArtikelModal';
 
 export default function ArtikelManager() {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('Semua');
+  const [showGenerate, setShowGenerate] = useState(false);
 
   const filtered = allArticles.filter(a => {
     const matchCategory = activeCategory === 'Semua' || a.category === activeCategory;
@@ -16,10 +18,34 @@ export default function ArtikelManager() {
   return (
     <div>
       {/* Header */}
-      <div style={{ marginBottom: '1.5rem' }}>
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.25rem' }}>Kelola Artikel</h1>
-        <p style={{ color: '#64748b', fontSize: '0.875rem' }}>{allArticles.length} artikel tersedia</p>
+      <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+        <div>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.25rem' }}>Kelola Artikel</h1>
+          <p style={{ color: '#64748b', fontSize: '0.875rem' }}>{allArticles.length} artikel tersedia</p>
+        </div>
+        <button
+          onClick={() => setShowGenerate(true)}
+          style={{
+            display: 'flex', alignItems: 'center', gap: '0.5rem',
+            padding: '0.65rem 1.1rem',
+            background: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
+            color: 'white', border: 'none', borderRadius: '10px',
+            fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer',
+            boxShadow: '0 4px 14px rgba(99,102,241,0.35)',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          <span style={{ fontSize: '1rem' }}>✨</span>
+          Generate Artikel
+        </button>
       </div>
+
+      {showGenerate && (
+        <GenerateArtikelModal
+          onClose={() => setShowGenerate(false)}
+          onSaved={() => setShowGenerate(false)}
+        />
+      )}
 
       {/* AI info banner */}
       <div style={{
