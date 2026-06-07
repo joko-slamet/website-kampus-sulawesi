@@ -83,6 +83,17 @@ export const api = {
       });
     },
   },
+  scheduler: {
+    get: () =>
+      request<{ enabled: boolean; times: string[] }>('/api/scheduler'),
+    update: (enabled: boolean, times: string[]) =>
+      request<{ enabled: boolean; times: string[] }>('/api/scheduler', {
+        method: 'PUT',
+        body: JSON.stringify({ enabled, times }),
+      }),
+    runNow: () =>
+      request<{ message: string }>('/api/scheduler/run', { method: 'POST' }),
+  },
   programs: {
     list: () => request<unknown[]>('/api/programs'),
     get: (id: string) => request<unknown>(`/api/programs/${id}`),

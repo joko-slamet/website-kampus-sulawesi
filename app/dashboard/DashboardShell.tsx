@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { api } from '../lib/api';
 
 const sidebarLinks = [
   { icon: '🏠', label: 'Overview', href: '/dashboard' },
   { icon: '📝', label: 'Artikel', href: '/dashboard/artikel' },
+  { icon: '⚙️', label: 'Pengaturan', href: '/dashboard/settings' },
 ];
 
 export default function DashboardShell({ children }: { children: React.ReactNode }) {
@@ -63,7 +65,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
       }} className={`dashboard-sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
         {/* Sidebar header */}
         <div style={{ padding: '1.5rem 1.25rem', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-          <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', textDecoration: 'none' }}>
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', textDecoration: 'none' }}>
             <div style={{
               width: '36px', height: '36px', borderRadius: '9px',
               background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)',
@@ -75,7 +77,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
               <div style={{ color: 'white', fontWeight: 700, fontSize: '0.875rem', lineHeight: 1.2 }}>STIMIK Nusantara</div>
               <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.65rem' }}>Admin Panel</div>
             </div>
-          </a>
+          </Link>
         </div>
 
         {/* Nav links */}
@@ -83,7 +85,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
           {sidebarLinks.map(link => {
             const active = pathname === link.href;
             return (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 style={{
@@ -112,7 +114,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
               >
                 <span style={{ fontSize: '1rem', width: '20px', textAlign: 'center' }}>{link.icon}</span>
                 {link.label}
-              </a>
+              </Link>
             );
           })}
         </nav>

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { allArticles } from '../artikel/data';
 
 const stats = [
@@ -67,9 +68,9 @@ export default function DashboardOverview() {
             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
           }}>
             <h2 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0f172a' }}>Artikel Terbaru</h2>
-            <a href="/dashboard/artikel" style={{ fontSize: '0.78rem', color: '#0f2d6b', fontWeight: 600, textDecoration: 'none' }}>
+            <Link href="/dashboard/artikel" style={{ fontSize: '0.78rem', color: '#0f2d6b', fontWeight: 600, textDecoration: 'none' }}>
               Kelola semua →
-            </a>
+            </Link>
           </div>
           <div>
             {recentArticles.map((a, i) => (
@@ -110,11 +111,10 @@ export default function DashboardOverview() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
               {[
                 { icon: '✍️', label: 'Tulis Artikel Baru', href: '/dashboard/artikel', color: '#0f2d6b' },
-                { icon: '📢', label: 'Buat Pengumuman', href: '/dashboard/berita', color: '#7c3aed' },
                 { icon: '🤖', label: 'Generate Artikel AI', href: '/dashboard/artikel', color: '#0891b2' },
                 { icon: '📊', label: 'Lihat Laporan', href: '/dashboard', color: '#10b981' },
               ].map(action => (
-                <a
+                <Link
                   key={action.label}
                   href={action.href}
                   style={{
@@ -140,7 +140,7 @@ export default function DashboardOverview() {
                     fontSize: '0.95rem', flexShrink: 0,
                   }}>{action.icon}</span>
                   <span style={{ fontSize: '0.825rem', fontWeight: 600, color: '#0f172a' }}>{action.label}</span>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
