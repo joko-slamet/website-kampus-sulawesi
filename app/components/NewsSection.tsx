@@ -11,7 +11,7 @@ const news = [
     date: '28 Mei 2025',
     title: 'Pendaftaran Mahasiswa Baru 2025/2026 Resmi Dibuka',
     excerpt:
-      'STIMIK Nusantara Sulawesi membuka pendaftaran mahasiswa baru gelombang I untuk tahun akademik 2025/2026. Daftar sekarang dan dapatkan beasiswa awal semester.',
+      'STIA Abdul Haris Makassar membuka pendaftaran mahasiswa baru gelombang I untuk tahun akademik 2025/2026. Daftar sekarang dan dapatkan beasiswa awal semester.',
     readTime: '3 menit',
     views: '2.4rb',
     emoji: '🎓',
@@ -22,9 +22,9 @@ const news = [
     category: 'Kemitraan',
     categoryColor: '#10b981',
     date: '22 Mei 2025',
-    title: 'STIMIK Nusantara Jalin MoU dengan Telkom Indonesia untuk Program Magang',
+    title: 'STIA Abdul Haris Jalin MoU dengan Telkom Indonesia untuk Program Magang',
     excerpt:
-      'Penandatanganan MoU strategis antara STIMIK Nusantara Sulawesi dan Telkom Indonesia membuka peluang magang bagi 200 mahasiswa per tahun.',
+      'Penandatanganan MoU strategis antara STIA Abdul Haris Makassar dan Telkom Indonesia membuka peluang magang bagi 200 mahasiswa per tahun.',
     readTime: '4 menit',
     views: '1.8rb',
     emoji: '🤝',
@@ -35,7 +35,7 @@ const news = [
     category: 'Prestasi',
     categoryColor: '#7c3aed',
     date: '15 Mei 2025',
-    title: 'Mahasiswa STIMIK Raih Juara 1 Hackathon Nasional 2025',
+    title: 'Mahasiswa STIA Raih Juara 1 Hackathon Nasional 2025',
     excerpt:
       'Tim mahasiswa Teknik Informatika berhasil merebut juara pertama dalam kompetisi hackathon nasional dengan solusi smart city berbasis AI.',
     readTime: '5 menit',

@@ -26,11 +26,11 @@ export const metadata: Metadata = {
   authors: [{ name: 'STIA YPA-AH "Abdul Haris" Makassar' }],
   creator: 'STIA YPA-AH "Abdul Haris" Makassar',
   publisher: 'STIA YPA-AH "Abdul Haris" Makassar',
-  metadataBase: new URL("https://stia-abdulharis.ac.id"),
+  metadataBase: new URL("https://stiaabdulharis.ac.id"),
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://stia-abdulharis.ac.id",
+    url: "https://stiaabdulharis.ac.id",
     siteName: 'STIA Abdul Haris Makassar',
     title: 'STIA YPA-AH "Abdul Haris" Makassar — Terakreditasi BAIK BAN-PT',
     description:
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://stia-abdulharis.ac.id",
+    canonical: "https://stiaabdulharis.ac.id",
   },
 };
 

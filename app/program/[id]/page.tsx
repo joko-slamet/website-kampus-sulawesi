@@ -6,7 +6,7 @@ import { programs } from '../../data/programs';
 import { lecturers } from '../../data/lecturers';
 import ProgramDetail from './ProgramDetail';
 
-const BASE_URL = 'https://stia-abdulharis.ac.id'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://stiaabdulharis.ac.id';
 
 type Props = { params: Promise<{ id: string }> };
 

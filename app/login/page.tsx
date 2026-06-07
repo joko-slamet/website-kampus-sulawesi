@@ -48,7 +48,7 @@ export default function LoginPage() {
               <span style={{ color: 'white', fontWeight: 800, fontSize: '1.25rem' }}>S</span>
             </div>
             <div style={{ textAlign: 'left' }}>
-              <div style={{ color: 'white', fontWeight: 800, fontSize: '1rem', lineHeight: 1.1 }}>STIMIK Nusantara</div>
+              <div style={{ color: 'white', fontWeight: 800, fontSize: '1rem', lineHeight: 1.1 }}>STIA Abdul Haris</div>
               <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.65rem', letterSpacing: '0.08em' }}>SULAWESI</div>
             </div>
           </a>
@@ -57,7 +57,7 @@ export default function LoginPage() {
         <LoginForm />
 
         <p style={{ textAlign: 'center', marginTop: '1.5rem', color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem' }}>
-          © 2025 STIMIK Nusantara Sulawesi. Admin Panel v1.0
+          © 2025 STIA Abdul Haris Makassar. Admin Panel v1.0
         </p>
       </div>
     </div>

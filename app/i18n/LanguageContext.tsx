@@ -20,14 +20,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem('stimik_lang') as Lang | null;
+    const stored = localStorage.getItem('stia_lang') as Lang | null;
     if (stored === 'en' || stored === 'id') setLangState(stored);
     setMounted(true);
   }, []);
 
   const setLang = (l: Lang) => {
     setLangState(l);
-    localStorage.setItem('stimik_lang', l);
+    localStorage.setItem('stia_lang', l);
   };
 
   // Always use 'id' on first render to match SSR, switch after hydration

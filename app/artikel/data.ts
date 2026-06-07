@@ -19,12 +19,12 @@ export const allArticles: Article[] = [
     date: '1 Juni 2025',
     readTime: '5 menit',
     title: '7 Tips Lulus Tepat Waktu dengan IPK Tinggi di Kampus IT',
-    excerpt: 'Banyak mahasiswa baru yang bingung bagaimana mengatur waktu antara kuliah, organisasi, dan kehidupan sosial. Berikut strategi terbukti dari alumni STIMIK Nusantara.',
+    excerpt: 'Banyak mahasiswa baru yang bingung bagaimana mengatur waktu antara kuliah, organisasi, dan kehidupan sosial. Berikut strategi terbukti dari alumni STIA Abdul Haris.',
     tag: 'Populer',
     tagColor: '#f5a623',
     en: {
       title: '7 Tips to Graduate on Time with a High GPA at an IT College',
-      excerpt: 'Many new students struggle to balance academics, organizations, and social life. Here are proven strategies from STIMIK Nusantara alumni.',
+      excerpt: 'Many new students struggle to balance academics, organizations, and social life. Here are proven strategies from STIA Abdul Haris alumni.',
     },
   },
   {
@@ -49,12 +49,12 @@ export const allArticles: Article[] = [
     date: '28 Mei 2025',
     readTime: '4 menit',
     title: 'Panduan Lengkap Beasiswa Mahasiswa Baru 2025 yang Wajib Kamu Tahu',
-    excerpt: 'Ada beberapa jalur beasiswa yang tersedia untuk calon mahasiswa baru STIMIK Nusantara. Simak syarat, jadwal, dan cara mendaftarnya di sini.',
+    excerpt: 'Ada beberapa jalur beasiswa yang tersedia untuk calon mahasiswa baru STIA Abdul Haris. Simak syarat, jadwal, dan cara mendaftarnya di sini.',
     tag: 'Baru',
     tagColor: '#ef4444',
     en: {
       title: 'Complete Scholarship Guide for New Students 2025 You Must Know',
-      excerpt: 'Several scholarship pathways are available for prospective STIMIK Nusantara students. Check the requirements, schedule, and how to apply.',
+      excerpt: 'Several scholarship pathways are available for prospective STIA Abdul Haris students. Check the requirements, schedule, and how to apply.',
     },
   },
   {
@@ -64,12 +64,12 @@ export const allArticles: Article[] = [
     date: '25 Mei 2025',
     readTime: '7 menit',
     title: 'Mulai Freelance Sejak Kuliah: Pengalaman Alumni yang Kini Raup Jutaan dari Laptop',
-    excerpt: 'Alumni STIMIK berbagi cerita bagaimana mereka membangun portofolio dan mendapatkan klien pertama sejak duduk di bangku semester 3.',
+    excerpt: 'Alumni STIA berbagi cerita bagaimana mereka membangun portofolio dan mendapatkan klien pertama sejak duduk di bangku semester 3.',
     tag: null,
     tagColor: null,
     en: {
       title: 'Start Freelancing in College: Alumni Who Now Earn Millions from Their Laptop',
-      excerpt: 'STIMIK alumni share how they built their portfolio and landed their first clients as early as their third semester.',
+      excerpt: 'STIA alumni share how they built their portfolio and landed their first clients as early as their third semester.',
     },
   },
   {

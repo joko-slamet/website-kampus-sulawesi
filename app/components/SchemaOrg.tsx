@@ -23,8 +23,8 @@ export default function SchemaOrg() {
       '@type': 'OfferCatalog',
       name: 'Program Studi',
       itemListElement: [
-        { '@type': 'Course', name: 'S1 Ilmu Administrasi Negara', url: 'https://stia-abdulharis.ac.id/program/adm-negara' },
-        { '@type': 'Course', name: 'S1 Ilmu Administrasi Niaga', url: 'https://stia-abdulharis.ac.id/program/adm-niaga' },
+        { '@type': 'Course', name: 'S1 Ilmu Administrasi Negara', url: 'https://stiaabdulharis.ac.id/program/adm-negara' },
+        { '@type': 'Course', name: 'S1 Ilmu Administrasi Niaga', url: 'https://stiaabdulharis.ac.id/program/adm-niaga' },
       ],
     },
   }

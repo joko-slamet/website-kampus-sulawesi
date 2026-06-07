@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import DashboardShell from './DashboardShell';
 
 export const metadata: Metadata = {
-  title: { default: 'Dashboard Admin', template: '%s | Dashboard STIMIK' },
+  title: { default: 'Dashboard Admin', template: '%s | Dashboard STIA' },
   robots: { index: false, follow: false },
 };
 

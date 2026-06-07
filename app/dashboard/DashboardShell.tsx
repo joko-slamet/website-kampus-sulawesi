@@ -17,7 +17,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
   const pathname = usePathname();
 
   useEffect(() => {
-    const token = localStorage.getItem('stimik_token');
+    const token = localStorage.getItem('stia_token');
     if (!token) {
       window.location.href = '/login';
       return;
@@ -25,15 +25,15 @@ export default function DashboardShell({ children }: { children: React.ReactNode
     api.auth.me()
       .then(user => setUser(user))
       .catch(() => {
-        localStorage.removeItem('stimik_token');
-        localStorage.removeItem('stimik_auth');
+        localStorage.removeItem('stia_token');
+        localStorage.removeItem('stia_auth');
         window.location.href = '/login';
       });
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('stimik_token');
-    localStorage.removeItem('stimik_auth');
+    localStorage.removeItem('stia_token');
+    localStorage.removeItem('stia_auth');
     window.location.href = '/login';
   };
 
@@ -74,7 +74,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
               <span style={{ color: 'white', fontWeight: 800, fontSize: '1rem' }}>S</span>
             </div>
             <div>
-              <div style={{ color: 'white', fontWeight: 700, fontSize: '0.875rem', lineHeight: 1.2 }}>STIMIK Nusantara</div>
+              <div style={{ color: 'white', fontWeight: 700, fontSize: '0.875rem', lineHeight: 1.2 }}>STIA Abdul Haris</div>
               <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.65rem' }}>Admin Panel</div>
             </div>
           </Link>

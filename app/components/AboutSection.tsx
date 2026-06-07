@@ -49,7 +49,7 @@ export default function AboutSection() {
             <div style={{ position: 'relative', height: '480px', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 24px 64px rgba(15,45,107,0.18)' }}>
               <Image
                 src="/students-campus.png"
-                alt="Mahasiswa STIMIK Nusantara Sulawesi"
+                alt="Mahasiswa STIA Abdul Haris Sulawesi"
                 fill
                 style={{ objectFit: 'cover' }}
                 sizes="(max-width: 768px) 100vw, 50vw"

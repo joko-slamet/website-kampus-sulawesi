@@ -17,8 +17,8 @@ export default function LoginForm() {
 
     try {
       const { token, user } = await api.auth.login(email, password);
-      localStorage.setItem('stimik_token', token);
-      localStorage.setItem('stimik_auth', JSON.stringify(user));
+      localStorage.setItem('stia_token', token);
+      localStorage.setItem('stia_auth', JSON.stringify(user));
       window.location.href = '/dashboard';
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Terjadi kesalahan');
@@ -36,7 +36,7 @@ export default function LoginForm() {
         Selamat Datang
       </h1>
       <p style={{ color: '#64748b', fontSize: '0.875rem', marginBottom: '2rem' }}>
-        Masuk ke panel admin STIMIK Nusantara
+        Masuk ke panel admin STIA Abdul Haris
       </p>
 
       {error && (
@@ -61,7 +61,7 @@ export default function LoginForm() {
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            placeholder="admin@stimik.ac.id"
+            placeholder="admin@stiaabdulharis.ac.id"
             required
             style={{
               width: '100%', padding: '0.75rem 1rem',
