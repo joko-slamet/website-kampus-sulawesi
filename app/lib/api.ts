@@ -103,6 +103,12 @@ export const api = {
         `/api/whatsapp/stats?${qs}`
       );
     },
+    daily: (from?: Date, to?: Date) => {
+      const qs = new URLSearchParams();
+      if (from) qs.set('from', from.toISOString());
+      if (to) qs.set('to', to.toISOString());
+      return request<{ day: string; count: number }[]>(`/api/whatsapp/daily?${qs}`);
+    },
   },
   programs: {
     list: () => request<unknown[]>('/api/programs'),

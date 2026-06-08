@@ -4,14 +4,17 @@ import { useEffect, useState } from 'react';
 import { api } from '../../lib/api';
 
 interface SchedulerConfig {
+  enabled: boolean;
   times: string[];
 }
 
 const DEFAULT_CONFIG: SchedulerConfig = {
+  enabled: false,
   times: ['06:00', '12:00', '18:00'],
 };
 
-function nextRunLabel(times: string[]): string {
+function nextRunLabel(enabled: boolean, times: string[]): string {
+  if (!enabled) return 'Nonaktif';
   if (times.length === 0) return '—';
   const now = new Date();
   const sorted = [...times].sort();
@@ -25,6 +28,7 @@ function nextRunLabel(times: string[]): string {
 }
 
 export default function SettingsManager() {
+  const [enabled, setEnabled] = useState<boolean>(DEFAULT_CONFIG.enabled);
   const [times, setTimes] = useState<string[]>(DEFAULT_CONFIG.times);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -33,7 +37,7 @@ export default function SettingsManager() {
 
   useEffect(() => {
     api.scheduler.get()
-      .then(data => setTimes(data.times))
+      .then(data => { setEnabled(data.enabled); setTimes(data.times); })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
@@ -57,7 +61,8 @@ export default function SettingsManager() {
     setSaving(true);
     setError('');
     try {
-      const updated = await api.scheduler.update(true, times);
+      const updated = await api.scheduler.update(enabled, times);
+      setEnabled(updated.enabled);
       setTimes(updated.times);
       setSaved(true);
       setTimeout(() => setSaved(false), 2500);
@@ -93,12 +98,31 @@ export default function SettingsManager() {
             background: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
             display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px',
           }}>🤖</div>
-          <div>
+          <div style={{ flex: 1 }}>
             <p style={{ fontWeight: 700, fontSize: '0.95rem', color: '#0f172a', lineHeight: 1.2 }}>Auto-Generate Artikel</p>
             <p style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
-              Jadwal berikutnya: {nextRunLabel(times)}
+              Jadwal berikutnya: {nextRunLabel(enabled, times)}
             </p>
           </div>
+          {/* Enable/disable toggle */}
+          <button
+            onClick={() => { setEnabled(prev => !prev); setSaved(false); }}
+            title={enabled ? 'Nonaktifkan scheduler' : 'Aktifkan scheduler'}
+            style={{
+              position: 'relative',
+              width: '44px', height: '24px', borderRadius: '12px', border: 'none',
+              background: enabled ? '#6366f1' : '#cbd5e1',
+              cursor: 'pointer', transition: 'background 0.2s', flexShrink: 0, padding: 0,
+            }}
+          >
+            <span style={{
+              position: 'absolute', top: '3px',
+              left: enabled ? '23px' : '3px',
+              width: '18px', height: '18px', borderRadius: '50%',
+              background: 'white', transition: 'left 0.2s',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+            }} />
+          </button>
         </div>
 
         {/* Schedule list */}
