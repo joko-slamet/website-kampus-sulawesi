@@ -7,7 +7,7 @@ const id = {
     contact: 'Kontak', apply: 'Daftar Sekarang', profil: 'Profil',
   },
   hero: {
-    badge: '🎓 Penerimaan Mahasiswa Baru 2025/2026 Telah Dibuka',
+    badge: '🎓 Penerimaan Mahasiswa Baru {year} Telah Dibuka',
     titleLine1: 'Wujudkan Karier',
     titleGradient: 'Impianmu',
     titleLine2: 'Bersama Kami',
@@ -280,7 +280,7 @@ const en: typeof id = {
     contact: 'Contact', apply: 'Apply Now', profil: 'Profile',
   },
   hero: {
-    badge: '🎓 New Student Admission 2025/2026 is Now Open',
+    badge: '🎓 New Student Admission {year} is Now Open',
     titleLine1: 'Build Your',
     titleGradient: 'Dream Career',
     titleLine2: 'With Us',
