@@ -58,6 +58,7 @@ export const api = {
       if (params?.all) qs.set('all', 'true');
       return request<{ data: unknown[]; total: number }>(`/api/articles?${qs}`);
     },
+    stats: () => request<{ articles: { total: number; published: number; draft: number }; totalViews: number; news: number; leads: number }>('/api/articles/stats'),
     get: (id: string) => request<unknown>(`/api/articles/${id}`),
     create: (body: unknown) =>
       request<unknown>('/api/articles', { method: 'POST', body: JSON.stringify(body) }),
@@ -163,5 +164,11 @@ export const api = {
       request<{ ok: boolean; id: string }>('/api/leads', { method: 'POST', body: JSON.stringify(data) }),
     list: (page = 1, limit = 20) =>
       request<{ data: unknown[]; total: number }>(`/api/leads?page=${page}&limit=${limit}`),
+    daily: (from?: string, to?: string) => {
+      const qs = new URLSearchParams();
+      if (from) qs.set('from', from);
+      if (to) qs.set('to', to);
+      return request<{ day: string; count: number }[]>(`/api/leads/daily?${qs}`);
+    },
   },
 };
