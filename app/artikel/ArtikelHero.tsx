@@ -1,9 +1,42 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+
+interface Stats {
+  totalArticles: number;
+  totalViews: number;
+  totalCategories: number;
+}
+
+function fmt(n: number): string {
+  if (n >= 1000) return (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, '') + 'K';
+  return String(n);
+}
 
 export default function ArtikelHero() {
   const { t } = useLanguage();
+  const [stats, setStats] = useState<Stats | null>(null);
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/articles?page=1&limit=500`)
+      .then(r => r.json())
+      .then((data: { data: { category: string; views: number }[]; total: number }) => {
+        const articles = data.data ?? [];
+        const totalViews = articles.reduce((sum, a) => sum + (a.views ?? 0), 0);
+        const totalCategories = new Set(articles.map(a => a.category)).size;
+        setStats({ totalArticles: data.total ?? articles.length, totalViews, totalCategories });
+      })
+      .catch(() => {});
+  }, []);
+
+  const statItems = [
+    { value: stats ? fmt(stats.totalArticles) : '—', label: t.articles.statArticles },
+    { value: stats ? fmt(stats.totalViews) : '—', label: t.articles.statUpdates },
+    { value: stats ? String(stats.totalCategories) : '—', label: t.articles.statCategories },
+  ];
 
   return (
     <section style={{
@@ -38,13 +71,13 @@ export default function ArtikelHero() {
         </p>
 
         <div style={{ display: 'flex', gap: '2.5rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
-          {[
-            { value: '100+', label: t.articles.statArticles },
-            { value: '3×', label: t.articles.statUpdates },
-            { value: '5', label: t.articles.statCategories },
-          ].map(s => (
+          {statItems.map(s => (
             <div key={s.label}>
-              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fbbf24' }}>{s.value}</div>
+              <div style={{
+                fontSize: '1.4rem', fontWeight: 800, color: '#fbbf24',
+                minWidth: '2rem',
+                opacity: stats ? 1 : 0.4, transition: 'opacity 0.3s',
+              }}>{s.value}</div>
               <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.55)', marginTop: '0.1rem' }}>{s.label}</div>
             </div>
           ))}

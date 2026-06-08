@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { api } from '../../lib/api';
-import GenerateArtikelModal from './GenerateArtikelModal';
 
 interface Article {
   id: string;
@@ -23,6 +22,10 @@ function fmtDateTime(iso: string) {
   const date = d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Asia/Makassar' });
   const time = d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Makassar' });
   return { date, time };
+}
+
+function isNew(iso: string, now: number) {
+  return now - new Date(iso).getTime() < 5 * 60 * 1000;
 }
 
 const PAGE_SIZE = 10;
@@ -46,11 +49,12 @@ export default function ArtikelManager() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('Semua');
-  const [showGenerate, setShowGenerate] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [togglingId, setTogglingId] = useState<string | null>(null);
 
   const [categorySet, setCategorySet] = useState<string[]>([]);
+  const [now, setNow] = useState(() => Date.now());
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const load = useCallback(async (p: number, cat: string, q: string) => {
     setLoading(true);
@@ -77,6 +81,21 @@ export default function ArtikelManager() {
   }, []);
 
   useEffect(() => { load(page, activeCategory, search); }, [load, page, activeCategory, search]);
+
+  // Auto-refresh every 1 minute
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      load(page, activeCategory, search);
+      setNow(Date.now());
+    }, 60_000);
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+  }, [load, page, activeCategory, search]);
+
+  // Update `now` every 30s so the "Baru" badge disappears on time
+  useEffect(() => {
+    const t = setInterval(() => setNow(Date.now()), 30_000);
+    return () => clearInterval(t);
+  }, []);
 
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
   const categories = ['Semua', ...categorySet];
@@ -125,29 +144,7 @@ export default function ArtikelManager() {
             )}
           </p>
         </div>
-        <button
-          onClick={() => setShowGenerate(true)}
-          style={{
-            display: 'flex', alignItems: 'center', gap: '0.5rem',
-            padding: '0.65rem 1.1rem',
-            background: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
-            color: 'white', border: 'none', borderRadius: '10px',
-            fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer',
-            boxShadow: '0 4px 14px rgba(99,102,241,0.35)',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          <span style={{ fontSize: '1rem' }}>✨</span>
-          Generate Artikel
-        </button>
       </div>
-
-      {showGenerate && (
-        <GenerateArtikelModal
-          onClose={() => setShowGenerate(false)}
-          onSaved={() => { setShowGenerate(false); load(page, activeCategory, search); }}
-        />
-      )}
 
       {/* Filter bar */}
       <div style={{
@@ -236,9 +233,19 @@ export default function ArtikelManager() {
           >
             {/* Title */}
             <div style={{ minWidth: 0, paddingRight: '1rem' }}>
-              <p style={{ fontSize: '0.85rem', fontWeight: 600, color: '#0f172a', marginBottom: '0.2rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {article.title}
-              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.2rem' }}>
+                <p style={{ fontSize: '0.85rem', fontWeight: 600, color: '#0f172a', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {article.title}
+                </p>
+                {isNew(article.createdAt, now) && (
+                  <span style={{
+                    flexShrink: 0, fontSize: '0.6rem', fontWeight: 800,
+                    padding: '0.15rem 0.45rem', borderRadius: '999px',
+                    background: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
+                    color: 'white', letterSpacing: '0.04em', animation: 'pulse-badge 2s ease infinite',
+                  }}>BARU</span>
+                )}
+              </div>
               {article.tag && (
                 <span style={{
                   fontSize: '0.65rem', fontWeight: 700, padding: '0.15rem 0.5rem',
@@ -363,6 +370,7 @@ export default function ArtikelManager() {
       )}
 
       <style>{`
+        @keyframes pulse-badge { 0%,100%{opacity:1} 50%{opacity:0.65} }
         @media (max-width: 768px) {
           .artikel-table-header { grid-template-columns: 1fr 90px !important; }
           .artikel-table-header span:not(:first-child):not(:last-child) { display: none; }

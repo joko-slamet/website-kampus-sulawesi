@@ -62,7 +62,7 @@ export default function ArticleHero({ category, categoryColor, tag, titleId, tit
         </div>
 
         {image && (
-          <div style={{ marginTop: '2rem', borderRadius: '16px', overflow: 'hidden', maxHeight: '420px' }}>
+          <div style={{ marginTop: '2rem', borderRadius: '16px', overflow: 'hidden', aspectRatio: '16/9', width: '100%' }}>
             <img src={resolveImage(image)} alt={titleId} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
         )}
