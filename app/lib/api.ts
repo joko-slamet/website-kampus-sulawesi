@@ -158,4 +158,10 @@ export const api = {
     patchStatus: (id: string, status: 'aktif' | 'nonaktif') =>
       request<unknown>(`/api/programs/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
   },
+  leads: {
+    create: (data: { name: string; phone: string; program?: string; school?: string; message?: string }) =>
+      request<{ ok: boolean; id: string }>('/api/leads', { method: 'POST', body: JSON.stringify(data) }),
+    list: (page = 1, limit = 20) =>
+      request<{ data: unknown[]; total: number }>(`/api/leads?page=${page}&limit=${limit}`),
+  },
 };
