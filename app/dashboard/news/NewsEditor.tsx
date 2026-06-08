@@ -234,7 +234,7 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
               type="text"
               value={form.title}
               onChange={e => set('title', e.target.value)}
-              placeholder={form.type === 'announcement' ? 'Judul pengumuman...' : 'Judul berita yang menarik...'}
+              placeholder={form.type === 'announcement' ? 'Judul pengumuman...' : 'Judul berita'}
               style={{
                 width: '100%', border: 'none', outline: 'none',
                 fontSize: '1.5rem', fontWeight: 800, color: '#0f172a',
