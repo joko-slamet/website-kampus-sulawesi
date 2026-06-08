@@ -10,6 +10,12 @@ import ArticleHero from './ArticleHero';
 const BASE_URL = 'https://stiaabdulharis.ac.id';
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
 
+function resolveImage(image: string | null | undefined): string | undefined {
+  if (!image) return undefined;
+  if (image.startsWith('http')) return image;
+  return `${API_URL}${image}`;
+}
+
 export interface ArticleForPage {
   id: string;
   title: string;
@@ -64,7 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: article.excerpt,
       url: `${BASE_URL}/artikel/${slug}`,
       type: 'article',
-      ...(article.image ? { images: [{ url: article.image }] } : {}),
+      ...(article.image ? { images: [{ url: resolveImage(article.image) as string }] } : {}),
     },
   };
 }
@@ -83,7 +89,7 @@ export default async function ArticleDetailPage({ params }: Props) {
     description: article.excerpt,
     datePublished: article.date,
     url: `${BASE_URL}/artikel/${slug}`,
-    ...(article.image ? { image: article.image } : {}),
+    ...(article.image ? { image: resolveImage(article.image) } : {}),
     publisher: {
       '@type': 'CollegeOrUniversity',
       '@id': `${BASE_URL}/#organization`,

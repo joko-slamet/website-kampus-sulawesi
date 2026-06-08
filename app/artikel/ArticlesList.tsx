@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { resolveImage } from '../lib/imageUrl';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
 const PAGE_SIZE = 9;
@@ -203,7 +204,7 @@ export default function ArticlesList() {
                 {article.image && (
                   <div style={{ height: '180px', overflow: 'hidden', flexShrink: 0 }}>
                     <img
-                      src={article.image}
+                      src={resolveImage(article.image)}
                       alt={article.title}
                       style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                       loading="lazy"

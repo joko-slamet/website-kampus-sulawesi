@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from '../../i18n/LanguageContext';
+import { resolveImage } from '../../lib/imageUrl';
 
 type Props = {
   category: string;
@@ -62,7 +63,7 @@ export default function ArticleHero({ category, categoryColor, tag, titleId, tit
 
         {image && (
           <div style={{ marginTop: '2rem', borderRadius: '16px', overflow: 'hidden', maxHeight: '420px' }}>
-            <img src={image} alt={titleId} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src={resolveImage(image)} alt={titleId} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
         )}
         <div style={{ borderBottom: '1px solid #e2e8f0', marginTop: '2.5rem' }} />
