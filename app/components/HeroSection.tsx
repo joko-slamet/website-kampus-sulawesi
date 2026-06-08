@@ -89,7 +89,13 @@ export default function HeroSection() {
         <div style={{ width: '1.5px', height: '32px', background: 'linear-gradient(to bottom, rgba(255,255,255,0.5), transparent)', animation: 'float 2s ease-in-out infinite' }} />
       </div>
 
-      <style>{`@media (max-width: 640px) { .hero-stats-grid { grid-template-columns: repeat(2, 1fr) !important; } }`}</style>
+      <style>{`
+        @media (max-width: 640px) {
+          .hero-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .hero-stats-grid > *:last-child:nth-child(odd) { grid-column: span 2; }
+          .hero-stats-grid > * { padding: 1rem !important; }
+        }
+      `}</style>
     </section>
   );
 }
