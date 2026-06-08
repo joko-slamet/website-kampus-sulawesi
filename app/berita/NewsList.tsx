@@ -85,8 +85,6 @@ export default function NewsList() {
     fetchItems(next, activeTab, search, true);
   };
 
-  const pinned = items.filter(i => i.pinned);
-  const regular = items.filter(i => !i.pinned);
   const hasMore = items.length < total;
 
   const tabs: { key: TabType; label: string }[] = [
@@ -162,67 +160,32 @@ export default function NewsList() {
         </div>
       )}
 
-      {/* Pinned announcements strip */}
-      {!loading && pinned.length > 0 && (
-        <div style={{ marginBottom: '2rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#d97706', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              📌 Disematkan
-            </span>
-            <div style={{ flex: 1, height: '1px', background: '#fde68a' }} />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-            {pinned.map(item => (
-              <a key={item.id} href={`/berita/${item.id}`} style={{ textDecoration: 'none' }}>
-                <div style={{
-                  display: 'flex', alignItems: 'center', gap: '0.85rem',
-                  background: 'linear-gradient(90deg, #fffbeb 0%, #fefce8 100%)',
-                  border: '1px solid #fde68a', borderRadius: '12px',
-                  padding: '0.85rem 1.1rem', transition: 'all 0.2s',
-                }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 16px rgba(217,119,6,0.15)'; (e.currentTarget as HTMLDivElement).style.transform = 'translateX(3px)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = 'none'; (e.currentTarget as HTMLDivElement).style.transform = 'translateX(0)'; }}
-                >
-                  <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>📢</span>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ fontSize: '0.85rem', fontWeight: 700, color: '#0f172a', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {item.title}
-                    </p>
-                    <p style={{ fontSize: '0.72rem', color: '#92400e', margin: 0 }}>{item.category} · {fmtDate(item.createdAt)}</p>
-                  </div>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="2.5" strokeLinecap="round" style={{ flexShrink: 0 }}>
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Main grid */}
-      {!loading && regular.length > 0 && (
+      {/* All items as card grid */}
+      {!loading && items.length > 0 && (
         <div className="news-list-grid">
-          {regular.map((item) => (
+          {items.map((item) => (
             <a key={item.id} href={`/berita/${item.id}`} style={{ textDecoration: 'none' }}>
               <article
                 style={{
-                  background: 'white', border: '1px solid #e2e8f0',
+                  background: item.pinned ? 'linear-gradient(135deg, #fffbeb 0%, #fefce8 100%)' : 'white',
+                  border: item.pinned ? '1.5px solid #fde68a' : '1px solid #e2e8f0',
                   borderRadius: '20px', overflow: 'hidden',
                   display: 'flex', flexDirection: 'column', height: '100%',
                   transition: 'all 0.25s ease',
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLElement;
-                  el.style.boxShadow = '0 12px 40px rgba(15,45,107,0.12)';
+                  el.style.boxShadow = item.pinned
+                    ? '0 12px 40px rgba(217,119,6,0.15)'
+                    : '0 12px 40px rgba(15,45,107,0.12)';
                   el.style.transform = 'translateY(-4px)';
-                  el.style.borderColor = 'rgba(15,45,107,0.18)';
+                  el.style.borderColor = item.pinned ? '#f59e0b' : 'rgba(15,45,107,0.18)';
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLElement;
                   el.style.boxShadow = 'none';
                   el.style.transform = 'translateY(0)';
-                  el.style.borderColor = '#e2e8f0';
+                  el.style.borderColor = item.pinned ? '#fde68a' : '#e2e8f0';
                 }}
               >
                 {/* Thumbnail */}
@@ -242,13 +205,16 @@ export default function NewsList() {
                       <span style={{ fontSize: '0.68rem', fontWeight: 700, color: catColor(item.category), textTransform: 'uppercase', letterSpacing: '0.08em' }}>{item.category}</span>
                     </div>
                   )}
-                  {/* Type badge overlay */}
-                  <div style={{ position: 'absolute', top: '0.75rem', left: '0.75rem' }}>
-                    {item.type === 'announcement' ? (
+                  {/* Badge overlay */}
+                  <div style={{ position: 'absolute', top: '0.75rem', left: '0.75rem', display: 'flex', gap: '0.35rem' }}>
+                    {item.pinned && (
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem', padding: '0.2rem 0.55rem', background: '#fffbeb', color: '#92400e', border: '1px solid #fde68a', borderRadius: '999px', fontSize: '0.65rem', fontWeight: 700 }}>📌 Disematkan</span>
+                    )}
+                    {!item.pinned && (item.type === 'announcement' ? (
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem', padding: '0.2rem 0.55rem', background: '#fffbeb', color: '#b45309', border: '1px solid #fde68a', borderRadius: '999px', fontSize: '0.65rem', fontWeight: 700 }}>📢 Pengumuman</span>
                     ) : (
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem', padding: '0.2rem 0.55rem', background: '#eff6ff', color: '#1d4ed8', border: '1px solid #bfdbfe', borderRadius: '999px', fontSize: '0.65rem', fontWeight: 700 }}>📰 Berita</span>
-                    )}
+                    ))}
                   </div>
                 </div>
 
@@ -278,7 +244,7 @@ export default function NewsList() {
                     {stripHtml(item.content)}
                   </p>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '0.75rem', borderTop: '1px solid #f1f5f9' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '0.75rem', borderTop: `1px solid ${item.pinned ? '#fde68a' : '#f1f5f9'}` }}>
                     <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>📅 {fmtDate(item.createdAt)}</span>
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', color: '#0f2d6b', fontWeight: 700, fontSize: '0.78rem' }}>
                       Baca

@@ -130,6 +130,11 @@ export const api = {
       request<unknown>(`/api/news/${id}`, { method: 'PUT', body: JSON.stringify(body) }),
     delete: (id: string) =>
       request<{ message: string }>(`/api/news/${id}`, { method: 'DELETE' }),
+    generate: (title: string, type: 'news' | 'announcement') =>
+      request<{ content: string; category: string; tag: string }>('/api/news/generate', {
+        method: 'POST',
+        body: JSON.stringify({ title, type }),
+      }),
     uploadImage: (file: File) => {
       const token = getToken();
       const form = new FormData();

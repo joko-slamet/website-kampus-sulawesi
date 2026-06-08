@@ -64,6 +64,8 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
   const [dragging, setDragging] = useState(false);
+  const [generating, setGenerating] = useState(false);
+  const [generateError, setGenerateError] = useState('');
   const [form, setForm] = useState<NewsDraft>({
     type: 'news',
     title: '',
@@ -111,6 +113,21 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
     const file = e.dataTransfer.files[0];
     if (file) pickImage(file);
   }, [pickImage]);
+
+  const handleGenerate = async () => {
+    if (!form.title.trim() || generating) return;
+    setGenerating(true);
+    setGenerateError('');
+    try {
+      const result = await api.news.generate(form.title, form.type);
+      if (editorRef.current) editorRef.current.innerHTML = result.content;
+      setForm(p => ({ ...p, category: result.category, tag: result.tag }));
+    } catch (e) {
+      setGenerateError(e instanceof Error ? e.message : 'Gagal generate konten');
+    } finally {
+      setGenerating(false);
+    }
+  };
 
   const handleSave = async (publish: boolean) => {
     setSaving(true);
@@ -227,11 +244,11 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
           </div>
 
           {/* Rich text editor */}
-          <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '14px', overflow: 'hidden' }}>
+          <div style={{ background: 'white', border: `1px solid ${generating ? '#a5b4fc' : '#e2e8f0'}`, borderRadius: '14px', overflow: 'hidden', position: 'relative', transition: 'border-color 0.2s' }}>
             <div style={{
               display: 'flex', alignItems: 'center',
               padding: '0.6rem 0.75rem', borderBottom: '1px solid #f1f5f9',
-              background: '#fafafa', flexWrap: 'wrap', rowGap: '0.25rem',
+              background: '#fafafa', flexWrap: 'wrap', rowGap: '0.25rem', gap: '0',
             }}>
               {TOOLBAR.map((group, gi) => (
                 <div key={gi} style={{ display: 'flex', alignItems: 'center' }}>
@@ -255,14 +272,58 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
                   ))}
                 </div>
               ))}
+
+              {/* AI generate button */}
+              <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                {generateError && (
+                  <span style={{ fontSize: '0.7rem', color: '#ef4444' }}>{generateError}</span>
+                )}
+                <div style={{ width: '1px', height: '18px', background: '#e2e8f0' }} />
+                <button
+                  onClick={handleGenerate}
+                  disabled={!form.title.trim() || generating || saving}
+                  title={!form.title.trim() ? 'Tulis judul terlebih dahulu' : 'Generate konten dengan AI berdasarkan judul'}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
+                    padding: '0.3rem 0.7rem', borderRadius: '7px', border: 'none',
+                    cursor: (!form.title.trim() || generating || saving) ? 'not-allowed' : 'pointer',
+                    background: (!form.title.trim() || generating || saving) ? '#f1f5f9' : 'linear-gradient(135deg,#6366f1,#8b5cf6)',
+                    color: (!form.title.trim() || generating || saving) ? '#94a3b8' : 'white',
+                    fontSize: '0.72rem', fontWeight: 700, transition: 'all 0.2s',
+                    opacity: (!form.title.trim() || generating || saving) ? 0.6 : 1,
+                    boxShadow: (!form.title.trim() || generating || saving) ? 'none' : '0 2px 8px rgba(99,102,241,0.3)',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {generating ? (
+                    <>
+                      <div style={{ width: '11px', height: '11px', border: '2px solid rgba(255,255,255,0.35)', borderTopColor: 'white', borderRadius: '50%', animation: 'spin 0.7s linear infinite', flexShrink: 0 }} />
+                      Generating...
+                    </>
+                  ) : (
+                    <>✨ Generate AI</>
+                  )}
+                </button>
+              </div>
             </div>
             <div
               ref={editorRef}
-              contentEditable
+              contentEditable={!generating}
               suppressContentEditableWarning
               data-placeholder="Mulai menulis konten di sini..."
               style={{ minHeight: '400px', padding: '1.5rem', outline: 'none', color: '#1e293b', fontSize: '0.95rem', lineHeight: 1.8, fontFamily: 'inherit' }}
             />
+            {generating && (
+              <div style={{
+                position: 'absolute', inset: 0,
+                background: 'rgba(238,242,255,0.85)', backdropFilter: 'blur(2px)',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.75rem',
+              }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', animation: 'pulse-spin 1.4s ease-in-out infinite' }}>✨</div>
+                <p style={{ fontSize: '0.88rem', fontWeight: 700, color: '#4f46e5' }}>AI sedang menulis konten...</p>
+                <p style={{ fontSize: '0.75rem', color: '#818cf8' }}>Berdasarkan judul yang kamu tulis</p>
+              </div>
+            )}
           </div>
         </div>
 
@@ -420,6 +481,7 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
 
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse-spin { 0%,100%{transform:rotate(0deg) scale(1)} 50%{transform:rotate(180deg) scale(1.1)} }
         [contenteditable]:empty:before { content: attr(data-placeholder); color: #cbd5e1; pointer-events: none; }
         [contenteditable] h2 { font-size: 1.4rem; font-weight: 800; color: #0f172a; margin: 1.25rem 0 0.5rem; line-height: 1.3; }
         [contenteditable] h3 { font-size: 1.15rem; font-weight: 700; color: #0f172a; margin: 1rem 0 0.4rem; }
