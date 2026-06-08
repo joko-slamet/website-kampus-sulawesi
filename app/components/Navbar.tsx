@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../i18n/LanguageContext';
 
-export default function Navbar({ variant = 'transparent' }: { variant?: 'transparent' | 'dark' }) {
+export default function Navbar({ variant = 'transparent' }: { variant?: 'transparent' | 'dark' | 'light' }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -25,6 +25,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
 
   const atTop = !scrolled;
   const darkAtTop = atTop && variant === 'dark';
+  const lightAtTop = atTop && variant === 'light';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -61,10 +62,10 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
           transition: 'all 0.35s ease',
           padding: scrolled ? '0.65rem 0' : '1.1rem 0',
-          background: scrolled ? 'rgba(255,255,255,0.95)' : darkAtTop ? 'rgba(7,26,64,0.97)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(24px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(24px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(15,45,107,0.08)' : darkAtTop ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
+          background: scrolled || lightAtTop ? 'rgba(255,255,255,0.95)' : darkAtTop ? 'rgba(7,26,64,0.97)' : 'transparent',
+          backdropFilter: scrolled || lightAtTop ? 'blur(24px)' : 'none',
+          WebkitBackdropFilter: scrolled || lightAtTop ? 'blur(24px)' : 'none',
+          borderBottom: scrolled || lightAtTop ? '1px solid rgba(15,45,107,0.08)' : darkAtTop ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
           boxShadow: scrolled ? '0 4px 24px rgba(15,45,107,0.06)' : 'none',
         }}
       >
@@ -80,10 +81,10 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
               priority
             />
             <div>
-              <div style={{ fontWeight: 800, fontSize: '1rem', lineHeight: 1.1, color: scrolled ? '#0f2d6b' : 'white', transition: 'color 0.3s' }}>
+              <div style={{ fontWeight: 800, fontSize: '1rem', lineHeight: 1.1, color: scrolled || lightAtTop ? '#0f2d6b' : 'white', transition: 'color 0.3s' }}>
                 STIA Abdul Haris
               </div>
-              <div style={{ fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.05em', color: scrolled ? '#64748b' : 'rgba(255,255,255,0.75)', transition: 'color 0.3s' }}>
+              <div style={{ fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.05em', color: scrolled || lightAtTop ? '#64748b' : 'rgba(255,255,255,0.75)', transition: 'color 0.3s' }}>
                 MAKASSAR
               </div>
             </div>
@@ -98,15 +99,15 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
                 style={{
                   background: 'none', border: 'none', cursor: 'pointer',
                   padding: '0.5rem 0.85rem', fontSize: '0.875rem', fontWeight: 500,
-                  color: scrolled ? (isActive(link) ? activeColor : '#475569') : 'rgba(255,255,255,0.9)',
+                  color: scrolled || lightAtTop ? (isActive(link) ? activeColor : '#475569') : 'rgba(255,255,255,0.9)',
                   borderRadius: '8px', transition: 'all 0.2s',
                 }}
                 onMouseEnter={e => {
-                  (e.currentTarget as HTMLButtonElement).style.color = scrolled ? activeColor : 'white';
-                  (e.currentTarget as HTMLButtonElement).style.background = scrolled ? 'rgba(15,45,107,0.07)' : 'rgba(255,255,255,0.12)';
+                  (e.currentTarget as HTMLButtonElement).style.color = scrolled || lightAtTop ? activeColor : 'white';
+                  (e.currentTarget as HTMLButtonElement).style.background = scrolled || lightAtTop ? 'rgba(15,45,107,0.07)' : 'rgba(255,255,255,0.12)';
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLButtonElement).style.color = scrolled ? (isActive(link) ? activeColor : '#475569') : 'rgba(255,255,255,0.9)';
+                  (e.currentTarget as HTMLButtonElement).style.color = scrolled || lightAtTop ? (isActive(link) ? activeColor : '#475569') : 'rgba(255,255,255,0.9)';
                   (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
                 }}
               >
@@ -120,7 +121,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
             {/* Language toggle */}
             <div style={{
               display: 'flex', borderRadius: '999px', overflow: 'hidden',
-              border: scrolled ? '1.5px solid #e2e8f0' : '1.5px solid rgba(255,255,255,0.25)',
+              border: scrolled || lightAtTop ? '1.5px solid #e2e8f0' : '1.5px solid rgba(255,255,255,0.25)',
               flexShrink: 0,
             }}>
               {(['id', 'en'] as const).map(l => (
@@ -129,10 +130,10 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
                   onClick={() => setLang(l)}
                   style={{
                     padding: '0.3rem 0.65rem',
-                    background: lang === l ? (scrolled ? '#0f2d6b' : 'rgba(255,255,255,0.2)') : 'transparent',
+                    background: lang === l ? (scrolled || lightAtTop ? '#0f2d6b' : 'rgba(255,255,255,0.2)') : 'transparent',
                     border: 'none', cursor: 'pointer',
                     fontSize: '0.72rem', fontWeight: 700,
-                    color: lang === l ? (scrolled ? 'white' : 'white') : (scrolled ? '#64748b' : 'rgba(255,255,255,0.6)'),
+                    color: lang === l ? 'white' : (scrolled || lightAtTop ? '#64748b' : 'rgba(255,255,255,0.6)'),
                     letterSpacing: '0.05em', transition: 'all 0.2s',
                   }}
                 >
@@ -170,7 +171,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Toggle menu"
-              style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: '0.4rem', borderRadius: '8px', color: scrolled ? '#0f2d6b' : 'white' }}
+              style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: '0.4rem', borderRadius: '8px', color: scrolled || lightAtTop ? '#0f2d6b' : 'white' }}
               className="hamburger-btn"
             >
               <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">

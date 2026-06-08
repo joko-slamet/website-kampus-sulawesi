@@ -8,6 +8,7 @@ import { api } from '../lib/api';
 const sidebarLinks = [
   { icon: '🏠', label: 'Overview', href: '/dashboard' },
   { icon: '📝', label: 'Artikel', href: '/dashboard/artikel' },
+  { icon: '📰', label: 'Berita & Pengumuman', href: '/dashboard/news' },
   { icon: '⚙️', label: 'Pengaturan', href: '/dashboard/settings' },
 ];
 

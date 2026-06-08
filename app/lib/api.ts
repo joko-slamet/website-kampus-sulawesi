@@ -112,6 +112,39 @@ export const api = {
       return request<{ day: string; count: number }[]>(`/api/whatsapp/daily?${qs}`);
     },
   },
+  news: {
+    list: (params?: { type?: string; category?: string; search?: string; page?: number; limit?: number; all?: boolean }) => {
+      const qs = new URLSearchParams();
+      if (params?.type) qs.set('type', params.type);
+      if (params?.category) qs.set('category', params.category);
+      if (params?.search) qs.set('search', params.search);
+      if (params?.page) qs.set('page', String(params.page));
+      if (params?.limit) qs.set('limit', String(params.limit));
+      if (params?.all) qs.set('all', 'true');
+      return request<{ data: unknown[]; total: number }>(`/api/news?${qs}`);
+    },
+    get: (id: string) => request<unknown>(`/api/news/${id}`),
+    create: (body: unknown) =>
+      request<unknown>('/api/news', { method: 'POST', body: JSON.stringify(body) }),
+    update: (id: string, body: unknown) =>
+      request<unknown>(`/api/news/${id}`, { method: 'PUT', body: JSON.stringify(body) }),
+    delete: (id: string) =>
+      request<{ message: string }>(`/api/news/${id}`, { method: 'DELETE' }),
+    uploadImage: (file: File) => {
+      const token = getToken();
+      const form = new FormData();
+      form.append('image', file);
+      return fetch(`${BASE_URL}/api/news/upload-image`, {
+        method: 'POST',
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        body: form,
+      }).then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message ?? 'Upload failed');
+        return data as { url: string; filename: string };
+      });
+    },
+  },
   programs: {
     list: () => request<unknown[]>('/api/programs'),
     get: (id: string) => request<unknown>(`/api/programs/${id}`),
