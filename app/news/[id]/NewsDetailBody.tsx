@@ -123,14 +123,14 @@ export default function NewsDetailBody({ news, related }: Props) {
             ))}
           </div>
 
-          {/* Hero image — full, no crop */}
+          {/* Hero image — max height capped, flexible width, no cropping */}
           {news.image && (
-            <div style={{ borderRadius: '20px 20px 0 0', overflow: 'hidden' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', maxHeight: '520px' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={resolveImage(news.image)}
                 alt={news.title}
-                style={{ width: '100%', height: 'auto', display: 'block' }}
+                style={{ maxWidth: '100%', maxHeight: '520px', width: 'auto', height: 'auto', display: 'block', borderRadius: '20px' }}
               />
             </div>
           )}

@@ -48,34 +48,28 @@ export default function ArtikelManager() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [activeCategory, setActiveCategory] = useState('Semua');
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [togglingId, setTogglingId] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<Article | null>(null);
   const [modalClosing, setModalClosing] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
-  const [categorySet, setCategorySet] = useState<string[]>([]);
+  const [sort, setSort] = useState<'terbaru' | 'trending'>('terbaru');
   const [now, setNow] = useState(() => Date.now());
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const load = useCallback(async (p: number, cat: string, q: string) => {
+  const load = useCallback(async (p: number, q: string, s: string) => {
     setLoading(true);
     try {
       const res = await api.articles.list({
         all: true,
         page: p,
         limit: PAGE_SIZE,
-        category: cat !== 'Semua' ? cat : undefined,
         search: q || undefined,
+        sort: s === 'trending' ? 'views' : undefined,
       });
       setArticles(res.data as Article[]);
       setTotal(res.total);
-      // accumulate category list only from unfiltered loads
-      if (cat === 'Semua' && !q) {
-        const cats = [...new Set((res.data as Article[]).map(a => a.category))];
-        setCategorySet(prev => [...new Set([...prev, ...cats])].sort());
-      }
     } catch {
       // keep existing list
     } finally {
@@ -83,16 +77,16 @@ export default function ArtikelManager() {
     }
   }, []);
 
-  useEffect(() => { load(page, activeCategory, search); }, [load, page, activeCategory, search]);
+  useEffect(() => { load(page, search, sort); }, [load, page, search, sort]);
 
   // Auto-refresh every 1 minute
   useEffect(() => {
     intervalRef.current = setInterval(() => {
-      load(page, activeCategory, search);
+      load(page, search, sort);
       setNow(Date.now());
     }, 60_000);
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
-  }, [load, page, activeCategory, search]);
+  }, [load, page, search, sort]);
 
   // Update `now` every 30s so the "Baru" badge disappears on time
   useEffect(() => {
@@ -101,11 +95,9 @@ export default function ArtikelManager() {
   }, []);
 
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-  const categories = ['Semua', ...categorySet];
   const filtered = articles;
 
   function handleSearch(q: string) { setSearch(q); setPage(1); }
-  function handleCategory(cat: string) { setActiveCategory(cat); setPage(1); }
 
   async function handleTogglePublish(article: Article) {
     setTogglingId(article.id);
@@ -187,29 +179,24 @@ export default function ArtikelManager() {
             value={search}
             onChange={e => handleSearch(e.target.value)}
             style={{
-              width: '100%', padding: '0.6rem 0.75rem 0.6rem 2.25rem',
+              width: '100%', height: '36px', padding: '0 0.75rem 0 2.25rem',
               border: '1.5px solid #e2e8f0', borderRadius: '8px',
               fontSize: '0.85rem', background: '#f8fafc', boxSizing: 'border-box',
             }}
           />
         </div>
-        <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => handleCategory(cat)}
-              style={{
-                padding: '0.35rem 0.85rem', borderRadius: '999px',
-                fontSize: '0.75rem', fontWeight: 600, border: '1.5px solid', cursor: 'pointer',
-                borderColor: activeCategory === cat ? '#0f2d6b' : '#e2e8f0',
-                background: activeCategory === cat ? '#0f2d6b' : 'white',
-                color: activeCategory === cat ? 'white' : '#64748b',
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        <select
+          value={sort}
+          onChange={e => { setSort(e.target.value as 'terbaru' | 'trending'); setPage(1); }}
+          style={{
+            height: '36px', padding: '0 0.75rem', border: '1.5px solid #e2e8f0', borderRadius: '8px',
+            fontSize: '0.8rem', fontWeight: 600, color: '#374151',
+            background: 'white', cursor: 'pointer', outline: 'none', flexShrink: 0, boxSizing: 'border-box',
+          }}
+        >
+          <option value="terbaru">🕐 Terbaru</option>
+          <option value="trending">🔥 Trending</option>
+        </select>
       </div>
 
       {/* Table */}

@@ -167,7 +167,7 @@ export default function DashboardOverview() {
 
       {/* Quick Actions */}
       <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap' }}>
-        <QuickAction href="/dashboard/artikel" icon="📰" label="Artikel" color="#6366f1" />
+        <QuickAction href="/dashboard/article" icon="📰" label="Artikel" color="#6366f1" />
         <QuickAction href="/dashboard/news" icon="✏️" label="Buat Berita/Pengumuman" color="#0f2d6b" />
         <QuickAction href="/dashboard/leads" icon="📬" label="Lihat Leads" color="#16a34a" />
         <QuickAction href="/dashboard/settings" icon="⚙️" label="Pengaturan" color="#64748b" />
@@ -176,7 +176,7 @@ export default function DashboardOverview() {
       {/* Stat Cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', alignItems: 'stretch' }} className="stat-cards">
         <StatCard
-          href="/dashboard/artikel"
+          href="/dashboard/article"
           color="#6366f1"
           icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>}
           label="Total Artikel"
@@ -259,7 +259,7 @@ export default function DashboardOverview() {
         <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
           <div style={{ padding: '1rem 1.4rem', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <p style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0f172a' }}>Artikel Terbaru</p>
-            <Link href="/dashboard/artikel" style={{ fontSize: '0.75rem', color: '#6366f1', fontWeight: 600, textDecoration: 'none' }}>Lihat semua →</Link>
+            <Link href="/dashboard/article" style={{ fontSize: '0.75rem', color: '#6366f1', fontWeight: 600, textDecoration: 'none' }}>Lihat semua →</Link>
           </div>
           {recentArticles.length === 0 ? (
             <div style={{ padding: '2rem', textAlign: 'center', color: '#94a3b8', fontSize: '0.82rem' }}>Belum ada artikel</div>

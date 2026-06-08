@@ -49,13 +49,14 @@ export const api = {
       request<{ id: string; name: string; email: string; role: string }>('/api/auth/me'),
   },
   articles: {
-    list: (params?: { category?: string; search?: string; page?: number; limit?: number; all?: boolean }) => {
+    list: (params?: { category?: string; search?: string; page?: number; limit?: number; all?: boolean; sort?: string }) => {
       const qs = new URLSearchParams();
       if (params?.category) qs.set('category', params.category);
       if (params?.search) qs.set('search', params.search);
       if (params?.page) qs.set('page', String(params.page));
       if (params?.limit) qs.set('limit', String(params.limit));
       if (params?.all) qs.set('all', 'true');
+      if (params?.sort) qs.set('sort', params.sort);
       return request<{ data: unknown[]; total: number }>(`/api/articles?${qs}`);
     },
     stats: () => request<{ articles: { total: number; published: number; draft: number }; totalViews: number; news: number; leads: number }>('/api/articles/stats'),
@@ -114,7 +115,7 @@ export const api = {
     },
   },
   news: {
-    list: (params?: { type?: string; category?: string; search?: string; page?: number; limit?: number; all?: boolean }) => {
+    list: (params?: { type?: string; category?: string; search?: string; page?: number; limit?: number; all?: boolean; sort?: string }) => {
       const qs = new URLSearchParams();
       if (params?.type) qs.set('type', params.type);
       if (params?.category) qs.set('category', params.category);
@@ -122,6 +123,7 @@ export const api = {
       if (params?.page) qs.set('page', String(params.page));
       if (params?.limit) qs.set('limit', String(params.limit));
       if (params?.all) qs.set('all', 'true');
+      if (params?.sort) qs.set('sort', params.sort);
       return request<{ data: unknown[]; total: number }>(`/api/news?${qs}`);
     },
     get: (id: string) => request<unknown>(`/api/news/${id}`),

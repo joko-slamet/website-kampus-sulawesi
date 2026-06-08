@@ -50,13 +50,14 @@ export default function NewsManager() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'news' | 'announcement'>('all');
+  const [sort, setSort] = useState<'terbaru' | 'trending'>('terbaru');
   const [actionId, setActionId] = useState<string | null>(null);
   const [error, setError] = useState('');
   const [confirmDelete, setConfirmDelete] = useState<NewsItem | null>(null);
   const [modalClosing, setModalClosing] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
-  const load = useCallback(async (p: number, f: string) => {
+  const load = useCallback(async (p: number, f: string, s: string) => {
     setLoading(true);
     setError('');
     try {
@@ -65,6 +66,7 @@ export default function NewsManager() {
         type: f !== 'all' ? f : undefined,
         page: p,
         limit: PAGE_SIZE,
+        sort: s === 'trending' ? 'views' : undefined,
       });
       setItems(res.data as NewsItem[]);
       setTotal(res.total);
@@ -75,7 +77,7 @@ export default function NewsManager() {
     }
   }, []);
 
-  useEffect(() => { load(page, filter); }, [load, page, filter]);
+  useEffect(() => { load(page, filter, sort); }, [load, page, filter, sort]);
 
   const handleSave = async (data: NewsDraft, publish: boolean) => {
     if (view.mode !== 'editor') return;
@@ -108,7 +110,7 @@ export default function NewsManager() {
     }
 
     setView({ mode: 'list' });
-    load(1, filter);
+    load(1, filter, sort);
     setPage(1);
   };
 
@@ -229,24 +231,38 @@ export default function NewsManager() {
         </button>
       </div>
 
-      {/* Filter tabs */}
-      <div style={{ display: 'flex', gap: '0.35rem', background: 'white', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '0.35rem', marginBottom: '1.25rem', width: 'fit-content' }}>
-        {([
-          { key: 'all', label: 'Semua' },
-          { key: 'news', label: '📰 Berita' },
-          { key: 'announcement', label: '📢 Pengumuman' },
-        ] as const).map(tab => (
-          <button
-            key={tab.key}
-            onClick={() => { setFilter(tab.key); setPage(1); }}
-            style={{
-              padding: '0.4rem 0.9rem', borderRadius: '8px', border: 'none', cursor: 'pointer',
-              fontSize: '0.8rem', fontWeight: 600,
-              background: filter === tab.key ? '#0f2d6b' : 'transparent',
-              color: filter === tab.key ? 'white' : '#64748b', transition: 'all 0.15s',
-            }}
-          >{tab.label}</button>
-        ))}
+      {/* Filter tabs + sort */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+        <div style={{ height: '36px', display: 'flex', alignItems: 'center', gap: '0.25rem', background: 'white', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '0 0.25rem', boxSizing: 'border-box' }}>
+          {([
+            { key: 'all', label: 'Semua' },
+            { key: 'news', label: '📰 Berita' },
+            { key: 'announcement', label: '📢 Pengumuman' },
+          ] as const).map(tab => (
+            <button
+              key={tab.key}
+              onClick={() => { setFilter(tab.key); setPage(1); }}
+              style={{
+                height: '28px', padding: '0 0.85rem', borderRadius: '7px', border: 'none', cursor: 'pointer',
+                fontSize: '0.8rem', fontWeight: 600,
+                background: filter === tab.key ? '#0f2d6b' : 'transparent',
+                color: filter === tab.key ? 'white' : '#64748b', transition: 'all 0.15s',
+              }}
+            >{tab.label}</button>
+          ))}
+        </div>
+        <select
+          value={sort}
+          onChange={e => { setSort(e.target.value as 'terbaru' | 'trending'); setPage(1); }}
+          style={{
+            height: '36px', padding: '0 0.75rem', border: '1.5px solid #e2e8f0', borderRadius: '10px',
+            fontSize: '0.8rem', fontWeight: 600, color: '#374151',
+            background: 'white', cursor: 'pointer', outline: 'none', boxSizing: 'border-box',
+          }}
+        >
+          <option value="terbaru">🕐 Terbaru</option>
+          <option value="trending">🔥 Trending</option>
+        </select>
       </div>
 
       {error && (
