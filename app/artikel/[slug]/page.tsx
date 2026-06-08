@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import FloatingCTA from '../../components/FloatingCTA';
-import { allArticles } from '../data';
 import ArticleContent from './ArticleContent';
 import ArticleSidebar from './ArticleSidebar';
 import ArticleHero from './ArticleHero';
@@ -14,9 +13,9 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
 export interface ArticleForPage {
   id: string;
   title: string;
-  titleEn: string;
+  titleEn: string | null;
   excerpt: string;
-  excerptEn: string;
+  excerptEn: string | null;
   content: string | null;
   contentEn: string | null;
   category: string;
@@ -29,10 +28,6 @@ export interface ArticleForPage {
 }
 
 type Props = { params: Promise<{ slug: string }> };
-
-export async function generateStaticParams() {
-  return allArticles.map(a => ({ slug: a.id }));
-}
 
 async function fetchArticle(slug: string): Promise<ArticleForPage | null> {
   try {
@@ -56,35 +51,9 @@ async function fetchRelated(category: string, excludeId: string): Promise<Articl
   }
 }
 
-async function getArticle(slug: string): Promise<ArticleForPage | null> {
-  // Try DB first (supports AI-generated articles)
-  const dbArticle = await fetchArticle(slug);
-  if (dbArticle) return dbArticle;
-
-  // Fall back to static data
-  const static_ = allArticles.find(a => a.id === slug);
-  if (!static_) return null;
-  return {
-    id: static_.id,
-    title: static_.title,
-    titleEn: static_.en.title,
-    excerpt: static_.excerpt,
-    excerptEn: static_.en.excerpt,
-    category: static_.category,
-    categoryColor: static_.categoryColor,
-    tag: static_.tag,
-    tagColor: static_.tagColor,
-    readTime: static_.readTime,
-    date: static_.date,
-    image: null,
-    content: null,
-    contentEn: null,
-  };
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article = await getArticle(slug);
+  const article = await fetchArticle(slug);
   if (!article) return {};
   return {
     title: article.title,
@@ -102,7 +71,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ArticleDetailPage({ params }: Props) {
   const { slug } = await params;
-  const article = await getArticle(slug);
+  const article = await fetchArticle(slug);
   if (!article) notFound();
 
   const related = await fetchRelated(article.category, article.id);

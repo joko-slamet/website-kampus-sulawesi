@@ -12,9 +12,17 @@ interface Article {
   tag: string | null;
   tagColor: string | null;
   date: string;
+  createdAt: string;
   views: number;
   published: boolean;
   image: string | null;
+}
+
+function fmtDateTime(iso: string) {
+  const d = new Date(iso);
+  const date = d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Asia/Makassar' });
+  const time = d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Makassar' });
+  return { date, time };
 }
 
 const PAGE_SIZE = 10;
@@ -187,14 +195,14 @@ export default function ArtikelManager() {
       {/* Table */}
       <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '14px', overflow: 'hidden' }}>
         <div style={{
-          display: 'grid', gridTemplateColumns: '1fr 130px 110px 90px 130px',
+          display: 'grid', gridTemplateColumns: 'minmax(0,2fr) minmax(0,1.4fr) 160px 90px 165px',
           padding: '0.75rem 1.25rem',
           background: '#f8fafc', borderBottom: '1px solid #e2e8f0',
           fontSize: '0.72rem', fontWeight: 700, color: '#64748b', letterSpacing: '0.05em',
         }} className="artikel-table-header">
           <span>JUDUL</span>
           <span>KATEGORI</span>
-          <span>TANGGAL</span>
+          <span>WAKTU DIBUAT</span>
           <span>STATUS</span>
           <span>AKSI</span>
         </div>
@@ -218,7 +226,7 @@ export default function ArtikelManager() {
           <div
             key={article.id}
             style={{
-              display: 'grid', gridTemplateColumns: '1fr 130px 110px 90px 130px',
+              display: 'grid', gridTemplateColumns: 'minmax(0,2fr) minmax(0,1.4fr) 160px 90px 165px',
               padding: '1rem 1.25rem', alignItems: 'center',
               borderBottom: i < filtered.length - 1 ? '1px solid #f8fafc' : 'none',
             }}
@@ -252,7 +260,10 @@ export default function ArtikelManager() {
             </span>
 
             {/* Date */}
-            <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>{article.date}</span>
+            <div>
+              <div style={{ fontSize: '0.78rem', color: '#64748b' }}>{fmtDateTime(article.createdAt).date}</div>
+              <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.1rem' }}>{fmtDateTime(article.createdAt).time} WITA</div>
+            </div>
 
             {/* Status */}
             <span style={{

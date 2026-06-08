@@ -1,10 +1,24 @@
 'use client';
 
 import { useLanguage } from '../../i18n/LanguageContext';
-import { getArticleContent, hasArticleContent } from '../content';
-import type { Block } from '../content';
 import ArticleBody from './ArticleBody';
+
+type Block =
+  | { type: 'heading'; text: string }
+  | { type: 'subheading'; text: string }
+  | { type: 'paragraph'; text: string }
+  | { type: 'list'; items: string[] }
+  | { type: 'ordered'; items: string[] }
+  | { type: 'callout'; icon: string; text: string }
+  | { type: 'divider' };
 import type { ArticleForPage } from './page';
+
+function stripInline(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
+    .replace(/_(.+?)_/g, '$1');
+}
 
 function markdownToBlocks(md: string): Block[] {
   const blocks: Block[] = [];
@@ -16,14 +30,20 @@ function markdownToBlocks(md: string): Block[] {
 
     if (!line) { i++; continue; }
 
+    if (line.startsWith('### ')) {
+      blocks.push({ type: 'subheading', text: stripInline(line.slice(4).trim()) });
+      i++;
+      continue;
+    }
+
     if (line.startsWith('## ')) {
-      blocks.push({ type: 'subheading', text: line.slice(3).trim() });
+      blocks.push({ type: 'subheading', text: stripInline(line.slice(3).trim()) });
       i++;
       continue;
     }
 
     if (line.startsWith('# ')) {
-      blocks.push({ type: 'heading', text: line.slice(2).trim() });
+      blocks.push({ type: 'heading', text: stripInline(line.slice(2).trim()) });
       i++;
       continue;
     }
@@ -34,31 +54,27 @@ function markdownToBlocks(md: string): Block[] {
       continue;
     }
 
-    // Collect consecutive bullet lines into a list block
     if (line.startsWith('- ')) {
       const items: string[] = [];
       while (i < lines.length && lines[i].trim().startsWith('- ')) {
-        items.push(lines[i].trim().slice(2).trim());
+        items.push(stripInline(lines[i].trim().slice(2).trim()));
         i++;
       }
       blocks.push({ type: 'list', items });
       continue;
     }
 
-    // Collect consecutive numbered lines into an ordered block
     if (/^\d+\.\s/.test(line)) {
       const items: string[] = [];
       while (i < lines.length && /^\d+\.\s/.test(lines[i].trim())) {
-        items.push(lines[i].trim().replace(/^\d+\.\s/, '').trim());
+        items.push(stripInline(lines[i].trim().replace(/^\d+\.\s/, '').trim()));
         i++;
       }
       blocks.push({ type: 'ordered', items });
       continue;
     }
 
-    // Regular paragraph — strip markdown bold/italic markers
-    const text = line.replace(/\*\*(.+?)\*\*/g, '$1').replace(/\*(.+?)\*/g, '$1');
-    blocks.push({ type: 'paragraph', text });
+    blocks.push({ type: 'paragraph', text: stripInline(line) });
     i++;
   }
 
@@ -68,14 +84,11 @@ function markdownToBlocks(md: string): Block[] {
 export default function ArticleContent({ article }: { article: ArticleForPage }) {
   const { lang } = useLanguage();
 
-  let content: Block[];
-
-  // Priority: DB content → static content.ts → excerpt fallback
   const dbContent = lang === 'en' ? (article.contentEn || article.content) : article.content;
+
+  let content: Block[];
   if (dbContent) {
     content = markdownToBlocks(dbContent);
-  } else if (hasArticleContent(article.id)) {
-    content = getArticleContent(article.id, lang);
   } else {
     const text = lang === 'en' ? (article.excerptEn || article.excerpt) : article.excerpt;
     content = text ? [{ type: 'paragraph', text }] : [];

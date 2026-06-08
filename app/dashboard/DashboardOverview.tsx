@@ -2,17 +2,17 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { allArticles } from '../artikel/data';
 import { api } from '../lib/api';
 import { DateRangePicker, DateRange, getPresetRange } from './DateRangePicker';
 
-const recentArticles = [
-  { title: '7 Tips Lulus Tepat Waktu dengan IPK Tinggi di Kampus IT', category: 'Tips Kuliah', date: '1 Jun 2025', views: '2.1rb' },
-  { title: 'Prospek Kerja Lulusan Teknik Informatika di Era AI 2025', category: 'Dunia IT', date: '30 Mei 2025', views: '1.8rb' },
-  { title: 'Panduan Lengkap Beasiswa Mahasiswa Baru 2025', category: 'Beasiswa', date: '28 Mei 2025', views: '3.4rb' },
-  { title: 'Mulai Freelance Sejak Kuliah', category: 'Karier', date: '25 Mei 2025', views: '980' },
-  { title: 'AI Tools Gratis untuk Mahasiswa IT 2025', category: 'Dunia IT', date: '20 Mei 2025', views: '1.2rb' },
-];
+interface RecentArticle {
+  id: string;
+  title: string;
+  category: string;
+  date: string;
+  views: number;
+  published: boolean;
+}
 
 interface DailyPoint { day: string; count: number; }
 
@@ -97,6 +97,17 @@ export default function DashboardOverview() {
   const [dailyData, setDailyData] = useState<DailyPoint[]>([]);
   const [dailyLoading, setDailyLoading] = useState(false);
   const [dateRange, setDateRange] = useState<DateRange | null>(null);
+  const [articleTotal, setArticleTotal] = useState<number | null>(null);
+  const [recentArticles, setRecentArticles] = useState<RecentArticle[]>([]);
+
+  useEffect(() => {
+    api.articles.list({ all: true, page: 1, limit: 5 })
+      .then(res => {
+        setArticleTotal(res.total);
+        setRecentArticles(res.data as RecentArticle[]);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (!dateRange) return;
@@ -116,7 +127,7 @@ export default function DashboardOverview() {
   }, [dateRange]);
 
   const stats = [
-    { icon: '📝', label: 'Total Artikel', value: String(allArticles.length), change: '+3' },
+    { icon: '📝', label: 'Total Artikel', value: articleTotal === null ? '…' : String(articleTotal) },
     {
       icon: 'wa', label: 'Inquiry Masuk',
       value: waTotal === null ? '…' : String(waTotal),
@@ -193,8 +204,13 @@ export default function DashboardOverview() {
           </Link>
         </div>
         <div>
+          {recentArticles.length === 0 && (
+            <div style={{ padding: '2rem 1.5rem', textAlign: 'center', color: '#94a3b8', fontSize: '0.85rem' }}>
+              Belum ada artikel
+            </div>
+          )}
           {recentArticles.map((a, i) => (
-            <div key={i} style={{
+            <div key={a.id} style={{
               padding: '1rem 1.5rem',
               borderBottom: i < recentArticles.length - 1 ? '1px solid #f8fafc' : 'none',
               display: 'flex', alignItems: 'center', gap: '1rem',
@@ -214,9 +230,11 @@ export default function DashboardOverview() {
               </div>
               <span style={{
                 fontSize: '0.68rem', fontWeight: 700, padding: '0.2rem 0.6rem',
-                background: '#dcfce7', color: '#16a34a', borderRadius: '999px', whiteSpace: 'nowrap',
+                background: a.published ? '#dcfce7' : '#fff7ed',
+                color: a.published ? '#16a34a' : '#f97316',
+                borderRadius: '999px', whiteSpace: 'nowrap',
               }}>
-                Tayang
+                {a.published ? 'Tayang' : 'Draft'}
               </span>
             </div>
           ))}

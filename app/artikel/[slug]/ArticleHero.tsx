@@ -8,7 +8,7 @@ type Props = {
   tag: string | null;
   tagColor: string | null;
   titleId: string;
-  titleEn: string;
+  titleEn: string | null;
   date: string;
   readTime: string;
   image?: string | null;
@@ -16,7 +16,7 @@ type Props = {
 
 export default function ArticleHero({ category, categoryColor, tag, titleId, titleEn, date, readTime, image }: Props) {
   const { t, lang } = useLanguage();
-  const title = lang === 'en' ? titleEn : titleId;
+  const title = lang === 'en' ? (titleEn || titleId) : titleId;
 
   return (
     <section style={{ background: '#f8fafc', padding: '8rem 1.5rem 2.5rem' }}>
