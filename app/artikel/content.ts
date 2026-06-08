@@ -244,6 +244,10 @@ export const articleContentEn: Record<string, Block[]> = {
   ],
 };
 
+export function hasArticleContent(id: string): boolean {
+  return id in articleContent;
+}
+
 export function getArticleContent(id: string, lang: 'id' | 'en' = 'id'): Block[] {
   const contentMap = lang === 'en' ? articleContentEn : articleContent;
   return (

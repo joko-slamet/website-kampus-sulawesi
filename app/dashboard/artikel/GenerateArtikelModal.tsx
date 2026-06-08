@@ -52,19 +52,8 @@ export default function GenerateArtikelModal({ onClose, onSaved }: Props) {
     setSaving(true);
     setError('');
     try {
-      await api.articles.create({
-        id: result.suggestedId,
+      await api.articles.update(result.id, {
         image: imageUrl || null,
-        title: result.title,
-        excerpt: result.excerpt,
-        titleEn: result.titleEn,
-        excerptEn: result.excerptEn,
-        category: result.category,
-        categoryColor: result.categoryColor,
-        tag: result.tag || null,
-        tagColor: result.tagColor || null,
-        readTime: result.readTime,
-        date: result.date,
         published: publish,
       });
       onSaved();

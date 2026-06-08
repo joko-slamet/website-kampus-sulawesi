@@ -1,7 +1,7 @@
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
 
 export interface GeneratedArticle {
-  suggestedId: string;
+  id: string;
   image: string | null;
   title: string;
   excerpt: string;
@@ -9,8 +9,8 @@ export interface GeneratedArticle {
   excerptEn: string;
   category: string;
   categoryColor: string;
-  tag: string;
-  tagColor: string;
+  tag: string | null;
+  tagColor: string | null;
   readTime: string;
   date: string;
   views: number;
@@ -49,11 +49,13 @@ export const api = {
       request<{ id: string; name: string; email: string; role: string }>('/api/auth/me'),
   },
   articles: {
-    list: (params?: { category?: string; search?: string; page?: number }) => {
+    list: (params?: { category?: string; search?: string; page?: number; limit?: number; all?: boolean }) => {
       const qs = new URLSearchParams();
       if (params?.category) qs.set('category', params.category);
       if (params?.search) qs.set('search', params.search);
       if (params?.page) qs.set('page', String(params.page));
+      if (params?.limit) qs.set('limit', String(params.limit));
+      if (params?.all) qs.set('all', 'true');
       return request<{ data: unknown[]; total: number }>(`/api/articles?${qs}`);
     },
     get: (id: string) => request<unknown>(`/api/articles/${id}`),

@@ -2,14 +2,10 @@
 
 import { useLanguage } from '../../i18n/LanguageContext';
 
-type RelatedArticle = {
-  id: string;
-  title: string;
-  readTime: string;
-};
+import type { ArticleForPage } from './page';
 
 type Props = {
-  related: RelatedArticle[];
+  related: Pick<ArticleForPage, 'id' | 'title' | 'readTime'>[];
 };
 
 export default function ArticleSidebar({ related }: Props) {

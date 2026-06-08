@@ -11,9 +11,10 @@ type Props = {
   titleEn: string;
   date: string;
   readTime: string;
+  image?: string | null;
 };
 
-export default function ArticleHero({ category, categoryColor, tag, titleId, titleEn, date, readTime }: Props) {
+export default function ArticleHero({ category, categoryColor, tag, titleId, titleEn, date, readTime, image }: Props) {
   const { t, lang } = useLanguage();
   const title = lang === 'en' ? titleEn : titleId;
 
@@ -59,6 +60,11 @@ export default function ArticleHero({ category, categoryColor, tag, titleId, tit
           ))}
         </div>
 
+        {image && (
+          <div style={{ marginTop: '2rem', borderRadius: '16px', overflow: 'hidden', maxHeight: '420px' }}>
+            <img src={image} alt={titleId} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+        )}
         <div style={{ borderBottom: '1px solid #e2e8f0', marginTop: '2.5rem' }} />
       </div>
     </section>

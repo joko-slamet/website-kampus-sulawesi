@@ -12,17 +12,8 @@ type Block =
   | { type: 'callout'; icon: string; text: string }
   | { type: 'divider' };
 
-type Article = {
-  id: string;
-  category: string;
-  categoryColor: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
-  tag: string | null;
-  tagColor: string | null;
-};
+import type { ArticleForPage } from './page';
+type Article = Pick<ArticleForPage, 'id' | 'category' | 'categoryColor' | 'title' | 'excerpt' | 'date' | 'readTime' | 'tag' | 'tagColor'>;
 
 export default function ArticleBody({ article, content }: { article: Article; content: Block[] }) {
   const { t } = useLanguage();
