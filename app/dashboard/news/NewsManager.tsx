@@ -9,7 +9,9 @@ interface NewsItem {
   type: 'news' | 'announcement';
   title: string;
   category: string;
+  tag?: string;
   image: string | null;
+  content?: string;
   pinned: boolean;
   published: boolean;
   views: number;
@@ -130,6 +132,18 @@ export default function NewsManager() {
     } catch { /* noop */ } finally { setActionId(null); }
   };
 
+  const handleEdit = async (item: NewsItem) => {
+    setActionId(item.id);
+    try {
+      const full = await api.news.get(item.id) as NewsItem;
+      setView({ mode: 'editor', item: { ...item, content: full.content ?? '', tag: full.tag ?? '' } });
+    } catch {
+      setView({ mode: 'editor', item });
+    } finally {
+      setActionId(null);
+    }
+  };
+
   function showToast(msg: string) {
     setToast(msg);
     setTimeout(() => setToast(null), 3000);
@@ -171,9 +185,9 @@ export default function NewsManager() {
           type: view.item.type,
           title: view.item.title,
           image: view.item.image,
-          content: '',
+          content: view.item.content ?? '',
           category: view.item.category,
-          tag: '',
+          tag: view.item.tag ?? '',
           pinned: view.item.pinned,
           published: view.item.published,
         }
@@ -417,7 +431,7 @@ export default function NewsManager() {
                   </a>
                 )}
                 <button
-                  onClick={() => setView({ mode: 'editor', item })}
+                  onClick={() => handleEdit(item)}
                   data-tip="Edit"
                   className="icon-btn"
                   style={{
