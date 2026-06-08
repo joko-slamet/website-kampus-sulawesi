@@ -13,7 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
-      url: `${BASE_URL}/artikel`,
+      url: `${BASE_URL}/article`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.8,
@@ -33,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (res.ok) {
       const data = await res.json() as { data: { id: string }[] }
       articleRoutes = data.data.map(a => ({
-        url: `${BASE_URL}/artikel/${a.id}`,
+        url: `${BASE_URL}/article/${a.id}`,
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.7,

@@ -164,7 +164,7 @@ export default function NewsList() {
       {!loading && items.length > 0 && (
         <div className="news-list-grid">
           {items.map((item) => (
-            <a key={item.id} href={`/berita/${item.id}`} style={{ textDecoration: 'none' }}>
+            <a key={item.id} href={`/news/${item.id}`} style={{ textDecoration: 'none' }}>
               <article
                 style={{
                   background: item.pinned ? 'linear-gradient(135deg, #fffbeb 0%, #fefce8 100%)' : 'white',

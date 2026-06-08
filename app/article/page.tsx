@@ -8,11 +8,11 @@ import ArtikelHero from './ArtikelHero';
 export const metadata: Metadata = {
   title: 'Artikel & Insight',
   description: 'Tips kuliah, info karier, dan beasiswa — konten edukatif untuk calon dan mahasiswa aktif STIA Abdul Haris Makassar. Diperbarui setiap hari.',
-  alternates: { canonical: 'https://stiaabdulharis.ac.id/artikel' },
+  alternates: { canonical: 'https://stiaabdulharis.ac.id/article' },
   openGraph: {
     title: 'Artikel & Insight | STIA Abdul Haris Makassar',
     description: 'Tips kuliah, info karier, dan beasiswa untuk mahasiswa STIA Abdul Haris Makassar.',
-    url: 'https://stiaabdulharis.ac.id/artikel',
+    url: 'https://stiaabdulharis.ac.id/article',
   },
 };
 

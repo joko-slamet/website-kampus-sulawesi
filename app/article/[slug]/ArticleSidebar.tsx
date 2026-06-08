@@ -53,7 +53,7 @@ export default function ArticleSidebar({ related }: Props) {
               {related.map(r => (
                 <a
                   key={r.id}
-                  href={`/artikel/${r.id}`}
+                  href={`/article/${r.id}`}
                   style={{ textDecoration: 'none' }}
                 >
                   <div
@@ -80,7 +80,7 @@ export default function ArticleSidebar({ related }: Props) {
               ))}
             </div>
             <a
-              href="/artikel"
+              href='/article'
               style={{
                 display: 'block', textAlign: 'center', marginTop: '1rem',
                 fontSize: '0.8rem', color: 'rgba(255,255,255,0.65)', fontWeight: 600,

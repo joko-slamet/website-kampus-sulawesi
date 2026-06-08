@@ -174,7 +174,7 @@ export default function ArticlesList() {
       {!loading && articles.length > 0 && (
         <div className="artikel-grid">
           {articles.map((article) => (
-            <a key={article.id} href={`/artikel/${article.id}`} style={{ textDecoration: 'none' }}>
+            <a key={article.id} href={`/article/${article.id}`} style={{ textDecoration: 'none' }}>
               <article
                 className="artikel-card"
                 style={{

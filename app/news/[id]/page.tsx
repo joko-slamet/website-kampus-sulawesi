@@ -67,11 +67,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${news.title} - STIA Abdul Haris Makassar`,
     description: desc,
-    alternates: { canonical: `${BASE_URL}/berita/${id}` },
+    alternates: { canonical: `${BASE_URL}/news/${id}` },
     openGraph: {
       title: news.title,
       description: desc,
-      url: `${BASE_URL}/berita/${id}`,
+      url: `${BASE_URL}/news/${id}`,
       type: 'article',
       ...(news.image ? { images: [{ url: resolveImage(news.image) as string }] } : {}),
     },
@@ -92,7 +92,7 @@ export default async function NewsDetailPage({ params }: Props) {
     description: stripHtml(news.content),
     datePublished: news.createdAt,
     dateModified: news.updatedAt,
-    url: `${BASE_URL}/berita/${id}`,
+    url: `${BASE_URL}/news/${id}`,
     ...(news.image ? { image: resolveImage(news.image) } : {}),
     publisher: {
       '@type': 'CollegeOrUniversity',
@@ -106,8 +106,8 @@ export default async function NewsDetailPage({ params }: Props) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Beranda', item: BASE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Berita & Pengumuman', item: `${BASE_URL}/berita` },
-      { '@type': 'ListItem', position: 3, name: news.title, item: `${BASE_URL}/berita/${id}` },
+      { '@type': 'ListItem', position: 2, name: 'Berita & Pengumuman', item: `${BASE_URL}/news` },
+      { '@type': 'ListItem', position: 3, name: news.title, item: `${BASE_URL}/news/${id}` },
     ],
   };
 

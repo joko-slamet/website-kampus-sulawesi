@@ -75,21 +75,6 @@ export default function AboutSection() {
               <div style={{ fontSize: '0.7rem', color: '#10b981', fontWeight: 600, marginTop: '0.2rem' }}>✓ {t.about.floatAccredSub}</div>
             </div>
 
-            {/* Floating card: Alumni */}
-            <div style={{
-              position: 'absolute', bottom: '-1.5rem', left: '-1.5rem',
-              background: 'linear-gradient(135deg, #0f2d6b 0%, #1a4aad 100%)',
-              borderRadius: '16px',
-              padding: '1.25rem 1.5rem',
-              boxShadow: '0 12px 40px rgba(15,45,107,0.35)',
-              minWidth: '180px',
-              animation: 'float 6s ease-in-out infinite 1s',
-            }}>
-              <div style={{ fontSize: '1.75rem', fontWeight: 900, color: '#fbbf24', lineHeight: 1 }}>12.000+</div>
-              <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', marginTop: '0.25rem' }}>{t.about.floatAlumniLabel}</div>
-              <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', marginTop: '0.2rem' }}>{t.about.floatAlumniSub}</div>
-            </div>
-
             {/* Milestone timeline */}
             <div style={{
               position: 'absolute', bottom: '2rem', right: '-1.5rem',

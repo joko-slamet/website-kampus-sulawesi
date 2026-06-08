@@ -64,11 +64,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: article.title,
     description: article.excerpt,
-    alternates: { canonical: `${BASE_URL}/artikel/${slug}` },
+    alternates: { canonical: `${BASE_URL}/article/${slug}` },
     openGraph: {
       title: article.title,
       description: article.excerpt,
-      url: `${BASE_URL}/artikel/${slug}`,
+      url: `${BASE_URL}/article/${slug}`,
       type: 'article',
       ...(article.image ? { images: [{ url: resolveImage(article.image) as string }] } : {}),
     },
@@ -88,14 +88,14 @@ export default async function ArticleDetailPage({ params }: Props) {
     headline: article.title,
     description: article.excerpt,
     datePublished: article.date,
-    url: `${BASE_URL}/artikel/${slug}`,
+    url: `${BASE_URL}/article/${slug}`,
     ...(article.image ? { image: resolveImage(article.image) } : {}),
     publisher: {
       '@type': 'CollegeOrUniversity',
       '@id': `${BASE_URL}/#organization`,
       name: 'STIA YPA-AH "Abdul Haris" Makassar',
     },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/artikel/${slug}` },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/article/${slug}` },
   };
 
   const breadcrumb = {
@@ -103,8 +103,8 @@ export default async function ArticleDetailPage({ params }: Props) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Beranda', item: BASE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Artikel', item: `${BASE_URL}/artikel` },
-      { '@type': 'ListItem', position: 3, name: article.title, item: `${BASE_URL}/artikel/${slug}` },
+      { '@type': 'ListItem', position: 2, name: 'Artikel', item: `${BASE_URL}/article` },
+      { '@type': 'ListItem', position: 3, name: article.title, item: `${BASE_URL}/article/${slug}` },
     ],
   };
 

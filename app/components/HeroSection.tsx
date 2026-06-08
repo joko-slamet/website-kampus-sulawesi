@@ -70,21 +70,10 @@ export default function HeroSection() {
             </a>
           </div>
 
-          {/* Trust */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '2rem', opacity: visible ? 1 : 0, transition: 'all 0.7s ease 0.65s' }}>
-            <div style={{ display: 'flex' }}>
-              {[1,2,3,4].map(i => (
-                <div key={i} style={{ width: '34px', height: '34px', borderRadius: '50%', background: `hsl(${220+i*15},60%,${50+i*5}%)`, border: '2px solid white', marginLeft: i===1?'0':'-10px' }} />
-              ))}
-            </div>
-            <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.875rem' }}>
-              <strong style={{ color: 'white' }}>{t.hero.stats[0].value}</strong> {t.hero.trust}
-            </p>
-          </div>
         </div>
 
         {/* Stats Row */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: 'rgba(255,255,255,0.12)', borderRadius: '16px', overflow: 'hidden', marginTop: '4rem', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(32px)', transition: 'all 0.7s ease 0.75s' }} className="hero-stats-grid">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(255,255,255,0.12)', borderRadius: '16px', overflow: 'hidden', marginTop: '4rem', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(32px)', transition: 'all 0.7s ease 0.75s' }} className="hero-stats-grid">
           {t.hero.stats.map(stat => (
             <div key={stat.label} style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.06)', textAlign: 'center' }}>
               <div style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: '#fbbf24', marginBottom: '0.25rem', lineHeight: 1 }}>{stat.value}</div>

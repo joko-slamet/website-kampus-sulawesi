@@ -67,7 +67,7 @@ export default function NewsDetailBody({ news, related }: Props) {
           <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.75rem', fontSize: '0.8rem', flexWrap: 'wrap' }}>
             <a href="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>Beranda</a>
             <span style={{ color: '#cbd5e1' }}>›</span>
-            <a href="/berita" style={{ color: '#94a3b8', textDecoration: 'none' }}>Berita & Pengumuman</a>
+            <a href='/news' style={{ color: '#94a3b8', textDecoration: 'none' }}>Berita & Pengumuman</a>
             <span style={{ color: '#cbd5e1' }}>›</span>
             <span style={{ color: '#0f2d6b', fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{news.title}</span>
           </nav>
@@ -179,7 +179,7 @@ export default function NewsDetailBody({ news, related }: Props) {
                 WhatsApp
               </a>
               <CopyButton title={news.title} />
-              <a href="/berita" style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', color: '#0f2d6b', fontWeight: 600, textDecoration: 'none' }}>
+              <a href='/news' style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', color: '#0f2d6b', fontWeight: 600, textDecoration: 'none' }}>
                 ← Semua Berita
               </a>
             </div>
@@ -248,7 +248,7 @@ export default function NewsDetailBody({ news, related }: Props) {
                   </h4>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                     {related.map(item => (
-                      <a key={item.id} href={`/berita/${item.id}`} style={{ textDecoration: 'none' }}>
+                      <a key={item.id} href={`/news/${item.id}`} style={{ textDecoration: 'none' }}>
                         <div
                           style={{
                             padding: '0.75rem', background: 'rgba(255,255,255,0.08)',
@@ -272,7 +272,7 @@ export default function NewsDetailBody({ news, related }: Props) {
                       </a>
                     ))}
                   </div>
-                  <a href="/berita" style={{ display: 'block', textAlign: 'center', marginTop: '0.85rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.55)', fontWeight: 600, textDecoration: 'none' }}>
+                  <a href='/news' style={{ display: 'block', textAlign: 'center', marginTop: '0.85rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.55)', fontWeight: 600, textDecoration: 'none' }}>
                     Lihat semua →
                   </a>
                 </div>

@@ -88,7 +88,7 @@ export default function ArticlesSection() {
             </p>
           </div>
           <a
-            href="/artikel"
+            href='/article'
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.65rem 1.5rem',
@@ -143,7 +143,7 @@ export default function ArticlesSection() {
         {/* Articles Grid */}
         <div style={{ display: 'grid', gap: '1.5rem' }} className="articles-grid">
           {filtered.map((article, i) => (
-            <a key={article.id} href={`/artikel/${article.id}`} style={{ textDecoration: 'none' }}>
+            <a key={article.id} href={`/article/${article.id}`} style={{ textDecoration: 'none' }}>
               <article
                 style={{
                   background: 'white',
@@ -241,7 +241,7 @@ export default function ArticlesSection() {
             {t.articles.newDaily}
           </p>
           <a
-            href="/artikel"
+            href='/article'
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.85rem 2rem',

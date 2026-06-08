@@ -263,7 +263,6 @@ export default function TestimonialsSection() {
           opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease 0.4s',
         }} className="alumni-stats">
           {[
-            { v: '12.000+', l: 'Total Alumni' },
             { v: '94%', l: 'Terserap Kerja' },
             { v: '< 6 bln', l: 'Rata-rata Waktu Kerja' },
             { v: '200+', l: 'Mitra Perusahaan' },

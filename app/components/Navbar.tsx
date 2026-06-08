@@ -18,7 +18,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
     { label: t.nav.home, href: '#hero' },
     { label: t.nav.about, href: '#tentang' },
     { label: t.nav.programs, href: '#program' },
-    { label: t.nav.articles, href: '/artikel' },
+    { label: t.nav.articles, href: '#artikel' },
     { label: t.nav.news, href: '#berita' },
     { label: t.nav.contact, href: '#kontak' },
   ];

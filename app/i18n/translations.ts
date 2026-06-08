@@ -14,9 +14,8 @@ const id = {
     subtitle: 'STIA YPA-AH "Abdul Haris" Makassar — kampus administrasi yang mencetak <strong>sarjana profesional</strong> di bidang Administrasi Publik dan Bisnis sejak 2004. Terakreditasi BAIK oleh BAN-PT.',
     cta1: 'Daftar Sekarang',
     cta2: 'Lihat Program Studi',
-    trust: 'alumni berhasil dari kampus kami',
+    trust: 'mahasiswa aktif di kampus kami',
     stats: [
-      { value: '500+', label: 'Alumni Lulusan' },
       { value: '2', label: 'Program Studi' },
       { value: '22', label: 'Tahun Berpengalaman' },
       { value: 'BAIK', label: 'Akreditasi BAN-PT' },
@@ -288,9 +287,8 @@ const en: typeof id = {
     subtitle: 'STIA YPA-AH "Abdul Haris" Makassar — shaping <strong>professional administration graduates</strong> in Public and Business Administration since 2004. Accredited BAIK by BAN-PT.',
     cta1: 'Apply Now',
     cta2: 'View Programs',
-    trust: 'successful alumni from our campus',
+    trust: 'active students at our campus',
     stats: [
-      { value: '500+', label: 'Graduates' },
       { value: '2', label: 'Study Programs' },
       { value: '22', label: 'Years of Experience' },
       { value: 'BAIK', label: 'BAN-PT Accreditation' },

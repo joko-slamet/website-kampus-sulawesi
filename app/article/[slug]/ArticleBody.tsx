@@ -173,7 +173,7 @@ export default function ArticleBody({ article, content }: { article: Article; co
         </button>
 
         <a
-          href="/artikel"
+          href='/article'
           style={{
             marginLeft: 'auto',
             display: 'inline-flex', alignItems: 'center', gap: '0.4rem',

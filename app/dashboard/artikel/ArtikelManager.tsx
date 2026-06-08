@@ -301,7 +301,7 @@ export default function ArtikelManager() {
               </button>
               {article.published && (
                 <a
-                  href={`/artikel/${article.id}`}
+                  href={`/article/${article.id}`}
                   target="_blank"
                   style={{
                     padding: '0.35rem 0.55rem', borderRadius: '7px',

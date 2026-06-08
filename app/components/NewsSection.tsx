@@ -165,7 +165,7 @@ export default function NewsSection() {
             </h2>
           </div>
           <a
-            href="/berita"
+            href='/news'
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.65rem 1.5rem', border: '1.5px solid #0f2d6b', color: '#0f2d6b',
@@ -207,7 +207,7 @@ export default function NewsSection() {
               </span>
             </div>
             <a
-              href={`/berita/${items.find(i => i.pinned)?.id}`}
+              href={`/news/${items.find(i => i.pinned)?.id}`}
               style={{
                 fontSize: '0.75rem', fontWeight: 700, color: '#d97706',
                 textDecoration: 'none', whiteSpace: 'nowrap',
@@ -273,7 +273,7 @@ export default function NewsSection() {
 
             {/* Featured card */}
             <a
-              href={`/berita/${featured.id}`}
+              href={`/news/${featured.id}`}
               style={{ textDecoration: 'none' }}
             >
               <div
@@ -353,7 +353,7 @@ export default function NewsSection() {
             {/* Side cards */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {sideItems.map((item, i) => (
-                <a key={item.id} href={`/berita/${item.id}`} style={{ textDecoration: 'none' }}>
+                <a key={item.id} href={`/news/${item.id}`} style={{ textDecoration: 'none' }}>
                   <div
                     style={{
                       display: 'flex', gap: '0.85rem', alignItems: 'flex-start',
@@ -439,7 +439,7 @@ export default function NewsSection() {
               {/* View all CTA at bottom of side column */}
               {filtered.length > 0 && (
                 <a
-                  href="/berita"
+                  href='/news'
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
                     padding: '0.85rem', border: '1.5px dashed #e2e8f0', borderRadius: '14px',

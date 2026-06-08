@@ -26,7 +26,7 @@ export default function ArticleHero({ category, categoryColor, tag, titleId, tit
         <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem', fontSize: '0.8rem' }}>
           <a href="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>{t.articleDetail.home}</a>
           <span style={{ color: '#cbd5e1' }}>›</span>
-          <a href="/artikel" style={{ color: '#94a3b8', textDecoration: 'none' }}>{t.articleDetail.articles}</a>
+          <a href='/article' style={{ color: '#94a3b8', textDecoration: 'none' }}>{t.articleDetail.articles}</a>
           <span style={{ color: '#cbd5e1' }}>›</span>
           <span style={{ color: '#0f2d6b', fontWeight: 600 }}>{category}</span>
         </nav>

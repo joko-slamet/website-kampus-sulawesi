@@ -8,11 +8,11 @@ import NewsList from './NewsList';
 export const metadata: Metadata = {
   title: 'Berita & Pengumuman - STIA Abdul Haris Makassar',
   description: 'Informasi terkini, pengumuman resmi, dan liputan kegiatan kampus STIA YPA-AH Abdul Haris Makassar.',
-  alternates: { canonical: 'https://stiaabdulharis.ac.id/berita' },
+  alternates: { canonical: 'https://stiaabdulharis.ac.id/news' },
   openGraph: {
     title: 'Berita & Pengumuman - STIA Abdul Haris Makassar',
     description: 'Informasi terkini dan pengumuman resmi kampus.',
-    url: 'https://stiaabdulharis.ac.id/berita',
+    url: 'https://stiaabdulharis.ac.id/news',
     type: 'website',
   },
 };
