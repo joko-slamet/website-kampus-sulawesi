@@ -2,6 +2,34 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { translations } from '../i18n/translations';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+
+interface TujuanContent {
+  tujuanAkadLabel: string;
+  tujuanAkadItems: string[];
+  tujuanProfLabel: string;
+  tujuanProfItems: string[];
+  sasaranLabel: string;
+  sasaranItems: string[];
+  sasaranSpecsLabel: string;
+  sasaranSpecs: string[];
+}
+
+function getDefault(lang: 'id' | 'en'): TujuanContent {
+  const p = translations[lang].profil;
+  return {
+    tujuanAkadLabel: p.tujuanAkadLabel,
+    tujuanAkadItems: [...p.tujuanAkadItems],
+    tujuanProfLabel: p.tujuanProfLabel,
+    tujuanProfItems: [...p.tujuanProfItems],
+    sasaranLabel: p.sasaranLabel,
+    sasaranItems: [...p.sasaranItems],
+    sasaranSpecsLabel: p.sasaranSpecsLabel,
+    sasaranSpecs: [...p.sasaranSpecs],
+  };
+}
 
 function useVisible(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -64,9 +92,23 @@ function ListCard({
 }
 
 export default function TujuanSection() {
-  const { t } = useLanguage();
-  const p = t.profil;
+  const { lang } = useLanguage();
+  const [content, setContent] = useState<TujuanContent>(() => getDefault(lang));
   const { ref, visible } = useVisible();
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/settings`)
+      .then(r => r.json())
+      .then((data: Record<string, { id: TujuanContent; en: TujuanContent }>) => {
+        const saved = data?.tujuan?.[lang];
+        if (saved) {
+          setContent({ ...getDefault(lang), ...saved });
+        }
+      })
+      .catch(() => {});
+  }, [lang]);
+
+  const p = content;
 
   return (
     <section id="tujuan" ref={ref} style={{ padding: '6rem 0', background: 'var(--bg-card)', overflow: 'hidden' }}>

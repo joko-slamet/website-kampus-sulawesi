@@ -62,11 +62,23 @@ interface FooterContent {
   copyright: string;
 }
 
+interface TujuanContent {
+  tujuanAkadLabel: string;
+  tujuanAkadItems: string[];
+  tujuanProfLabel: string;
+  tujuanProfItems: string[];
+  sasaranLabel: string;
+  sasaranItems: string[];
+  sasaranSpecsLabel: string;
+  sasaranSpecs: string[];
+}
+
 interface AllSections {
   hero: { id: HeroContent; en: HeroContent };
   about: { id: AboutContent; en: AboutContent };
   visiMisi: { id: VisiMisiContent; en: VisiMisiContent };
   why: { id: WhyContent; en: WhyContent };
+  tujuan: { id: TujuanContent; en: TujuanContent };
   pmb: { id: PmbContent; en: PmbContent };
   contact: { id: ContactContent; en: ContactContent };
   footer: { id: FooterContent; en: FooterContent };
@@ -147,12 +159,27 @@ function defaultFooter(lang: 'id' | 'en'): FooterContent {
   return { tagline: t.tagline, hours: t.hours, copyright: t.copyright };
 }
 
+function defaultTujuan(lang: 'id' | 'en'): TujuanContent {
+  const p = translations[lang].profil;
+  return {
+    tujuanAkadLabel: p.tujuanAkadLabel,
+    tujuanAkadItems: [...p.tujuanAkadItems],
+    tujuanProfLabel: p.tujuanProfLabel,
+    tujuanProfItems: [...p.tujuanProfItems],
+    sasaranLabel: p.sasaranLabel,
+    sasaranItems: [...p.sasaranItems],
+    sasaranSpecsLabel: p.sasaranSpecsLabel,
+    sasaranSpecs: [...p.sasaranSpecs],
+  };
+}
+
 function buildDefaults(): AllSections {
   return {
     hero: { id: defaultHero('id'), en: defaultHero('en') },
     about: { id: defaultAbout('id'), en: defaultAbout('en') },
     visiMisi: { id: defaultVisiMisi('id'), en: defaultVisiMisi('en') },
     why: { id: defaultWhy('id'), en: defaultWhy('en') },
+    tujuan: { id: defaultTujuan('id'), en: defaultTujuan('en') },
     pmb: { id: defaultPmb('id'), en: defaultPmb('en') },
     contact: { id: defaultContact('id'), en: defaultContact('en') },
     footer: { id: defaultFooter('id'), en: defaultFooter('en') },
@@ -600,6 +627,52 @@ function ContactTab({ data, onChange }: SectionTabProps<ContactContent>) {
   );
 }
 
+// ─── Section: Tujuan & Sasaran ────────────────────────────────────────────────
+
+function TujuanTab({ data, onChange }: SectionTabProps<TujuanContent>) {
+  const d = data;
+
+  function itemsField(label: string, items: string[], key: 'tujuanAkadItems' | 'tujuanProfItems' | 'sasaranItems' | 'sasaranSpecs') {
+    return (
+      <Field label={label}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+          {items.map((item, i) => (
+            <SectionRow key={i}>
+              <Textarea value={item} onChange={v => { const n = [...items]; n[i] = v; onChange({ ...d, [key]: n }); }} rows={2} />
+              <AddRemoveBtn remove onClick={() => onChange({ ...d, [key]: items.filter((_, j) => j !== i) })} />
+            </SectionRow>
+          ))}
+          <AddRemoveBtn onClick={() => onChange({ ...d, [key]: [...items, ''] })} />
+        </div>
+      </Field>
+    );
+  }
+
+  return (
+    <div style={formGrid}>
+      <Field label="Label Tujuan Akademis">
+        <Input value={d.tujuanAkadLabel} onChange={v => onChange({ ...d, tujuanAkadLabel: v })} />
+      </Field>
+      {itemsField('Butir Tujuan Akademis', d.tujuanAkadItems, 'tujuanAkadItems')}
+
+      <Field label="Label Tujuan Profesional">
+        <Input value={d.tujuanProfLabel} onChange={v => onChange({ ...d, tujuanProfLabel: v })} />
+      </Field>
+      {itemsField('Butir Tujuan Profesional', d.tujuanProfItems, 'tujuanProfItems')}
+
+      <Field label="Label Sasaran">
+        <Input value={d.sasaranLabel} onChange={v => onChange({ ...d, sasaranLabel: v })} />
+      </Field>
+      {itemsField('Butir Sasaran', d.sasaranItems, 'sasaranItems')}
+
+      <Field label="Label Spesifikasi Capaian">
+        <Input value={d.sasaranSpecsLabel} onChange={v => onChange({ ...d, sasaranSpecsLabel: v })} />
+      </Field>
+      {itemsField('Butir Spesifikasi Capaian', d.sasaranSpecs, 'sasaranSpecs')}
+    </div>
+  );
+}
+
 // ─── Section: Footer ─────────────────────────────────────────────────────────
 
 function FooterTab({ data, onChange }: SectionTabProps<FooterContent>) {
@@ -681,6 +754,7 @@ const TABS = [
   { key: 'about', label: 'ℹ️ Tentang', section: 'about' as keyof AllSections },
   { key: 'visiMisi', label: '🎯 Visi/Misi', section: 'visiMisi' as keyof AllSections },
   { key: 'why', label: '⭐ Keunggulan', section: 'why' as keyof AllSections },
+  { key: 'tujuan', label: '🎯 Tujuan & Sasaran', section: 'tujuan' as keyof AllSections },
   { key: 'pmb', label: '🎓 PMB', section: 'pmb' as keyof AllSections },
   { key: 'contact', label: '📞 Kontak', section: 'contact' as keyof AllSections },
   { key: 'footer', label: '🔗 Footer', section: 'footer' as keyof AllSections },
@@ -691,7 +765,7 @@ const TABS = [
 export default function SettingsManager() {
   const [activeTab, setActiveTab] = useState<string>('scheduler');
   const [langTab, setLangTab] = useState<'id' | 'en'>('id');
-  const [forms, setForms] = useState<AllSections>(buildDefaults());
+  const [forms, setForms] = useState<AllSections>(buildDefaults);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState<string | null>(null);
   const [saved, setSaved] = useState<string | null>(null);
@@ -704,7 +778,7 @@ export default function SettingsManager() {
       .then(data => {
         if (!data) return;
         setForms(prev => {
-          const next = { ...prev };
+          const next = { ...buildDefaults(), ...prev };
           for (const sectionKey of Object.keys(data) as Array<keyof AllSections>) {
             const stored = data[sectionKey];
             if (stored && stored.id && stored.en) {
@@ -841,6 +915,12 @@ export default function SettingsManager() {
                 <WhyTab
                   data={forms.why[langTab]}
                   onChange={v => updateSection('why', langTab, v)}
+                />
+              )}
+              {sectionKey === 'tujuan' && forms.tujuan && (
+                <TujuanTab
+                  data={forms.tujuan[langTab] ?? defaultTujuan(langTab)}
+                  onChange={v => updateSection('tujuan', langTab, v)}
                 />
               )}
               {sectionKey === 'pmb' && (
