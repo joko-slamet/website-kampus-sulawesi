@@ -151,9 +151,9 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
           onClick={onBack}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-            background: 'white', border: '1.5px solid #e2e8f0', borderRadius: '10px',
+            background: 'var(--bg-card)', border: '1.5px solid var(--border)', borderRadius: '10px',
             padding: '0.5rem 0.9rem', fontSize: '0.82rem', fontWeight: 600,
-            color: '#475569', cursor: 'pointer',
+            color: 'var(--text-body)', cursor: 'pointer',
           }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -167,9 +167,9 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
             onClick={() => handleSave(false)}
             disabled={saving || uploading}
             style={{
-              padding: '0.6rem 1.1rem', background: 'white',
-              border: '1.5px solid #e2e8f0', borderRadius: '10px',
-              fontSize: '0.83rem', fontWeight: 700, color: '#64748b',
+              padding: '0.6rem 1.1rem', background: 'var(--bg-card)',
+              border: '1.5px solid var(--border)', borderRadius: '10px',
+              fontSize: '0.83rem', fontWeight: 700, color: 'var(--text-muted)',
               cursor: (saving || uploading) ? 'not-allowed' : 'pointer',
               opacity: (saving || uploading) ? 0.7 : 1,
             }}
@@ -196,8 +196,8 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
           {/* Type selector */}
-          <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '1rem 1.25rem' }}>
-            <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '0.65rem' }}>
+          <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '14px', padding: '1rem 1.25rem' }}>
+            <p style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-subtle)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '0.65rem' }}>
               Jenis Konten
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
@@ -226,8 +226,8 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
           </div>
 
           {/* Title */}
-          <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '1.25rem 1.5rem' }}>
-            <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+          <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '14px', padding: '1.25rem 1.5rem' }}>
+            <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-subtle)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
               Judul
             </label>
             <input
@@ -237,14 +237,14 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
               placeholder={form.type === 'announcement' ? 'Judul pengumuman...' : 'Judul berita'}
               style={{
                 width: '100%', border: 'none', outline: 'none',
-                fontSize: '1.5rem', fontWeight: 800, color: '#0f172a',
+                fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-heading)',
                 lineHeight: 1.3, background: 'transparent', fontFamily: 'inherit', boxSizing: 'border-box',
               }}
             />
           </div>
 
           {/* Rich text editor */}
-          <div style={{ background: 'white', border: `1px solid ${generating ? '#a5b4fc' : '#e2e8f0'}`, borderRadius: '14px', overflow: 'hidden', position: 'relative', transition: 'border-color 0.2s' }}>
+          <div style={{ background: 'var(--bg-card)', border: `1px solid ${generating ? '#a5b4fc' : '#e2e8f0'}`, borderRadius: '14px', overflow: 'hidden', position: 'relative', transition: 'border-color 0.2s' }}>
             <div style={{
               display: 'flex', alignItems: 'center',
               padding: '0.6rem 0.75rem', borderBottom: '1px solid #f1f5f9',
@@ -261,12 +261,12 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
                       style={{
                         width: '30px', height: '30px', borderRadius: '6px',
                         border: 'none', background: 'transparent', cursor: 'pointer',
-                        color: '#374151', fontSize: btn.mono ? '0.85rem' : '0.75rem',
+                        color: 'var(--text-heading)', fontSize: btn.mono ? '0.85rem' : '0.75rem',
                         fontWeight: 700, display: 'flex', alignItems: 'center',
                         justifyContent: 'center', fontFamily: btn.mono ? 'monospace' : 'inherit',
                         transition: 'background 0.15s',
                       }}
-                      onMouseEnter={e => (e.currentTarget.style.background = '#f1f5f9')}
+                      onMouseEnter={e => (e.currentTarget.style.background = 'var(--bg-muted)')}
                       onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                     >{btn.icon}</button>
                   ))}
@@ -311,7 +311,7 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
               contentEditable={!generating}
               suppressContentEditableWarning
               data-placeholder="Mulai menulis konten di sini..."
-              style={{ minHeight: '400px', padding: '1.5rem', outline: 'none', color: '#1e293b', fontSize: '0.95rem', lineHeight: 1.8, fontFamily: 'inherit' }}
+              style={{ minHeight: '400px', padding: '1.5rem', outline: 'none', color: 'var(--text-heading)', fontSize: '0.95rem', lineHeight: 1.8, fontFamily: 'inherit' }}
             />
             {generating && (
               <div style={{
@@ -331,8 +331,8 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
           {/* Image upload */}
-          <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '1.25rem' }}>
-            <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+          <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '14px', padding: '1.25rem' }}>
+            <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-subtle)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
               Gambar Utama
             </label>
 
@@ -357,7 +357,7 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
                     onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,0,0,0.4)')}
                     onMouseLeave={e => (e.currentTarget.style.background = 'rgba(0,0,0,0)')}
                   >
-                    <button onClick={() => fileRef.current?.click()} style={{ padding: '0.4rem 0.85rem', background: 'white', border: 'none', borderRadius: '7px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', color: '#0f172a' }}>Ganti</button>
+                    <button onClick={() => fileRef.current?.click()} style={{ padding: '0.4rem 0.85rem', background: 'var(--bg-card)', border: 'none', borderRadius: '7px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', color: 'var(--text-heading)' }}>Ganti</button>
                     <button onClick={() => setForm(p => ({ ...p, image: null }))} style={{ padding: '0.4rem 0.85rem', background: '#ef4444', border: 'none', borderRadius: '7px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', color: 'white' }}>Hapus</button>
                   </div>
                 )}
@@ -376,10 +376,10 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
                 }}
               >
                 <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{uploading ? '⏳' : '🖼️'}</div>
-                <p style={{ fontSize: '0.8rem', fontWeight: 600, color: '#64748b', marginBottom: '0.25rem' }}>
+                <p style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.25rem' }}>
                   {uploading ? 'Mengupload...' : 'Klik atau seret gambar'}
                 </p>
-                <p style={{ fontSize: '0.7rem', color: '#94a3b8' }}>JPG, PNG, WebP · maks 5 MB</p>
+                <p style={{ fontSize: '0.7rem', color: 'var(--text-subtle)' }}>JPG, PNG, WebP · maks 5 MB</p>
               </div>
             )}
             <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }}
@@ -387,30 +387,30 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
           </div>
 
           {/* Settings */}
-          <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Pengaturan</p>
+          <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '14px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <p style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-subtle)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Pengaturan</p>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>Kategori</label>
+              <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-heading)', marginBottom: '0.4rem' }}>Kategori</label>
               <select
                 value={form.category}
                 onChange={e => set('category', e.target.value)}
-                style={{ width: '100%', padding: '0.55rem 0.75rem', border: '1.5px solid #e2e8f0', borderRadius: '8px', fontSize: '0.85rem', color: '#0f172a', background: 'white', cursor: 'pointer', fontFamily: 'inherit' }}
+                style={{ width: '100%', padding: '0.55rem 0.75rem', border: '1.5px solid var(--border)', borderRadius: '8px', fontSize: '0.85rem', color: 'var(--text-heading)', background: 'var(--bg-card)', cursor: 'pointer', fontFamily: 'inherit' }}
               >
                 {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
-                Tag <span style={{ color: '#94a3b8', fontWeight: 400 }}>(opsional)</span>
+              <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-heading)', marginBottom: '0.4rem' }}>
+                Tag <span style={{ color: 'var(--text-subtle)', fontWeight: 400 }}>(opsional)</span>
               </label>
               <input
                 type="text" value={form.tag} onChange={e => set('tag', e.target.value)}
                 placeholder="cth: Penting, Terbaru..."
-                style={{ width: '100%', padding: '0.55rem 0.75rem', border: '1.5px solid #e2e8f0', borderRadius: '8px', fontSize: '0.85rem', color: '#0f172a', background: 'white', fontFamily: 'inherit', boxSizing: 'border-box', outline: 'none' }}
+                style={{ width: '100%', padding: '0.55rem 0.75rem', border: '1.5px solid var(--border)', borderRadius: '8px', fontSize: '0.85rem', color: 'var(--text-heading)', background: 'var(--bg-card)', fontFamily: 'inherit', boxSizing: 'border-box', outline: 'none' }}
                 onFocus={e => (e.currentTarget.style.borderColor = '#0f2d6b')}
-                onBlur={e => (e.currentTarget.style.borderColor = '#e2e8f0')}
+                onBlur={e => (e.currentTarget.style.borderColor = 'var(--border)')}
               />
             </div>
 
@@ -425,8 +425,8 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                   <span style={{ fontSize: '1.1rem' }}>📌</span>
                   <div>
-                    <p style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0f172a', margin: 0 }}>Sematkan</p>
-                    <p style={{ fontSize: '0.68rem', color: '#94a3b8', margin: 0 }}>Tampil paling atas</p>
+                    <p style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-heading)', margin: 0 }}>Sematkan</p>
+                    <p style={{ fontSize: '0.68rem', color: 'var(--text-subtle)', margin: 0 }}>Tampil paling atas</p>
                   </div>
                 </div>
                 <button
@@ -439,14 +439,14 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
                     justifyContent: form.pinned ? 'flex-end' : 'flex-start',
                   }}
                 >
-                  <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
+                  <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'var(--bg-card)', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
                 </button>
               </div>
             )}
 
             {/* Status */}
             <div>
-              <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#374151', marginBottom: '0.5rem' }}>Status Publikasi</label>
+              <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-heading)', marginBottom: '0.5rem' }}>Status Publikasi</label>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 {([
                   { val: false, label: 'Draft', color: '#f97316', bg: '#fff7ed', border: '#fed7aa' },
@@ -468,7 +468,7 @@ export default function NewsEditor({ initial, onBack, onSave }: Props) {
             </div>
           </div>
 
-          <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: '12px', padding: '1rem' }}>
+          <div style={{ background: 'var(--bg-muted)', border: '1px solid #bae6fd', borderRadius: '12px', padding: '1rem' }}>
             <p style={{ fontSize: '0.72rem', fontWeight: 700, color: '#0369a1', marginBottom: '0.5rem' }}>💡 Tips</p>
             <ul style={{ margin: 0, paddingLeft: '1rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
               {['Pengumuman penting bisa disematkan agar tampil paling atas', 'Gambar disarankan rasio 16:9', 'Draft tidak tampil di halaman publik'].map(tip => (

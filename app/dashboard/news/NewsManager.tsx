@@ -212,10 +212,10 @@ export default function NewsManager() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
         <div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.4rem' }}>Berita & Pengumuman</h1>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-heading)', marginBottom: '0.4rem' }}>Berita & Pengumuman</h1>
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             {[
-              { label: `${total} Total`, color: '#64748b', bg: '#f1f5f9' },
+              { label: `${total} Total`, color: 'var(--text-muted)', bg: 'var(--bg-muted)' },
               { label: `${newsCount} Berita`, color: '#1d4ed8', bg: '#eff6ff' },
               { label: `${annCount} Pengumuman`, color: '#b45309', bg: '#fffbeb' },
               ...(pinnedCount > 0 ? [{ label: `${pinnedCount} Disematkan`, color: '#d97706', bg: '#fef3c7' }] : []),
@@ -247,7 +247,7 @@ export default function NewsManager() {
 
       {/* Filter tabs + sort */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
-        <div style={{ height: '36px', display: 'flex', alignItems: 'center', gap: '0.25rem', background: 'white', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '0 0.25rem', boxSizing: 'border-box' }}>
+        <div style={{ height: '36px', display: 'flex', alignItems: 'center', gap: '0.25rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '10px', padding: '0 0.25rem', boxSizing: 'border-box' }}>
           {([
             { key: 'all', label: 'Semua' },
             { key: 'news', label: '📰 Berita' },
@@ -260,7 +260,7 @@ export default function NewsManager() {
                 height: '28px', padding: '0 0.85rem', borderRadius: '7px', border: 'none', cursor: 'pointer',
                 fontSize: '0.8rem', fontWeight: 600,
                 background: filter === tab.key ? '#0f2d6b' : 'transparent',
-                color: filter === tab.key ? 'white' : '#64748b', transition: 'all 0.15s',
+                color: filter === tab.key ? '#ffffff' : 'var(--text-muted)', transition: 'all 0.15s',
               }}
             >{tab.label}</button>
           ))}
@@ -269,9 +269,9 @@ export default function NewsManager() {
           value={sort}
           onChange={e => { setSort(e.target.value as 'terbaru' | 'trending'); setPage(1); }}
           style={{
-            height: '36px', padding: '0 0.75rem', border: '1.5px solid #e2e8f0', borderRadius: '10px',
-            fontSize: '0.8rem', fontWeight: 600, color: '#374151',
-            background: 'white', cursor: 'pointer', outline: 'none', boxSizing: 'border-box',
+            height: '36px', padding: '0 0.75rem', border: '1.5px solid var(--border)', borderRadius: '10px',
+            fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-heading)',
+            background: 'var(--bg-card)', cursor: 'pointer', outline: 'none', boxSizing: 'border-box',
           }}
         >
           <option value="terbaru">🕐 Terbaru</option>
@@ -287,19 +287,19 @@ export default function NewsManager() {
 
       {/* Loading */}
       {loading && (
-        <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '3rem', textAlign: 'center' }}>
+        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '14px', padding: '3rem', textAlign: 'center' }}>
           <div style={{ width: '28px', height: '28px', border: '3px solid #e2e8f0', borderTopColor: '#0f2d6b', borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto 0.75rem' }} />
-          <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>Memuat...</p>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-subtle)' }}>Memuat...</p>
           <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}
 
       {/* Empty state */}
       {!loading && items.length === 0 && (
-        <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '4rem 2rem', textAlign: 'center' }}>
+        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '14px', padding: '4rem 2rem', textAlign: 'center' }}>
           <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>📭</div>
-          <p style={{ fontWeight: 700, color: '#0f172a', marginBottom: '0.4rem' }}>Belum ada konten</p>
-          <p style={{ color: '#94a3b8', fontSize: '0.875rem', marginBottom: '1.25rem' }}>Mulai dengan menulis berita atau pengumuman.</p>
+          <p style={{ fontWeight: 700, color: 'var(--text-heading)', marginBottom: '0.4rem' }}>Belum ada konten</p>
+          <p style={{ color: 'var(--text-subtle)', fontSize: '0.875rem', marginBottom: '1.25rem' }}>Mulai dengan menulis berita atau pengumuman.</p>
           <button
             onClick={() => setView({ mode: 'editor' })}
             style={{ padding: '0.65rem 1.5rem', background: 'linear-gradient(135deg, #0f2d6b, #1e40af)', color: 'white', border: 'none', borderRadius: '10px', fontSize: '0.875rem', fontWeight: 700, cursor: 'pointer' }}
@@ -309,11 +309,11 @@ export default function NewsManager() {
 
       {/* Table */}
       {!loading && items.length > 0 && (
-        <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '14px', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '14px', overflow: 'hidden' }}>
           <div style={{
             display: 'grid', gridTemplateColumns: 'minmax(0,2.5fr) 115px minmax(0,1fr) 100px 85px 55px 165px',
-            padding: '0.75rem 1.25rem', background: '#f8fafc', borderBottom: '1px solid #e2e8f0',
-            fontSize: '0.72rem', fontWeight: 700, color: '#64748b', letterSpacing: '0.05em',
+            padding: '0.75rem 1.25rem', background: 'var(--bg-muted)', borderBottom: '1px solid var(--border)',
+            fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.05em',
           }} className="news-table-header">
             <span>JUDUL</span>
             <span>TIPE</span>
@@ -330,14 +330,14 @@ export default function NewsManager() {
               style={{
                 display: 'grid', gridTemplateColumns: 'minmax(0,2.5fr) 115px minmax(0,1fr) 100px 85px 55px 165px',
                 padding: '0.9rem 1.25rem', alignItems: 'center',
-                borderBottom: i < items.length - 1 ? '1px solid #f8fafc' : 'none',
+                borderBottom: i < items.length - 1 ? '1px solid var(--border)' : 'none',
                 transition: 'all 0.15s',
                 opacity: actionId === item.id ? 0.5 : 1,
-                background: item.pinned ? 'linear-gradient(90deg, #fffbeb 0%, white 100%)' : 'white',
+                background: item.pinned ? 'linear-gradient(90deg, #fffbeb 0%, var(--bg-card) 100%)' : 'var(--bg-card)',
               }}
               className="news-table-row"
-              onMouseEnter={e => { if (!item.pinned) (e.currentTarget as HTMLDivElement).style.background = '#f8fafc'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = item.pinned ? 'linear-gradient(90deg, #fffbeb 0%, white 100%)' : 'white'; }}
+              onMouseEnter={e => { if (!item.pinned) (e.currentTarget as HTMLDivElement).style.background = 'var(--bg-muted)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = item.pinned ? 'linear-gradient(90deg, #fffbeb 0%, var(--bg-card) 100%)' : 'var(--bg-card)'; }}
             >
               {/* Title + thumbnail */}
               <div style={{ minWidth: 0, paddingRight: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
@@ -346,7 +346,7 @@ export default function NewsManager() {
                   <img src={resolveImage(item.image) ?? ''} alt="" style={{ width: '38px', height: '38px', borderRadius: '6px', objectFit: 'cover', flexShrink: 0 }} />
                 )}
                 {item.pinned && <span title="Disematkan" style={{ fontSize: '0.85rem', flexShrink: 0 }}>📌</span>}
-                <p style={{ fontSize: '0.85rem', fontWeight: 600, color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0 }}>
+                <p style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-heading)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0 }}>
                   {item.title}
                 </p>
               </div>
@@ -364,8 +364,8 @@ export default function NewsManager() {
                 )}
               </div>
 
-              <span style={{ fontSize: '0.78rem', color: '#64748b' }}>{item.category}</span>
-              <span style={{ fontSize: '0.78rem', color: '#64748b' }}>{fmtDate(item.createdAt)}</span>
+              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{item.category}</span>
+              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{fmtDate(item.createdAt)}</span>
 
               <span style={{
                 fontSize: '0.7rem', fontWeight: 700, padding: '0.2rem 0.55rem', borderRadius: '999px', width: 'fit-content',
@@ -374,7 +374,7 @@ export default function NewsManager() {
               }}>{item.published ? 'Published' : 'Draft'}</span>
 
               {/* Views */}
-              <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#475569' }}>
+              <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-body)' }}>
                 {(item.views ?? 0).toLocaleString('id-ID')}
               </div>
 
@@ -388,9 +388,9 @@ export default function NewsManager() {
                     className="icon-btn"
                     style={{
                       width: '28px', height: '28px', borderRadius: '6px',
-                      background: item.pinned ? '#fef3c7' : '#f1f5f9',
-                      border: `1px solid ${item.pinned ? '#fde68a' : '#e2e8f0'}`,
-                      color: item.pinned ? '#d97706' : '#94a3b8',
+                      background: item.pinned ? '#fef3c7' : 'var(--bg-muted)',
+                      border: `1px solid ${item.pinned ? '#fde68a' : 'var(--border)'}`,
+                      color: item.pinned ? '#d97706' : 'var(--text-subtle)',
                       fontSize: '0.8rem', cursor: 'pointer',
                       display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
                     }}
@@ -423,7 +423,7 @@ export default function NewsManager() {
                     className="icon-btn"
                     style={{
                       width: '28px', height: '28px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      background: '#f1f5f9', border: '1px solid #e2e8f0', color: '#475569',
+                      background: 'var(--bg-muted)', border: '1px solid var(--border)', color: 'var(--text-body)',
                       textDecoration: 'none', flexShrink: 0,
                     }}
                   >
@@ -464,7 +464,7 @@ export default function NewsManager() {
       {/* Pagination */}
       {totalPages > 1 && !loading && (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
-          <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>Halaman {page} dari {totalPages} · {total} item</span>
+          <span style={{ fontSize: '0.78rem', color: 'var(--text-subtle)' }}>Halaman {page} dari {totalPages} · {total} item</span>
           <div style={{ display: 'flex', gap: '0.35rem' }}>
             {[
               { label: '«', disabled: page === 1, action: () => setPage(1) },
@@ -478,9 +478,9 @@ export default function NewsManager() {
                 disabled={btn.disabled}
                 style={{
                   minWidth: '32px', height: '32px', padding: '0 0.4rem',
-                  borderRadius: '7px', border: '1px solid #e2e8f0',
-                  background: btn.disabled ? '#f8fafc' : 'white',
-                  color: btn.disabled ? '#cbd5e1' : '#374151',
+                  borderRadius: '7px', border: '1px solid var(--border)',
+                  background: btn.disabled ? 'var(--bg-muted)' : 'var(--bg-card)',
+                  color: btn.disabled ? 'var(--text-subtle)' : 'var(--text-heading)',
                   fontSize: '0.8rem', fontWeight: 600,
                   cursor: btn.disabled ? 'not-allowed' : 'pointer',
                 }}
@@ -496,19 +496,19 @@ export default function NewsManager() {
           style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(15,23,42,0.5)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', animation: `${modalClosing ? 'backdrop-out' : 'backdrop-in'} 0.2s ease both` }}
           onClick={e => { if (e.target === e.currentTarget) closeModal(); }}
         >
-          <div style={{ background: 'white', borderRadius: '20px', width: '100%', maxWidth: '420px', boxShadow: '0 24px 60px rgba(0,0,0,0.18)', overflow: 'hidden', animation: `${modalClosing ? 'modal-out' : 'modal-in'} 0.2s ease both` }}>
+          <div style={{ background: 'var(--bg-card)', borderRadius: '20px', width: '100%', maxWidth: '420px', boxShadow: '0 24px 60px rgba(0,0,0,0.18)', overflow: 'hidden', animation: `${modalClosing ? 'modal-out' : 'modal-in'} 0.2s ease both` }}>
             <div style={{ padding: '1.75rem 1.75rem 0' }}>
               <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#fef2f2', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', marginBottom: '1.25rem' }}>🗑️</div>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem' }}>Hapus Item?</h3>
-              <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: 1.6, marginBottom: '0.35rem' }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-heading)', marginBottom: '0.5rem' }}>Hapus Item?</h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '0.35rem' }}>
                 Item berikut akan dihapus permanen dan tidak dapat dikembalikan:
               </p>
-              <p style={{ fontSize: '0.85rem', fontWeight: 700, color: '#0f172a', background: '#f8fafc', borderRadius: '8px', padding: '0.65rem 0.85rem', border: '1px solid #e2e8f0' }}>
+              <p style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-heading)', background: 'var(--bg-muted)', borderRadius: '8px', padding: '0.65rem 0.85rem', border: '1px solid var(--border)' }}>
                 &ldquo;{confirmDelete?.title}&rdquo;
               </p>
             </div>
             <div style={{ display: 'flex', gap: '0.65rem', padding: '1.25rem 1.75rem 1.75rem' }}>
-              <button onClick={closeModal} style={{ flex: 1, padding: '0.7rem', background: 'white', border: '1.5px solid #e2e8f0', borderRadius: '10px', fontSize: '0.875rem', fontWeight: 600, color: '#64748b', cursor: 'pointer' }}>Batal</button>
+              <button onClick={closeModal} style={{ flex: 1, padding: '0.7rem', background: 'var(--bg-card)', border: '1.5px solid var(--border)', borderRadius: '10px', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-muted)', cursor: 'pointer' }}>Batal</button>
               <button onClick={confirmDeleteExec} style={{ flex: 1, padding: '0.7rem', background: '#ef4444', border: 'none', borderRadius: '10px', fontSize: '0.875rem', fontWeight: 700, color: 'white', cursor: 'pointer', boxShadow: '0 4px 14px rgba(239,68,68,0.35)' }}>Ya, Hapus</button>
             </div>
           </div>

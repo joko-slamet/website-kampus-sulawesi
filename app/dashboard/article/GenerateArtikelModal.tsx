@@ -77,7 +77,7 @@ export default function GenerateArtikelModal({ onClose, onSaved }: Props) {
       onClick={e => { if (e.target === e.currentTarget && !saving) onClose(); }}
     >
       <div style={{
-        background: 'white', borderRadius: '20px', width: '100%', maxWidth: '520px',
+        background: 'var(--bg-card)', borderRadius: '20px', width: '100%', maxWidth: '520px',
         boxShadow: '0 25px 60px rgba(0,0,0,0.18)', overflow: 'hidden',
       }}>
         {/* Header */}
@@ -92,14 +92,14 @@ export default function GenerateArtikelModal({ onClose, onSaved }: Props) {
               display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px',
             }}>✨</div>
             <div>
-              <p style={{ fontWeight: 800, fontSize: '0.95rem', color: '#0f172a', lineHeight: 1.2 }}>Generate Artikel AI</p>
-              <p style={{ fontSize: '0.72rem', color: '#94a3b8' }}>AI memilih topik dan menulis otomatis</p>
+              <p style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--text-heading)', lineHeight: 1.2 }}>Generate Artikel AI</p>
+              <p style={{ fontSize: '0.72rem', color: 'var(--text-subtle)' }}>AI memilih topik dan menulis otomatis</p>
             </div>
           </div>
           <button
             onClick={onClose}
             disabled={saving}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', fontSize: '1.4rem', lineHeight: 1, padding: '0.25rem' }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-subtle)', fontSize: '1.4rem', lineHeight: 1, padding: '0.25rem' }}
           >×</button>
         </div>
 
@@ -114,8 +114,8 @@ export default function GenerateArtikelModal({ onClose, onSaved }: Props) {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '22px', animation: 'pulse-spin 1.4s ease-in-out infinite',
               }}>✨</div>
-              <p style={{ fontWeight: 700, color: '#0f172a', fontSize: '1rem', marginBottom: '0.35rem' }}>Sedang membuat artikel &amp; gambar...</p>
-              <p style={{ color: '#94a3b8', fontSize: '0.82rem' }}>AI memilih topik, menulis konten, dan generate gambar</p>
+              <p style={{ fontWeight: 700, color: 'var(--text-heading)', fontSize: '1rem', marginBottom: '0.35rem' }}>Sedang membuat artikel &amp; gambar...</p>
+              <p style={{ color: 'var(--text-subtle)', fontSize: '0.82rem' }}>AI memilih topik, menulis konten, dan generate gambar</p>
               <style>{`@keyframes pulse-spin { 0%,100%{transform:rotate(0deg) scale(1)} 50%{transform:rotate(180deg) scale(1.1)} }`}</style>
             </div>
           )}
@@ -145,7 +145,7 @@ export default function GenerateArtikelModal({ onClose, onSaved }: Props) {
               {/* Gambar */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#374151' }}>
+                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-heading)' }}>
                     Gambar Artikel
                   </label>
                   {imageUrl && (
@@ -175,15 +175,15 @@ export default function GenerateArtikelModal({ onClose, onSaved }: Props) {
                     style={{
                       width: '100%', padding: '1.1rem',
                       border: '2px dashed #e2e8f0', borderRadius: '10px',
-                      background: '#f8fafc', cursor: uploading ? 'wait' : 'pointer',
+                      background: 'var(--bg-muted)', cursor: uploading ? 'wait' : 'pointer',
                       display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.35rem',
                     }}
                   >
                     <span style={{ fontSize: '1.4rem' }}>{uploading ? '⏳' : '🖼️'}</span>
-                    <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600 }}>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>
                       {uploading ? 'Mengupload...' : 'Upload gambar manual'}
                     </span>
-                    <span style={{ fontSize: '0.7rem', color: '#94a3b8' }}>JPEG, PNG, WebP — maks 5 MB</span>
+                    <span style={{ fontSize: '0.7rem', color: 'var(--text-subtle)' }}>JPEG, PNG, WebP — maks 5 MB</span>
                   </button>
                 )}
                 <input
@@ -193,7 +193,7 @@ export default function GenerateArtikelModal({ onClose, onSaved }: Props) {
               </div>
 
               {/* Result fields */}
-              <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <div style={{ background: 'var(--bg-muted)', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <FieldRow label="Judul" value={result.title} />
                 <FieldRow label="Ringkasan" value={result.excerpt} />
                 <FieldRow label="Title (EN)" value={result.titleEn} />
@@ -218,9 +218,9 @@ export default function GenerateArtikelModal({ onClose, onSaved }: Props) {
                   onClick={runGenerate}
                   disabled={saving}
                   style={{
-                    padding: '0.75rem 1rem', background: 'white',
-                    border: '1.5px solid #e2e8f0', borderRadius: '10px',
-                    fontSize: '0.82rem', fontWeight: 600, color: '#64748b',
+                    padding: '0.75rem 1rem', background: 'var(--bg-card)',
+                    border: '1.5px solid var(--border)', borderRadius: '10px',
+                    fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)',
                     cursor: saving ? 'not-allowed' : 'pointer', whiteSpace: 'nowrap',
                   }}
                 >↺ Generate Ulang</button>
@@ -229,9 +229,9 @@ export default function GenerateArtikelModal({ onClose, onSaved }: Props) {
                   disabled={saving}
                   style={{
                     flex: 1, padding: '0.75rem',
-                    background: '#f1f5f9', border: '1.5px solid #e2e8f0',
+                    background: 'var(--bg-muted)', border: '1.5px solid var(--border)',
                     borderRadius: '10px', fontSize: '0.85rem',
-                    fontWeight: 700, color: '#475569', cursor: saving ? 'not-allowed' : 'pointer',
+                    fontWeight: 700, color: 'var(--text-body)', cursor: saving ? 'not-allowed' : 'pointer',
                   }}
                 >{saving ? '...' : 'Simpan Draft'}</button>
                 <button
@@ -256,17 +256,17 @@ export default function GenerateArtikelModal({ onClose, onSaved }: Props) {
 function FieldRow({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p style={{ fontSize: '0.67rem', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.12rem' }}>{label}</p>
-      <p style={{ fontSize: '0.82rem', color: '#0f172a', lineHeight: 1.55 }}>{value}</p>
+      <p style={{ fontSize: '0.67rem', fontWeight: 700, color: 'var(--text-subtle)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.12rem' }}>{label}</p>
+      <p style={{ fontSize: '0.82rem', color: 'var(--text-heading)', lineHeight: 1.55 }}>{value}</p>
     </div>
   );
 }
 
 function MetaChip({ label, value }: { label: string; value: string }) {
   return (
-    <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '0.28rem 0.65rem' }}>
-      <p style={{ fontSize: '0.6rem', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase' }}>{label}</p>
-      <p style={{ fontSize: '0.78rem', fontWeight: 600, color: '#0f172a' }}>{value}</p>
+    <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.28rem 0.65rem' }}>
+      <p style={{ fontSize: '0.6rem', fontWeight: 700, color: 'var(--text-subtle)', textTransform: 'uppercase' }}>{label}</p>
+      <p style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-heading)' }}>{value}</p>
     </div>
   );
 }

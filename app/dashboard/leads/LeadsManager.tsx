@@ -49,18 +49,18 @@ export default function LeadsManager() {
   return (
     <div>
       <div style={{ marginBottom: '1.5rem' }}>
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.25rem' }}>Leads & Inquiry</h1>
-        <p style={{ color: '#64748b', fontSize: '0.875rem' }}>
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-heading)', marginBottom: '0.25rem' }}>Leads & Inquiry</h1>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
           {loading ? '…' : `${total} total inquiry masuk`}
         </p>
       </div>
 
-      <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '14px', overflow: 'hidden' }}>
+      <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '14px', overflow: 'hidden' }}>
         {/* Header */}
         <div style={{
           display: 'grid', gridTemplateColumns: 'minmax(0,1.5fr) 130px minmax(0,1fr) minmax(0,1fr) 160px',
-          padding: '0.75rem 1.25rem', background: '#f8fafc', borderBottom: '1px solid #e2e8f0',
-          fontSize: '0.72rem', fontWeight: 700, color: '#64748b', letterSpacing: '0.05em',
+          padding: '0.75rem 1.25rem', background: 'var(--bg-muted)', borderBottom: '1px solid var(--border)',
+          fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.05em',
         }} className="leads-header">
           <span>NAMA</span>
           <span>NO. HP</span>
@@ -70,14 +70,14 @@ export default function LeadsManager() {
         </div>
 
         {loading && (
-          <div style={{ padding: '3rem', textAlign: 'center', color: '#94a3b8' }}>
+          <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-subtle)' }}>
             <div style={{ width: '28px', height: '28px', border: '3px solid #e2e8f0', borderTopColor: '#0f2d6b', borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto 0.75rem' }} />
             <p style={{ fontSize: '0.85rem' }}>Memuat...</p>
           </div>
         )}
 
         {!loading && leads.length === 0 && (
-          <div style={{ padding: '4rem', textAlign: 'center', color: '#94a3b8' }}>
+          <div style={{ padding: '4rem', textAlign: 'center', color: 'var(--text-subtle)' }}>
             <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>📭</div>
             <p style={{ fontWeight: 600 }}>Belum ada inquiry masuk</p>
           </div>
@@ -90,16 +90,16 @@ export default function LeadsManager() {
               display: 'grid', gridTemplateColumns: 'minmax(0,1.5fr) 130px minmax(0,1fr) minmax(0,1fr) 160px',
               padding: '1rem 1.25rem', alignItems: 'start',
               borderBottom: i < leads.length - 1 ? '1px solid #f8fafc' : 'none',
-              background: 'white',
+              background: 'var(--bg-card)',
             }}
             className="leads-row"
-            onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.background = '#f8fafc'}
-            onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.background = 'white'}
+            onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.background = 'var(--bg-muted)'}
+            onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.background = 'var(--bg-card)'}
           >
             <div>
-              <p style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0f172a', margin: '0 0 0.2rem' }}>{lead.name}</p>
+              <p style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-heading)', margin: '0 0 0.2rem' }}>{lead.name}</p>
               {lead.message && (
-                <p style={{ fontSize: '0.75rem', color: '#64748b', margin: 0, lineHeight: 1.5, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
                   {lead.message}
                 </p>
               )}
@@ -112,23 +112,23 @@ export default function LeadsManager() {
             >
               {lead.phone}
             </a>
-            <span style={{ fontSize: '0.8rem', color: '#475569' }}>{lead.program ?? '—'}</span>
-            <span style={{ fontSize: '0.8rem', color: '#475569' }}>{lead.school ?? '—'}</span>
-            <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{fmtDateTime(lead.createdAt)}</span>
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-body)' }}>{lead.program ?? '—'}</span>
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-body)' }}>{lead.school ?? '—'}</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-subtle)' }}>{fmtDateTime(lead.createdAt)}</span>
           </div>
         ))}
       </div>
 
       {totalPages > 1 && !loading && (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
-          <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>Halaman {page} dari {totalPages} · {total} leads</span>
+          <span style={{ fontSize: '0.78rem', color: 'var(--text-subtle)' }}>Halaman {page} dari {totalPages} · {total} leads</span>
           <div style={{ display: 'flex', gap: '0.35rem' }}>
             {[
               { label: '‹', disabled: page === 1, action: () => setPage(p => Math.max(1, p - 1)) },
               { label: '›', disabled: page === totalPages, action: () => setPage(p => Math.min(totalPages, p + 1)) },
             ].map(btn => (
               <button key={btn.label} onClick={btn.action} disabled={btn.disabled}
-                style={{ minWidth: '32px', height: '32px', padding: '0 0.4rem', borderRadius: '7px', border: '1px solid #e2e8f0', background: btn.disabled ? '#f8fafc' : 'white', color: btn.disabled ? '#cbd5e1' : '#374151', fontSize: '0.9rem', fontWeight: 600, cursor: btn.disabled ? 'not-allowed' : 'pointer' }}
+                style={{ minWidth: '32px', height: '32px', padding: '0 0.4rem', borderRadius: '7px', border: '1px solid var(--border)', background: btn.disabled ? '#f8fafc' : 'white', color: btn.disabled ? '#cbd5e1' : '#374151', fontSize: '0.9rem', fontWeight: 600, cursor: btn.disabled ? 'not-allowed' : 'pointer' }}
               >{btn.label}</button>
             ))}
           </div>

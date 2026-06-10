@@ -46,8 +46,8 @@ export default function ProgramManager() {
     <div>
       {/* Header */}
       <div style={{ marginBottom: '1.75rem' }}>
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.25rem' }}>Program Studi</h1>
-        <p style={{ color: '#64748b', fontSize: '0.875rem' }}>{programs.filter(p => p.status === 'aktif').length} program aktif dari {programs.length} total</p>
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-heading)', marginBottom: '0.25rem' }}>Program Studi</h1>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>{programs.filter(p => p.status === 'aktif').length} program aktif dari {programs.length} total</p>
       </div>
 
       {/* Program cards */}
@@ -56,7 +56,7 @@ export default function ProgramManager() {
           <div
             key={program.id}
             style={{
-              background: 'white', border: '1px solid #e2e8f0',
+              background: 'var(--bg-card)', border: '1px solid var(--border)',
               borderRadius: '16px', overflow: 'hidden',
               opacity: program.status === 'nonaktif' ? 0.6 : 1,
               transition: 'opacity 0.2s',
@@ -82,11 +82,11 @@ export default function ProgramManager() {
                     {program.icon}
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.2rem' }}>{program.name}</p>
+                    <p style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-heading)', marginBottom: '0.2rem' }}>{program.name}</p>
                     <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.72rem', color: '#64748b' }}>{program.degree}</span>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{program.degree}</span>
                       <span style={{ color: '#e2e8f0' }}>·</span>
-                      <span style={{ fontSize: '0.72rem', color: '#64748b' }}>{program.accreditation}</span>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{program.accreditation}</span>
                     </div>
                   </div>
                 </div>
@@ -96,7 +96,7 @@ export default function ProgramManager() {
                   {program.highlights.map(h => (
                     <span key={h} style={{
                       padding: '0.2rem 0.6rem',
-                      background: '#f1f5f9', color: '#475569',
+                      background: 'var(--bg-muted)', color: 'var(--text-body)',
                       borderRadius: '999px', fontSize: '0.7rem', fontWeight: 500,
                     }}>{h}</span>
                   ))}
@@ -105,7 +105,7 @@ export default function ProgramManager() {
                 {/* Alumni */}
                 <div style={{ textAlign: 'center', minWidth: '80px' }}>
                   <div style={{ fontSize: '1.1rem', fontWeight: 800, color: program.color }}>{program.alumni}</div>
-                  <div style={{ fontSize: '0.68rem', color: '#94a3b8' }}>alumni</div>
+                  <div style={{ fontSize: '0.68rem', color: 'var(--text-subtle)' }}>alumni</div>
                 </div>
 
                 {/* Badge */}
@@ -171,7 +171,7 @@ export default function ProgramManager() {
           onClick={e => { if (e.target === e.currentTarget) closeEdit(); }}
         >
           <div style={{
-            background: 'white', borderRadius: '20px',
+            background: 'var(--bg-card)', borderRadius: '20px',
             width: '100%', maxWidth: '580px',
             boxShadow: '0 32px 80px rgba(0,0,0,0.2)',
             maxHeight: '90vh', overflowY: 'auto',
@@ -180,7 +180,7 @@ export default function ProgramManager() {
             <div style={{
               display: 'flex', justifyContent: 'space-between', alignItems: 'center',
               padding: '1.5rem 1.75rem', borderBottom: '1px solid #f1f5f9',
-              position: 'sticky', top: 0, background: 'white', zIndex: 1,
+              position: 'sticky', top: 0, background: 'var(--bg-card)', zIndex: 1,
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <div style={{
@@ -191,9 +191,9 @@ export default function ProgramManager() {
                 }}>
                   {editingProgram.icon}
                 </div>
-                <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a' }}>Edit Program Studi</h2>
+                <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-heading)' }}>Edit Program Studi</h2>
               </div>
-              <button onClick={closeEdit} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', fontSize: '1.25rem', lineHeight: 1 }}>✕</button>
+              <button onClick={closeEdit} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-subtle)', fontSize: '1.25rem', lineHeight: 1 }}>✕</button>
             </div>
 
             {/* Form */}
@@ -266,13 +266,13 @@ export default function ProgramManager() {
                     <span key={i} style={{
                       display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
                       padding: '0.25rem 0.65rem',
-                      background: '#f1f5f9', color: '#475569',
+                      background: 'var(--bg-muted)', color: 'var(--text-body)',
                       borderRadius: '999px', fontSize: '0.75rem',
                     }}>
                       {h}
                       <button
                         onClick={() => removeHighlight(i)}
-                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', fontSize: '0.75rem', padding: 0, lineHeight: 1 }}
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-subtle)', fontSize: '0.75rem', padding: 0, lineHeight: 1 }}
                       >✕</button>
                     </span>
                   ))}
@@ -288,9 +288,9 @@ export default function ProgramManager() {
                   <button
                     onClick={addHighlight}
                     style={{
-                      padding: '0.65rem 1rem', background: '#f1f5f9',
-                      border: '1.5px solid #e2e8f0', borderRadius: '10px',
-                      fontSize: '0.8rem', fontWeight: 600, color: '#475569', cursor: 'pointer',
+                      padding: '0.65rem 1rem', background: 'var(--bg-muted)',
+                      border: '1.5px solid var(--border)', borderRadius: '10px',
+                      fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-body)', cursor: 'pointer',
                     }}
                   >
                     + Tambah
@@ -302,7 +302,7 @@ export default function ProgramManager() {
               <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', paddingTop: '0.5rem' }}>
                 <button
                   onClick={closeEdit}
-                  style={{ padding: '0.7rem 1.5rem', border: '1.5px solid #e2e8f0', borderRadius: '10px', background: 'white', color: '#475569', fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer' }}
+                  style={{ padding: '0.7rem 1.5rem', border: '1.5px solid var(--border)', borderRadius: '10px', background: 'var(--bg-card)', color: 'var(--text-body)', fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer' }}
                 >
                   Batal
                 </button>
@@ -324,7 +324,7 @@ export default function ProgramManager() {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
+      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-heading)', marginBottom: '0.4rem' }}>
         {label}
       </label>
       {children}
@@ -334,7 +334,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 const inputStyle: React.CSSProperties = {
   width: '100%', padding: '0.7rem 1rem',
-  border: '1.5px solid #e2e8f0', borderRadius: '10px',
-  fontSize: '0.875rem', color: '#0f172a',
-  background: '#f8fafc', boxSizing: 'border-box',
+  border: '1.5px solid var(--border)', borderRadius: '10px',
+  fontSize: '0.875rem', color: 'var(--text-heading)',
+  background: 'var(--bg-muted)', boxSizing: 'border-box',
 };

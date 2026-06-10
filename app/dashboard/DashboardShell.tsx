@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { api } from '../lib/api';
+import { useTheme } from '../i18n/ThemeContext';
 
 const sidebarLinks = [
   { icon: '🏠', label: 'Overview', href: '/dashboard' },
@@ -17,6 +18,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
   const [user, setUser] = useState<{ name: string; email: string; role: string } | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const token = localStorage.getItem('stia_token');
@@ -40,14 +42,14 @@ export default function DashboardShell({ children }: { children: React.ReactNode
   };
 
   if (!user) return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fafc' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-muted)' }}>
       <div style={{ width: '32px', height: '32px', border: '3px solid #e2e8f0', borderTopColor: '#0f2d6b', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#f1f5f9' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg-muted)' }}>
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -133,7 +135,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
               background: 'linear-gradient(135deg, #f5a623, #fbbf24)',
               display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
             }}>
-              <span style={{ color: '#0f2d6b', fontWeight: 800, fontSize: '0.8rem' }}>
+              <span style={{ color: 'var(--text-primary)', fontWeight: 800, fontSize: '0.8rem' }}>
                 {user.name.charAt(0)}
               </span>
             </div>
@@ -167,14 +169,14 @@ export default function DashboardShell({ children }: { children: React.ReactNode
       <div style={{ flex: 1, marginLeft: '240px', display: 'flex', flexDirection: 'column', minWidth: 0 }} className="dashboard-main">
         {/* Topbar */}
         <header style={{
-          background: 'white', borderBottom: '1px solid #e2e8f0',
+          background: 'var(--bg-card)', borderBottom: '1px solid var(--border)',
           padding: '0 1.5rem', height: '60px',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           position: 'sticky', top: 0, zIndex: 30,
         }}>
           <button
             onClick={() => setSidebarOpen(v => !v)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748b', padding: '0.25rem' }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', padding: '0.25rem' }}
             className="sidebar-toggle"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -182,11 +184,36 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             </svg>
           </button>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              title={theme === 'dark' ? 'Mode Terang' : 'Mode Gelap'}
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                width: '34px', height: '34px',
+                background: 'var(--bg-muted)', border: '1px solid var(--border)',
+                borderRadius: '8px', cursor: 'pointer',
+                color: 'var(--text-muted)', transition: 'all 0.2s',
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-primary)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--text-primary)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-muted)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)'; }}
+            >
+              {theme === 'dark' ? (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.166 17.834a.75.75 0 00-1.06 1.06l1.59 1.591a.75.75 0 001.061-1.06l-1.59-1.591zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.166 6.166a.75.75 0 001.06 1.06l-1.59 1.591a.75.75 0 001.061 1.06L5.106 7.227a.75.75 0 00-1.061-1.061L6.166 6.166z"/>
+                </svg>
+              ) : (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path fillRule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clipRule="evenodd"/>
+                </svg>
+              )}
+            </button>
+
             <a href="/" target="_blank" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-              fontSize: '0.8rem', color: '#0f2d6b', fontWeight: 600, textDecoration: 'none',
-              padding: '0.4rem 0.85rem', border: '1.5px solid #e2e8f0', borderRadius: '999px',
+              fontSize: '0.8rem', color: 'var(--text-primary)', fontWeight: 600, textDecoration: 'none',
+              padding: '0.4rem 0.85rem', border: '1.5px solid var(--border)', borderRadius: '999px',
             }}>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />

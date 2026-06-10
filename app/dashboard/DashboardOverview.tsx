@@ -26,7 +26,7 @@ function TrendChart({ data, loading, color = '#6366f1' }: { data: DailyPoint[]; 
     </div>
   );
   if (data.length === 0) return (
-    <div style={{ height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: '0.78rem' }}>
+    <div style={{ height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-subtle)', fontSize: '0.78rem' }}>
       Belum ada data
     </div>
   );
@@ -67,7 +67,7 @@ function TrendChart({ data, loading, color = '#6366f1' }: { data: DailyPoint[]; 
 function StatCard({ icon, label, value, sub, color, href }: { icon: React.ReactNode; label: string; value: string; sub?: string; color: string; href?: string }) {
   const inner = (
     <div style={{
-      background: 'white', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.25rem 1.4rem',
+      background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', padding: '1.25rem 1.4rem',
       display: 'flex', flexDirection: 'column', gap: '0.5rem',
       height: '100%', boxSizing: 'border-box',
       transition: 'box-shadow 0.2s, transform 0.2s',
@@ -84,9 +84,9 @@ function StatCard({ icon, label, value, sub, color, href }: { icon: React.ReactN
         )}
       </div>
       <div>
-        <div style={{ fontSize: '1.65rem', fontWeight: 800, color: '#0f172a', lineHeight: 1 }}>{value}</div>
-        <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#64748b', marginTop: '0.25rem' }}>{label}</div>
-        {sub && <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.15rem' }}>{sub}</div>}
+        <div style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-heading)', lineHeight: 1 }}>{value}</div>
+        <div style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)', marginTop: '0.25rem' }}>{label}</div>
+        {sub && <div style={{ fontSize: '0.7rem', color: 'var(--text-subtle)', marginTop: '0.15rem' }}>{sub}</div>}
       </div>
     </div>
   );
@@ -159,8 +159,8 @@ export default function DashboardOverview() {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.2rem' }}>{greeting} 👋</h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.8rem' }}>{dateStr}</p>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-heading)', marginBottom: '0.2rem' }}>{greeting} 👋</h1>
+          <p style={{ color: 'var(--text-subtle)', fontSize: '0.8rem' }}>{dateStr}</p>
         </div>
         <DateRangePicker defaultPreset="30-hari" onChange={setDateRange} />
       </div>
@@ -215,16 +215,16 @@ export default function DashboardOverview() {
 
       {/* Charts — 2 kolom */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }} className="chart-grid">
-        <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden' }}>
           <div style={{ padding: '1rem 1.4rem', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <p style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0f172a' }}>Tren WA Inquiry</p>
-              <p style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '0.1rem' }}>Klik WhatsApp per hari</p>
+              <p style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-heading)' }}>Tren WA Inquiry</p>
+              <p style={{ fontSize: '0.72rem', color: 'var(--text-subtle)', marginTop: '0.1rem' }}>Klik WhatsApp per hari</p>
             </div>
             {waTotal !== null && (
               <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0f172a' }}>{fmt(waTotal)}</div>
-                <div style={{ fontSize: '0.68rem', color: '#94a3b8' }}>periode ini</div>
+                <div style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-heading)' }}>{fmt(waTotal)}</div>
+                <div style={{ fontSize: '0.68rem', color: 'var(--text-subtle)' }}>periode ini</div>
               </div>
             )}
           </div>
@@ -233,16 +233,16 @@ export default function DashboardOverview() {
           </div>
         </div>
 
-        <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden' }}>
           <div style={{ padding: '1rem 1.4rem', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <p style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0f172a' }}>Tren Form Leads</p>
-              <p style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '0.1rem' }}>Inquiry form per hari</p>
+              <p style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-heading)' }}>Tren Form Leads</p>
+              <p style={{ fontSize: '0.72rem', color: 'var(--text-subtle)', marginTop: '0.1rem' }}>Inquiry form per hari</p>
             </div>
             {siteStats !== null && (
               <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0f172a' }}>{fmt(siteStats.leads)}</div>
-                <div style={{ fontSize: '0.68rem', color: '#94a3b8' }}>total leads</div>
+                <div style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-heading)' }}>{fmt(siteStats.leads)}</div>
+                <div style={{ fontSize: '0.68rem', color: 'var(--text-subtle)' }}>total leads</div>
               </div>
             )}
           </div>
@@ -256,21 +256,21 @@ export default function DashboardOverview() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }} className="bottom-grid">
 
         {/* Artikel Terbaru */}
-        <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden' }}>
           <div style={{ padding: '1rem 1.4rem', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <p style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0f172a' }}>Artikel Terbaru</p>
+            <p style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-heading)' }}>Artikel Terbaru</p>
             <Link href="/dashboard/article" style={{ fontSize: '0.75rem', color: '#6366f1', fontWeight: 600, textDecoration: 'none' }}>Lihat semua →</Link>
           </div>
           {recentArticles.length === 0 ? (
-            <div style={{ padding: '2rem', textAlign: 'center', color: '#94a3b8', fontSize: '0.82rem' }}>Belum ada artikel</div>
+            <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-subtle)', fontSize: '0.82rem' }}>Belum ada artikel</div>
           ) : recentArticles.map((a, i) => (
             <div key={a.id} style={{ padding: '0.85rem 1.4rem', borderBottom: i < recentArticles.length - 1 ? '1px solid #f8fafc' : 'none', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <p style={{ fontSize: '0.82rem', fontWeight: 600, color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginBottom: '0.2rem' }}>{a.title}</p>
+                <p style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-heading)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginBottom: '0.2rem' }}>{a.title}</p>
                 <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                   <span style={{ fontSize: '0.65rem', fontWeight: 700, padding: '0.1rem 0.45rem', background: (a.categoryColor || '#6366f1') + '18', color: a.categoryColor || '#6366f1', borderRadius: '999px' }}>{a.category}</span>
-                  <span style={{ fontSize: '0.68rem', color: '#94a3b8' }}>{fmtDate(a.createdAt)}</span>
-                  <span style={{ fontSize: '0.68rem', color: '#94a3b8' }}>👁 {a.views}</span>
+                  <span style={{ fontSize: '0.68rem', color: 'var(--text-subtle)' }}>{fmtDate(a.createdAt)}</span>
+                  <span style={{ fontSize: '0.68rem', color: 'var(--text-subtle)' }}>👁 {a.views}</span>
                 </div>
               </div>
               <span style={{ fontSize: '0.65rem', fontWeight: 700, padding: '0.15rem 0.5rem', background: a.published ? '#dcfce7' : '#fff7ed', color: a.published ? '#16a34a' : '#f97316', borderRadius: '999px', whiteSpace: 'nowrap' }}>
@@ -281,26 +281,26 @@ export default function DashboardOverview() {
         </div>
 
         {/* Leads Terbaru */}
-        <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden' }}>
           <div style={{ padding: '1rem 1.4rem', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <p style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0f172a' }}>Leads Terbaru</p>
+            <p style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-heading)' }}>Leads Terbaru</p>
             <Link href="/dashboard/leads" style={{ fontSize: '0.75rem', color: '#16a34a', fontWeight: 600, textDecoration: 'none' }}>Lihat semua →</Link>
           </div>
           {recentLeads.length === 0 ? (
-            <div style={{ padding: '2rem', textAlign: 'center', color: '#94a3b8', fontSize: '0.82rem' }}>Belum ada leads masuk</div>
+            <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-subtle)', fontSize: '0.82rem' }}>Belum ada leads masuk</div>
           ) : recentLeads.map((lead, i) => (
             <div key={lead.id} style={{ padding: '0.85rem 1.4rem', borderBottom: i < recentLeads.length - 1 ? '1px solid #f8fafc' : 'none', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'linear-gradient(135deg,#16a34a,#4ade80)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '0.8rem', fontWeight: 700, color: 'white' }}>
                 {lead.name.charAt(0).toUpperCase()}
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <p style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.15rem' }}>{lead.name}</p>
+                <p style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-heading)', marginBottom: '0.15rem' }}>{lead.name}</p>
                 <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                   <a href={`https://wa.me/${lead.phone.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.68rem', color: '#25d366', fontWeight: 600, textDecoration: 'none' }}>{lead.phone}</a>
-                  {lead.program && <span style={{ fontSize: '0.65rem', color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{lead.program.replace('S1 Ilmu Administrasi ', '')}</span>}
+                  {lead.program && <span style={{ fontSize: '0.65rem', color: 'var(--text-subtle)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{lead.program.replace('S1 Ilmu Administrasi ', '')}</span>}
                 </div>
               </div>
-              <span style={{ fontSize: '0.68rem', color: '#94a3b8', whiteSpace: 'nowrap' }}>{fmtDate(lead.createdAt)}</span>
+              <span style={{ fontSize: '0.68rem', color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>{fmtDate(lead.createdAt)}</span>
             </div>
           ))}
         </div>

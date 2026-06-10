@@ -149,8 +149,8 @@ export default function ArtikelManager() {
       {/* Header */}
       <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
         <div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.25rem' }}>Kelola Artikel</h1>
-          <p style={{ color: '#64748b', fontSize: '0.875rem' }}>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-heading)', marginBottom: '0.25rem' }}>Kelola Artikel</h1>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
             {loading ? '…' : `${articles.length} artikel`}
             {!loading && articles.filter(a => !a.published).length > 0 && (
               <span style={{ color: '#f97316', marginLeft: '0.4rem' }}>
@@ -163,13 +163,13 @@ export default function ArtikelManager() {
 
       {/* Filter bar */}
       <div style={{
-        background: 'white', border: '1px solid #e2e8f0',
+        background: 'var(--bg-card)', border: '1px solid var(--border)',
         borderRadius: '14px', padding: '1rem 1.25rem',
         display: 'flex', gap: '1rem', alignItems: 'center',
         marginBottom: '1.25rem', flexWrap: 'wrap',
       }}>
         <div style={{ position: 'relative', flex: 1, minWidth: '200px' }}>
-          <svg style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }}
+          <svg style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-subtle)' }}
             width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
           </svg>
@@ -180,8 +180,8 @@ export default function ArtikelManager() {
             onChange={e => handleSearch(e.target.value)}
             style={{
               width: '100%', height: '36px', padding: '0 0.75rem 0 2.25rem',
-              border: '1.5px solid #e2e8f0', borderRadius: '8px',
-              fontSize: '0.85rem', background: '#f8fafc', boxSizing: 'border-box',
+              border: '1.5px solid var(--border)', borderRadius: '8px',
+              fontSize: '0.85rem', background: 'var(--bg-muted)', boxSizing: 'border-box',
             }}
           />
         </div>
@@ -189,9 +189,9 @@ export default function ArtikelManager() {
           value={sort}
           onChange={e => { setSort(e.target.value as 'terbaru' | 'trending'); setPage(1); }}
           style={{
-            height: '36px', padding: '0 0.75rem', border: '1.5px solid #e2e8f0', borderRadius: '8px',
-            fontSize: '0.8rem', fontWeight: 600, color: '#374151',
-            background: 'white', cursor: 'pointer', outline: 'none', flexShrink: 0, boxSizing: 'border-box',
+            height: '36px', padding: '0 0.75rem', border: '1.5px solid var(--border)', borderRadius: '8px',
+            fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-heading)',
+            background: 'var(--bg-card)', cursor: 'pointer', outline: 'none', flexShrink: 0, boxSizing: 'border-box',
           }}
         >
           <option value="terbaru">🕐 Terbaru</option>
@@ -200,12 +200,12 @@ export default function ArtikelManager() {
       </div>
 
       {/* Table */}
-      <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '14px', overflow: 'hidden' }}>
+      <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '14px', overflow: 'hidden' }}>
         <div style={{
           display: 'grid', gridTemplateColumns: 'minmax(0,2fr) minmax(0,1.4fr) 160px 90px 70px 165px',
           padding: '0.75rem 1.25rem',
-          background: '#f8fafc', borderBottom: '1px solid #e2e8f0',
-          fontSize: '0.72rem', fontWeight: 700, color: '#64748b', letterSpacing: '0.05em',
+          background: 'var(--bg-muted)', borderBottom: '1px solid var(--border)',
+          fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.05em',
         }} className="artikel-table-header">
           <span>JUDUL</span>
           <span>KATEGORI</span>
@@ -216,7 +216,7 @@ export default function ArtikelManager() {
         </div>
 
         {loading && (
-          <div style={{ padding: '3rem', textAlign: 'center', color: '#94a3b8' }}>
+          <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-subtle)' }}>
             <div style={{ width: '28px', height: '28px', border: '3px solid #e2e8f0', borderTopColor: '#6366f1', borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto 0.75rem' }} />
             <p style={{ fontSize: '0.85rem' }}>Memuat artikel...</p>
             <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
@@ -224,7 +224,7 @@ export default function ArtikelManager() {
         )}
 
         {!loading && filtered.length === 0 && (
-          <div style={{ padding: '3rem', textAlign: 'center', color: '#94a3b8' }}>
+          <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-subtle)' }}>
             <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>🔍</div>
             <p style={{ fontWeight: 600 }}>Artikel tidak ditemukan</p>
           </div>
@@ -239,13 +239,13 @@ export default function ArtikelManager() {
               borderBottom: i < filtered.length - 1 ? '1px solid #f8fafc' : 'none',
             }}
             className="artikel-table-row"
-            onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.background = '#f8fafc'}
-            onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.background = 'white'}
+            onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.background = 'var(--bg-muted)'}
+            onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.background = 'var(--bg-card)'}
           >
             {/* Title */}
             <div style={{ minWidth: 0, paddingRight: '1rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.2rem' }}>
-                <p style={{ fontSize: '0.85rem', fontWeight: 600, color: '#0f172a', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <p style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-heading)', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {article.title}
                 </p>
                 {isNew(article.createdAt, now) && (
@@ -279,8 +279,8 @@ export default function ArtikelManager() {
 
             {/* Date */}
             <div>
-              <div style={{ fontSize: '0.78rem', color: '#64748b' }}>{fmtDateTime(article.createdAt).date}</div>
-              <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.1rem' }}>{fmtDateTime(article.createdAt).time} WITA</div>
+              <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{fmtDateTime(article.createdAt).date}</div>
+              <div style={{ fontSize: '0.7rem', color: 'var(--text-subtle)', marginTop: '0.1rem' }}>{fmtDateTime(article.createdAt).time} WITA</div>
             </div>
 
             {/* Status */}
@@ -294,7 +294,7 @@ export default function ArtikelManager() {
             </span>
 
             {/* Views */}
-            <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#475569' }}>
+            <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-body)' }}>
               {article.views.toLocaleString('id-ID')}
             </div>
 
@@ -327,8 +327,8 @@ export default function ArtikelManager() {
                   className="icon-btn"
                   style={{
                     width: '32px', height: '32px', borderRadius: '7px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    background: '#f1f5f9', border: '1px solid #e2e8f0',
-                    color: '#475569', textDecoration: 'none', flexShrink: 0,
+                    background: 'var(--bg-muted)', border: '1px solid var(--border)',
+                    color: 'var(--text-body)', textDecoration: 'none', flexShrink: 0,
                   }}
                 >
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -355,7 +355,7 @@ export default function ArtikelManager() {
       {/* Pagination */}
       {totalPages > 1 && (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
-          <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+          <span style={{ fontSize: '0.78rem', color: 'var(--text-subtle)' }}>
             Halaman {page} dari {totalPages} · {total} artikel
           </span>
           <div style={{ display: 'flex', gap: '0.35rem' }}>
@@ -396,21 +396,21 @@ export default function ArtikelManager() {
           style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(15,23,42,0.5)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', animation: `${modalClosing ? 'backdrop-out' : 'backdrop-in'} 0.2s ease both` }}
           onClick={e => { if (e.target === e.currentTarget) closeModal(); }}
         >
-          <div style={{ background: 'white', borderRadius: '20px', width: '100%', maxWidth: '420px', boxShadow: '0 24px 60px rgba(0,0,0,0.18)', overflow: 'hidden', animation: `${modalClosing ? 'modal-out' : 'modal-in'} 0.2s ease both` }}>
+          <div style={{ background: 'var(--bg-card)', borderRadius: '20px', width: '100%', maxWidth: '420px', boxShadow: '0 24px 60px rgba(0,0,0,0.18)', overflow: 'hidden', animation: `${modalClosing ? 'modal-out' : 'modal-in'} 0.2s ease both` }}>
             <div style={{ padding: '1.75rem 1.75rem 0' }}>
               <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#fef2f2', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', marginBottom: '1.25rem' }}>🗑️</div>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem' }}>Hapus Artikel?</h3>
-              <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: 1.6, marginBottom: '0.35rem' }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-heading)', marginBottom: '0.5rem' }}>Hapus Artikel?</h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '0.35rem' }}>
                 Artikel berikut akan dihapus permanen dan tidak dapat dikembalikan:
               </p>
-              <p style={{ fontSize: '0.85rem', fontWeight: 700, color: '#0f172a', background: '#f8fafc', borderRadius: '8px', padding: '0.65rem 0.85rem', border: '1px solid #e2e8f0' }}>
+              <p style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-heading)', background: 'var(--bg-muted)', borderRadius: '8px', padding: '0.65rem 0.85rem', border: '1px solid var(--border)' }}>
                 &ldquo;{confirmDelete?.title}&rdquo;
               </p>
             </div>
             <div style={{ display: 'flex', gap: '0.65rem', padding: '1.25rem 1.75rem 1.75rem' }}>
               <button
                 onClick={closeModal}
-                style={{ flex: 1, padding: '0.7rem', background: 'white', border: '1.5px solid #e2e8f0', borderRadius: '10px', fontSize: '0.875rem', fontWeight: 600, color: '#64748b', cursor: 'pointer' }}
+                style={{ flex: 1, padding: '0.7rem', background: 'var(--bg-card)', border: '1.5px solid var(--border)', borderRadius: '10px', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-muted)', cursor: 'pointer' }}
               >Batal</button>
               <button
                 onClick={confirmDeleteExec}

@@ -187,8 +187,8 @@ function Field({
 }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-      <label style={{ fontSize: '0.78rem', fontWeight: 700, color: '#374151' }}>{label}</label>
-      {hint && <p style={{ fontSize: '0.7rem', color: '#94a3b8', margin: 0 }}>{hint}</p>}
+      <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-heading)' }}>{label}</label>
+      {hint && <p style={{ fontSize: '0.7rem', color: 'var(--text-subtle)', margin: 0 }}>{hint}</p>}
       {children}
     </div>
   );
@@ -196,11 +196,11 @@ function Field({
 
 const inputStyle: React.CSSProperties = {
   padding: '0.55rem 0.75rem',
-  border: '1.5px solid #e2e8f0',
+  border: '1.5px solid var(--border)',
   borderRadius: '8px',
   fontSize: '0.875rem',
-  color: '#0f172a',
-  background: 'white',
+  color: 'var(--text-heading)',
+  background: 'var(--bg-card)',
   outline: 'none',
   width: '100%',
   boxSizing: 'border-box',
@@ -279,7 +279,7 @@ function LangBar({
 }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-      <div style={{ display: 'flex', background: '#f1f5f9', borderRadius: '8px', padding: '3px' }}>
+      <div style={{ display: 'flex', background: 'var(--bg-muted)', borderRadius: '8px', padding: '3px' }}>
         {(['id', 'en'] as const).map(l => (
           <button
             key={l}
@@ -348,10 +348,10 @@ function SchedulerTab() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 1.25rem', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 1.25rem', background: 'var(--bg-muted)', borderRadius: '12px', border: '1px solid var(--border)' }}>
         <div>
-          <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0f172a' }}>Auto-Generate Artikel</div>
-          <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '0.2rem' }}>
+          <div style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-heading)' }}>Auto-Generate Artikel</div>
+          <div style={{ fontSize: '0.72rem', color: 'var(--text-subtle)', marginTop: '0.2rem' }}>
             Berikutnya: {nextRunLabel(enabled, times)}
           </div>
         </div>
@@ -360,14 +360,14 @@ function SchedulerTab() {
 
       <div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
-          <label style={{ fontSize: '0.78rem', fontWeight: 700, color: '#374151' }}>
+          <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-heading)' }}>
             Jadwal posting ({times.length}/hari) · Zona WITA (UTC+8)
           </label>
           <AddRemoveBtn onClick={() => setTimes(p => [...p, '08:00'])} />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
           {times.map((t, i) => (
-            <div key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', padding: '0.5rem 0.75rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #f1f5f9' }}>
+            <div key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', padding: '0.5rem 0.75rem', background: 'var(--bg-muted)', borderRadius: '8px', border: '1px solid #f1f5f9' }}>
               <span style={{ width: '20px', fontSize: '0.7rem', fontWeight: 800, color: '#6366f1', textAlign: 'center' }}>{i + 1}</span>
               <input
                 type="time"
@@ -457,7 +457,7 @@ function AboutTab({ data, onChange }: SectionTabProps<AboutContent>) {
       <Field label="Pilar Nilai (3 item)">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           {d.features.map((f, i) => (
-            <div key={i} style={{ padding: '0.75rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+            <div key={i} style={{ padding: '0.75rem', background: 'var(--bg-muted)', borderRadius: '8px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               <input type="text" value={f.title} placeholder="Judul" onChange={e => { const n = [...d.features]; n[i] = { ...n[i], title: e.target.value }; onChange({ ...d, features: n }); }} style={inputStyle} />
               <textarea value={f.desc} placeholder="Deskripsi" rows={2} onChange={e => { const n = [...d.features]; n[i] = { ...n[i], desc: e.target.value }; onChange({ ...d, features: n }); }} style={{ ...textareaStyle, minHeight: '3rem' }} />
             </div>
@@ -490,8 +490,8 @@ function VisiMisiTab({ data, onChange }: SectionTabProps<VisiMisiContent>) {
       </Field>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
         {([1, 2] as const).map(n => (
-          <div key={n} style={{ padding: '1rem', background: '#f8fafc', borderRadius: '10px', border: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <div style={{ fontWeight: 700, fontSize: '0.8rem', color: '#0f2d6b', marginBottom: '0.25rem' }}>📍 Kampus {n}</div>
+          <div key={n} style={{ padding: '1rem', background: 'var(--bg-muted)', borderRadius: '10px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <div style={{ fontWeight: 700, fontSize: '0.8rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>📍 Kampus {n}</div>
             <Input value={d[`campus${n}Title`]} onChange={v => onChange({ ...d, [`campus${n}Title`]: v })} placeholder="Nama kampus" />
             <Input value={d[`campus${n}Desc`]} onChange={v => onChange({ ...d, [`campus${n}Desc`]: v })} placeholder="Deskripsi singkat" />
             <Textarea value={d[`campus${n}Address`]} onChange={v => onChange({ ...d, [`campus${n}Address`]: v })} rows={2} placeholder="Alamat lengkap" />
@@ -514,7 +514,7 @@ function WhyTab({ data, onChange }: SectionTabProps<WhyContent>) {
       <Field label="Kartu Keunggulan">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           {d.reasons.map((r, i) => (
-            <div key={i} style={{ padding: '0.85rem', background: '#f8fafc', borderRadius: '10px', border: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+            <div key={i} style={{ padding: '0.85rem', background: 'var(--bg-muted)', borderRadius: '10px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <input type="text" value={r.stat} placeholder="Nilai (misal BAIK)" onChange={e => { const n = [...d.reasons]; n[i] = { ...n[i], stat: e.target.value }; onChange({ ...d, reasons: n }); }} style={{ ...inputStyle, flex: 1 }} />
                 <input type="text" value={r.statLabel} placeholder="Label nilai" onChange={e => { const n = [...d.reasons]; n[i] = { ...n[i], statLabel: e.target.value }; onChange({ ...d, reasons: n }); }} style={{ ...inputStyle, flex: 2 }} />
@@ -567,7 +567,7 @@ function PmbTab({ data, onChange }: SectionTabProps<PmbContent>) {
       <Field label="Biaya">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           {d.costItems.map((c, i) => (
-            <div key={i} style={{ padding: '0.75rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+            <div key={i} style={{ padding: '0.75rem', background: 'var(--bg-muted)', borderRadius: '8px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <input type="text" value={c.label} placeholder="Nama biaya" onChange={e => { const n = [...d.costItems]; n[i] = { ...n[i], label: e.target.value }; onChange({ ...d, costItems: n }); }} style={{ ...inputStyle, flex: 2 }} />
                 <input type="text" value={c.amount} placeholder="Jumlah" onChange={e => { const n = [...d.costItems]; n[i] = { ...n[i], amount: e.target.value }; onChange({ ...d, costItems: n }); }} style={{ ...inputStyle, flex: 1 }} />
@@ -642,7 +642,7 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
       onClick={() => onChange(!checked)}
       style={{ position: 'relative', width: '44px', height: '24px', borderRadius: '12px', border: 'none', background: checked ? '#6366f1' : '#cbd5e1', cursor: 'pointer', transition: 'background 0.2s', flexShrink: 0, padding: 0 }}
     >
-      <span style={{ position: 'absolute', top: '3px', left: checked ? '23px' : '3px', width: '18px', height: '18px', borderRadius: '50%', background: 'white', transition: 'left 0.2s', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
+      <span style={{ position: 'absolute', top: '3px', left: checked ? '23px' : '3px', width: '18px', height: '18px', borderRadius: '50%', background: 'var(--bg-card)', transition: 'left 0.2s', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
     </button>
   );
 }
@@ -772,12 +772,12 @@ export default function SettingsManager() {
   return (
     <div>
       <div style={{ marginBottom: '1.75rem' }}>
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.25rem' }}>Pengaturan</h1>
-        <p style={{ color: '#64748b', fontSize: '0.875rem' }}>Kelola konten landing page dan konfigurasi sistem</p>
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-heading)', marginBottom: '0.25rem' }}>Pengaturan</h1>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>Kelola konten landing page dan konfigurasi sistem</p>
       </div>
 
       {/* Tab bar */}
-      <div style={{ display: 'flex', gap: '0.25rem', flexWrap: 'wrap', marginBottom: '1.5rem', background: '#f8fafc', padding: '0.35rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+      <div style={{ display: 'flex', gap: '0.25rem', flexWrap: 'wrap', marginBottom: '1.5rem', background: 'var(--bg-muted)', padding: '0.35rem', borderRadius: '12px', border: '1px solid var(--border)' }}>
         {TABS.map(tab => (
           <button
             key={tab.key}
@@ -803,7 +803,7 @@ export default function SettingsManager() {
       </div>
 
       {/* Tab content card */}
-      <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
+      <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden' }}>
         <div style={{ padding: '1.5rem' }}>
 
           {activeTab === 'scheduler' && <SchedulerTab />}
@@ -851,7 +851,7 @@ export default function SettingsManager() {
               )}
               {sectionKey === 'contact' && (
                 <>
-                  <div style={{ marginBottom: '1rem', padding: '0.6rem 0.85rem', background: '#f0f9ff', borderRadius: '8px', fontSize: '0.78rem', color: '#0369a1', border: '1px solid #bae6fd' }}>
+                  <div style={{ marginBottom: '1rem', padding: '0.6rem 0.85rem', background: 'var(--bg-muted)', borderRadius: '8px', fontSize: '0.78rem', color: '#0369a1', border: '1px solid #bae6fd' }}>
                     Info kontak berlaku untuk semua bahasa — hanya perlu diisi sekali.
                   </div>
                   <ContactTab

@@ -68,12 +68,12 @@ function MonthGrid({ year, month, rangeFrom, rangeTo, hoverDate, onDayClick, onD
 
   return (
     <div style={{ minWidth: 220 }}>
-      <div style={{ textAlign: 'center', fontWeight: 700, fontSize: '0.85rem', marginBottom: '0.6rem', color: '#0f172a' }}>
+      <div style={{ textAlign: 'center', fontWeight: 700, fontSize: '0.85rem', marginBottom: '0.6rem', color: 'var(--text-heading)' }}>
         {ID_MONTHS[month]} {year}
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 32px)' }}>
         {ID_DAYS.map(d => (
-          <div key={d} style={{ textAlign: 'center', fontSize: '0.68rem', fontWeight: 600, color: '#94a3b8', paddingBottom: 6 }}>
+          <div key={d} style={{ textAlign: 'center', fontSize: '0.68rem', fontWeight: 600, color: 'var(--text-subtle)', paddingBottom: 6 }}>
             {d}
           </div>
         ))}
@@ -248,9 +248,9 @@ export function DateRangePicker({ defaultPreset = '30-hari', onChange }: Props) 
     : (presetLabel ?? '30 Hari Terakhir');
 
   const navBtnStyle: React.CSSProperties = {
-    background: 'none', border: '1px solid #e2e8f0', borderRadius: 6,
+    background: 'none', border: '1px solid var(--border)', borderRadius: 6,
     width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center',
-    cursor: 'pointer', color: '#64748b', flexShrink: 0,
+    cursor: 'pointer', color: 'var(--text-muted)', flexShrink: 0,
   };
 
   return (
@@ -261,8 +261,8 @@ export function DateRangePicker({ defaultPreset = '30-hari', onChange }: Props) 
         style={{
           display: 'flex', alignItems: 'center', gap: '0.5rem',
           padding: '0.5rem 0.875rem',
-          background: 'white', border: '1px solid #e2e8f0', borderRadius: '10px',
-          cursor: 'pointer', fontSize: '0.825rem', fontWeight: 600, color: '#0f172a',
+          background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '10px',
+          cursor: 'pointer', fontSize: '0.825rem', fontWeight: 600, color: 'var(--text-heading)',
           boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
         }}
       >
@@ -279,7 +279,7 @@ export function DateRangePicker({ defaultPreset = '30-hari', onChange }: Props) 
       {open && (
         <div style={{
           position: 'absolute', right: 0, top: 'calc(100% + 8px)', zIndex: 100,
-          background: 'white', border: '1px solid #e2e8f0', borderRadius: '16px',
+          background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px',
           boxShadow: '0 8px 40px rgba(0,0,0,0.12)',
           display: 'flex', overflow: 'hidden', minWidth: 580,
         }}>
@@ -336,7 +336,7 @@ export function DateRangePicker({ defaultPreset = '30-hari', onChange }: Props) 
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid #f1f5f9' }}>
               <button
                 onClick={handleCancel}
-                style={{ padding: '0.45rem 1.25rem', background: 'white', border: '1px solid #e2e8f0', borderRadius: '8px', cursor: 'pointer', fontSize: '0.825rem', fontWeight: 600, color: '#374151' }}
+                style={{ padding: '0.45rem 1.25rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', cursor: 'pointer', fontSize: '0.825rem', fontWeight: 600, color: 'var(--text-heading)' }}
               >
                 Batal
               </button>
