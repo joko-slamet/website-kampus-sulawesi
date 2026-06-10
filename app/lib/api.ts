@@ -173,4 +173,18 @@ export const api = {
       return request<{ day: string; count: number }[]>(`/api/leads/daily?${qs}`);
     },
   },
+  settings: {
+    getAll: () =>
+      request<Record<string, { id: Record<string, unknown>; en: Record<string, unknown> }>>('/api/settings'),
+    save: (key: string, id: unknown, en: unknown) =>
+      request<{ key: string; updatedAt: string }>(`/api/settings/${key}`, {
+        method: 'PUT',
+        body: JSON.stringify({ id, en }),
+      }),
+    translate: (key: string, idContent: unknown) =>
+      request<{ key: string; enContent: unknown }>('/api/settings/translate', {
+        method: 'POST',
+        body: JSON.stringify({ key, idContent }),
+      }),
+  },
 };

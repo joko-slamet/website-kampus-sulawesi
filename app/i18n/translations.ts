@@ -271,6 +271,15 @@ const id = {
     registerBtn: 'Daftar Sekarang',
     infoBtn: 'Tanya via WhatsApp',
   },
+  contact: {
+    phone: '089685894351 – 0882022506660',
+    email: 'stiaabdulharis14@gmail.com',
+    address1: 'Jalan Tanggul Patompo No. 19, Kota Makassar 90224',
+    address2: 'Jalan Gunung Bawakaraeng No. 72, Makassar',
+    facebook: 'Stia Abdul Haris Makassar',
+    instagram: 'STIA Abdul Haris',
+    website: 'stiaabdulharis.ac.id',
+  },
 };
 
 const en: typeof id = {
@@ -543,6 +552,15 @@ const en: typeof id = {
     ],
     registerBtn: 'Register Now',
     infoBtn: 'Ask via WhatsApp',
+  },
+  contact: {
+    phone: '089685894351 – 0882022506660',
+    email: 'stiaabdulharis14@gmail.com',
+    address1: 'Jalan Tanggul Patompo No. 19, Makassar City 90224',
+    address2: 'Jalan Gunung Bawakaraeng No. 72, Makassar',
+    facebook: 'Stia Abdul Haris Makassar',
+    instagram: 'STIA Abdul Haris',
+    website: 'stiaabdulharis.ac.id',
   },
 };
 

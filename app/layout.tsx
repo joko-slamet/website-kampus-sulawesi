@@ -3,6 +3,20 @@ import "./globals.css";
 import ClientProviders from "./components/ClientProviders";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import SchemaOrg from "./components/SchemaOrg";
+import type { SiteSettingsOverrides } from "./i18n/LanguageContext";
+
+async function fetchSiteSettings(): Promise<SiteSettingsOverrides> {
+  try {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+    const res = await fetch(`${apiUrl}/api/settings`, {
+      next: { revalidate: 0 },
+    });
+    if (!res.ok) return {};
+    return await res.json();
+  } catch {
+    return {};
+  }
+}
 
 export const metadata: Metadata = {
   title: {
@@ -72,15 +86,17 @@ export const viewport: Viewport = {
   themeColor: "#0f2d6b",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await fetchSiteSettings();
+
   return (
     <html lang="id" className="scroll-smooth">
       <body className="min-h-screen antialiased">
-        <ClientProviders>{children}</ClientProviders>
+        <ClientProviders settings={settings}>{children}</ClientProviders>
         <SchemaOrg />
         <GoogleAnalytics />
       </body>
