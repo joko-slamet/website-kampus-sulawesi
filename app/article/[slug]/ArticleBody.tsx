@@ -31,8 +31,8 @@ export default function ArticleBody({ article, content }: { article: Article; co
     <article>
       {/* Body */}
       <div style={{
-        background: 'white',
-        border: '1px solid #e2e8f0',
+        background: 'var(--bg-card)',
+        border: '1px solid var(--border)',
         borderRadius: '20px',
         padding: '2.5rem',
       }}>
@@ -41,7 +41,7 @@ export default function ArticleBody({ article, content }: { article: Article; co
             return (
               <h2 key={i} style={{
                 fontSize: '1.35rem', fontWeight: 800,
-                color: '#0f2d6b', lineHeight: 1.3,
+                color: 'var(--text-primary)', lineHeight: 1.3,
                 marginTop: i === 0 ? 0 : '2rem', marginBottom: '0.75rem',
               }}>
                 {block.text}
@@ -52,7 +52,7 @@ export default function ArticleBody({ article, content }: { article: Article; co
             return (
               <h3 key={i} style={{
                 fontSize: '1.05rem', fontWeight: 700,
-                color: '#1e3a5f', lineHeight: 1.4,
+                color: 'var(--text-heading)', lineHeight: 1.4,
                 marginTop: '1.5rem', marginBottom: '0.6rem',
               }}>
                 {block.text}
@@ -62,7 +62,7 @@ export default function ArticleBody({ article, content }: { article: Article; co
           if (block.type === 'paragraph') {
             return (
               <p key={i} style={{
-                color: '#334155', fontSize: '1rem', lineHeight: 1.85,
+                color: 'var(--text-body)', fontSize: '1rem', lineHeight: 1.85,
                 marginBottom: '1rem',
               }}>
                 {block.text}
@@ -74,7 +74,7 @@ export default function ArticleBody({ article, content }: { article: Article; co
               <ul key={i} style={{ paddingLeft: '1.25rem', marginBottom: '1rem' }}>
                 {block.items.map((item, j) => (
                   <li key={j} style={{
-                    color: '#334155', fontSize: '0.95rem', lineHeight: 1.75,
+                    color: 'var(--text-body)', fontSize: '0.95rem', lineHeight: 1.75,
                     marginBottom: '0.4rem',
                   }}>
                     {item}
@@ -88,7 +88,7 @@ export default function ArticleBody({ article, content }: { article: Article; co
               <ol key={i} style={{ paddingLeft: '1.25rem', marginBottom: '1rem' }}>
                 {block.items.map((item, j) => (
                   <li key={j} style={{
-                    color: '#334155', fontSize: '0.95rem', lineHeight: 1.75,
+                    color: 'var(--text-body)', fontSize: '0.95rem', lineHeight: 1.75,
                     marginBottom: '0.4rem',
                   }}>
                     {item}
@@ -100,8 +100,8 @@ export default function ArticleBody({ article, content }: { article: Article; co
           if (block.type === 'callout') {
             return (
               <div key={i} style={{
-                background: '#f0f7ff',
-                border: '1px solid #bfdbfe',
+                background: 'var(--bg-muted)',
+                border: '1px solid var(--border)',
                 borderRadius: '12px',
                 padding: '1.1rem 1.25rem',
                 margin: '1.5rem 0',
@@ -117,7 +117,7 @@ export default function ArticleBody({ article, content }: { article: Article; co
           if (block.type === 'divider') {
             return (
               <hr key={i} style={{
-                border: 'none', borderTop: '1px solid #e2e8f0',
+                border: 'none', borderTop: '1px solid var(--border)',
                 margin: '2rem 0',
               }} />
             );
@@ -131,10 +131,10 @@ export default function ArticleBody({ article, content }: { article: Article; co
         display: 'flex', alignItems: 'center', gap: '0.75rem',
         flexWrap: 'wrap', marginTop: '1.5rem',
         padding: '1.25rem 1.5rem',
-        background: 'white', border: '1px solid #e2e8f0',
+        background: 'var(--bg-card)', border: '1px solid var(--border)',
         borderRadius: '16px',
       }}>
-        <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#64748b', marginRight: '0.25rem' }}>
+        <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-muted)', marginRight: '0.25rem' }}>
           {t.articleDetail.shareLabel}
         </span>
 
@@ -162,8 +162,8 @@ export default function ArticleBody({ article, content }: { article: Article; co
           style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
             padding: '0.5rem 1rem',
-            background: copied ? '#10b981' : '#f1f5f9',
-            color: copied ? 'white' : '#475569',
+            background: copied ? '#10b981' : 'var(--bg-muted)',
+            color: copied ? '#ffffff' : 'var(--text-body)',
             borderRadius: '999px', border: 'none',
             fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer',
             transition: 'all 0.2s ease',
@@ -177,7 +177,7 @@ export default function ArticleBody({ article, content }: { article: Article; co
           style={{
             marginLeft: 'auto',
             display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-            fontSize: '0.8rem', color: '#0f2d6b', fontWeight: 600,
+            fontSize: '0.8rem', color: 'var(--text-primary)', fontWeight: 600,
             textDecoration: 'none',
           }}
         >

@@ -126,7 +126,7 @@ export default async function ArticleDetailPage({ params }: Props) {
           image={article.image}
         />
 
-        <section style={{ background: '#f8fafc', padding: '2.5rem 1.5rem 6rem' }}>
+        <section style={{ background: 'var(--bg-muted)', padding: '2.5rem 1.5rem 6rem' }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gap: '2.5rem' }} className="artikel-detail-layout">
             <ArticleContent article={article} />
             <ArticleSidebar related={related} />

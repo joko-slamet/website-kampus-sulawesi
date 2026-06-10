@@ -20,15 +20,15 @@ export default function ArticleHero({ category, categoryColor, tag, titleId, tit
   const title = lang === 'en' ? (titleEn || titleId) : titleId;
 
   return (
-    <section style={{ background: '#f8fafc', padding: '8rem 1.5rem 2.5rem' }}>
+    <section style={{ background: 'var(--bg-muted)', padding: '8rem 1.5rem 2.5rem' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* Breadcrumb */}
         <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem', fontSize: '0.8rem' }}>
-          <a href="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>{t.articleDetail.home}</a>
-          <span style={{ color: '#cbd5e1' }}>›</span>
-          <a href='/article' style={{ color: '#94a3b8', textDecoration: 'none' }}>{t.articleDetail.articles}</a>
-          <span style={{ color: '#cbd5e1' }}>›</span>
-          <span style={{ color: '#0f2d6b', fontWeight: 600 }}>{category}</span>
+          <a href="/" style={{ color: 'var(--text-subtle)', textDecoration: 'none' }}>{t.articleDetail.home}</a>
+          <span style={{ color: 'var(--border)' }}>›</span>
+          <a href='/article' style={{ color: 'var(--text-subtle)', textDecoration: 'none' }}>{t.articleDetail.articles}</a>
+          <span style={{ color: 'var(--border)' }}>›</span>
+          <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{category}</span>
         </nav>
 
         {/* Badges */}
@@ -44,7 +44,7 @@ export default function ArticleHero({ category, categoryColor, tag, titleId, tit
         </div>
 
         {/* Title */}
-        <h1 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.875rem)', fontWeight: 800, color: '#0f172a', lineHeight: 1.25, marginBottom: '1.5rem' }}>
+        <h1 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.875rem)', fontWeight: 800, color: 'var(--text-heading)', lineHeight: 1.25, marginBottom: '1.5rem' }}>
           {title}
         </h1>
 
@@ -55,7 +55,7 @@ export default function ArticleHero({ category, categoryColor, tag, titleId, tit
             { icon: '⏱', text: `${readTime} ${t.articleDetail.readTime}` },
             { icon: '✍️', text: t.articleDetail.author },
           ].map(m => (
-            <span key={m.text} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.85rem', background: 'white', border: '1px solid #e2e8f0', borderRadius: '999px', fontSize: '0.8rem', color: '#64748b' }}>
+            <span key={m.text} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.85rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '999px', fontSize: '0.8rem', color: 'var(--text-body)' }}>
               {m.icon} {m.text}
             </span>
           ))}
@@ -66,7 +66,7 @@ export default function ArticleHero({ category, categoryColor, tag, titleId, tit
             <img src={resolveImage(image)} alt={titleId} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
         )}
-        <div style={{ borderBottom: '1px solid #e2e8f0', marginTop: '2.5rem' }} />
+        <div style={{ borderBottom: '1px solid var(--border)', marginTop: '2.5rem' }} />
       </div>
     </section>
   );

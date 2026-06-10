@@ -22,7 +22,7 @@ export default function ArtikelPage() {
       <Navbar variant="dark" />
       <main>
         <ArtikelHero />
-        <section style={{ background: '#f8fafc', padding: '4rem 1.5rem 6rem' }}>
+        <section style={{ background: 'var(--bg-muted)', padding: '4rem 1.5rem 6rem' }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
             <ArticlesList />
           </div>

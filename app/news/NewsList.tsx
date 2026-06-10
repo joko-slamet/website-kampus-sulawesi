@@ -108,16 +108,16 @@ export default function NewsList() {
             onChange={e => handleSearch(e.target.value)}
             style={{
               width: '100%', padding: '0.75rem 1rem 0.75rem 2.75rem',
-              border: '1.5px solid #e2e8f0', borderRadius: '999px',
-              fontSize: '0.9rem', background: 'white', color: '#0f172a',
+              border: '1.5px solid var(--border)', borderRadius: '999px',
+              fontSize: '0.9rem', background: 'var(--bg-card)', color: 'var(--text-heading)',
               outline: 'none', boxSizing: 'border-box',
             }}
             onFocus={e => (e.currentTarget.style.borderColor = '#0f2d6b')}
-            onBlur={e => (e.currentTarget.style.borderColor = '#e2e8f0')}
+            onBlur={e => (e.currentTarget.style.borderColor = 'var(--border)')}
           />
         </div>
 
-        <div style={{ display: 'flex', gap: '0.35rem', background: 'white', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '0.35rem', width: 'fit-content' }}>
+        <div style={{ display: 'flex', gap: '0.35rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px', padding: '0.35rem', width: 'fit-content' }}>
           {tabs.map(tab => (
             <button
               key={tab.key}
@@ -126,7 +126,7 @@ export default function NewsList() {
                 padding: '0.45rem 1rem', borderRadius: '8px', border: 'none', cursor: 'pointer',
                 fontSize: '0.82rem', fontWeight: 600, transition: 'all 0.15s',
                 background: activeTab === tab.key ? '#0f2d6b' : 'transparent',
-                color: activeTab === tab.key ? 'white' : '#64748b',
+                color: activeTab === tab.key ? '#ffffff' : 'var(--text-muted)',
               }}
             >{tab.label}</button>
           ))}
@@ -135,8 +135,8 @@ export default function NewsList() {
 
       {/* Result count */}
       {!loading && (
-        <p style={{ color: '#94a3b8', fontSize: '0.82rem', marginBottom: '1.5rem' }}>
-          Menampilkan <strong style={{ color: '#0f2d6b' }}>{total}</strong> konten
+        <p style={{ color: 'var(--text-subtle)', fontSize: '0.82rem', marginBottom: '1.5rem' }}>
+          Menampilkan <strong style={{ color: 'var(--text-primary)' }}>{total}</strong> konten
           {activeTab !== 'all' && ` · ${activeTab === 'news' ? 'Berita' : 'Pengumuman'}`}
           {search && ` · pencarian "${search}"`}
         </p>
@@ -146,16 +146,16 @@ export default function NewsList() {
       {loading && (
         <div className="news-list-grid" style={{ marginBottom: '2rem' }}>
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} style={{ height: '260px', background: '#f1f5f9', borderRadius: '20px', animation: 'pulse 1.5s ease infinite' }} />
+            <div key={i} style={{ height: '260px', background: 'var(--bg-muted)', borderRadius: '20px', animation: 'pulse 1.5s ease infinite' }} />
           ))}
         </div>
       )}
 
       {/* Empty */}
       {!loading && items.length === 0 && (
-        <div style={{ textAlign: 'center', padding: '5rem 0', color: '#94a3b8' }}>
+        <div style={{ textAlign: 'center', padding: '5rem 0', color: 'var(--text-subtle)' }}>
           <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📭</div>
-          <p style={{ fontWeight: 600, color: '#64748b', marginBottom: '0.5rem' }}>Tidak ada konten ditemukan</p>
+          <p style={{ fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Tidak ada konten ditemukan</p>
           <p style={{ fontSize: '0.875rem' }}>Coba ubah filter atau kata kunci pencarian</p>
         </div>
       )}
@@ -167,8 +167,8 @@ export default function NewsList() {
             <a key={item.id} href={`/news/${item.id}`} style={{ textDecoration: 'none' }}>
               <article
                 style={{
-                  background: item.pinned ? 'linear-gradient(135deg, #fffbeb 0%, #fefce8 100%)' : 'white',
-                  border: item.pinned ? '1.5px solid #fde68a' : '1px solid #e2e8f0',
+                  background: item.pinned ? 'linear-gradient(135deg, #fffbeb 0%, #fefce8 100%)' : 'var(--bg-card)',
+                  border: item.pinned ? '1.5px solid #fde68a' : '1px solid var(--border)',
                   borderRadius: '20px', overflow: 'hidden',
                   display: 'flex', flexDirection: 'column', height: '100%',
                   transition: 'all 0.25s ease',
@@ -185,7 +185,7 @@ export default function NewsList() {
                   const el = e.currentTarget as HTMLElement;
                   el.style.boxShadow = 'none';
                   el.style.transform = 'translateY(0)';
-                  el.style.borderColor = item.pinned ? '#fde68a' : '#e2e8f0';
+                  el.style.borderColor = item.pinned ? '#fde68a' : 'var(--border)';
                 }}
               >
                 {/* Thumbnail */}
@@ -234,19 +234,19 @@ export default function NewsList() {
                     </span>
                   </div>
 
-                  <h2 style={{ fontSize: '0.95rem', fontWeight: 800, color: '#0f2d6b', lineHeight: 1.4, margin: 0,
+                  <h2 style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.4, margin: 0,
                     display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {item.title}
                   </h2>
 
-                  <p style={{ color: '#64748b', fontSize: '0.82rem', lineHeight: 1.65, margin: 0, flex: 1,
+                  <p style={{ color: 'var(--text-body)', fontSize: '0.82rem', lineHeight: 1.65, margin: 0, flex: 1,
                     display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {stripHtml(item.content)}
                   </p>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '0.75rem', borderTop: `1px solid ${item.pinned ? '#fde68a' : '#f1f5f9'}` }}>
-                    <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>📅 {fmtDate(item.createdAt)}</span>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', color: '#0f2d6b', fontWeight: 700, fontSize: '0.78rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '0.75rem', borderTop: `1px solid ${item.pinned ? '#fde68a' : 'var(--border)'}` }}>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-subtle)' }}>📅 {fmtDate(item.createdAt)}</span>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.78rem' }}>
                       Baca
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                         <path d="M5 12h14M12 5l7 7-7 7" />
@@ -267,14 +267,14 @@ export default function NewsList() {
             onClick={loadMore}
             disabled={loadingMore}
             style={{
-              padding: '0.85rem 2.5rem', border: '1.5px solid #0f2d6b',
-              borderRadius: '999px', background: 'white', color: '#0f2d6b',
+              padding: '0.85rem 2.5rem', border: '1.5px solid var(--text-primary)',
+              borderRadius: '999px', background: 'var(--bg-card)', color: 'var(--text-primary)',
               fontWeight: 700, fontSize: '0.9rem',
               cursor: loadingMore ? 'not-allowed' : 'pointer',
               opacity: loadingMore ? 0.6 : 1, transition: 'all 0.25s ease',
             }}
-            onMouseEnter={e => { if (!loadingMore) { (e.currentTarget as HTMLButtonElement).style.background = '#0f2d6b'; (e.currentTarget as HTMLButtonElement).style.color = 'white'; } }}
-            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'white'; (e.currentTarget as HTMLButtonElement).style.color = '#0f2d6b'; }}
+            onMouseEnter={e => { if (!loadingMore) { (e.currentTarget as HTMLButtonElement).style.background = 'var(--text-primary)'; (e.currentTarget as HTMLButtonElement).style.color = '#ffffff'; } }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--bg-card)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-primary)'; }}
           >
             {loadingMore ? 'Memuat...' : `Muat lebih banyak (${total - items.length} lagi)`}
           </button>

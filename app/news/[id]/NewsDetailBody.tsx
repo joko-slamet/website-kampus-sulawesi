@@ -42,8 +42,8 @@ function CopyButton({ title }: { title: string }) {
       style={{
         display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
         padding: '0.5rem 1rem',
-        background: copied ? '#10b981' : '#f1f5f9',
-        color: copied ? 'white' : '#475569',
+        background: copied ? '#10b981' : 'var(--bg-muted)',
+        color: copied ? '#ffffff' : 'var(--text-body)',
         borderRadius: '999px', border: 'none',
         fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer',
         transition: 'all 0.2s',
@@ -60,16 +60,16 @@ export default function NewsDetailBody({ news, related }: Props) {
   return (
     <>
       {/* Hero */}
-      <section style={{ background: 'white', padding: '7rem 1.5rem 0', position: 'relative' }}>
+      <section style={{ background: 'var(--bg)', padding: '7rem 1.5rem 0', position: 'relative' }}>
 
         <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative' }}>
           {/* Breadcrumb */}
           <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.75rem', fontSize: '0.8rem', flexWrap: 'wrap' }}>
-            <a href="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>Beranda</a>
-            <span style={{ color: '#cbd5e1' }}>›</span>
-            <a href='/news' style={{ color: '#94a3b8', textDecoration: 'none' }}>Berita & Pengumuman</a>
-            <span style={{ color: '#cbd5e1' }}>›</span>
-            <span style={{ color: '#0f2d6b', fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{news.title}</span>
+            <a href="/" style={{ color: 'var(--text-subtle)', textDecoration: 'none' }}>Beranda</a>
+            <span style={{ color: 'var(--border)' }}>›</span>
+            <a href='/news' style={{ color: 'var(--text-subtle)', textDecoration: 'none' }}>Berita & Pengumuman</a>
+            <span style={{ color: 'var(--border)' }}>›</span>
+            <span style={{ color: 'var(--text-primary)', fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{news.title}</span>
           </nav>
 
           {/* Badges */}
@@ -101,7 +101,7 @@ export default function NewsDetailBody({ news, related }: Props) {
           {/* Title */}
           <h1 style={{
             fontSize: 'clamp(1.5rem, 2.5vw, 2.25rem)', fontWeight: 800,
-            color: '#0f172a', lineHeight: 1.25, marginBottom: '1.5rem',
+            color: 'var(--text-heading)', lineHeight: 1.25, marginBottom: '1.5rem',
           }}>
             {news.title}
           </h1>
@@ -114,9 +114,9 @@ export default function NewsDetailBody({ news, related }: Props) {
             ].map(m => (
               <span key={m.text} style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-                padding: '0.35rem 0.85rem', background: '#f1f5f9',
-                border: '1px solid #e2e8f0',
-                borderRadius: '999px', fontSize: '0.78rem', color: '#64748b',
+                padding: '0.35rem 0.85rem', background: 'var(--bg-muted)',
+                border: '1px solid var(--border)',
+                borderRadius: '999px', fontSize: '0.78rem', color: 'var(--text-muted)',
               }}>
                 {m.icon} {m.text}
               </span>
@@ -138,12 +138,12 @@ export default function NewsDetailBody({ news, related }: Props) {
       </section>
 
       {/* Content section */}
-      <section style={{ background: '#f8fafc', padding: '2.5rem 1.5rem 6rem' }}>
+      <section style={{ background: 'var(--bg-muted)', padding: '2.5rem 1.5rem 6rem' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gap: '2rem' }} className="news-detail-layout">
 
           {/* Main content */}
           <article>
-            <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '20px', padding: '2.5rem' }}>
+            <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '20px', padding: '2.5rem' }}>
               {news.content ? (
                 <div
                   className="news-content"
@@ -160,9 +160,9 @@ export default function NewsDetailBody({ news, related }: Props) {
             <div style={{
               display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap',
               marginTop: '1.25rem', padding: '1.25rem 1.5rem',
-              background: 'white', border: '1px solid #e2e8f0', borderRadius: '16px',
+              background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px',
             }}>
-              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#64748b', marginRight: '0.25rem' }}>Bagikan:</span>
+              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-muted)', marginRight: '0.25rem' }}>Bagikan:</span>
               <a
                 href={`https://wa.me/?text=${encodeURIComponent(news.title + ' ' + (typeof window !== 'undefined' ? window.location.href : ''))}`}
                 target="_blank" rel="noopener noreferrer"
@@ -179,7 +179,7 @@ export default function NewsDetailBody({ news, related }: Props) {
                 WhatsApp
               </a>
               <CopyButton title={news.title} />
-              <a href='/news' style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', color: '#0f2d6b', fontWeight: 600, textDecoration: 'none' }}>
+              <a href='/news' style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', color: 'var(--text-primary)', fontWeight: 600, textDecoration: 'none' }}>
                 ← Semua Berita
               </a>
             </div>
@@ -286,22 +286,22 @@ export default function NewsDetailBody({ news, related }: Props) {
         .news-detail-layout { grid-template-columns: 1fr 300px; }
         @media (max-width: 960px) { .news-detail-layout { grid-template-columns: 1fr !important; } }
 
-        .news-content { font-size: 1rem; line-height: 1.85; color: #334155; }
-        .news-content h2 { font-size: 1.35rem; font-weight: 800; color: #0f2d6b; margin: 2rem 0 0.75rem; line-height: 1.3; }
-        .news-content h3 { font-size: 1.1rem; font-weight: 700; color: #1e3a5f; margin: 1.5rem 0 0.6rem; }
-        .news-content h4 { font-size: 1rem; font-weight: 700; color: #374151; margin: 1.25rem 0 0.5rem; }
+        .news-content { font-size: 1rem; line-height: 1.85; color: var(--text-body); }
+        .news-content h2 { font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 2rem 0 0.75rem; line-height: 1.3; }
+        .news-content h3 { font-size: 1.1rem; font-weight: 700; color: var(--text-heading); margin: 1.5rem 0 0.6rem; }
+        .news-content h4 { font-size: 1rem; font-weight: 700; color: var(--text-heading); margin: 1.25rem 0 0.5rem; }
         .news-content p { margin-bottom: 1rem; }
         .news-content ul, .news-content ol { padding-left: 1.5rem; margin-bottom: 1rem; }
         .news-content li { margin-bottom: 0.4rem; line-height: 1.7; }
         .news-content blockquote {
-          border-left: 3px solid #0f2d6b; padding: 0.65rem 1.25rem;
-          margin: 1.5rem 0; color: #475569; font-style: italic;
-          background: #f8fafc; border-radius: 0 10px 10px 0;
+          border-left: 3px solid var(--text-primary); padding: 0.65rem 1.25rem;
+          margin: 1.5rem 0; color: var(--text-body); font-style: italic;
+          background: var(--bg-muted); border-radius: 0 10px 10px 0;
         }
-        .news-content hr { border: none; border-top: 1px solid #e2e8f0; margin: 1.75rem 0; }
-        .news-content strong { font-weight: 700; color: #0f172a; }
+        .news-content hr { border: none; border-top: 1px solid var(--border); margin: 1.75rem 0; }
+        .news-content strong { font-weight: 700; color: var(--text-heading); }
         .news-content em { font-style: italic; }
-        .news-content a { color: #0f2d6b; text-decoration: underline; }
+        .news-content a { color: var(--text-primary); text-decoration: underline; }
         .news-content img { max-width: 100%; border-radius: 10px; margin: 1rem 0; }
       `}</style>
     </>

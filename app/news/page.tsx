@@ -23,7 +23,7 @@ export default function BeritaPage() {
       <Navbar variant="dark" />
       <main>
         <NewsHero />
-        <section style={{ background: '#f8fafc', padding: '3rem 1.5rem 6rem' }}>
+        <section style={{ background: 'var(--bg-muted)', padding: '3rem 1.5rem 6rem' }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
             <NewsList />
           </div>

@@ -104,15 +104,15 @@ export default function ArticlesList() {
             style={{
               width: '100%',
               padding: '0.75rem 1rem 0.75rem 2.75rem',
-              border: '1.5px solid #e2e8f0',
+              border: '1.5px solid var(--border)',
               borderRadius: '999px',
               fontSize: '0.9rem',
-              background: 'white',
-              color: '#0f172a',
+              background: 'var(--bg-card)',
+              color: 'var(--text-heading)',
               transition: 'border-color 0.2s ease',
             }}
             onFocus={e => (e.currentTarget.style.borderColor = '#0f2d6b')}
-            onBlur={e => (e.currentTarget.style.borderColor = '#e2e8f0')}
+            onBlur={e => (e.currentTarget.style.borderColor = 'var(--border)')}
           />
         </div>
 
@@ -128,9 +128,9 @@ export default function ArticlesList() {
                 border: '1.5px solid',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                borderColor: activeCategory === cat ? '#0f2d6b' : '#e2e8f0',
-                background: activeCategory === cat ? '#0f2d6b' : 'white',
-                color: activeCategory === cat ? 'white' : '#64748b',
+                borderColor: activeCategory === cat ? '#0f2d6b' : 'var(--border)',
+                background: activeCategory === cat ? '#0f2d6b' : 'var(--bg-card)',
+                color: activeCategory === cat ? '#ffffff' : 'var(--text-muted)',
               }}
             >
               {cat}
@@ -141,8 +141,8 @@ export default function ArticlesList() {
 
       {/* Result count */}
       {!loading && (
-        <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
-          {t.articles.showing} <strong style={{ color: '#0f2d6b' }}>{total}</strong> {t.articles.articleWord}
+        <p style={{ color: 'var(--text-subtle)', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
+          {t.articles.showing} <strong style={{ color: 'var(--text-primary)' }}>{total}</strong> {t.articles.articleWord}
           {activeCategory !== 'Semua' && ` ${t.articles.inCategory} "${activeCategory}"`}
           {search && ` ${t.articles.forKeyword} "${search}"`}
         </p>
@@ -153,7 +153,7 @@ export default function ArticlesList() {
         <div className="artikel-grid" style={{ marginBottom: '2rem' }}>
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} style={{
-              background: 'white', border: '1px solid #e2e8f0',
+              background: 'var(--bg-card)', border: '1px solid var(--border)',
               borderRadius: '20px', height: '260px',
               animation: 'pulse 1.5s ease infinite',
             }} />
@@ -163,9 +163,9 @@ export default function ArticlesList() {
 
       {/* Empty state */}
       {!loading && articles.length === 0 && (
-        <div style={{ textAlign: 'center', padding: '5rem 0', color: '#94a3b8' }}>
+        <div style={{ textAlign: 'center', padding: '5rem 0', color: 'var(--text-subtle)' }}>
           <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔍</div>
-          <p style={{ fontWeight: 600, color: '#64748b', marginBottom: '0.5rem' }}>{t.articles.notFound}</p>
+          <p style={{ fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>{t.articles.notFound}</p>
           <p style={{ fontSize: '0.875rem' }}>{t.articles.notFoundDesc}</p>
         </div>
       )}
@@ -178,8 +178,8 @@ export default function ArticlesList() {
               <article
                 className="artikel-card"
                 style={{
-                  background: 'white',
-                  border: '1px solid #e2e8f0',
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border)',
                   borderRadius: '20px',
                   overflow: 'hidden',
                   cursor: 'pointer',
@@ -197,7 +197,7 @@ export default function ArticlesList() {
                   const el = e.currentTarget as HTMLElement;
                   el.style.boxShadow = 'none';
                   el.style.transform = 'translateY(0)';
-                  el.style.borderColor = '#e2e8f0';
+                  el.style.borderColor = 'var(--border)';
                 }}
               >
                 {/* Thumbnail */}
@@ -233,18 +233,18 @@ export default function ArticlesList() {
                         {article.tag}
                       </span>
                     )}
-                    <span style={{ marginLeft: 'auto', fontSize: '0.72rem', color: '#94a3b8', whiteSpace: 'nowrap' }}>
+                    <span style={{ marginLeft: 'auto', fontSize: '0.72rem', color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>
                       ⏱ {article.readTime}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h2 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f2d6b', lineHeight: 1.4, margin: 0 }}>
+                  <h2 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.4, margin: 0 }}>
                     {lang === 'en' ? (article.titleEn || article.title) : article.title}
                   </h2>
 
                   {/* Excerpt */}
-                  <p style={{ color: '#64748b', fontSize: '0.875rem', lineHeight: 1.7, margin: 0, flex: 1 }}>
+                  <p style={{ color: 'var(--text-body)', fontSize: '0.875rem', lineHeight: 1.7, margin: 0, flex: 1 }}>
                     {lang === 'en' ? (article.excerptEn || article.excerpt) : article.excerpt}
                   </p>
 
@@ -252,12 +252,12 @@ export default function ArticlesList() {
                   <div style={{
                     display: 'flex', justifyContent: 'space-between',
                     alignItems: 'center', marginTop: '0.5rem',
-                    paddingTop: '1rem', borderTop: '1px solid #f1f5f9',
+                    paddingTop: '1rem', borderTop: '1px solid var(--border)',
                   }}>
-                    <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>📅 {article.date}</span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-subtle)' }}>📅 {article.date}</span>
                     <span style={{
                       display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
-                      color: '#0f2d6b', fontWeight: 700, fontSize: '0.8rem',
+                      color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.8rem',
                     }}>
                       {t.articles.readBtn}
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -280,9 +280,9 @@ export default function ArticlesList() {
             disabled={loadingMore}
             style={{
               padding: '0.85rem 2.5rem',
-              border: '1.5px solid #0f2d6b',
+              border: '1.5px solid var(--text-primary)',
               borderRadius: '999px',
-              background: 'white', color: '#0f2d6b',
+              background: 'var(--bg-card)', color: 'var(--text-primary)',
               fontWeight: 700, fontSize: '0.9rem',
               cursor: loadingMore ? 'not-allowed' : 'pointer',
               opacity: loadingMore ? 0.6 : 1,
@@ -290,13 +290,13 @@ export default function ArticlesList() {
             }}
             onMouseEnter={e => {
               if (!loadingMore) {
-                (e.currentTarget as HTMLButtonElement).style.background = '#0f2d6b';
+                (e.currentTarget as HTMLButtonElement).style.background = 'var(--text-primary)';
                 (e.currentTarget as HTMLButtonElement).style.color = 'white';
               }
             }}
             onMouseLeave={e => {
-              (e.currentTarget as HTMLButtonElement).style.background = 'white';
-              (e.currentTarget as HTMLButtonElement).style.color = '#0f2d6b';
+              (e.currentTarget as HTMLButtonElement).style.background = 'var(--bg-card)';
+              (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-primary)';
             }}
           >
             {loadingMore ? 'Memuat...' : `${t.articles.loadMore} (${total - articles.length} ${t.articles.moreArticles})`}
