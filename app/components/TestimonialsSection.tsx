@@ -131,7 +131,7 @@ export default function TestimonialsSection() {
           }}>{t.testimonials.label}</span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
-            fontWeight: 800, color: 'white',
+            fontWeight: 800, color: '#ffffff',
             lineHeight: 1.2, marginBottom: '1rem',
           }}>
             {t.testimonials.title}{' '}

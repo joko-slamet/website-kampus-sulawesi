@@ -72,7 +72,7 @@ const contactMeta = [
     ),
     label: 'Website',
     getHref: () => 'https://stiaabdulharis.ac.id/',
-    color: '#0f2d6b',
+    color: 'var(--text-primary)',
     bg: 'rgba(15,45,107,0.07)',
     border: 'rgba(15,45,107,0.18)',
     isWA: false,
@@ -100,7 +100,7 @@ function ContactCard({ item, index, visible }: { item: ContactItem; index: numbe
       style={{
         display: 'flex', alignItems: 'center', gap: '1rem',
         padding: '1.25rem 1.5rem',
-        background: hovered ? item.bg : 'white',
+        background: hovered ? item.bg : 'var(--bg-card)',
         border: `1px solid ${hovered ? item.border : '#e9eef5'}`,
         borderRadius: '16px',
         textDecoration: 'none',
@@ -123,10 +123,10 @@ function ContactCard({ item, index, visible }: { item: ContactItem; index: numbe
         {item.icon}
       </div>
       <div style={{ minWidth: 0 }}>
-        <div style={{ fontSize: '0.72rem', fontWeight: 600, color: '#94a3b8', letterSpacing: '0.04em', marginBottom: '0.15rem' }}>
+        <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-subtle)', letterSpacing: '0.04em', marginBottom: '0.15rem' }}>
           {item.label}
         </div>
-        <div style={{ fontSize: '0.9rem', fontWeight: 700, color: hovered ? item.color : '#1e293b', transition: 'color 0.2s', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+        <div style={{ fontSize: '0.9rem', fontWeight: 700, color: hovered ? item.color : 'var(--text-heading)', transition: 'color 0.2s', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {item.value}
         </div>
       </div>
@@ -161,7 +161,7 @@ export default function ContactSection() {
   }, []);
 
   return (
-    <section id="kontak" ref={ref} style={{ padding: '6rem 0', background: 'white' }}>
+    <section id="kontak" ref={ref} style={{ padding: '6rem 0', background: 'var(--bg-card)' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         <div style={{
@@ -174,21 +174,16 @@ export default function ContactSection() {
           </span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
-            fontWeight: 800, color: '#0f2d6b',
+            fontWeight: 800, color: 'var(--text-primary)',
             lineHeight: 1.2, marginBottom: '1rem',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
           }}>
             Ada Pertanyaan?{' '}
-            <span style={{
-              background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
+            <span className="title-gradient">
               Kami Siap Membantu
             </span>
           </h2>
-          <p style={{ color: '#64748b', maxWidth: '480px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
+          <p style={{ color: 'var(--text-muted)', maxWidth: '480px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
             Hubungi kami melalui salah satu kanal berikut. Tim kami siap menjawab pertanyaan seputar pendaftaran dan program studi.
           </p>
         </div>

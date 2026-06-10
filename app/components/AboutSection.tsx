@@ -24,7 +24,7 @@ export default function AboutSection() {
   const values = t.about.features.map((f, i) => ({ icon: icons[i], title: f.title, desc: f.desc }));
 
   return (
-    <section id="tentang" ref={ref} style={{ padding: '6rem 0', background: '#f8fafc', overflow: 'hidden' }}>
+    <section id="tentang" ref={ref} style={{ padding: '6rem 0', background: 'var(--bg-muted)', overflow: 'hidden' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
         {/* Section Label */}
         <div style={{
@@ -63,33 +63,33 @@ export default function AboutSection() {
             {/* Floating card: Akreditasi */}
             <div style={{
               position: 'absolute', top: '-1.5rem', right: '-1.5rem',
-              background: 'white', borderRadius: '16px',
+              background: 'var(--bg-card)', borderRadius: '16px',
               padding: '1.25rem 1.5rem',
               boxShadow: '0 12px 40px rgba(15,45,107,0.18)',
               border: '1px solid rgba(15,45,107,0.08)',
               minWidth: '160px',
               animation: 'float 5s ease-in-out infinite',
             }}>
-              <div style={{ fontSize: '2.25rem', fontWeight: 900, color: '#0f2d6b', lineHeight: 1 }}>A</div>
-              <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '0.25rem', fontWeight: 500 }}>{t.about.floatAccred}</div>
+              <div style={{ fontSize: '2.25rem', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1 }}>A</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem', fontWeight: 500 }}>{t.about.floatAccred}</div>
               <div style={{ fontSize: '0.7rem', color: '#10b981', fontWeight: 600, marginTop: '0.2rem' }}>✓ {t.about.floatAccredSub}</div>
             </div>
 
             {/* Milestone timeline */}
             <div style={{
               position: 'absolute', bottom: '2rem', right: '-1.5rem',
-              background: 'white', borderRadius: '16px',
+              background: 'var(--bg-card)', borderRadius: '16px',
               padding: '1rem 1.25rem',
               boxShadow: '0 8px 32px rgba(15,45,107,0.14)',
               border: '1px solid rgba(15,45,107,0.06)',
             }}>
-              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#0f2d6b', letterSpacing: '0.06em', marginBottom: '0.6rem' }}>{t.about.journeyLabel}</div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '0.06em', marginBottom: '0.6rem' }}>{t.about.journeyLabel}</div>
               <div style={{ display: 'flex', gap: '0.75rem' }}>
                 {milestones.map((m, i) => (
                   <div key={i} style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#0f2d6b' }}>{m.year}</div>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-primary)' }}>{m.year}</div>
                     <div style={{ width: '6px', height: '6px', background: '#f5a623', borderRadius: '50%', margin: '4px auto' }} />
-                    <div style={{ fontSize: '0.6rem', color: '#64748b', whiteSpace: 'nowrap' }}>{m.label}</div>
+                    <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>{m.label}</div>
                   </div>
                 ))}
               </div>
@@ -104,26 +104,21 @@ export default function AboutSection() {
           }}>
             <h2 style={{
               fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
-              fontWeight: 800, color: '#0f2d6b',
+              fontWeight: 800, color: 'var(--text-primary)',
               lineHeight: 1.2, marginBottom: '1rem',
               fontFamily: 'Plus Jakarta Sans, sans-serif',
             }}>
               {t.about.title}{' '}
-              <span style={{
-                background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>{t.about.titleGradient}</span>
+              <span className="title-gradient">{t.about.titleGradient}</span>
             </h2>
 
             <div style={{ width: '3rem', height: '3px', background: 'linear-gradient(90deg, #f5a623, #fbbf24)', borderRadius: '2px', marginBottom: '1.5rem' }} />
 
-            <p style={{ color: '#475569', lineHeight: 1.8, marginBottom: '1.5rem', fontSize: '1rem' }}>
+            <p style={{ color: 'var(--text-body)', lineHeight: 1.8, marginBottom: '1.5rem', fontSize: '1rem' }}>
               {t.about.body1}
             </p>
 
-            <p style={{ color: '#475569', lineHeight: 1.8, marginBottom: '2rem', fontSize: '1rem' }}>
+            <p style={{ color: 'var(--text-body)', lineHeight: 1.8, marginBottom: '2rem', fontSize: '1rem' }}>
               {t.about.body2}
             </p>
 
@@ -133,8 +128,8 @@ export default function AboutSection() {
                 <div key={i} style={{
                   display: 'flex', gap: '1rem', alignItems: 'flex-start',
                   padding: '1rem 1.25rem',
-                  background: 'white', borderRadius: '12px',
-                  border: '1px solid #e2e8f0',
+                  background: 'var(--bg-card)', borderRadius: '12px',
+                  border: '1px solid var(--border)',
                   boxShadow: '0 2px 8px rgba(15,45,107,0.05)',
                   transition: 'all 0.25s ease',
                   cursor: 'default',
@@ -152,8 +147,8 @@ export default function AboutSection() {
                 >
                   <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{v.icon}</span>
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0f2d6b', marginBottom: '0.2rem' }}>{v.title}</div>
-                    <div style={{ fontSize: '0.8rem', color: '#64748b', lineHeight: 1.6 }}>{v.desc}</div>
+                    <div style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>{v.title}</div>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>{v.desc}</div>
                   </div>
                 </div>
               ))}
@@ -167,7 +162,7 @@ export default function AboutSection() {
                 display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                 padding: '0.75rem 1.75rem',
                 background: '#0f2d6b',
-                color: 'white', fontWeight: 600, fontSize: '0.9rem',
+                color: '#ffffff', fontWeight: 600, fontSize: '0.9rem',
                 borderRadius: '999px', textDecoration: 'none',
                 transition: 'all 0.25s ease',
               }}

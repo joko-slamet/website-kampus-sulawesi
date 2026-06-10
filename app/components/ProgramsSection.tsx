@@ -14,7 +14,7 @@ function ProgramCard({ program, index, visible, detailLabel }: {
     <div
       id={`program-card-${program.id}`}
       style={{
-        background: 'white',
+        background: 'var(--bg-card)',
         borderRadius: '24px',
         overflow: 'hidden',
         boxShadow: hovered ? '0 24px 64px rgba(15,45,107,0.18)' : '0 6px 32px rgba(15,45,107,0.09)',
@@ -53,7 +53,7 @@ function ProgramCard({ program, index, visible, detailLabel }: {
             <span style={{
               padding: '0.25rem 0.85rem',
               background: program.badgeColor,
-              color: 'white',
+              color: '#ffffff',
               borderRadius: '999px',
               fontSize: '0.7rem', fontWeight: 700,
               letterSpacing: '0.04em',
@@ -73,7 +73,7 @@ function ProgramCard({ program, index, visible, detailLabel }: {
         </div>
 
         <h3 style={{
-          fontSize: '1.35rem', fontWeight: 800, color: 'white',
+          fontSize: '1.35rem', fontWeight: 800, color: '#ffffff',
           marginBottom: '0.4rem', lineHeight: 1.2,
         }}>
           {program.name}
@@ -86,24 +86,24 @@ function ProgramCard({ program, index, visible, detailLabel }: {
       {/* Body */}
       <div style={{ padding: '1.75rem 2rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         {/* Description */}
-        <p style={{ color: '#475569', lineHeight: 1.75, fontSize: '0.9rem', margin: 0 }}>
+        <p style={{ color: 'var(--text-body)', lineHeight: 1.75, fontSize: '0.9rem', margin: 0 }}>
           {program.description}
         </p>
 
         {/* Highlights */}
         <div>
-          <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.07em', marginBottom: '0.6rem' }}>
+          <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-subtle)', letterSpacing: '0.07em', marginBottom: '0.6rem' }}>
             BIDANG KAJIAN
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
             {program.highlights.map((h) => (
               <span key={h} style={{
                 padding: '0.3rem 0.8rem',
-                background: '#f1f5f9',
-                color: '#374151',
+                background: 'var(--bg-muted)',
+                color: 'var(--text-heading)',
                 borderRadius: '999px',
                 fontSize: '0.75rem', fontWeight: 500,
-                border: '1px solid #e2e8f0',
+                border: '1px solid var(--border)',
               }}>
                 {h}
               </span>
@@ -113,12 +113,12 @@ function ProgramCard({ program, index, visible, detailLabel }: {
 
         {/* Career Paths */}
         <div>
-          <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.07em', marginBottom: '0.6rem' }}>
+          <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-subtle)', letterSpacing: '0.07em', marginBottom: '0.6rem' }}>
             PROSPEK KARIER
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
             {careers.map((c) => (
-              <div key={c} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.82rem', color: '#475569' }}>
+              <div key={c} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.82rem', color: 'var(--text-body)' }}>
                 <span style={{ color: program.color, fontWeight: 700, fontSize: '0.8rem' }}>→</span>
                 {c}
               </div>
@@ -135,7 +135,7 @@ function ProgramCard({ program, index, visible, detailLabel }: {
               display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
               padding: '0.65rem 1.5rem',
               background: program.bgGradient,
-              color: 'white', fontWeight: 600, fontSize: '0.85rem',
+              color: '#ffffff', fontWeight: 600, fontSize: '0.85rem',
               borderRadius: '999px', textDecoration: 'none',
               transition: 'all 0.2s',
               boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
@@ -175,7 +175,7 @@ export default function ProgramsSection() {
   }, []);
 
   return (
-    <section id="program" ref={ref} style={{ padding: '6rem 0', background: 'white' }}>
+    <section id="program" ref={ref} style={{ padding: '6rem 0', background: 'var(--bg-card)' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         {/* Header */}
@@ -189,21 +189,16 @@ export default function ProgramsSection() {
           </span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
-            fontWeight: 800, color: '#0f2d6b',
+            fontWeight: 800, color: 'var(--text-primary)',
             lineHeight: 1.2, marginBottom: '1rem',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
           }}>
             {t.programs.title}{' '}
-            <span style={{
-              background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
+            <span className="title-gradient">
               {t.programs.titleGradient}
             </span>
           </h2>
-          <p style={{ color: '#64748b', maxWidth: '580px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
+          <p style={{ color: 'var(--text-muted)', maxWidth: '580px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
             {t.programs.subtitle}
           </p>
         </div>
@@ -232,7 +227,7 @@ export default function ProgramsSection() {
           textAlign: 'center', marginTop: '3rem',
           opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease 0.4s',
         }}>
-          <p style={{ color: '#64748b', marginBottom: '1rem', fontSize: '0.9rem' }}>
+          <p style={{ color: 'var(--text-muted)', marginBottom: '1rem', fontSize: '0.9rem' }}>
             {t.programs.noProgram}
           </p>
           <a
@@ -242,7 +237,7 @@ export default function ProgramsSection() {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.75rem 1.75rem',
-              border: '2px solid #0f2d6b', color: '#0f2d6b',
+              border: '2px solid #0f2d6b', color: 'var(--text-primary)',
               fontWeight: 600, fontSize: '0.9rem',
               borderRadius: '999px', textDecoration: 'none',
               transition: 'all 0.25s ease',
@@ -253,7 +248,7 @@ export default function ProgramsSection() {
             }}
             onMouseLeave={e => {
               (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
-              (e.currentTarget as HTMLAnchorElement).style.color = '#0f2d6b';
+              (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-primary)';
             }}
           >
             {t.programs.consult}

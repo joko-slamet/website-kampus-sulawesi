@@ -142,7 +142,7 @@ export default function NewsSection() {
   ];
 
   return (
-    <section id="berita" ref={ref} style={{ padding: '6rem 0', background: 'white' }}>
+    <section id="berita" ref={ref} style={{ padding: '6rem 0', background: 'var(--bg-body)' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         {/* Header */}
@@ -156,19 +156,16 @@ export default function NewsSection() {
             <span className="section-label" style={{ marginBottom: '0.75rem', display: 'inline-block' }}>
               {t.news.label}
             </span>
-            <h2 style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', fontWeight: 800, color: '#0f2d6b', lineHeight: 1.2 }}>
+            <h2 style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.2 }}>
               {t.news.title}{' '}
-              <span style={{
-                background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
-                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-              }}>{t.news.titleGradient}</span>
+              <span className="title-gradient">{t.news.titleGradient}</span>
             </h2>
           </div>
           <a
             href='/news'
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              padding: '0.65rem 1.5rem', border: '1.5px solid #0f2d6b', color: '#0f2d6b',
+              padding: '0.65rem 1.5rem', border: '1.5px solid #0f2d6b', color: 'var(--text-primary)',
               fontWeight: 600, fontSize: '0.875rem', borderRadius: '999px', textDecoration: 'none',
               transition: 'all 0.25s ease', whiteSpace: 'nowrap',
             }}
@@ -178,7 +175,7 @@ export default function NewsSection() {
             }}
             onMouseLeave={e => {
               (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
-              (e.currentTarget as HTMLAnchorElement).style.color = '#0f2d6b';
+              (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-primary)';
             }}
           >
             {t.news.viewAll}
@@ -202,7 +199,7 @@ export default function NewsSection() {
               <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#92400e', textTransform: 'uppercase', letterSpacing: '0.06em', marginRight: '0.6rem' }}>
                 Pengumuman Disematkan
               </span>
-              <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#0f172a' }}>
+              <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-heading)' }}>
                 {items.find(i => i.pinned)?.title}
               </span>
             </div>
@@ -225,7 +222,7 @@ export default function NewsSection() {
         {/* Tab filter */}
         <div style={{
           display: 'flex', gap: '0.35rem',
-          background: '#f8fafc', border: '1px solid #e2e8f0',
+          background: 'var(--bg-muted)', border: '1px solid var(--border)',
           borderRadius: '12px', padding: '0.35rem',
           marginBottom: '1.5rem', width: 'fit-content',
           opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease 0.15s',
@@ -238,7 +235,7 @@ export default function NewsSection() {
                 padding: '0.4rem 1rem', borderRadius: '8px', border: 'none',
                 cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600,
                 background: activeTab === tab.key ? '#0f2d6b' : 'transparent',
-                color: activeTab === tab.key ? 'white' : '#64748b',
+                color: activeTab === tab.key ? '#ffffff' : '#64748b',
                 transition: 'all 0.15s',
               }}
             >{tab.label}</button>
@@ -248,10 +245,10 @@ export default function NewsSection() {
         {/* Loading skeleton */}
         {loading && (
           <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '1.5rem' }} className="news-main-grid">
-            <div style={{ height: '420px', borderRadius: '20px', background: '#f1f5f9', animation: 'pulse 1.5s ease infinite' }} />
+            <div style={{ height: '420px', borderRadius: '20px', background: 'var(--bg-muted)', animation: 'pulse 1.5s ease infinite' }} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[1, 2, 3].map(i => (
-                <div key={i} style={{ height: '120px', borderRadius: '16px', background: '#f1f5f9', animation: 'pulse 1.5s ease infinite' }} />
+                <div key={i} style={{ height: '120px', borderRadius: '16px', background: 'var(--bg-muted)', animation: 'pulse 1.5s ease infinite' }} />
               ))}
             </div>
           </div>
@@ -259,9 +256,9 @@ export default function NewsSection() {
 
         {/* Empty state */}
         {!loading && filtered.length === 0 && (
-          <div style={{ textAlign: 'center', padding: '4rem 0', color: '#94a3b8' }}>
+          <div style={{ textAlign: 'center', padding: '4rem 0', color: 'var(--text-subtle)' }}>
             <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>📭</div>
-            <p style={{ fontWeight: 600, color: '#64748b' }}>
+            <p style={{ fontWeight: 600, color: 'var(--text-muted)' }}>
               {activeTab === 'announcement' ? 'Belum ada pengumuman' : 'Belum ada berita'}
             </p>
           </div>
@@ -278,7 +275,7 @@ export default function NewsSection() {
             >
               <div
                 style={{
-                  background: '#f8fafc', border: `1.5px solid ${featured.pinned ? '#fde68a' : '#e2e8f0'}`,
+                  background: 'var(--bg-muted)', border: `1.5px solid ${featured.pinned ? '#fde68a' : '#e2e8f0'}`,
                   borderRadius: '20px', overflow: 'hidden',
                   opacity: visible ? 1 : 0,
                   transform: visible ? 'translateY(0)' : 'translateY(28px)',
@@ -326,20 +323,20 @@ export default function NewsSection() {
                       color: getCategoryColor(featured.category),
                       fontSize: '0.7rem', fontWeight: 700,
                     }}>{featured.category}</span>
-                    <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>📅 {fmtDate(featured.createdAt)}</span>
-                    {featured.views > 0 && <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>👁 {featured.views.toLocaleString('id-ID')}</span>}
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-subtle)' }}>📅 {fmtDate(featured.createdAt)}</span>
+                    {featured.views > 0 && <span style={{ fontSize: '0.75rem', color: 'var(--text-subtle)' }}>👁 {featured.views.toLocaleString('id-ID')}</span>}
                   </div>
 
-                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0f2d6b', marginBottom: '0.65rem', lineHeight: 1.35 }}>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.65rem', lineHeight: 1.35 }}>
                     {featured.title}
                   </h3>
-                  <p style={{ color: '#64748b', fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '1rem' }}>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '1rem' }}>
                     {stripHtml(featured.content)}
                   </p>
 
                   <span style={{
                     display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
-                    color: '#0f2d6b', fontWeight: 700, fontSize: '0.85rem',
+                    color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.85rem',
                   }}>
                     {t.news.readMore}
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -414,11 +411,11 @@ export default function NewsSection() {
                           color: getCategoryColor(item.category),
                           fontSize: '0.62rem', fontWeight: 700,
                         }}>{item.category}</span>
-                        <span style={{ fontSize: '0.68rem', color: '#94a3b8' }}>{fmtDate(item.createdAt)}</span>
+                        <span style={{ fontSize: '0.68rem', color: 'var(--text-subtle)' }}>{fmtDate(item.createdAt)}</span>
                       </div>
 
                       <h4 style={{
-                        fontSize: '0.85rem', fontWeight: 700, color: '#0f2d6b',
+                        fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)',
                         lineHeight: 1.4, marginBottom: '0.3rem',
                         display: '-webkit-box', WebkitLineClamp: 2,
                         WebkitBoxOrient: 'vertical', overflow: 'hidden',
@@ -426,7 +423,7 @@ export default function NewsSection() {
                         {item.title}
                       </h4>
 
-                      <p style={{ fontSize: '0.75rem', color: '#64748b', lineHeight: 1.55, margin: 0,
+                      <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.55, margin: 0,
                         display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
                       }}>
                         {stripHtml(item.content, 90)}
@@ -443,17 +440,17 @@ export default function NewsSection() {
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
                     padding: '0.85rem', border: '1.5px dashed #e2e8f0', borderRadius: '14px',
-                    textDecoration: 'none', color: '#64748b', fontSize: '0.82rem', fontWeight: 600,
+                    textDecoration: 'none', color: 'var(--text-muted)', fontSize: '0.82rem', fontWeight: 600,
                     transition: 'all 0.2s', marginTop: 'auto',
                   }}
                   onMouseEnter={e => {
                     (e.currentTarget as HTMLAnchorElement).style.borderColor = '#0f2d6b';
-                    (e.currentTarget as HTMLAnchorElement).style.color = '#0f2d6b';
+                    (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-primary)';
                     (e.currentTarget as HTMLAnchorElement).style.background = '#f8fafc';
                   }}
                   onMouseLeave={e => {
                     (e.currentTarget as HTMLAnchorElement).style.borderColor = '#e2e8f0';
-                    (e.currentTarget as HTMLAnchorElement).style.color = '#64748b';
+                    (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-muted)';
                     (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
                   }}
                 >

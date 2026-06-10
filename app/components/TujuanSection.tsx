@@ -25,7 +25,7 @@ function ListCard({
 }) {
   return (
     <div style={{
-      background: 'white', borderRadius: '20px', padding: '2rem',
+      background: 'var(--bg-card)', borderRadius: '20px', padding: '2rem',
       border: '1px solid rgba(15,45,107,0.07)',
       boxShadow: '0 4px 24px rgba(15,45,107,0.06)',
       opacity: visible ? 1 : 0,
@@ -41,7 +41,7 @@ function ListCard({
         }}>
           {icon}
         </div>
-        <h3 style={{ fontWeight: 800, fontSize: '1rem', color: '#0f2d6b', margin: 0 }}>{label}</h3>
+        <h3 style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)', margin: 0 }}>{label}</h3>
       </div>
       <div style={{ width: '2.5rem', height: '3px', background: 'linear-gradient(90deg, #f5a623, #fbbf24)', borderRadius: '2px' }} />
       <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -49,13 +49,13 @@ function ListCard({
           <li key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
             <span style={{
               minWidth: '24px', height: '24px', borderRadius: '50%',
-              background: dotColor, color: 'white', fontWeight: 700,
+              background: dotColor, color: '#ffffff', fontWeight: 700,
               fontSize: '0.72rem', display: 'flex', alignItems: 'center',
               justifyContent: 'center', flexShrink: 0, marginTop: '2px',
             }}>
               {i + 1}
             </span>
-            <span style={{ color: '#475569', lineHeight: 1.75, fontSize: '0.875rem' }}>{item}</span>
+            <span style={{ color: 'var(--text-body)', lineHeight: 1.75, fontSize: '0.875rem' }}>{item}</span>
           </li>
         ))}
       </ol>
@@ -69,7 +69,7 @@ export default function TujuanSection() {
   const { ref, visible } = useVisible();
 
   return (
-    <section id="tujuan" ref={ref} style={{ padding: '6rem 0', background: 'white', overflow: 'hidden' }}>
+    <section id="tujuan" ref={ref} style={{ padding: '6rem 0', background: 'var(--bg-card)', overflow: 'hidden' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         {/* Header */}
@@ -83,21 +83,16 @@ export default function TujuanSection() {
           </span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
-            fontWeight: 800, color: '#0f2d6b',
+            fontWeight: 800, color: 'var(--text-primary)',
             lineHeight: 1.2, marginBottom: '1rem',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
           }}>
             Orientasi{' '}
-            <span style={{
-              background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
+            <span className="title-gradient">
               Pendidikan Kami
             </span>
           </h2>
-          <p style={{ color: '#64748b', maxWidth: '560px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
+          <p style={{ color: 'var(--text-muted)', maxWidth: '560px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
             Tujuan akademis dan profesional yang ingin dicapai, serta sasaran konkret bagi setiap lulusan STIA Abdul Haris.
           </p>
         </div>
@@ -128,7 +123,7 @@ export default function TujuanSection() {
 
         {/* Sasaran */}
         <div style={{
-          background: '#f8fafc', borderRadius: '20px', padding: '2rem 2.25rem',
+          background: 'var(--bg-muted)', borderRadius: '20px', padding: '2rem 2.25rem',
           border: '1px solid rgba(15,45,107,0.07)',
           opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(28px)',
           transition: 'all 0.6s ease 0.2s',
@@ -137,7 +132,7 @@ export default function TujuanSection() {
             <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(15,45,107,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.15rem', flexShrink: 0 }}>
               🏆
             </div>
-            <h3 style={{ fontWeight: 800, fontSize: '1rem', color: '#0f2d6b', margin: 0 }}>{p.sasaranLabel}</h3>
+            <h3 style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)', margin: 0 }}>{p.sasaranLabel}</h3>
           </div>
           <div style={{ width: '2.5rem', height: '3px', background: 'linear-gradient(90deg, #f5a623, #fbbf24)', borderRadius: '2px', marginBottom: '1.5rem' }} />
 
@@ -145,11 +140,11 @@ export default function TujuanSection() {
             {/* Sasaran list */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {p.sasaranItems.map((item, i) => (
-                <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', background: 'white', padding: '0.85rem 1rem', borderRadius: '12px', border: '1px solid #e9eef5' }}>
-                  <span style={{ minWidth: '24px', height: '24px', borderRadius: '50%', background: '#0f2d6b', color: 'white', fontWeight: 700, fontSize: '0.72rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '2px' }}>
+                <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', background: 'var(--bg-card)', padding: '0.85rem 1rem', borderRadius: '12px', border: '1px solid #e9eef5' }}>
+                  <span style={{ minWidth: '24px', height: '24px', borderRadius: '50%', background: '#0f2d6b', color: '#ffffff', fontWeight: 700, fontSize: '0.72rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '2px' }}>
                     {i + 1}
                   </span>
-                  <span style={{ color: '#374151', lineHeight: 1.7, fontSize: '0.875rem' }}>{item}</span>
+                  <span style={{ color: 'var(--text-heading)', lineHeight: 1.7, fontSize: '0.875rem' }}>{item}</span>
                 </div>
               ))}
             </div>

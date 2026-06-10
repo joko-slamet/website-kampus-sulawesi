@@ -56,7 +56,7 @@ export default function ArticlesSection() {
     <section
       id="artikel"
       ref={ref}
-      style={{ padding: '6rem 0', background: '#f8fafc' }}
+      style={{ padding: '6rem 0', background: 'var(--bg-muted)' }}
     >
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
 
@@ -73,17 +73,12 @@ export default function ArticlesSection() {
             </span>
             <h2 style={{
               fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
-              fontWeight: 800, color: '#0f2d6b', lineHeight: 1.2,
+              fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.2,
             }}>
               {t.articles.sectionTitle}{' '}
-              <span style={{
-                background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>{t.articles.sectionGradient}</span>
+              <span className="title-gradient">{t.articles.sectionGradient}</span>
             </h2>
-            <p style={{ color: '#64748b', marginTop: '0.5rem', fontSize: '0.95rem' }}>
+            <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem', fontSize: '0.95rem' }}>
               {t.articles.sectionDesc}
             </p>
           </div>
@@ -92,7 +87,7 @@ export default function ArticlesSection() {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.65rem 1.5rem',
-              border: '1.5px solid #0f2d6b', color: '#0f2d6b',
+              border: '1.5px solid #0f2d6b', color: 'var(--text-primary)',
               fontWeight: 600, fontSize: '0.875rem',
               borderRadius: '999px', textDecoration: 'none',
               transition: 'all 0.25s ease', whiteSpace: 'nowrap',
@@ -103,7 +98,7 @@ export default function ArticlesSection() {
             }}
             onMouseLeave={e => {
               (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
-              (e.currentTarget as HTMLAnchorElement).style.color = '#0f2d6b';
+              (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-primary)';
             }}
           >
             {t.articles.viewAll}
@@ -131,8 +126,8 @@ export default function ArticlesSection() {
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
                 borderColor: activeCategory === cat ? '#0f2d6b' : '#e2e8f0',
-                background: activeCategory === cat ? '#0f2d6b' : 'white',
-                color: activeCategory === cat ? 'white' : '#64748b',
+                background: activeCategory === cat ? '#0f2d6b' : '#ffffff',
+                color: activeCategory === cat ? '#ffffff' : '#64748b',
               }}
             >
               {cat}
@@ -146,8 +141,8 @@ export default function ArticlesSection() {
             <a key={article.id} href={`/article/${article.id}`} style={{ textDecoration: 'none' }}>
               <article
                 style={{
-                  background: 'white',
-                  border: '1px solid #e2e8f0',
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border)',
                   borderRadius: '20px',
                   overflow: 'hidden',
                   cursor: 'pointer',
@@ -200,25 +195,25 @@ export default function ArticlesSection() {
                         {article.tag}
                       </span>
                     )}
-                    <span style={{ marginLeft: 'auto', fontSize: '0.72rem', color: '#94a3b8', whiteSpace: 'nowrap' }}>
+                    <span style={{ marginLeft: 'auto', fontSize: '0.72rem', color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>
                       📅 {article.date} · ⏱ {article.readTime}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f2d6b', lineHeight: 1.4, margin: 0 }}>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.4, margin: 0 }}>
                     {lang === 'en' ? (article.titleEn || article.title) : article.title}
                   </h3>
 
                   {/* Excerpt */}
-                  <p style={{ color: '#64748b', fontSize: '0.875rem', lineHeight: 1.7, margin: 0, flex: 1 }}>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem', lineHeight: 1.7, margin: 0, flex: 1 }}>
                     {lang === 'en' ? (article.excerptEn || article.excerpt) : article.excerpt}
                   </p>
 
                   {/* Read more */}
                   <div style={{
                     display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
-                    color: '#0f2d6b', fontWeight: 600, fontSize: '0.82rem',
+                    color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.82rem',
                     marginTop: '0.25rem',
                   }}>
                     {t.articles.readBtn}
@@ -237,7 +232,7 @@ export default function ArticlesSection() {
           textAlign: 'center', marginTop: '3rem',
           opacity: visible ? 1 : 0, transition: 'all 0.6s ease 0.5s',
         }}>
-          <p style={{ color: '#64748b', marginBottom: '1rem', fontSize: '0.9rem' }}>
+          <p style={{ color: 'var(--text-muted)', marginBottom: '1rem', fontSize: '0.9rem' }}>
             {t.articles.newDaily}
           </p>
           <a
@@ -246,7 +241,7 @@ export default function ArticlesSection() {
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.85rem 2rem',
               background: 'linear-gradient(135deg, #0f2d6b 0%, #1a4aad 100%)',
-              color: 'white', fontWeight: 700, fontSize: '0.9rem',
+              color: '#ffffff', fontWeight: 700, fontSize: '0.9rem',
               borderRadius: '999px', textDecoration: 'none',
               boxShadow: '0 8px 24px rgba(15,45,107,0.25)',
               transition: 'all 0.25s ease',

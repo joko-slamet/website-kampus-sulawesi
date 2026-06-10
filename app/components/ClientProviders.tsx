@@ -1,6 +1,7 @@
 'use client';
 
 import { LanguageProvider, type SiteSettingsOverrides } from '../i18n/LanguageContext';
+import { ThemeProvider } from '../i18n/ThemeContext';
 
 export default function ClientProviders({
   children,
@@ -9,5 +10,9 @@ export default function ClientProviders({
   children: React.ReactNode;
   settings?: SiteSettingsOverrides;
 }) {
-  return <LanguageProvider overrides={settings}>{children}</LanguageProvider>;
+  return (
+    <ThemeProvider>
+      <LanguageProvider overrides={settings}>{children}</LanguageProvider>
+    </ThemeProvider>
+  );
 }

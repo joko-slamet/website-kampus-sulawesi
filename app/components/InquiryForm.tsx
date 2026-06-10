@@ -47,21 +47,21 @@ export default function InquiryForm({ embedded = false }: { embedded?: boolean }
   if (status === 'success') {
     return (
       <div style={{
-        ...(!embedded ? { background: 'white', borderRadius: '20px', border: '1px solid rgba(15,45,107,0.08)', boxShadow: '0 4px 24px rgba(15,45,107,0.07)' } : {}),
+        ...(!embedded ? { background: '#ffffff', borderRadius: '20px', border: '1px solid rgba(15,45,107,0.08)', boxShadow: '0 4px 24px rgba(15,45,107,0.07)' } : {}),
         padding: '2.5rem',
         textAlign: 'center',
         animation: 'fade-in-up 0.4s ease',
       }}>
         <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎉</div>
-        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f2d6b', marginBottom: '0.5rem' }}>
+        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
           Pesan Terkirim!
         </h3>
-        <p style={{ color: '#64748b', lineHeight: 1.75, fontSize: '0.95rem' }}>
-          Terima kasih, <strong style={{ color: '#0f2d6b' }}>{form.name}</strong>. Tim kami akan menghubungi kamu di nomor <strong style={{ color: '#0f2d6b' }}>{form.phone}</strong> dalam 1×24 jam.
+        <p style={{ color: 'var(--text-muted)', lineHeight: 1.75, fontSize: '0.95rem' }}>
+          Terima kasih, <strong style={{ color: 'var(--text-primary)' }}>{form.name}</strong>. Tim kami akan menghubungi kamu di nomor <strong style={{ color: 'var(--text-primary)' }}>{form.phone}</strong> dalam 1×24 jam.
         </p>
         <button
           onClick={() => { setStatus('idle'); setForm({ name: '', phone: '', program: '', school: '', message: '' }); }}
-          style={{ marginTop: '1.5rem', padding: '0.6rem 1.5rem', borderRadius: '999px', background: '#f1f5f9', border: '1px solid #e2e8f0', color: '#475569', fontWeight: 600, cursor: 'pointer', fontSize: '0.875rem' }}
+          style={{ marginTop: '1.5rem', padding: '0.6rem 1.5rem', borderRadius: '999px', background: 'var(--bg-muted)', border: '1px solid var(--border)', color: 'var(--text-body)', fontWeight: 600, cursor: 'pointer', fontSize: '0.875rem' }}
         >Kirim Lagi</button>
       </div>
     );
@@ -69,26 +69,26 @@ export default function InquiryForm({ embedded = false }: { embedded?: boolean }
 
   const inputStyle: React.CSSProperties = {
     width: '100%', padding: '0.75rem 1rem',
-    border: '1.5px solid #e2e8f0', borderRadius: '10px',
-    fontSize: '0.9rem', color: '#1e293b', background: '#f8fafc',
+    border: '1.5px solid var(--border)', borderRadius: '10px',
+    fontSize: '0.9rem', color: 'var(--text-heading)', background: 'var(--bg-muted)',
     boxSizing: 'border-box', outline: 'none',
     transition: 'border-color 0.2s, box-shadow 0.2s',
   };
 
   const labelStyle: React.CSSProperties = {
     display: 'block', fontSize: '0.78rem', fontWeight: 700,
-    color: '#475569', marginBottom: '0.35rem', letterSpacing: '0.02em',
+    color: 'var(--text-body)', marginBottom: '0.35rem', letterSpacing: '0.02em',
   };
 
   return (
     <div style={{
-      ...(!embedded ? { background: 'white', borderRadius: '20px', padding: '2rem', border: '1px solid rgba(15,45,107,0.08)', boxShadow: '0 4px 24px rgba(15,45,107,0.07)' } : {}),
+      ...(!embedded ? { background: '#ffffff', borderRadius: '20px', padding: '2rem', border: '1px solid rgba(15,45,107,0.08)', boxShadow: '0 4px 24px rgba(15,45,107,0.07)' } : {}),
     }}>
       <div style={{ marginBottom: '1.5rem' }}>
-        <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f2d6b', marginBottom: '0.3rem' }}>
+        <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.3rem' }}>
           Formulir Pendaftaran
         </h3>
-        <p style={{ fontSize: '0.82rem', color: '#94a3b8', lineHeight: 1.6 }}>
+        <p style={{ fontSize: '0.82rem', color: 'var(--text-subtle)', lineHeight: 1.6 }}>
           Isi form di bawah dan tim kami akan menghubungi kamu.
         </p>
       </div>
@@ -168,7 +168,7 @@ export default function InquiryForm({ embedded = false }: { embedded?: boolean }
             background: status === 'loading'
               ? '#94a3b8'
               : 'linear-gradient(135deg, #0f2d6b 0%, #1a4aad 100%)',
-            color: 'white', border: 'none', borderRadius: '10px',
+            color: '#ffffff', border: 'none', borderRadius: '10px',
             fontSize: '0.95rem', fontWeight: 700, cursor: status === 'loading' ? 'not-allowed' : 'pointer',
             boxShadow: status === 'loading' ? 'none' : '0 4px 16px rgba(15,45,107,0.3)',
             transition: 'all 0.2s ease',
@@ -177,7 +177,7 @@ export default function InquiryForm({ embedded = false }: { embedded?: boolean }
         >
           {status === 'loading' ? (
             <>
-              <span style={{ width: '16px', height: '16px', border: '2px solid rgba(255,255,255,0.3)', borderTopColor: 'white', borderRadius: '50%', animation: 'spin 0.7s linear infinite', display: 'inline-block' }} />
+              <span style={{ width: '16px', height: '16px', border: '2px solid rgba(255,255,255,0.3)', borderTopColor: '#ffffff', borderRadius: '50%', animation: 'spin 0.7s linear infinite', display: 'inline-block' }} />
               Mengirim...
             </>
           ) : (

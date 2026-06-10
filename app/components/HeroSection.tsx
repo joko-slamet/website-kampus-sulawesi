@@ -37,7 +37,7 @@ export default function HeroSection() {
           </div>
 
           {/* Headline */}
-          <h1 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', fontWeight: 800, lineHeight: 1.12, color: 'white', marginBottom: '1.5rem', fontFamily: 'Plus Jakarta Sans, sans-serif', opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(28px)', transition: 'all 0.7s ease 0.2s' }}>
+          <h1 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', fontWeight: 800, lineHeight: 1.12, color: '#ffffff', marginBottom: '1.5rem', fontFamily: 'Plus Jakarta Sans, sans-serif', opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(28px)', transition: 'all 0.7s ease 0.2s' }}>
             {t.hero.titleLine1}
             <br />
             <span style={{ background: 'linear-gradient(90deg, #f5a623 0%, #fbbf24 50%, #f5a623 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
@@ -62,7 +62,7 @@ export default function HeroSection() {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </a>
             <a href="#program" onClick={e => { e.preventDefault(); handleScroll('program'); }}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.9rem 2rem', background: 'rgba(255,255,255,0.12)', color: 'white', fontWeight: 600, fontSize: '1rem', borderRadius: '999px', textDecoration: 'none', border: '1.5px solid rgba(255,255,255,0.35)', backdropFilter: 'blur(10px)', transition: 'all 0.25s ease', whiteSpace: 'nowrap' }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.9rem 2rem', background: 'rgba(255,255,255,0.12)', color: '#ffffff', fontWeight: 600, fontSize: '1rem', borderRadius: '999px', textDecoration: 'none', border: '1.5px solid rgba(255,255,255,0.35)', backdropFilter: 'blur(10px)', transition: 'all 0.25s ease', whiteSpace: 'nowrap' }}
               onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(255,255,255,0.2)'; (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(255,255,255,0.12)'; (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)'; }}
             >

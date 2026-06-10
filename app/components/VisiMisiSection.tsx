@@ -23,7 +23,7 @@ export default function VisiMisiSection() {
   const { ref, visible } = useVisible();
 
   return (
-    <section id="visi-misi" ref={ref} style={{ padding: '6rem 0', background: '#f8fafc', overflow: 'hidden' }}>
+    <section id="visi-misi" ref={ref} style={{ padding: '6rem 0', background: 'var(--bg-muted)', overflow: 'hidden' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         {/* Header */}
@@ -37,21 +37,16 @@ export default function VisiMisiSection() {
           </span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
-            fontWeight: 800, color: '#0f2d6b',
+            fontWeight: 800, color: 'var(--text-primary)',
             lineHeight: 1.2, marginBottom: '1rem',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
           }}>
             Arah &amp;{' '}
-            <span style={{
-              background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
+            <span className="title-gradient">
               Komitmen Kami
             </span>
           </h2>
-          <p style={{ color: '#64748b', maxWidth: '520px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
+          <p style={{ color: 'var(--text-muted)', maxWidth: '520px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
             Landasan nilai dan arah pengembangan STIA YPA-AH &ldquo;Abdul Haris&rdquo; Makassar dalam mewujudkan pendidikan administrasi berkualitas.
           </p>
         </div>
@@ -92,7 +87,7 @@ export default function VisiMisiSection() {
 
           {/* Misi */}
           <div style={{
-            background: 'white', borderRadius: '24px', padding: '2.5rem',
+            background: 'var(--bg-card)', borderRadius: '24px', padding: '2.5rem',
             border: '1px solid rgba(15,45,107,0.08)',
             boxShadow: '0 4px 24px rgba(15,45,107,0.06)',
             display: 'flex', flexDirection: 'column', gap: '1.25rem',
@@ -101,7 +96,7 @@ export default function VisiMisiSection() {
               <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(15,45,107,0.07)', border: '1px solid rgba(15,45,107,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>
                 🚀
               </div>
-              <span style={{ fontWeight: 800, fontSize: '1rem', color: '#0f2d6b', letterSpacing: '0.04em' }}>
+              <span style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)', letterSpacing: '0.04em' }}>
                 {p.misiLabel.toUpperCase()}
               </span>
             </div>
@@ -114,13 +109,13 @@ export default function VisiMisiSection() {
                   <span style={{
                     minWidth: '26px', height: '26px', borderRadius: '50%',
                     background: 'linear-gradient(135deg, #0f2d6b, #1a4aad)',
-                    color: 'white', fontWeight: 700, fontSize: '0.75rem',
+                    color: '#ffffff', fontWeight: 700, fontSize: '0.75rem',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     flexShrink: 0, marginTop: '2px',
                   }}>
                     {i + 1}
                   </span>
-                  <span style={{ color: '#374151', lineHeight: 1.75, fontSize: '0.9rem' }}>{item}</span>
+                  <span style={{ color: 'var(--text-heading)', lineHeight: 1.75, fontSize: '0.9rem' }}>{item}</span>
                 </li>
               ))}
             </ol>
@@ -138,7 +133,7 @@ export default function VisiMisiSection() {
             { title: p.campus2Title, desc: p.campus2Desc, address: p.campus2Address },
           ].map((c, i) => (
             <div key={i} style={{
-              background: 'white', borderRadius: '16px', padding: '1.5rem 1.75rem',
+              background: 'var(--bg-card)', borderRadius: '16px', padding: '1.5rem 1.75rem',
               border: '1px solid rgba(15,45,107,0.08)',
               boxShadow: '0 2px 12px rgba(15,45,107,0.05)',
               display: 'flex', gap: '1rem', alignItems: 'flex-start',
@@ -152,9 +147,9 @@ export default function VisiMisiSection() {
                 📍
               </div>
               <div>
-                <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#0f2d6b', marginBottom: '0.2rem' }}>{c.title}</div>
-                <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginBottom: '0.4rem', fontStyle: 'italic' }}>{c.desc}</div>
-                <div style={{ fontSize: '0.88rem', color: '#374151', fontWeight: 600, lineHeight: 1.5 }}>{c.address}</div>
+                <div style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>{c.title}</div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-subtle)', marginBottom: '0.4rem', fontStyle: 'italic' }}>{c.desc}</div>
+                <div style={{ fontSize: '0.88rem', color: 'var(--text-heading)', fontWeight: 600, lineHeight: 1.5 }}>{c.address}</div>
               </div>
             </div>
           ))}

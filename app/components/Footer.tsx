@@ -54,7 +54,7 @@ export default function Footer() {
 
           {/* Programs column */}
           <div>
-            <h4 style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '1.25rem', color: 'white', letterSpacing: '0.03em' }}>
+            <h4 style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '1.25rem', color: '#ffffff', letterSpacing: '0.03em' }}>
               {t.footer.colPrograms}
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
@@ -71,7 +71,7 @@ export default function Footer() {
 
           {/* Services column */}
           <div>
-            <h4 style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '1.25rem', color: 'white', letterSpacing: '0.03em' }}>
+            <h4 style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '1.25rem', color: '#ffffff', letterSpacing: '0.03em' }}>
               {t.footer.colServices}
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
@@ -88,7 +88,7 @@ export default function Footer() {
 
           {/* Institution column */}
           <div>
-            <h4 style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '1.25rem', color: 'white', letterSpacing: '0.03em' }}>
+            <h4 style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '1.25rem', color: '#ffffff', letterSpacing: '0.03em' }}>
               {t.footer.colInstitution}
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>

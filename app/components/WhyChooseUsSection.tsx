@@ -5,7 +5,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 
 const reasonsMeta = [
   { id: 'akreditasi', icon: '🏆', color: '#f5a623' },
-  { id: 'dosen',      icon: '👨‍🏫', color: '#0f2d6b' },
+  { id: 'dosen',      icon: '👨‍🏫', color: 'var(--text-primary)' },
   { id: 'karir',      icon: '💼', color: '#10b981' },
   { id: 'fasilitas',  icon: '🔬', color: '#7c3aed' },
   { id: 'beasiswa',   icon: '🎓', color: '#dc2626' },
@@ -29,11 +29,11 @@ function ReasonCard({ reason, index, visible }: { reason: ReasonItem; index: num
     <div
       id={`reason-${reason.id}`}
       style={{
-        background: hovered ? reason.color : 'white',
-        border: `1px solid ${hovered ? reason.color : '#e2e8f0'}`,
+        background: hovered ? reason.color : 'var(--bg-card)',
+        border: `1px solid ${hovered ? reason.color : 'var(--border)'}`,
         borderRadius: '20px',
         padding: '2rem',
-        boxShadow: hovered ? `0 16px 48px ${reason.color}40` : '0 4px 20px rgba(15,45,107,0.06)',
+        boxShadow: hovered ? `0 16px 48px ${reason.color}40` : 'var(--card-shadow)',
         transform: visible
           ? (hovered ? 'translateY(-8px) scale(1.02)' : 'translateY(0) scale(1)')
           : 'translateY(32px)',
@@ -58,27 +58,27 @@ function ReasonCard({ reason, index, visible }: { reason: ReasonItem; index: num
       {/* Metric */}
       <div style={{
         fontSize: '1.75rem', fontWeight: 900,
-        color: hovered ? 'white' : reason.color,
+        color: hovered ? '#ffffff' : reason.color,
         lineHeight: 1, marginBottom: '0.2rem',
         transition: 'color 0.3s',
       }}>{reason.metric}</div>
       <div style={{
         fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.06em',
-        color: hovered ? 'rgba(255,255,255,0.75)' : '#94a3b8',
+        color: hovered ? 'rgba(255,255,255,0.75)' : 'var(--text-subtle)',
         marginBottom: '1rem',
         transition: 'color 0.3s',
       }}>{reason.metricLabel}</div>
 
       <h3 style={{
         fontSize: '1rem', fontWeight: 700,
-        color: hovered ? 'white' : '#0f2d6b',
+        color: hovered ? '#ffffff' : 'var(--text-primary)',
         marginBottom: '0.6rem',
         transition: 'color 0.3s',
       }}>{reason.title}</h3>
 
       <p style={{
         fontSize: '0.85rem',
-        color: hovered ? 'rgba(255,255,255,0.85)' : '#64748b',
+        color: hovered ? 'rgba(255,255,255,0.85)' : 'var(--text-body)',
         lineHeight: 1.7,
         transition: 'color 0.3s',
       }}>{reason.description}</p>
@@ -116,7 +116,7 @@ export default function WhyChooseUsSection() {
       ref={ref}
       style={{
         padding: '6rem 0',
-        background: '#f8fafc',
+        background: 'var(--bg-muted)',
         backgroundImage: 'radial-gradient(circle, rgba(15,45,107,0.04) 1px, transparent 1px)',
         backgroundSize: '28px 28px',
       }}
@@ -131,20 +131,15 @@ export default function WhyChooseUsSection() {
           <span className="section-label" style={{ marginBottom: '1rem', display: 'inline-block' }}>{t.why.label}</span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
-            fontWeight: 800, color: '#0f2d6b',
+            fontWeight: 800, color: 'var(--text-primary)',
             lineHeight: 1.2, marginBottom: '1rem',
           }}>
             {t.why.title}{' '}
-            <span style={{
-              background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
+            <span className="title-gradient">
               {t.why.titleGradient}
             </span>
           </h2>
-          <p style={{ color: '#64748b', maxWidth: '540px', margin: '0 auto', lineHeight: 1.75 }}>
+          <p style={{ color: 'var(--text-muted)', maxWidth: '540px', margin: '0 auto', lineHeight: 1.75 }}>
             {t.why.subtitle}
           </p>
         </div>

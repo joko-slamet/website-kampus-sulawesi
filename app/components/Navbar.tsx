@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useTheme } from '../i18n/ThemeContext';
 
 export default function Navbar({ variant = 'transparent' }: { variant?: 'transparent' | 'dark' | 'light' }) {
   const [scrolled, setScrolled] = useState(false);
@@ -13,6 +14,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
   const pathname = usePathname();
   const isLanding = pathname === '/';
   const { t, lang, setLang } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
     { label: t.nav.home, href: '#hero' },
@@ -52,7 +54,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
       ? activeSection === link.href.replace('#', '')
       : pathname.startsWith(link.href);
 
-  const activeColor = '#0f2d6b';
+  const activeColor = 'var(--text-primary)';
 
   return (
     <>
@@ -62,7 +64,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
           transition: 'all 0.35s ease',
           padding: scrolled ? '0.65rem 0' : '1.1rem 0',
-          background: scrolled || lightAtTop ? 'rgba(255,255,255,0.95)' : darkAtTop ? 'rgba(7,26,64,0.97)' : 'transparent',
+          background: scrolled || lightAtTop ? (theme === 'dark' ? 'rgba(15,23,42,0.97)' : 'rgba(255,255,255,0.95)') : darkAtTop ? 'rgba(7,26,64,0.97)' : 'transparent',
           backdropFilter: scrolled || lightAtTop ? 'blur(24px)' : 'none',
           WebkitBackdropFilter: scrolled || lightAtTop ? 'blur(24px)' : 'none',
           borderBottom: scrolled || lightAtTop ? '1px solid rgba(15,45,107,0.08)' : darkAtTop ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
@@ -81,10 +83,10 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
               priority
             />
             <div>
-              <div style={{ fontWeight: 800, fontSize: '1rem', lineHeight: 1.1, color: scrolled || lightAtTop ? '#0f2d6b' : 'white', transition: 'color 0.3s' }}>
+              <div style={{ fontWeight: 800, fontSize: '1rem', lineHeight: 1.1, color: scrolled || lightAtTop ? 'var(--text-primary)' : '#ffffff', transition: 'color 0.3s' }}>
                 STIA Abdul Haris
               </div>
-              <div style={{ fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.05em', color: scrolled || lightAtTop ? '#64748b' : 'rgba(255,255,255,0.75)', transition: 'color 0.3s' }}>
+              <div style={{ fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.05em', color: scrolled || lightAtTop ? 'var(--text-muted)' : 'rgba(255,255,255,0.75)', transition: 'color 0.3s' }}>
                 MAKASSAR
               </div>
             </div>
@@ -99,7 +101,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
                 style={{
                   background: 'none', border: 'none', cursor: 'pointer',
                   padding: '0.5rem 0.85rem', fontSize: '0.875rem', fontWeight: 500,
-                  color: scrolled || lightAtTop ? (isActive(link) ? activeColor : '#475569') : 'rgba(255,255,255,0.9)',
+                  color: scrolled || lightAtTop ? (isActive(link) ? activeColor : 'var(--text-body)') : 'rgba(255,255,255,0.9)',
                   borderRadius: '8px', transition: 'all 0.2s',
                 }}
                 onMouseEnter={e => {
@@ -107,7 +109,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
                   (e.currentTarget as HTMLButtonElement).style.background = scrolled || lightAtTop ? 'rgba(15,45,107,0.07)' : 'rgba(255,255,255,0.12)';
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLButtonElement).style.color = scrolled || lightAtTop ? (isActive(link) ? activeColor : '#475569') : 'rgba(255,255,255,0.9)';
+                  (e.currentTarget as HTMLButtonElement).style.color = scrolled || lightAtTop ? (isActive(link) ? activeColor : 'var(--text-body)') : 'rgba(255,255,255,0.9)';
                   (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
                 }}
               >
@@ -121,7 +123,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
             {/* Language toggle */}
             <div style={{
               display: 'flex', borderRadius: '999px', overflow: 'hidden',
-              border: scrolled || lightAtTop ? '1.5px solid #e2e8f0' : '1.5px solid rgba(255,255,255,0.25)',
+              border: scrolled || lightAtTop ? '1.5px solid var(--border)' : '1.5px solid rgba(255,255,255,0.25)',
               flexShrink: 0,
             }}>
               {(['id', 'en'] as const).map(l => (
@@ -133,7 +135,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
                     background: lang === l ? (scrolled || lightAtTop ? '#0f2d6b' : 'rgba(255,255,255,0.2)') : 'transparent',
                     border: 'none', cursor: 'pointer',
                     fontSize: '0.72rem', fontWeight: 700,
-                    color: lang === l ? 'white' : (scrolled || lightAtTop ? '#64748b' : 'rgba(255,255,255,0.6)'),
+                    color: lang === l ? '#ffffff' : (scrolled || lightAtTop ? '#64748b' : 'rgba(255,255,255,0.6)'),
                     letterSpacing: '0.05em', transition: 'all 0.2s',
                   }}
                 >
@@ -141,6 +143,33 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
                 </button>
               ))}
             </div>
+
+            {/* Dark mode toggle */}
+            <button
+              onClick={toggleTheme}
+              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                padding: '0.35rem',
+                borderRadius: '8px',
+                color: scrolled || lightAtTop ? 'var(--text-body)' : 'rgba(255,255,255,0.8)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'all 0.2s',
+                flexShrink: 0,
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = scrolled || lightAtTop ? 'rgba(15,45,107,0.07)' : 'rgba(255,255,255,0.12)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'none'; }}
+            >
+              {theme === 'dark' ? (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.166 17.834a.75.75 0 00-1.06 1.06l1.59 1.591a.75.75 0 001.061-1.06l-1.59-1.591zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.166 6.166a.75.75 0 001.06 1.06l-1.59 1.591a.75.75 0 001.061 1.06L5.106 7.227a.75.75 0 00-1.061-1.061L6.166 6.166z"/>
+                </svg>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path fillRule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clipRule="evenodd"/>
+                </svg>
+              )}
+            </button>
 
             {/* CTA */}
             <a
@@ -150,7 +179,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
                 display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                 padding: '0.55rem 1.25rem',
                 background: 'linear-gradient(135deg, #f5a623 0%, #fbbf24 100%)',
-                color: '#0f2d6b', fontWeight: 700, fontSize: '0.875rem',
+                color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.875rem',
                 borderRadius: '999px', textDecoration: 'none',
                 boxShadow: '0 4px 14px rgba(245,166,35,0.35)',
                 transition: 'all 0.2s ease', whiteSpace: 'nowrap',
@@ -192,7 +221,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
                 onClick={() => handleLinkClick(link.href)}
                 style={{
                   background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left',
-                  padding: '1rem 1.25rem', fontSize: '1.25rem', fontWeight: 600, color: 'white',
+                  padding: '1rem 1.25rem', fontSize: '1.25rem', fontWeight: 600, color: '#ffffff',
                   borderRadius: '12px', transition: 'all 0.2s', borderLeft: '3px solid transparent',
                   animation: `fadeInLeft 0.4s ease ${i * 0.05}s both`,
                 }}
@@ -204,15 +233,22 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
             ))}
           </nav>
           <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            {/* Mobile lang toggle */}
+            {/* Mobile lang + theme toggles */}
             <div style={{ display: 'flex', gap: '0.5rem' }}>
               {(['id', 'en'] as const).map(l => (
-                <button key={l} onClick={() => setLang(l)} style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid rgba(255,255,255,0.2)', background: lang === l ? 'rgba(255,255,255,0.15)' : 'transparent', color: 'white', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer' }}>
+                <button key={l} onClick={() => setLang(l)} style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid rgba(255,255,255,0.2)', background: lang === l ? 'rgba(255,255,255,0.15)' : 'transparent', color: '#ffffff', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer' }}>
                   {l === 'id' ? '🇮🇩 Indonesia' : '🇬🇧 English'}
                 </button>
               ))}
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+                style={{ padding: '0.65rem 1rem', borderRadius: '10px', border: '1.5px solid rgba(255,255,255,0.2)', background: 'transparent', color: '#ffffff', cursor: 'pointer', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              >
+                {theme === 'dark' ? '☀️' : '🌙'}
+              </button>
             </div>
-            <a href="#daftar" onClick={e => { e.preventDefault(); handleLinkClick('#daftar'); }} style={{ display: 'block', textAlign: 'center', padding: '1rem', background: 'linear-gradient(135deg, #f5a623 0%, #fbbf24 100%)', color: '#0f2d6b', fontWeight: 700, fontSize: '1rem', borderRadius: '12px', textDecoration: 'none' }}>
+            <a href="#daftar" onClick={e => { e.preventDefault(); handleLinkClick('#daftar'); }} style={{ display: 'block', textAlign: 'center', padding: '1rem', background: 'linear-gradient(135deg, #f5a623 0%, #fbbf24 100%)', color: 'var(--text-primary)', fontWeight: 700, fontSize: '1rem', borderRadius: '12px', textDecoration: 'none' }}>
               {t.nav.apply} →
             </a>
           </div>

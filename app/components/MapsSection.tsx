@@ -29,7 +29,7 @@ export default function MapsSection() {
   }, []);
 
   return (
-    <section ref={ref} style={{ padding: '5rem 0', background: '#f8fafc' }}>
+    <section ref={ref} style={{ padding: '5rem 0', background: 'var(--bg-muted)' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         <div style={{
@@ -42,21 +42,16 @@ export default function MapsSection() {
           </span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)',
-            fontWeight: 800, color: '#0f2d6b',
+            fontWeight: 800, color: 'var(--text-primary)',
             lineHeight: 1.2, marginBottom: '0.75rem',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
           }}>
             Temukan Kami di{' '}
-            <span style={{
-              background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
+            <span className="title-gradient">
               Makassar
             </span>
           </h2>
-          <p style={{ color: '#64748b', maxWidth: '480px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
+          <p style={{ color: 'var(--text-muted)', maxWidth: '480px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
             STIA YPA-AH &ldquo;Abdul Haris&rdquo; hadir di dua lokasi strategis di Kota Makassar.
           </p>
         </div>
@@ -68,7 +63,7 @@ export default function MapsSection() {
         }} className="maps-grid">
           {MAPS.map((m) => (
             <div key={m.title} style={{
-              background: 'white', borderRadius: '20px', overflow: 'hidden',
+              background: 'var(--bg-card)', borderRadius: '20px', overflow: 'hidden',
               border: '1px solid rgba(15,45,107,0.08)',
               boxShadow: '0 4px 20px rgba(15,45,107,0.07)',
             }}>
@@ -84,8 +79,8 @@ export default function MapsSection() {
                   📍
                 </div>
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0f2d6b' }}>{m.title}</div>
-                  <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{m.address}</div>
+                  <div style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>{m.title}</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-subtle)' }}>{m.address}</div>
                 </div>
               </div>
               <iframe

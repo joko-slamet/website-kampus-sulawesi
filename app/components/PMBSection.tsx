@@ -25,7 +25,7 @@ export default function PMBSection() {
   const { ref, visible } = useVisible();
 
   return (
-    <section id="daftar" ref={ref} style={{ padding: '6rem 0', background: '#f8fafc' }}>
+    <section id="daftar" ref={ref} style={{ padding: '6rem 0', background: 'var(--bg-muted)' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         {/* Header */}
@@ -39,21 +39,16 @@ export default function PMBSection() {
           </span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
-            fontWeight: 800, color: '#0f2d6b',
+            fontWeight: 800, color: 'var(--text-primary)',
             lineHeight: 1.2, marginBottom: '1rem',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
           }}>
             {p.title}{' '}
-            <span style={{
-              background: 'linear-gradient(135deg, #0f2d6b 0%, #f5a623 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
+            <span className="title-gradient">
               {p.titleGradient}
             </span>
           </h2>
-          <p style={{ color: '#64748b', maxWidth: '560px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
+          <p style={{ color: 'var(--text-muted)', maxWidth: '560px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
             {p.subtitle}
           </p>
         </div>
@@ -87,7 +82,7 @@ export default function PMBSection() {
                 <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'rgba(255,255,255,0.65)', letterSpacing: '0.06em', marginBottom: '0.25rem' }}>
                   {p.scheduleLabel.toUpperCase()}
                 </div>
-                <div style={{ fontWeight: 800, fontSize: '1rem', color: 'white', marginBottom: '0.2rem' }}>
+                <div style={{ fontWeight: 800, fontSize: '1rem', color: '#ffffff', marginBottom: '0.2rem' }}>
                   {wave.name}
                 </div>
                 <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.85)', fontWeight: 500 }}>
@@ -108,7 +103,7 @@ export default function PMBSection() {
 
           {/* Syarat Administrasi */}
           <div style={{
-            background: 'white', borderRadius: '20px', padding: '2rem',
+            background: 'var(--bg-card)', borderRadius: '20px', padding: '2rem',
             border: '1px solid rgba(15,45,107,0.07)',
             boxShadow: '0 4px 24px rgba(15,45,107,0.06)',
           }}>
@@ -116,7 +111,7 @@ export default function PMBSection() {
               <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(15,45,107,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.15rem', flexShrink: 0 }}>
                 📋
               </div>
-              <h3 style={{ fontWeight: 800, fontSize: '1rem', color: '#0f2d6b', margin: 0 }}>{p.reqLabel}</h3>
+              <h3 style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)', margin: 0 }}>{p.reqLabel}</h3>
             </div>
             <div style={{ width: '2.5rem', height: '3px', background: 'linear-gradient(90deg, #f5a623, #fbbf24)', borderRadius: '2px', marginBottom: '1.25rem' }} />
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
@@ -125,13 +120,13 @@ export default function PMBSection() {
                   <span style={{
                     minWidth: '22px', height: '22px', borderRadius: '50%',
                     background: 'linear-gradient(135deg, #0f2d6b, #1a4aad)',
-                    color: 'white', fontWeight: 700, fontSize: '0.7rem',
+                    color: '#ffffff', fontWeight: 700, fontSize: '0.7rem',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     flexShrink: 0, marginTop: '2px',
                   }}>
                     {i + 1}
                   </span>
-                  <span style={{ color: '#374151', lineHeight: 1.7, fontSize: '0.9rem' }}>{item}</span>
+                  <span style={{ color: 'var(--text-heading)', lineHeight: 1.7, fontSize: '0.9rem' }}>{item}</span>
                 </li>
               ))}
             </ul>
@@ -139,7 +134,7 @@ export default function PMBSection() {
 
           {/* Biaya */}
           <div style={{
-            background: 'white', borderRadius: '20px', padding: '2rem',
+            background: 'var(--bg-card)', borderRadius: '20px', padding: '2rem',
             border: '1px solid rgba(15,45,107,0.07)',
             boxShadow: '0 4px 24px rgba(15,45,107,0.06)',
             display: 'flex', flexDirection: 'column',
@@ -148,7 +143,7 @@ export default function PMBSection() {
               <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(245,166,35,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.15rem', flexShrink: 0 }}>
                 💰
               </div>
-              <h3 style={{ fontWeight: 800, fontSize: '1rem', color: '#0f2d6b', margin: 0 }}>{p.costLabel}</h3>
+              <h3 style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)', margin: 0 }}>{p.costLabel}</h3>
             </div>
             <div style={{ width: '2.5rem', height: '3px', background: 'linear-gradient(90deg, #f5a623, #fbbf24)', borderRadius: '2px', marginBottom: '1.25rem' }} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', flex: 1 }}>
@@ -156,18 +151,18 @@ export default function PMBSection() {
                 <div key={i} style={{
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                   padding: '1rem 1.25rem',
-                  background: i === 0 ? 'rgba(245,166,35,0.06)' : '#f8fafc',
+                  background: i === 0 ? 'rgba(245,166,35,0.06)' : 'var(--bg-muted)',
                   borderRadius: '12px',
-                  border: `1px solid ${i === 0 ? 'rgba(245,166,35,0.2)' : '#e9eef5'}`,
+                  border: `1px solid ${i === 0 ? 'rgba(245,166,35,0.2)' : 'var(--border)'}`,
                   gap: '1rem',
                 }}>
                   <div>
-                    <div style={{ fontWeight: 600, fontSize: '0.875rem', color: '#1e293b' }}>{item.label}</div>
-                    <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '0.15rem' }}>{item.note}</div>
+                    <div style={{ fontWeight: 600, fontSize: '0.875rem', color: 'var(--text-heading)' }}>{item.label}</div>
+                    <div style={{ fontSize: '0.72rem', color: 'var(--text-subtle)', marginTop: '0.15rem' }}>{item.note}</div>
                   </div>
                   <div style={{
                     fontWeight: 800, fontSize: '1rem',
-                    color: i === 0 ? '#b45309' : '#0f2d6b',
+                    color: i === 0 ? '#b45309' : 'var(--text-primary)',
                     whiteSpace: 'nowrap',
                   }}>
                     {item.amount}
@@ -209,7 +204,7 @@ export default function PMBSection() {
               <span style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.1em', color: '#fbbf24', marginBottom: '0.75rem', display: 'block' }}>
                 MULAI PERJALANANMU
               </span>
-              <h3 style={{ fontSize: 'clamp(1.3rem, 2vw, 1.65rem)', fontWeight: 800, color: 'white', lineHeight: 1.25, marginBottom: '1rem' }}>
+              <h3 style={{ fontSize: 'clamp(1.3rem, 2vw, 1.65rem)', fontWeight: 800, color: '#ffffff', lineHeight: 1.25, marginBottom: '1rem' }}>
                 Tertarik Bergabung<br />Bersama Kami?
               </h3>
               <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.72)', lineHeight: 1.75, marginBottom: '1.75rem' }}>
@@ -244,7 +239,7 @@ export default function PMBSection() {
                 marginTop: '2rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                 padding: '0.75rem 1.25rem',
                 background: '#25d366', borderRadius: '10px',
-                color: 'white', fontWeight: 700, fontSize: '0.85rem',
+                color: '#ffffff', fontWeight: 700, fontSize: '0.85rem',
                 textDecoration: 'none', width: 'fit-content',
                 boxShadow: '0 4px 16px rgba(37,211,102,0.35)',
                 position: 'relative',
@@ -256,7 +251,7 @@ export default function PMBSection() {
           </div>
 
           {/* Right: Form */}
-          <div style={{ background: 'white', padding: '2.5rem 2rem' }}>
+          <div style={{ background: 'var(--bg-card)', padding: '2.5rem 2rem' }}>
             <InquiryForm embedded />
           </div>
         </div>

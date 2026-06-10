@@ -31,7 +31,7 @@ export default function CTASection() {
   const steps = t.cta.steps.map((s, i) => ({ ...s, icon: stepIcons[i] }));
 
   return (
-    <section id="daftar" ref={ref} style={{ padding: '6rem 0', background: '#f8fafc' }}>
+    <section id="daftar" ref={ref} style={{ padding: '6rem 0', background: 'var(--bg-muted)' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         {/* Registration steps */}
@@ -43,7 +43,7 @@ export default function CTASection() {
           <span className="section-label" style={{ marginBottom: '0.75rem', display: 'inline-block' }}>{t.cta.label}</span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
-            fontWeight: 800, color: '#0f2d6b', lineHeight: 1.2, marginBottom: '0.75rem',
+            fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.2, marginBottom: '0.75rem',
           }}>
             {t.cta.title}{' '}
             <span style={{
@@ -53,7 +53,7 @@ export default function CTASection() {
               backgroundClip: 'text',
             }}>{t.cta.titleGradient}</span>
           </h2>
-          <p style={{ color: '#64748b', maxWidth: '500px', margin: '0 auto', lineHeight: 1.75 }}>
+          <p style={{ color: 'var(--text-muted)', maxWidth: '500px', margin: '0 auto', lineHeight: 1.75 }}>
             {t.cta.subtitle}
           </p>
         </div>
@@ -66,7 +66,7 @@ export default function CTASection() {
         }} className="steps-grid">
           {steps.map((step, i) => (
             <div key={step.num} style={{
-              background: 'white', border: '1px solid #e2e8f0',
+              background: 'var(--bg-card)', border: '1px solid var(--border)',
               borderRadius: '16px', padding: '1.5rem',
               boxShadow: '0 4px 16px rgba(15,45,107,0.06)',
               textAlign: 'center', position: 'relative',
@@ -88,12 +88,12 @@ export default function CTASection() {
                 display: 'inline-block',
                 padding: '0.2rem 0.65rem',
                 background: 'rgba(15,45,107,0.08)',
-                color: '#0f2d6b', borderRadius: '999px',
+                color: 'var(--text-primary)', borderRadius: '999px',
                 fontSize: '0.7rem', fontWeight: 800,
                 letterSpacing: '0.06em', marginBottom: '0.65rem',
               }}>LANGKAH {step.num}</div>
-              <h4 style={{ fontWeight: 700, color: '#0f2d6b', fontSize: '0.95rem', marginBottom: '0.4rem' }}>{step.title}</h4>
-              <p style={{ fontSize: '0.8rem', color: '#64748b', lineHeight: 1.6 }}>{step.desc}</p>
+              <h4 style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.95rem', marginBottom: '0.4rem' }}>{step.title}</h4>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>{step.desc}</p>
             </div>
           ))}
         </div>
@@ -118,7 +118,7 @@ export default function CTASection() {
               background: 'rgba(245,166,35,0.1)', pointerEvents: 'none',
             }} />
 
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'white', marginBottom: '0.5rem' }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.5rem' }}>
               {t.cta.infoTitle}
             </h3>
             <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '2rem' }}>
@@ -133,7 +133,7 @@ export default function CTASection() {
                 <span style={{ fontSize: '1.2rem', flexShrink: 0, marginTop: '0.1rem' }}>{item.icon}</span>
                 <div>
                   <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.55)', fontWeight: 500 }}>{item.label}</div>
-                  <div style={{ fontSize: '0.9rem', color: 'white', fontWeight: 600 }}>{item.val}</div>
+                  <div style={{ fontSize: '0.9rem', color: '#ffffff', fontWeight: 600 }}>{item.val}</div>
                 </div>
               </div>
             ))}
@@ -163,7 +163,7 @@ export default function CTASection() {
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem',
                 marginTop: '1.5rem', padding: '0.85rem',
-                background: '#25d366', color: 'white',
+                background: '#25d366', color: '#ffffff',
                 fontWeight: 700, fontSize: '0.9rem',
                 borderRadius: '12px', textDecoration: 'none',
                 transition: 'all 0.2s ease',
@@ -186,24 +186,24 @@ export default function CTASection() {
 
           {/* Right: Form */}
           <div style={{
-            background: 'white', borderRadius: '24px', padding: '2.5rem',
-            border: '1px solid #e2e8f0',
+            background: 'var(--bg-card)', borderRadius: '24px', padding: '2.5rem',
+            border: '1px solid var(--border)',
             boxShadow: '0 8px 32px rgba(15,45,107,0.08)',
           }}>
             {submitted ? (
               <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
                 <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🎉</div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f2d6b', marginBottom: '0.75rem' }}>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
                   {t.cta.successTitle}
                 </h3>
-                <p style={{ color: '#64748b', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+                <p style={{ color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
                   {t.cta.successDesc}
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
                   style={{
                     padding: '0.75rem 1.75rem',
-                    background: '#0f2d6b', color: 'white',
+                    background: '#0f2d6b', color: '#ffffff',
                     border: 'none', borderRadius: '999px',
                     fontWeight: 600, cursor: 'pointer',
                     fontFamily: 'Plus Jakarta Sans, sans-serif',
@@ -214,10 +214,10 @@ export default function CTASection() {
               </div>
             ) : (
               <>
-                <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#0f2d6b', marginBottom: '0.35rem' }}>
+                <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.35rem' }}>
                   {t.cta.formTitle}
                 </h3>
-                <p style={{ color: '#64748b', fontSize: '0.875rem', marginBottom: '1.75rem' }}>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem', marginBottom: '1.75rem' }}>
                   {t.cta.formSubtitle}
                 </p>
 
@@ -228,7 +228,7 @@ export default function CTASection() {
                     { id: 'form-phone', label: t.cta.fieldPhone, type: 'tel', key: 'phone', placeholder: t.cta.fieldPhonePlaceholder, required: true },
                   ].map((field) => (
                     <div key={field.key}>
-                      <label htmlFor={field.id} style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
+                      <label htmlFor={field.id} style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-heading)', marginBottom: '0.4rem' }}>
                         {field.label} {field.required && <span style={{ color: '#dc2626' }}>*</span>}
                       </label>
                       <input
@@ -240,7 +240,7 @@ export default function CTASection() {
                         onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
                         style={{
                           width: '100%', padding: '0.7rem 1rem',
-                          border: '1.5px solid #e2e8f0', borderRadius: '10px',
+                          border: '1.5px solid var(--border)', borderRadius: '10px',
                           fontSize: '0.9rem', fontFamily: 'Plus Jakarta Sans, sans-serif',
                           transition: 'border-color 0.2s',
                           background: '#fafafa',
@@ -250,7 +250,7 @@ export default function CTASection() {
                   ))}
 
                   <div>
-                    <label htmlFor="form-program" style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
+                    <label htmlFor="form-program" style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-heading)', marginBottom: '0.4rem' }}>
                       {t.cta.fieldProgram} <span style={{ color: '#dc2626' }}>*</span>
                     </label>
                     <select
@@ -260,7 +260,7 @@ export default function CTASection() {
                       onChange={(e) => setFormData({ ...formData, program: e.target.value })}
                       style={{
                         width: '100%', padding: '0.7rem 1rem',
-                        border: '1.5px solid #e2e8f0', borderRadius: '10px',
+                        border: '1.5px solid var(--border)', borderRadius: '10px',
                         fontSize: '0.9rem', fontFamily: 'Plus Jakarta Sans, sans-serif',
                         background: '#fafafa', cursor: 'pointer',
                       }}
@@ -274,7 +274,7 @@ export default function CTASection() {
                   </div>
 
                   <div>
-                    <label htmlFor="form-pesan" style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
+                    <label htmlFor="form-pesan" style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-heading)', marginBottom: '0.4rem' }}>
                       {t.cta.fieldMessage}
                     </label>
                     <textarea
@@ -285,7 +285,7 @@ export default function CTASection() {
                       onChange={(e) => setFormData({ ...formData, pesan: e.target.value })}
                       style={{
                         width: '100%', padding: '0.7rem 1rem',
-                        border: '1.5px solid #e2e8f0', borderRadius: '10px',
+                        border: '1.5px solid var(--border)', borderRadius: '10px',
                         fontSize: '0.9rem', fontFamily: 'Plus Jakarta Sans, sans-serif',
                         resize: 'vertical', background: '#fafafa',
                       }}
@@ -299,7 +299,7 @@ export default function CTASection() {
                     style={{
                       padding: '0.9rem',
                       background: loading ? '#94a3b8' : 'linear-gradient(135deg, #f5a623 0%, #fbbf24 100%)',
-                      color: '#0f2d6b', fontWeight: 800, fontSize: '1rem',
+                      color: 'var(--text-primary)', fontWeight: 800, fontSize: '1rem',
                       border: 'none', borderRadius: '12px',
                       cursor: loading ? 'not-allowed' : 'pointer',
                       boxShadow: loading ? 'none' : '0 8px 24px rgba(245,166,35,0.4)',
@@ -326,7 +326,7 @@ export default function CTASection() {
                     )}
                   </button>
 
-                  <p style={{ textAlign: 'center', fontSize: '0.75rem', color: '#94a3b8' }}>
+                  <p style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--text-subtle)' }}>
                     🔒 {t.cta.privacy}
                   </p>
                 </form>
