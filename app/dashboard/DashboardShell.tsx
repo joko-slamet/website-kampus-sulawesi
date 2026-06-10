@@ -10,6 +10,7 @@ const sidebarLinks = [
   { icon: '🏠', label: 'Overview', href: '/dashboard' },
   { icon: '📝', label: 'Artikel', href: '/dashboard/article' },
   { icon: '📰', label: 'Berita & Pengumuman', href: '/dashboard/news' },
+  { icon: '🎓', label: 'Program Studi', href: '/dashboard/program' },
   { icon: '📬', label: 'Leads / Inquiry', href: '/dashboard/leads' },
   { icon: '⚙️', label: 'Pengaturan', href: '/dashboard/settings' },
 ];

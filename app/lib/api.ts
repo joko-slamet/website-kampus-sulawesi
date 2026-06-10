@@ -156,10 +156,14 @@ export const api = {
   programs: {
     list: () => request<unknown[]>('/api/programs'),
     get: (id: string) => request<unknown>(`/api/programs/${id}`),
+    create: (body: unknown) =>
+      request<unknown>('/api/programs', { method: 'POST', body: JSON.stringify(body) }),
     update: (id: string, body: unknown) =>
       request<unknown>(`/api/programs/${id}`, { method: 'PUT', body: JSON.stringify(body) }),
     patchStatus: (id: string, status: 'aktif' | 'nonaktif') =>
       request<unknown>(`/api/programs/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+    delete: (id: string) =>
+      request<{ message: string }>(`/api/programs/${id}`, { method: 'DELETE' }),
   },
   leads: {
     create: (data: { name: string; phone: string; program?: string; school?: string; message?: string }) =>

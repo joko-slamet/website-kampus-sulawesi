@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next'
-import { programs } from './data/programs'
 
 const BASE_URL = 'https://stiaabdulharis.ac.id'
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000'
@@ -20,12 +19,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  const programRoutes: MetadataRoute.Sitemap = programs.map((p) => ({
-    url: `${BASE_URL}/program/${p.id}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.9,
-  }))
+  let programRoutes: MetadataRoute.Sitemap = []
+  try {
+    const res = await fetch(`${API_URL}/api/programs`, { next: { revalidate: 3600 } })
+    if (res.ok) {
+      const data = await res.json() as { id: string }[]
+      programRoutes = data.map(p => ({
+        url: `${BASE_URL}/program/${p.id}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.9,
+      }))
+    }
+  } catch {
+    // sitemap proceeds without programs if API is unavailable
+  }
 
   let articleRoutes: MetadataRoute.Sitemap = []
   try {

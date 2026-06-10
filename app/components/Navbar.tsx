@@ -179,7 +179,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
                 display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                 padding: '0.55rem 1.25rem',
                 background: 'linear-gradient(135deg, #f5a623 0%, #fbbf24 100%)',
-                color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.875rem',
+                color: '#0f2d6b', fontWeight: 700, fontSize: '0.875rem',
                 borderRadius: '999px', textDecoration: 'none',
                 boxShadow: '0 4px 14px rgba(245,166,35,0.35)',
                 transition: 'all 0.2s ease', whiteSpace: 'nowrap',
@@ -248,7 +248,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
                 {theme === 'dark' ? '☀️' : '🌙'}
               </button>
             </div>
-            <a href="#daftar" onClick={e => { e.preventDefault(); handleLinkClick('#daftar'); }} style={{ display: 'block', textAlign: 'center', padding: '1rem', background: 'linear-gradient(135deg, #f5a623 0%, #fbbf24 100%)', color: 'var(--text-primary)', fontWeight: 700, fontSize: '1rem', borderRadius: '12px', textDecoration: 'none' }}>
+            <a href="#daftar" onClick={e => { e.preventDefault(); handleLinkClick('#daftar'); }} style={{ display: 'block', textAlign: 'center', padding: '1rem', background: 'linear-gradient(135deg, #f5a623 0%, #fbbf24 100%)', color: '#0f2d6b', fontWeight: 700, fontSize: '1rem', borderRadius: '12px', textDecoration: 'none' }}>
               {t.nav.apply} →
             </a>
           </div>

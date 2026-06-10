@@ -1,11 +1,28 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { programs } from '../data/programs';
 import { useLanguage } from '../i18n/LanguageContext';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+
+interface Program {
+  id: string;
+  icon: string;
+  badge: string;
+  badgeColor: string;
+  name: string;
+  degree: string;
+  accreditation: string;
+  description: string;
+  highlights: string[];
+  careerPaths: string[];
+  color: string;
+  bgGradient: string;
+  status: 'aktif' | 'nonaktif';
+}
+
 function ProgramCard({ program, index, visible, detailLabel }: {
-  program: typeof programs[0]; index: number; visible: boolean; detailLabel: string;
+  program: Program; index: number; visible: boolean; detailLabel: string;
 }) {
   const [hovered, setHovered] = useState(false);
   const careers = program.careerPaths;
@@ -163,7 +180,15 @@ function ProgramCard({ program, index, visible, detailLabel }: {
 export default function ProgramsSection() {
   const { t } = useLanguage();
   const [visible, setVisible] = useState(false);
+  const [programs, setPrograms] = useState<Program[]>([]);
   const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/programs`)
+      .then(r => r.json())
+      .then((data: Program[]) => setPrograms(data.filter(p => p.status === 'aktif')))
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

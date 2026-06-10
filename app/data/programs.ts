@@ -12,7 +12,6 @@ export type Program = {
   careerPaths: string[];
   color: string;
   bgGradient: string;
-  alumni: string;
   status: 'aktif' | 'nonaktif';
 };
 
@@ -32,7 +31,6 @@ export const programs: Program[] = [
     careerPaths: ['Aparatur Sipil Negara (ASN)', 'Staf Pemerintah Daerah', 'Lembaga Negara & BUMN', 'Konsultan Kebijakan Publik'],
     color: '#0f2d6b',
     bgGradient: 'linear-gradient(135deg, #0f2d6b 0%, #1a4aad 100%)',
-    alumni: 'Lulusan Aktif',
     status: 'aktif',
   },
   {
@@ -50,7 +48,6 @@ export const programs: Program[] = [
     careerPaths: ['Manajer Operasional', 'Staf Administrasi Perusahaan', 'Wirausahawan Digital', 'HRD & Manajemen SDM'],
     color: '#065f46',
     bgGradient: 'linear-gradient(135deg, #065f46 0%, #10b981 100%)',
-    alumni: 'Lulusan Aktif',
     status: 'aktif',
   },
 ];
