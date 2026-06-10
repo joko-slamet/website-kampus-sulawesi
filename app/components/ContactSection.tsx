@@ -126,7 +126,7 @@ function ContactCard({ item, index, visible }: { item: ContactItem; index: numbe
         <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-subtle)', letterSpacing: '0.04em', marginBottom: '0.15rem' }}>
           {item.label}
         </div>
-        <div style={{ fontSize: '0.9rem', fontWeight: 700, color: hovered ? item.color : 'var(--text-heading)', transition: 'color 0.2s', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+        <div style={{ fontSize: '0.9rem', fontWeight: 700, color: hovered ? item.color : 'var(--text-heading)', transition: 'color 0.2s', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
           {item.value}
         </div>
       </div>
@@ -161,7 +161,7 @@ export default function ContactSection() {
   }, []);
 
   return (
-    <section id="kontak" ref={ref} style={{ padding: '6rem 0', background: 'var(--bg-card)' }}>
+    <section id="kontak" ref={ref} style={{ padding: 'clamp(3rem, 8vw, 6rem) 0', background: 'var(--bg-card)' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         <div style={{
@@ -194,7 +194,7 @@ export default function ContactSection() {
           gap: '1rem',
           maxWidth: '960px',
           margin: '0 auto',
-        }} className="contact-grid">
+        }} className="contact-grid contact-grid-root">
           {contacts.map((item, i) => (
             <ContactCard key={item.label} item={item} index={i} visible={visible} />
           ))}
@@ -202,8 +202,13 @@ export default function ContactSection() {
       </div>
 
       <style>{`
-        @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr 1fr !important; } }
-        @media (max-width: 480px) { .contact-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 900px) {
+          .contact-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 540px) {
+          .contact-grid { grid-template-columns: 1fr !important; gap: 0.75rem !important; }
+          .contact-grid a { padding: 1rem 1.1rem !important; }
+        }
       `}</style>
     </section>
   );

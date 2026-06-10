@@ -121,7 +121,9 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
           {/* Right: lang toggle + CTA + hamburger */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             {/* Language toggle */}
-            <div style={{
+            <div
+              className="navbar-extras"
+              style={{
               display: 'flex', borderRadius: '999px', overflow: 'hidden',
               border: scrolled || lightAtTop ? '1.5px solid var(--border)' : '1.5px solid rgba(255,255,255,0.25)',
               flexShrink: 0,
@@ -146,6 +148,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
 
             {/* Dark mode toggle */}
             <button
+              className="navbar-extras"
               onClick={toggleTheme}
               aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
               style={{
@@ -173,6 +176,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
 
             {/* CTA */}
             <a
+              className="navbar-extras"
               href="#daftar"
               onClick={e => { e.preventDefault(); handleLinkClick('#daftar'); }}
               style={{
@@ -259,6 +263,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .hamburger-btn { display: flex !important; }
+          .navbar-extras { display: none !important; }
         }
       `}</style>
     </>
