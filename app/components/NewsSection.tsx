@@ -47,6 +47,7 @@ function getCategoryColor(cat: string): string {
 }
 
 function TypeBadge({ type, pinned }: { type: 'news' | 'announcement'; pinned: boolean }) {
+  const { t } = useLanguage();
   return (
     <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
       {type === 'announcement' ? (
@@ -55,14 +56,14 @@ function TypeBadge({ type, pinned }: { type: 'news' | 'announcement'; pinned: bo
           padding: '0.22rem 0.65rem', borderRadius: '999px',
           background: '#fffbeb', color: '#b45309',
           border: '1px solid #fde68a', fontSize: '0.7rem', fontWeight: 700,
-        }}>📢 Pengumuman</span>
+        }}>{t.news.typeBadgeAnnouncement}</span>
       ) : (
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
           padding: '0.22rem 0.65rem', borderRadius: '999px',
           background: '#eff6ff', color: '#1d4ed8',
           border: '1px solid #bfdbfe', fontSize: '0.7rem', fontWeight: 700,
-        }}>📰 Berita</span>
+        }}>{t.news.typeBadgeNews}</span>
       )}
       {pinned && (
         <span style={{
@@ -70,7 +71,7 @@ function TypeBadge({ type, pinned }: { type: 'news' | 'announcement'; pinned: bo
           padding: '0.22rem 0.65rem', borderRadius: '999px',
           background: '#fef3c7', color: '#d97706',
           border: '1px solid #fde68a', fontSize: '0.7rem', fontWeight: 700,
-        }}>📌 Disematkan</span>
+        }}>{t.news.typeBadgePinned}</span>
       )}
     </div>
   );
@@ -136,9 +137,9 @@ export default function NewsSection() {
   const sideItems = filtered.slice(1, 4);
 
   const tabs: { key: TabType; label: string }[] = [
-    { key: 'all', label: 'Semua' },
-    { key: 'news', label: '📰 Berita' },
-    { key: 'announcement', label: '📢 Pengumuman' },
+    { key: 'all', label: t.news.tabAll },
+    { key: 'news', label: t.news.typeBadgeNews },
+    { key: 'announcement', label: t.news.typeBadgeAnnouncement },
   ];
 
   return (
@@ -197,7 +198,7 @@ export default function NewsSection() {
             <span style={{ fontSize: '1rem', flexShrink: 0 }}>📌</span>
             <div style={{ flex: 1, minWidth: 0 }}>
               <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#92400e', textTransform: 'uppercase', letterSpacing: '0.06em', marginRight: '0.6rem' }}>
-                Pengumuman Disematkan
+                {t.news.pinnedLabel}
               </span>
               <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-heading)' }}>
                 {items.find(i => i.pinned)?.title}
@@ -211,7 +212,7 @@ export default function NewsSection() {
                 display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
               }}
             >
-              Baca
+              {t.news.readShort}
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
@@ -259,7 +260,7 @@ export default function NewsSection() {
           <div style={{ textAlign: 'center', padding: '4rem 0', color: 'var(--text-subtle)' }}>
             <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>📭</div>
             <p style={{ fontWeight: 600, color: 'var(--text-muted)' }}>
-              {activeTab === 'announcement' ? 'Belum ada pengumuman' : 'Belum ada berita'}
+              {activeTab === 'announcement' ? t.news.emptyAnnouncement : t.news.emptyNews}
             </p>
           </div>
         )}
@@ -454,7 +455,7 @@ export default function NewsSection() {
                     (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
                   }}
                 >
-                  Lihat semua berita & pengumuman
+                  {t.news.viewAllLabel}
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>

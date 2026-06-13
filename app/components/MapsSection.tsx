@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const MAPS = [
   {
@@ -16,6 +17,7 @@ const MAPS = [
 ];
 
 export default function MapsSection() {
+  const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -38,7 +40,7 @@ export default function MapsSection() {
           transition: 'all 0.6s ease',
         }}>
           <span className="section-label" style={{ marginBottom: '1rem', display: 'inline-block' }}>
-            ✦ Lokasi Kampus
+            {t.maps.sectionLabel}
           </span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)',
@@ -46,13 +48,13 @@ export default function MapsSection() {
             lineHeight: 1.2, marginBottom: '0.75rem',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
           }}>
-            Temukan Kami di{' '}
+            {t.maps.heading}{' '}
             <span className="title-gradient">
-              Makassar
+              {t.maps.headingGradient}
             </span>
           </h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: '480px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
-            STIA YPA-AH &ldquo;Abdul Haris&rdquo; hadir di dua lokasi strategis di Kota Makassar.
+            {t.maps.desc}
           </p>
         </div>
 

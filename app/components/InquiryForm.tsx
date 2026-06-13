@@ -3,15 +3,15 @@
 import { useState } from 'react';
 import { api } from '../lib/api';
 import { gtagEvent } from '../lib/gtag';
-
-const PROGRAMS = [
-  'S1 Ilmu Administrasi Negara',
-  'S1 Ilmu Administrasi Niaga',
-];
+import { useLanguage } from '../i18n/LanguageContext';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
 export default function InquiryForm({ embedded = false }: { embedded?: boolean }) {
+  const { t } = useLanguage();
+  const f = t.inquiryForm;
+  const programs = [t.footer.programLink1, t.footer.programLink2];
+
   const [form, setForm] = useState({ name: '', phone: '', program: '', school: '', message: '' });
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState('');
@@ -40,11 +40,13 @@ export default function InquiryForm({ embedded = false }: { embedded?: boolean }
       setStatus('success');
     } catch {
       setStatus('error');
-      setErrorMsg('Gagal mengirim. Silakan coba lagi atau hubungi via WhatsApp.');
+      setErrorMsg(f.errorMsg);
     }
   }
 
   if (status === 'success') {
+    const [before, rest] = f.successDesc.split('{name}');
+    const [middle, after] = (rest ?? '').split('{phone}');
     return (
       <div style={{
         ...(!embedded ? { background: '#ffffff', borderRadius: '20px', border: '1px solid rgba(15,45,107,0.08)', boxShadow: '0 4px 24px rgba(15,45,107,0.07)' } : {}),
@@ -54,15 +56,15 @@ export default function InquiryForm({ embedded = false }: { embedded?: boolean }
       }}>
         <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎉</div>
         <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
-          Pesan Terkirim!
+          {f.successTitle}
         </h3>
         <p style={{ color: 'var(--text-muted)', lineHeight: 1.75, fontSize: '0.95rem' }}>
-          Terima kasih, <strong style={{ color: 'var(--text-primary)' }}>{form.name}</strong>. Tim kami akan menghubungi kamu di nomor <strong style={{ color: 'var(--text-primary)' }}>{form.phone}</strong> dalam 1×24 jam.
+          {before}<strong style={{ color: 'var(--text-primary)' }}>{form.name}</strong>{middle}<strong style={{ color: 'var(--text-primary)' }}>{form.phone}</strong>{after}
         </p>
         <button
           onClick={() => { setStatus('idle'); setForm({ name: '', phone: '', program: '', school: '', message: '' }); }}
           style={{ marginTop: '1.5rem', padding: '0.6rem 1.5rem', borderRadius: '999px', background: 'var(--bg-muted)', border: '1px solid var(--border)', color: 'var(--text-body)', fontWeight: 600, cursor: 'pointer', fontSize: '0.875rem' }}
-        >Kirim Lagi</button>
+        >{f.successBtn}</button>
       </div>
     );
   }
@@ -86,30 +88,30 @@ export default function InquiryForm({ embedded = false }: { embedded?: boolean }
     }}>
       <div style={{ marginBottom: '1.5rem' }}>
         <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.3rem' }}>
-          Formulir Pendaftaran
+          {f.title}
         </h3>
         <p style={{ fontSize: '0.82rem', color: 'var(--text-subtle)', lineHeight: 1.6 }}>
-          Isi form di bawah dan tim kami akan menghubungi kamu.
+          {f.subtitle}
         </p>
       </div>
 
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }} className="inquiry-2col">
           <div>
-            <label style={labelStyle}>Nama Lengkap <span style={{ color: '#ef4444' }}>*</span></label>
+            <label style={labelStyle}>{f.fieldName} <span style={{ color: '#ef4444' }}>*</span></label>
             <input
               name="name" value={form.name} onChange={handleChange}
-              placeholder="Contoh: Andi Firmansyah"
+              placeholder={f.fieldNamePlaceholder}
               required style={inputStyle}
               onFocus={e => { e.currentTarget.style.borderColor = '#0f2d6b'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(15,45,107,0.08)'; }}
               onBlur={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.boxShadow = 'none'; }}
             />
           </div>
           <div>
-            <label style={labelStyle}>Nomor HP/WhatsApp <span style={{ color: '#ef4444' }}>*</span></label>
+            <label style={labelStyle}>{f.fieldPhone} <span style={{ color: '#ef4444' }}>*</span></label>
             <input
               name="phone" value={form.phone} onChange={handleChange}
-              placeholder="08xxxxxxxxxx"
+              placeholder={f.fieldPhonePlaceholder}
               required type="tel" style={inputStyle}
               onFocus={e => { e.currentTarget.style.borderColor = '#0f2d6b'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(15,45,107,0.08)'; }}
               onBlur={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.boxShadow = 'none'; }}
@@ -119,22 +121,22 @@ export default function InquiryForm({ embedded = false }: { embedded?: boolean }
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }} className="inquiry-2col">
           <div>
-            <label style={labelStyle}>Program Studi</label>
+            <label style={labelStyle}>{f.fieldProgram}</label>
             <select
               name="program" value={form.program} onChange={handleChange}
               style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
               onFocus={e => { e.currentTarget.style.borderColor = '#0f2d6b'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(15,45,107,0.08)'; }}
               onBlur={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.boxShadow = 'none'; }}
             >
-              <option value="">-- Pilih Program --</option>
-              {PROGRAMS.map(p => <option key={p} value={p}>{p}</option>)}
+              <option value="">{f.fieldProgramDefault}</option>
+              {programs.map(p => <option key={p} value={p}>{p}</option>)}
             </select>
           </div>
           <div>
-            <label style={labelStyle}>Asal Sekolah</label>
+            <label style={labelStyle}>{f.fieldSchool}</label>
             <input
               name="school" value={form.school} onChange={handleChange}
-              placeholder="Nama SMA/SMK/MA"
+              placeholder={f.fieldSchoolPlaceholder}
               style={inputStyle}
               onFocus={e => { e.currentTarget.style.borderColor = '#0f2d6b'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(15,45,107,0.08)'; }}
               onBlur={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.boxShadow = 'none'; }}
@@ -143,10 +145,10 @@ export default function InquiryForm({ embedded = false }: { embedded?: boolean }
         </div>
 
         <div>
-          <label style={labelStyle}>Pesan / Pertanyaan</label>
+          <label style={labelStyle}>{f.fieldMessage}</label>
           <textarea
             name="message" value={form.message} onChange={handleChange}
-            placeholder="Tuliskan pertanyaan atau pesan kamu di sini..."
+            placeholder={f.fieldMessagePlaceholder}
             rows={3}
             style={{ ...inputStyle, resize: 'vertical', minHeight: '80px', fontFamily: 'inherit' }}
             onFocus={e => { e.currentTarget.style.borderColor = '#0f2d6b'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(15,45,107,0.08)'; }}
@@ -178,10 +180,10 @@ export default function InquiryForm({ embedded = false }: { embedded?: boolean }
           {status === 'loading' ? (
             <>
               <span style={{ width: '16px', height: '16px', border: '2px solid rgba(255,255,255,0.3)', borderTopColor: '#ffffff', borderRadius: '50%', animation: 'spin 0.7s linear infinite', display: 'inline-block' }} />
-              Mengirim...
+              {f.submitting}
             </>
           ) : (
-            'Kirim Sekarang →'
+            f.submit
           )}
         </button>
       </form>

@@ -21,8 +21,8 @@ interface Program {
   status: 'aktif' | 'nonaktif';
 }
 
-function ProgramCard({ program, index, visible, detailLabel }: {
-  program: Program; index: number; visible: boolean; detailLabel: string;
+function ProgramCard({ program, index, visible, detailLabel, highlightsLabel, careerLabel }: {
+  program: Program; index: number; visible: boolean; detailLabel: string; highlightsLabel: string; careerLabel: string;
 }) {
   const [hovered, setHovered] = useState(false);
   const careers = program.careerPaths;
@@ -110,7 +110,7 @@ function ProgramCard({ program, index, visible, detailLabel }: {
         {/* Highlights */}
         <div>
           <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-subtle)', letterSpacing: '0.07em', marginBottom: '0.6rem' }}>
-            BIDANG KAJIAN
+            {highlightsLabel}
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
             {program.highlights.map((h) => (
@@ -131,7 +131,7 @@ function ProgramCard({ program, index, visible, detailLabel }: {
         {/* Career Paths */}
         <div>
           <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-subtle)', letterSpacing: '0.07em', marginBottom: '0.6rem' }}>
-            PROSPEK KARIER
+            {careerLabel}
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
             {careers.map((c) => (
@@ -242,6 +242,8 @@ export default function ProgramsSection() {
                 index={i}
                 visible={visible}
                 detailLabel={t.programs.detail}
+                highlightsLabel={t.programs.highlightsLabel}
+                careerLabel={t.programs.careerLabel}
               />
             ))}
           </div>

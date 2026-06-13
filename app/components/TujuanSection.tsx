@@ -92,7 +92,7 @@ function ListCard({
 }
 
 export default function TujuanSection() {
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const [content, setContent] = useState<TujuanContent>(() => getDefault(lang));
   const { ref, visible } = useVisible();
 
@@ -121,7 +121,7 @@ export default function TujuanSection() {
           transition: 'all 0.6s ease',
         }}>
           <span className="section-label" style={{ marginBottom: '1rem', display: 'inline-block' }}>
-            ✦ Tujuan &amp; Sasaran
+            {t.tujuan.sectionLabel}
           </span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
@@ -129,13 +129,13 @@ export default function TujuanSection() {
             lineHeight: 1.2, marginBottom: '1rem',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
           }}>
-            Orientasi{' '}
+            {t.tujuan.heading}{' '}
             <span className="title-gradient">
-              Pendidikan Kami
+              {t.tujuan.headingGradient}
             </span>
           </h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: '560px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
-            Tujuan akademis dan profesional yang ingin dicapai, serta sasaran konkret bagi setiap lulusan STIA Abdul Haris.
+            {t.tujuan.desc}
           </p>
         </div>
 

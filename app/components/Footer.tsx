@@ -3,10 +3,7 @@
 import Image from 'next/image';
 import { useLanguage } from '../i18n/LanguageContext';
 
-const programLinks = [
-  { label: 'S1 Ilmu Administrasi Negara', href: '/program/adm-negara' },
-  { label: 'S1 Ilmu Administrasi Niaga', href: '/program/adm-niaga' },
-];
+const programHrefs = ['/program/adm-negara', '/program/adm-niaga'];
 
 const servicesHrefs = ['/#daftar', '/news', '/article'];
 const institutionHrefs = ['/#tentang', '/#program', '/#kontak'];
@@ -58,12 +55,12 @@ export default function Footer() {
               {t.footer.colPrograms}
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-              {programLinks.map((link) => (
-                <li key={link.href}>
-                  <a href={link.href} style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.85rem', textDecoration: 'none', transition: 'color 0.2s, padding-left 0.2s', display: 'inline-block' }}
+              {[t.footer.programLink1, t.footer.programLink2].map((label, i) => (
+                <li key={label}>
+                  <a href={programHrefs[i]} style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.85rem', textDecoration: 'none', transition: 'color 0.2s, padding-left 0.2s', display: 'inline-block' }}
                     onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#fbbf24'; (e.currentTarget as HTMLAnchorElement).style.paddingLeft = '4px'; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.55)'; (e.currentTarget as HTMLAnchorElement).style.paddingLeft = '0'; }}
-                  >{link.label}</a>
+                  >{label}</a>
                 </li>
               ))}
             </ul>
@@ -139,18 +136,16 @@ export default function Footer() {
             {t.footer.copyright}
           </p>
           <div style={{ display: 'flex', gap: '1.5rem' }}>
-            <a href="/news" style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.8rem', textDecoration: 'none', transition: 'color 0.2s' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.7)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.35)'; }}
-            >Berita</a>
-            <a href="/article" style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.8rem', textDecoration: 'none', transition: 'color 0.2s' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.7)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.35)'; }}
-            >Artikel</a>
-            <a href="#kontak" style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.8rem', textDecoration: 'none', transition: 'color 0.2s' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.7)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.35)'; }}
-            >Kontak</a>
+            {[
+              { label: t.footer.linkNews, href: '/news' },
+              { label: t.footer.linkArticles, href: '/article' },
+              { label: t.footer.linkContact, href: '#kontak' },
+            ].map(({ label, href }) => (
+              <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.8rem', textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.7)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.35)'; }}
+              >{label}</a>
+            ))}
           </div>
         </div>
       </div>

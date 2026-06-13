@@ -25,7 +25,7 @@ interface ApiArticle {
 export default function ArticlesSection() {
   const { t, lang } = useLanguage();
   const [visible, setVisible] = useState(false);
-  const [activeCategory, setActiveCategory] = useState('Semua');
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [articles, setArticles] = useState<ApiArticle[]>([]);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -45,11 +45,12 @@ export default function ArticlesSection() {
       .catch(() => {});
   }, []);
 
-  const categories = ['Semua', ...Array.from(new Set(articles.map(a => a.category)))];
+  const categories = [t.articles.filterAll, ...Array.from(new Set(articles.map(a => a.category)))];
 
-  const filtered = (activeCategory === 'Semua'
+  const effectiveCategory = activeCategory ?? t.articles.filterAll;
+  const filtered = (effectiveCategory === t.articles.filterAll
     ? articles
-    : articles.filter(a => a.category === activeCategory)
+    : articles.filter(a => a.category === effectiveCategory)
   ).slice(0, 6);
 
   return (
@@ -125,9 +126,9 @@ export default function ArticlesSection() {
                 border: '1.5px solid',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                borderColor: activeCategory === cat ? '#0f2d6b' : '#e2e8f0',
-                background: activeCategory === cat ? '#0f2d6b' : '#ffffff',
-                color: activeCategory === cat ? '#ffffff' : '#64748b',
+                borderColor: effectiveCategory === cat ? '#0f2d6b' : '#e2e8f0',
+                background: effectiveCategory === cat ? '#0f2d6b' : '#ffffff',
+                color: effectiveCategory === cat ? '#ffffff' : '#64748b',
               }}
             >
               {cat}

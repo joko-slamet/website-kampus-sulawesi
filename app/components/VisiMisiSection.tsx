@@ -33,7 +33,7 @@ export default function VisiMisiSection() {
           transition: 'all 0.6s ease',
         }}>
           <span className="section-label" style={{ marginBottom: '1rem', display: 'inline-block' }}>
-            ✦ Visi &amp; Misi
+            {p.visiMisiSectionLabel}
           </span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
@@ -41,13 +41,13 @@ export default function VisiMisiSection() {
             lineHeight: 1.2, marginBottom: '1rem',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
           }}>
-            Arah &amp;{' '}
+            {p.visiMisiHeading}{' '}
             <span className="title-gradient">
-              Komitmen Kami
+              {p.visiMisiHeadingGradient}
             </span>
           </h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: '520px', margin: '0 auto', lineHeight: 1.75, fontSize: '1rem' }}>
-            Landasan nilai dan arah pengembangan STIA YPA-AH &ldquo;Abdul Haris&rdquo; Makassar dalam mewujudkan pendidikan administrasi berkualitas.
+            {p.visiMisiDesc}
           </p>
         </div>
 
