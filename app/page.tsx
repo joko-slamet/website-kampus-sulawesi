@@ -6,6 +6,7 @@ export const metadata: Metadata = {
 };
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
+import StrukturOrganisasiSection from './components/StrukturOrganisasiSection';
 import VisiMisiSection from './components/VisiMisiSection';
 import ProgramsSection from './components/ProgramsSection';
 import TujuanSection from './components/TujuanSection';
@@ -25,6 +26,7 @@ export default function Home() {
       <main>
         <HeroSection />
         <AboutSection />
+        <StrukturOrganisasiSection />
         <VisiMisiSection />
         <ProgramsSection />
         <TujuanSection />

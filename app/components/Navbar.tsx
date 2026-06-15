@@ -84,7 +84,7 @@ export default function Navbar({ variant = 'transparent' }: { variant?: 'transpa
             />
             <div>
               <div style={{ fontWeight: 800, fontSize: '1rem', lineHeight: 1.1, color: scrolled || lightAtTop ? 'var(--text-primary)' : '#ffffff', transition: 'color 0.3s' }}>
-                STIA Abdul Haris
+                STIA YPA-AH MAKASSAR
               </div>
               <div style={{ fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.05em', color: scrolled || lightAtTop ? 'var(--text-muted)' : 'rgba(255,255,255,0.75)', transition: 'color 0.3s' }}>
                 MAKASSAR

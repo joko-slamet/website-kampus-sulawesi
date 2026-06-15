@@ -326,6 +326,12 @@ const id = {
     headingGradient: 'Pendidikan Kami',
     desc: 'Tujuan akademis dan profesional yang ingin dicapai, serta sasaran konkret bagi setiap lulusan STIA Abdul Haris.',
   },
+  struktur: {
+    sectionLabel: '✦ Struktur Organisasi',
+    heading: 'Susunan',
+    headingGradient: 'Organisasi',
+    caption: 'Sekolah Tinggi Ilmu Administrasi STIA YPA-AH MAKASSAR didukung SDM muda berkompeten di bidangnya masing-masing.',
+  },
   maps: {
     sectionLabel: '✦ Lokasi Kampus',
     heading: 'Temukan Kami di',
@@ -679,6 +685,12 @@ const en: typeof id = {
     heading: 'Our Educational',
     headingGradient: 'Orientation',
     desc: 'The academic and professional goals to be achieved, and the concrete targets for every STIA Abdul Haris graduate.',
+  },
+  struktur: {
+    sectionLabel: '✦ Organizational Structure',
+    heading: 'Our',
+    headingGradient: 'Organization',
+    caption: 'Sekolah Tinggi Ilmu Administrasi STIA YPA-AH MAKASSAR is supported by young and competent human resources in their respective fields.',
   },
   maps: {
     sectionLabel: '✦ Campus Locations',
