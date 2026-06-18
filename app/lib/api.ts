@@ -177,6 +177,15 @@ export const api = {
       return request<{ day: string; count: number }[]>(`/api/leads/daily?${qs}`);
     },
   },
+  articleTopics: {
+    get: () =>
+      request<{ topics: string[] }>('/api/settings/article-topics'),
+    update: (topics: string[]) =>
+      request<{ topics: string[] }>('/api/settings/article-topics', {
+        method: 'PUT',
+        body: JSON.stringify({ topics }),
+      }),
+  },
   settings: {
     getAll: () =>
       request<Record<string, { id: Record<string, unknown>; en: Record<string, unknown> }>>('/api/settings'),

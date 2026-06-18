@@ -428,6 +428,85 @@ function SchedulerTab() {
   );
 }
 
+// ─── Tab: Topik Artikel ────────────────────────────────────────────────────────
+
+function ArticleTopicsTab() {
+  const [topics, setTopics] = useState<string[]>([]);
+  const [newTopic, setNewTopic] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    api.articleTopics.get()
+      .then(d => setTopics(d.topics))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  function addTopic() {
+    const trimmed = newTopic.trim();
+    if (!trimmed || topics.includes(trimmed)) return;
+    setTopics(p => [...p, trimmed]);
+    setNewTopic('');
+  }
+
+  if (loading) return <Spinner />;
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <div style={{ fontSize: '0.8rem', color: 'var(--text-subtle)', lineHeight: 1.6 }}>
+        Topik ini digunakan oleh AI saat generate konten berita/pengumuman untuk memilih kategori yang paling relevan.
+      </div>
+
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
+          <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-heading)' }}>
+            Daftar Topik ({topics.length})
+          </label>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+          {topics.map((t, i) => (
+            <div key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', padding: '0.5rem 0.75rem', background: 'var(--bg-muted)', borderRadius: '8px', border: '1px solid #f1f5f9' }}>
+              <span style={{ flex: 1, fontSize: '0.875rem', color: 'var(--text-heading)' }}>{t}</span>
+              <AddRemoveBtn remove onClick={() => setTopics(p => p.filter((_, j) => j !== i))} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', gap: '0.6rem' }}>
+        <input
+          type="text"
+          value={newTopic}
+          onChange={e => setNewTopic(e.target.value)}
+          onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addTopic(); } }}
+          placeholder="Tambah topik baru..."
+          style={{ ...inputStyle, flex: 1 }}
+        />
+        <AddRemoveBtn onClick={addTopic} />
+      </div>
+
+      {error && <ErrorBox msg={error} />}
+      <SaveBar
+        saving={saving}
+        saved={saved}
+        onSave={async () => {
+          setSaving(true); setError('');
+          try {
+            const u = await api.articleTopics.update(topics);
+            setTopics(u.topics);
+            setSaved(true); setTimeout(() => setSaved(false), 2500);
+          } catch (e) {
+            setError(e instanceof Error ? e.message : 'Gagal menyimpan');
+          } finally { setSaving(false); }
+        }}
+      />
+    </div>
+  );
+}
+
 // ─── Section: Hero ─────────────────────────────────────────────────────────────
 
 function HeroTab({ data, onChange, onTranslate, translating }: SectionTabProps<HeroContent>) {
@@ -750,6 +829,7 @@ const formGrid: React.CSSProperties = {
 
 const TABS = [
   { key: 'scheduler', label: '🤖 Scheduler', section: null },
+  { key: 'articleTopics', label: '🏷️ Topik', section: null },
   { key: 'hero', label: '🦸 Hero', section: 'hero' as keyof AllSections },
   { key: 'about', label: 'ℹ️ Tentang', section: 'about' as keyof AllSections },
   { key: 'visiMisi', label: '🎯 Visi/Misi', section: 'visiMisi' as keyof AllSections },
@@ -881,6 +961,7 @@ export default function SettingsManager() {
         <div style={{ padding: '1.5rem' }}>
 
           {activeTab === 'scheduler' && <SchedulerTab />}
+          {activeTab === 'articleTopics' && <ArticleTopicsTab />}
 
           {sectionKey && sectionKey !== null && (
             <>
