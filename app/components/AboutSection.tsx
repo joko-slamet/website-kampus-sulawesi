@@ -48,7 +48,7 @@ export default function AboutSection() {
           }}>
             <div style={{ position: 'relative', height: '480px', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 24px 64px rgba(15,45,107,0.18)' }}>
               <Image
-                src="/students-campus.png"
+                src="/stia-brosur.jpg"
                 alt="Mahasiswa STIA Abdul Haris Sulawesi"
                 fill
                 style={{ objectFit: 'cover' }}
@@ -56,43 +56,7 @@ export default function AboutSection() {
               />
               <div style={{
                 position: 'absolute', inset: 0,
-                background: 'linear-gradient(to top, rgba(7,26,64,0.45) 0%, transparent 60%)',
               }} />
-            </div>
-
-            {/* Floating card: Akreditasi */}
-            <div style={{
-              position: 'absolute', top: '-1.5rem', right: '-1.5rem',
-              background: 'var(--bg-card)', borderRadius: '16px',
-              padding: '1.25rem 1.5rem',
-              boxShadow: '0 12px 40px rgba(15,45,107,0.18)',
-              border: '1px solid rgba(15,45,107,0.08)',
-              minWidth: '160px',
-              animation: 'float 5s ease-in-out infinite',
-            }}>
-              <div style={{ fontSize: '2.25rem', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1 }}>A</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem', fontWeight: 500 }}>{t.about.floatAccred}</div>
-              <div style={{ fontSize: '0.7rem', color: '#10b981', fontWeight: 600, marginTop: '0.2rem' }}>✓ {t.about.floatAccredSub}</div>
-            </div>
-
-            {/* Milestone timeline */}
-            <div style={{
-              position: 'absolute', bottom: '2rem', right: '-1.5rem',
-              background: 'var(--bg-card)', borderRadius: '16px',
-              padding: '1rem 1.25rem',
-              boxShadow: '0 8px 32px rgba(15,45,107,0.14)',
-              border: '1px solid rgba(15,45,107,0.06)',
-            }}>
-              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '0.06em', marginBottom: '0.6rem' }}>{t.about.journeyLabel}</div>
-              <div style={{ display: 'flex', gap: '0.75rem' }}>
-                {milestones.map((m, i) => (
-                  <div key={i} style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-primary)' }}>{m.year}</div>
-                    <div style={{ width: '6px', height: '6px', background: '#f5a623', borderRadius: '50%', margin: '4px auto' }} />
-                    <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>{m.label}</div>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
 
