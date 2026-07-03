@@ -1,11 +1,12 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
-import ProgramDetail from './ProgramDetail';
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import ProgramDetail from "./ProgramDetail";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://stiaabdulharis.ac.id';
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+const BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL || "https://stiaabdulharis.ac.id";
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
 export interface Lecturer {
   name: string;
@@ -34,7 +35,9 @@ type Props = { params: Promise<{ id: string }> };
 
 async function fetchProgram(id: string): Promise<ProgramForPage | null> {
   try {
-    const res = await fetch(`${API_URL}/api/programs/${id}`, { next: { revalidate: 300 } });
+    const res = await fetch(`${API_URL}/api/programs/${id}`, {
+      next: { revalidate: 300 },
+    });
     if (!res.ok) return null;
     return res.json() as Promise<ProgramForPage>;
   } catch {
@@ -64,33 +67,49 @@ export default async function ProgramDetailPage({ params }: Props) {
   if (!program) notFound();
 
   const courseSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Course',
+    "@context": "https://schema.org",
+    "@type": "Course",
     name: program.name,
     description: program.description,
     url: `${BASE_URL}/program/${id}`,
     educationalCredentialAwarded: program.degreeTitle || program.degree,
     provider: {
-      '@type': 'CollegeOrUniversity',
-      '@id': `${BASE_URL}/#organization`,
-      name: 'STIA YPA-AH "Abdul Haris" Makassar',
+      "@type": "CollegeOrUniversity",
+      "@id": `${BASE_URL}/#organization`,
+      name: "STIA YPA-AH MAKASSAR",
     },
   };
 
   const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Beranda', item: BASE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Program Studi', item: `${BASE_URL}/#program` },
-      { '@type': 'ListItem', position: 3, name: program.name, item: `${BASE_URL}/program/${id}` },
+      { "@type": "ListItem", position: 1, name: "Beranda", item: BASE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Program Studi",
+        item: `${BASE_URL}/#program`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: program.name,
+        item: `${BASE_URL}/program/${id}`,
+      },
     ],
   };
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
       <Navbar variant="dark" />
       <main>
         <ProgramDetail program={program} lecturers={program.lecturers ?? []} />

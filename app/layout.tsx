@@ -7,7 +7,7 @@ import type { SiteSettingsOverrides } from "./i18n/LanguageContext";
 
 async function fetchSiteSettings(): Promise<SiteSettingsOverrides> {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
     const res = await fetch(`${apiUrl}/api/settings`, {
       next: { revalidate: 0 },
     });
@@ -20,11 +20,11 @@ async function fetchSiteSettings(): Promise<SiteSettingsOverrides> {
 
 export const metadata: Metadata = {
   title: {
-    default: 'STIA YPA-AH "Abdul Haris" Makassar — Sekolah Tinggi Ilmu Administrasi',
-    template: '%s | STIA Abdul Haris Makassar',
+    default: "STIA YPA-AH MAKASSAR — Sekolah Tinggi Ilmu Administrasi",
+    template: "%s | STIA Abdul Haris Makassar",
   },
   description:
-    'STIA YPA-AH "Abdul Haris" Makassar adalah perguruan tinggi terakreditasi BAIK oleh BAN-PT yang mencetak sarjana profesional di bidang Ilmu Administrasi Negara (Publik) dan Ilmu Administrasi Niaga (Bisnis). Beroperasi sejak 2004, berlokasi di Makassar, Sulawesi Selatan.',
+    "STIA YPA-AH MAKASSAR adalah perguruan tinggi terakreditasi BAIK oleh BAN-PT yang mencetak sarjana profesional di bidang Ilmu Administrasi Negara (Publik) dan Ilmu Administrasi Niaga (Bisnis). Beroperasi sejak 2004, berlokasi di Makassar, Sulawesi Selatan.",
   keywords: [
     "STIA Abdul Haris Makassar",
     "STIA YPA-AH Makassar",
@@ -37,32 +37,32 @@ export const metadata: Metadata = {
     "pendaftaran mahasiswa baru makassar",
     "akreditasi BAIK BAN-PT",
   ],
-  authors: [{ name: 'STIA YPA-AH "Abdul Haris" Makassar' }],
-  creator: 'STIA YPA-AH "Abdul Haris" Makassar',
-  publisher: 'STIA YPA-AH "Abdul Haris" Makassar',
+  authors: [{ name: "STIA YPA-AH MAKASSAR" }],
+  creator: "STIA YPA-AH MAKASSAR",
+  publisher: "STIA YPA-AH MAKASSAR",
   metadataBase: new URL("https://stiaabdulharis.ac.id"),
   openGraph: {
     type: "website",
     locale: "id_ID",
     url: "https://stiaabdulharis.ac.id",
-    siteName: 'STIA Abdul Haris Makassar',
-    title: 'STIA YPA-AH "Abdul Haris" Makassar — Terakreditasi BAIK BAN-PT',
+    siteName: "STIA Abdul Haris Makassar",
+    title: "STIA YPA-AH MAKASSAR — Terakreditasi BAIK BAN-PT",
     description:
-      'Bergabunglah bersama STIA YPA-AH "Abdul Haris" Makassar. Raih gelar Sarjana Administrasi Negara atau Niaga dengan pendidikan berkualitas, terakreditasi BAIK oleh BAN-PT, di jantung Kota Makassar.',
+      "Bergabunglah bersama STIA YPA-AH MAKASSAR. Raih gelar Sarjana Administrasi Negara atau Niaga dengan pendidikan berkualitas, terakreditasi BAIK oleh BAN-PT, di jantung Kota Makassar.",
     images: [
       {
         url: "/hero-campus.png",
         width: 1200,
         height: 630,
-        alt: 'Kampus STIA YPA-AH "Abdul Haris" Makassar',
+        alt: "Kampus STIA YPA-AH MAKASSAR",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: 'STIA Abdul Haris Makassar',
+    title: "STIA Abdul Haris Makassar",
     description:
-      'Perguruan tinggi administrasi terakreditasi BAIK BAN-PT di Makassar. Daftar sekarang!',
+      "Perguruan tinggi administrasi terakreditasi BAIK BAN-PT di Makassar. Daftar sekarang!",
   },
   robots: {
     index: true,
@@ -96,7 +96,11 @@ export default async function RootLayout({
   return (
     <html lang="id" className="scroll-smooth">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('stia_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();` }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('stia_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
+          }}
+        />
       </head>
       <body className="min-h-screen antialiased">
         <ClientProviders settings={settings}>{children}</ClientProviders>

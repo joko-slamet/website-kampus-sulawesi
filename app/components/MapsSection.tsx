@@ -6,7 +6,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 const MAPS = [
   {
     title: 'Kampus 1',
-    address: 'Jl. Baji Gau No.19, Makassar',
+    address: 'Jl. Tanggul Patompo No 19 Makassar',
     src: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1199.0394592952434!2d119.4114401!3d-5.1812601!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbf1d82442670bf%3A0xa1128be2535f575b!2sSekolah%20Tinggi%20Ilmu%20Administrasi%20Abdul%20Haris!5e1!3m2!1sen!2sid!4v1780831324251!5m2!1sen!2sid',
   },
   {
