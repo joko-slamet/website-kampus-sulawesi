@@ -7,7 +7,8 @@ import type { SiteSettingsOverrides } from "./i18n/LanguageContext";
 
 async function fetchSiteSettings(): Promise<SiteSettingsOverrides> {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+    const apiUrl =
+      process.env.NEXT_PUBLIC_API_URL ?? "https://stiaahmakassar.ac.id";
     const res = await fetch(`${apiUrl}/api/settings`, {
       next: { revalidate: 0 },
     });

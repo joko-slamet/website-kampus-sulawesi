@@ -1,10 +1,12 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-const WA_NUMBER = process.env.NEXT_PUBLIC_WA_NUMBER ?? '';
-const DEFAULT_MSG = 'Halo, saya ingin bertanya tentang informasi pendaftaran kampus STIA Abdul Haris Makassar';
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+const WA_NUMBER = process.env.NEXT_PUBLIC_WA_NUMBER ?? "";
+const DEFAULT_MSG =
+  "Halo, saya ingin bertanya tentang informasi pendaftaran kampus STIA Abdul Haris Makassar";
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_API_URL ?? "https://stiaahmakassar.ac.id";
 
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
@@ -13,17 +15,24 @@ export default function FloatingCTA() {
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 3000);
     const handleScroll = () => setShowBack(window.scrollY > 600);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => { clearTimeout(timer); window.removeEventListener('scroll', handleScroll); };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const handleClick = () => {
     fetch(`${BACKEND_URL}/api/whatsapp/track`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ page: window.location.pathname }),
     }).catch(() => {});
-    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(DEFAULT_MSG)}`, '_blank', 'noopener,noreferrer');
+    window.open(
+      `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(DEFAULT_MSG)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
   };
 
   return (
@@ -33,24 +42,37 @@ export default function FloatingCTA() {
         onClick={handleClick}
         aria-label="Chat WhatsApp"
         style={{
-          position: 'fixed', bottom: '2rem', right: '2rem',
+          position: "fixed",
+          bottom: "2rem",
+          right: "2rem",
           zIndex: 9999,
-          width: '56px', height: '56px', borderRadius: '50%',
-          background: '#25d366',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          border: 'none', cursor: 'pointer',
-          boxShadow: '0 8px 32px rgba(37,211,102,0.45)',
-          transform: visible ? 'scale(1)' : 'scale(0)',
-          transition: 'transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.2s ease',
-          animation: visible ? 'pulse-glow-wa 2s ease-in-out infinite 2s' : 'none',
+          width: "56px",
+          height: "56px",
+          borderRadius: "50%",
+          background: "#25d366",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          border: "none",
+          cursor: "pointer",
+          boxShadow: "0 8px 32px rgba(37,211,102,0.45)",
+          transform: visible ? "scale(1)" : "scale(0)",
+          transition:
+            "transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.2s ease",
+          animation: visible
+            ? "pulse-glow-wa 2s ease-in-out infinite 2s"
+            : "none",
         }}
         onMouseEnter={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.12)';
-          (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 12px 40px rgba(37,211,102,0.55)';
+          (e.currentTarget as HTMLButtonElement).style.transform =
+            "scale(1.12)";
+          (e.currentTarget as HTMLButtonElement).style.boxShadow =
+            "0 12px 40px rgba(37,211,102,0.55)";
         }}
         onMouseLeave={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)';
-          (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 8px 32px rgba(37,211,102,0.45)';
+          (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
+          (e.currentTarget as HTMLButtonElement).style.boxShadow =
+            "0 8px 32px rgba(37,211,102,0.45)";
         }}
       >
         <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
@@ -61,28 +83,45 @@ export default function FloatingCTA() {
       {showBack && (
         <button
           id="back-to-top"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Kembali ke atas"
           style={{
-            position: 'fixed', bottom: '5.5rem', right: '2rem',
+            position: "fixed",
+            bottom: "5.5rem",
+            right: "2rem",
             zIndex: 9998,
-            width: '44px', height: '44px', borderRadius: '50%',
-            background: '#0f2d6b',
-            border: 'none', cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 4px 16px rgba(15,45,107,0.3)',
-            transition: 'all 0.25s ease',
+            width: "44px",
+            height: "44px",
+            borderRadius: "50%",
+            background: "#0f2d6b",
+            border: "none",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 4px 16px rgba(15,45,107,0.3)",
+            transition: "all 0.25s ease",
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = '#1a4aad';
-            (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)';
+            (e.currentTarget as HTMLButtonElement).style.background = "#1a4aad";
+            (e.currentTarget as HTMLButtonElement).style.transform =
+              "translateY(-2px)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = '#0f2d6b';
-            (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)';
+            (e.currentTarget as HTMLButtonElement).style.background = "#0f2d6b";
+            (e.currentTarget as HTMLButtonElement).style.transform =
+              "translateY(0)";
           }}
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="white"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          >
             <path d="M12 19V5M5 12l7-7 7 7" />
           </svg>
         </button>

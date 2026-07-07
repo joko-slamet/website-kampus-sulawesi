@@ -6,7 +6,8 @@ import ProgramDetail from "./ProgramDetail";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL || "https://stiaahmakassar.ac.id";
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ?? "https://stiaahmakassar.ac.id";
 
 export interface Lecturer {
   name: string;

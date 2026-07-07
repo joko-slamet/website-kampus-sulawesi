@@ -1,6 +1,6 @@
 import { gtagEvent } from './gtag';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL ?? 'https://stiaahmakassar.ac.id';
 
 export const WA_NUMBER = process.env.NEXT_PUBLIC_WA_NUMBER ?? '';
 export const WA_DEFAULT_MSG = 'Halo, saya ingin bertanya tentang informasi pendaftaran kampus STIA Abdul Haris Makassar';

@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { useLanguage } from '../i18n/LanguageContext';
-import { resolveImage } from '../lib/imageUrl';
+import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "../i18n/LanguageContext";
+import { resolveImage } from "../lib/imageUrl";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ?? "https://stiaahmakassar.ac.id";
 
 interface ApiArticle {
   id: string;
@@ -31,8 +32,10 @@ export default function ArticlesSection() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.1 }
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.1 },
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -40,95 +43,145 @@ export default function ArticlesSection() {
 
   useEffect(() => {
     fetch(`${API_URL}/api/articles?limit=18`)
-      .then(r => r.json())
+      .then((r) => r.json())
       .then((res: { data: ApiArticle[] }) => setArticles(res.data ?? []))
       .catch(() => {});
   }, []);
 
-  const categories = [t.articles.filterAll, ...Array.from(new Set(articles.map(a => a.category)))];
+  const categories = [
+    t.articles.filterAll,
+    ...Array.from(new Set(articles.map((a) => a.category))),
+  ];
 
   const effectiveCategory = activeCategory ?? t.articles.filterAll;
-  const filtered = (effectiveCategory === t.articles.filterAll
-    ? articles
-    : articles.filter(a => a.category === effectiveCategory)
+  const filtered = (
+    effectiveCategory === t.articles.filterAll
+      ? articles
+      : articles.filter((a) => a.category === effectiveCategory)
   ).slice(0, 6);
 
   return (
     <section
       id="artikel"
       ref={ref}
-      style={{ padding: '6rem 0', background: 'var(--bg-muted)' }}
+      style={{ padding: "6rem 0", background: "var(--bg-muted)" }}
     >
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
-
+      <div
+        style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 1.5rem" }}
+      >
         {/* Header */}
-        <div style={{
-          display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',
-          marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem',
-          opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(20px)',
-          transition: 'all 0.6s ease',
-        }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            marginBottom: "2rem",
+            flexWrap: "wrap",
+            gap: "1rem",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "all 0.6s ease",
+          }}
+        >
           <div>
-            <span className="section-label" style={{ marginBottom: '0.75rem', display: 'inline-block' }}>
+            <span
+              className="section-label"
+              style={{ marginBottom: "0.75rem", display: "inline-block" }}
+            >
               {t.articles.sectionLabel}
             </span>
-            <h2 style={{
-              fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
-              fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.2,
-            }}>
-              {t.articles.sectionTitle}{' '}
-              <span className="title-gradient">{t.articles.sectionGradient}</span>
+            <h2
+              style={{
+                fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                fontWeight: 800,
+                color: "var(--text-primary)",
+                lineHeight: 1.2,
+              }}
+            >
+              {t.articles.sectionTitle}{" "}
+              <span className="title-gradient">
+                {t.articles.sectionGradient}
+              </span>
             </h2>
-            <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem', fontSize: '0.95rem' }}>
+            <p
+              style={{
+                color: "var(--text-muted)",
+                marginTop: "0.5rem",
+                fontSize: "0.95rem",
+              }}
+            >
               {t.articles.sectionDesc}
             </p>
           </div>
           <a
-            href='/article'
+            href="/article"
             style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              padding: '0.65rem 1.5rem',
-              border: '1.5px solid #0f2d6b', color: 'var(--text-primary)',
-              fontWeight: 600, fontSize: '0.875rem',
-              borderRadius: '999px', textDecoration: 'none',
-              transition: 'all 0.25s ease', whiteSpace: 'nowrap',
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.65rem 1.5rem",
+              border: "1.5px solid #0f2d6b",
+              color: "var(--text-primary)",
+              fontWeight: 600,
+              fontSize: "0.875rem",
+              borderRadius: "999px",
+              textDecoration: "none",
+              transition: "all 0.25s ease",
+              whiteSpace: "nowrap",
             }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLAnchorElement).style.background = '#0f2d6b';
-              (e.currentTarget as HTMLAnchorElement).style.color = 'white';
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.background =
+                "#0f2d6b";
+              (e.currentTarget as HTMLAnchorElement).style.color = "white";
             }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
-              (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-primary)';
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.background =
+                "transparent";
+              (e.currentTarget as HTMLAnchorElement).style.color =
+                "var(--text-primary)";
             }}
           >
             {t.articles.viewAll}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
         </div>
 
         {/* Category Filter */}
-        <div style={{
-          display: 'flex', gap: '0.5rem', flexWrap: 'wrap',
-          marginBottom: '2.5rem',
-          opacity: visible ? 1 : 0, transition: 'all 0.6s ease 0.1s',
-        }}>
-          {categories.map(cat => (
+        <div
+          style={{
+            display: "flex",
+            gap: "0.5rem",
+            flexWrap: "wrap",
+            marginBottom: "2.5rem",
+            opacity: visible ? 1 : 0,
+            transition: "all 0.6s ease 0.1s",
+          }}
+        >
+          {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
               style={{
-                padding: '0.45rem 1.1rem',
-                borderRadius: '999px',
-                fontSize: '0.8rem', fontWeight: 600,
-                border: '1.5px solid',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                borderColor: effectiveCategory === cat ? '#0f2d6b' : '#e2e8f0',
-                background: effectiveCategory === cat ? '#0f2d6b' : '#ffffff',
-                color: effectiveCategory === cat ? '#ffffff' : '#64748b',
+                padding: "0.45rem 1.1rem",
+                borderRadius: "999px",
+                fontSize: "0.8rem",
+                fontWeight: 600,
+                border: "1.5px solid",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+                borderColor: effectiveCategory === cat ? "#0f2d6b" : "#e2e8f0",
+                background: effectiveCategory === cat ? "#0f2d6b" : "#ffffff",
+                color: effectiveCategory === cat ? "#ffffff" : "#64748b",
               }}
             >
               {cat}
@@ -137,88 +190,176 @@ export default function ArticlesSection() {
         </div>
 
         {/* Articles Grid */}
-        <div style={{ display: 'grid', gap: '1.5rem' }} className="articles-grid">
+        <div
+          style={{ display: "grid", gap: "1.5rem" }}
+          className="articles-grid"
+        >
           {filtered.map((article, i) => (
-            <a key={article.id} href={`/article/${article.id}`} style={{ textDecoration: 'none' }}>
+            <a
+              key={article.id}
+              href={`/article/${article.id}`}
+              style={{ textDecoration: "none" }}
+            >
               <article
                 style={{
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--border)',
-                  borderRadius: '20px',
-                  overflow: 'hidden',
-                  cursor: 'pointer',
+                  background: "var(--bg-card)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "20px",
+                  overflow: "hidden",
+                  cursor: "pointer",
                   opacity: visible ? 1 : 0,
-                  transform: visible ? 'translateY(0)' : 'translateY(24px)',
+                  transform: visible ? "translateY(0)" : "translateY(24px)",
                   transition: `all 0.5s ease ${i * 0.07 + 0.15}s`,
-                  display: 'flex', flexDirection: 'column',
-                  height: '100%',
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
                 }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 40px rgba(15,45,107,0.12)';
-                  (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)';
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(15,45,107,0.18)';
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.boxShadow =
+                    "0 12px 40px rgba(15,45,107,0.12)";
+                  (e.currentTarget as HTMLElement).style.transform =
+                    "translateY(-4px)";
+                  (e.currentTarget as HTMLElement).style.borderColor =
+                    "rgba(15,45,107,0.18)";
                 }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                  (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-                  (e.currentTarget as HTMLElement).style.borderColor = '#e2e8f0';
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                  (e.currentTarget as HTMLElement).style.transform =
+                    "translateY(0)";
+                  (e.currentTarget as HTMLElement).style.borderColor =
+                    "#e2e8f0";
                 }}
               >
                 {/* Thumbnail */}
                 {article.image && (
-                  <div style={{ height: '180px', overflow: 'hidden', flexShrink: 0 }}>
+                  <div
+                    style={{
+                      height: "180px",
+                      overflow: "hidden",
+                      flexShrink: 0,
+                    }}
+                  >
                     <img
                       src={resolveImage(article.image)}
                       alt={article.title}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        display: "block",
+                      }}
                     />
                   </div>
                 )}
 
-                <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1 }}>
+                <div
+                  style={{
+                    padding: "1.5rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.75rem",
+                    flex: 1,
+                  }}
+                >
                   {/* Top row */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
-                    <span style={{
-                      padding: '0.25rem 0.75rem',
-                      background: article.categoryColor + '18',
-                      color: article.categoryColor,
-                      borderRadius: '999px', fontSize: '0.72rem', fontWeight: 700,
-                    }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.6rem",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <span
+                      style={{
+                        padding: "0.25rem 0.75rem",
+                        background: article.categoryColor + "18",
+                        color: article.categoryColor,
+                        borderRadius: "999px",
+                        fontSize: "0.72rem",
+                        fontWeight: 700,
+                      }}
+                    >
                       {article.category}
                     </span>
                     {article.tag && (
-                      <span style={{
-                        padding: '0.25rem 0.75rem',
-                        background: (article.tagColor ?? '#f5a623') + '20',
-                        color: article.tagColor ?? '#f5a623',
-                        borderRadius: '999px', fontSize: '0.72rem', fontWeight: 700,
-                      }}>
+                      <span
+                        style={{
+                          padding: "0.25rem 0.75rem",
+                          background: (article.tagColor ?? "#f5a623") + "20",
+                          color: article.tagColor ?? "#f5a623",
+                          borderRadius: "999px",
+                          fontSize: "0.72rem",
+                          fontWeight: 700,
+                        }}
+                      >
                         {article.tag}
                       </span>
                     )}
-                    <span style={{ marginLeft: 'auto', fontSize: '0.72rem', color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>
+                    <span
+                      style={{
+                        marginLeft: "auto",
+                        fontSize: "0.72rem",
+                        color: "var(--text-subtle)",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       📅 {article.date} · ⏱ {article.readTime}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.4, margin: 0 }}>
-                    {lang === 'en' ? (article.titleEn || article.title) : article.title}
+                  <h3
+                    style={{
+                      fontSize: "1.05rem",
+                      fontWeight: 800,
+                      color: "var(--text-primary)",
+                      lineHeight: 1.4,
+                      margin: 0,
+                    }}
+                  >
+                    {lang === "en"
+                      ? article.titleEn || article.title
+                      : article.title}
                   </h3>
 
                   {/* Excerpt */}
-                  <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem', lineHeight: 1.7, margin: 0, flex: 1 }}>
-                    {lang === 'en' ? (article.excerptEn || article.excerpt) : article.excerpt}
+                  <p
+                    style={{
+                      color: "var(--text-muted)",
+                      fontSize: "0.875rem",
+                      lineHeight: 1.7,
+                      margin: 0,
+                      flex: 1,
+                    }}
+                  >
+                    {lang === "en"
+                      ? article.excerptEn || article.excerpt
+                      : article.excerpt}
                   </p>
 
                   {/* Read more */}
-                  <div style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
-                    color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.82rem',
-                    marginTop: '0.25rem',
-                  }}>
+                  <div
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.35rem",
+                      color: "var(--text-primary)",
+                      fontWeight: 600,
+                      fontSize: "0.82rem",
+                      marginTop: "0.25rem",
+                    }}
+                  >
                     {t.articles.readBtn}
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    >
                       <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                   </div>
@@ -229,35 +370,62 @@ export default function ArticlesSection() {
         </div>
 
         {/* Bottom CTA */}
-        <div style={{
-          textAlign: 'center', marginTop: '3rem',
-          opacity: visible ? 1 : 0, transition: 'all 0.6s ease 0.5s',
-        }}>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '1rem', fontSize: '0.9rem' }}>
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "3rem",
+            opacity: visible ? 1 : 0,
+            transition: "all 0.6s ease 0.5s",
+          }}
+        >
+          <p
+            style={{
+              color: "var(--text-muted)",
+              marginBottom: "1rem",
+              fontSize: "0.9rem",
+            }}
+          >
             {t.articles.newDaily}
           </p>
           <a
-            href='/article'
+            href="/article"
             style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              padding: '0.85rem 2rem',
-              background: 'linear-gradient(135deg, #0f2d6b 0%, #1a4aad 100%)',
-              color: '#ffffff', fontWeight: 700, fontSize: '0.9rem',
-              borderRadius: '999px', textDecoration: 'none',
-              boxShadow: '0 8px 24px rgba(15,45,107,0.25)',
-              transition: 'all 0.25s ease',
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.85rem 2rem",
+              background: "linear-gradient(135deg, #0f2d6b 0%, #1a4aad 100%)",
+              color: "#ffffff",
+              fontWeight: 700,
+              fontSize: "0.9rem",
+              borderRadius: "999px",
+              textDecoration: "none",
+              boxShadow: "0 8px 24px rgba(15,45,107,0.25)",
+              transition: "all 0.25s ease",
             }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)';
-              (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 14px 32px rgba(15,45,107,0.35)';
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.transform =
+                "translateY(-2px)";
+              (e.currentTarget as HTMLAnchorElement).style.boxShadow =
+                "0 14px 32px rgba(15,45,107,0.35)";
             }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
-              (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 8px 24px rgba(15,45,107,0.25)';
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.transform =
+                "translateY(0)";
+              (e.currentTarget as HTMLAnchorElement).style.boxShadow =
+                "0 8px 24px rgba(15,45,107,0.25)";
             }}
           >
             {t.articles.exploreAll}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>

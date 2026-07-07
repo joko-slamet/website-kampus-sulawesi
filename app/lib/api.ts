@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'https://stiaahmakassar.ac.id';
 
 export interface GeneratedArticle {
   id: string;
