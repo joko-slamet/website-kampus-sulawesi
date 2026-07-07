@@ -7,7 +7,7 @@ import ArticleContent from "./ArticleContent";
 import ArticleSidebar from "./ArticleSidebar";
 import ArticleHero from "./ArticleHero";
 
-const BASE_URL = "https://stiaabdulharis.ac.id";
+const BASE_URL = "https://stiaahmakassar.ac.id";
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
 function resolveImage(image: string | null | undefined): string | undefined {

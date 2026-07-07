@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-const BASE_URL = 'https://stiaabdulharis.ac.id'
+const BASE_URL = 'https://stiaahmakassar.ac.id'
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

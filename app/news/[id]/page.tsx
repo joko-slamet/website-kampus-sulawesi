@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import FloatingCTA from "../../components/FloatingCTA";
 import NewsDetailBody from "./NewsDetailBody";
 
-const BASE_URL = "https://stiaabdulharis.ac.id";
+const BASE_URL = "https://stiaahmakassar.ac.id";
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
 function resolveImage(image: string | null | undefined): string | undefined {

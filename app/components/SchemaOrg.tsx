@@ -2,15 +2,15 @@ export default function SchemaOrg() {
   const organization = {
     "@context": "https://schema.org",
     "@type": "CollegeOrUniversity",
-    "@id": "https://stiaabdulharis.ac.id/#organization",
+    "@id": "https://stiaahmakassar.ac.id/#organization",
     name: "STIA YPA-AH MAKASSAR",
     alternateName: "STIA Abdul Haris Makassar",
-    url: "https://stiaabdulharis.ac.id",
+    url: "https://stiaahmakassar.ac.id",
     logo: {
       "@type": "ImageObject",
-      url: "https://stiaabdulharis.ac.id/logo.png",
+      url: "https://stiaahmakassar.ac.id/logo.png",
     },
-    image: "https://stiaabdulharis.ac.id/hero-campus.png",
+    image: "https://stiaahmakassar.ac.id/hero-campus.png",
     description:
       "Sekolah Tinggi Ilmu Administrasi terakreditasi BAIK oleh BAN-PT di Makassar, Sulawesi Selatan. Menyelenggarakan program S1 Ilmu Administrasi Negara dan S1 Ilmu Administrasi Niaga sejak 2004.",
     address: {
@@ -26,12 +26,12 @@ export default function SchemaOrg() {
         {
           "@type": "Course",
           name: "S1 Ilmu Administrasi Negara",
-          url: "https://stiaabdulharis.ac.id/program/adm-negara",
+          url: "https://stiaahmakassar.ac.id/program/adm-negara",
         },
         {
           "@type": "Course",
           name: "S1 Ilmu Administrasi Niaga",
-          url: "https://stiaabdulharis.ac.id/program/adm-niaga",
+          url: "https://stiaahmakassar.ac.id/program/adm-niaga",
         },
       ],
     },
@@ -40,10 +40,10 @@ export default function SchemaOrg() {
   const website = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": "https://stiaabdulharis.ac.id/#website",
-    url: "https://stiaabdulharis.ac.id",
+    "@id": "https://stiaahmakassar.ac.id/#website",
+    url: "https://stiaahmakassar.ac.id",
     name: "STIA YPA-AH MAKASSAR",
-    publisher: { "@id": "https://stiaabdulharis.ac.id/#organization" },
+    publisher: { "@id": "https://stiaahmakassar.ac.id/#organization" },
   };
 
   return (

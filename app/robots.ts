@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/dashboard/', '/login/'],
     },
-    sitemap: 'https://stiaabdulharis.ac.id/sitemap.xml',
+    sitemap: 'https://stiaahmakassar.ac.id/sitemap.xml',
   }
 }

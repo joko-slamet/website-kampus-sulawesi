@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import ProgramDetail from "./ProgramDetail";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL || "https://stiaabdulharis.ac.id";
+  process.env.NEXT_PUBLIC_BASE_URL || "https://stiaahmakassar.ac.id";
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
 export interface Lecturer {
