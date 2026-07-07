@@ -341,7 +341,7 @@ export default function NewsSection() {
               </span>
             </div>
             <a
-              href={`/news/${items.find((i) => i.pinned)?.id}`}
+              href={`/p/news/${items.find((i) => i.pinned)?.id}`}
               style={{
                 fontSize: "0.75rem",
                 fontWeight: 700,
@@ -470,7 +470,7 @@ export default function NewsSection() {
             className="news-main-grid"
           >
             {/* Featured card */}
-            <a href={`/news/${featured.id}`} style={{ textDecoration: "none" }}>
+            <a href={`/p/news/${featured.id}`} style={{ textDecoration: "none" }}>
               <div
                 style={{
                   background: "var(--bg-muted)",
@@ -636,7 +636,7 @@ export default function NewsSection() {
               {sideItems.map((item, i) => (
                 <a
                   key={item.id}
-                  href={`/news/${item.id}`}
+                  href={`/p/news/${item.id}`}
                   style={{ textDecoration: "none" }}
                 >
                   <div

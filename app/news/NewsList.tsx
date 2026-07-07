@@ -267,7 +267,7 @@ export default function NewsList() {
           {items.map((item) => (
             <a
               key={item.id}
-              href={`/news/${item.id}`}
+              href={`/p/news/${item.id}`}
               style={{ textDecoration: "none" }}
             >
               <article
