@@ -3,7 +3,7 @@ import { gtagEvent } from './gtag';
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL ?? 'https://stiaahmakassar.ac.id';
 
 export const WA_NUMBER = process.env.NEXT_PUBLIC_WA_NUMBER ?? '';
-export const WA_DEFAULT_MSG = 'Halo, saya ingin bertanya tentang informasi pendaftaran kampus STIA Abdul Haris Makassar';
+export const WA_DEFAULT_MSG = 'Halo, saya ingin bertanya tentang informasi pendaftaran kampus STIA YPA-AH MAKASSAR';
 export const WA_HREF = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_DEFAULT_MSG)}`;
 
 export function trackWA(page?: string): void {

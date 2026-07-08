@@ -47,7 +47,7 @@ export default function LoginForm() {
       <p
         style={{ color: "#64748b", fontSize: "0.875rem", marginBottom: "2rem" }}
       >
-        Masuk ke panel admin STIA Abdul Haris
+        Masuk ke panel admin STIA YPA-AH MAKASSAR
       </p>
 
       {error && (

@@ -8,12 +8,12 @@ import ArtikelHero from "./ArtikelHero";
 export const metadata: Metadata = {
   title: "Artikel & Insight",
   description:
-    "Tips kuliah, info karier, dan beasiswa — konten edukatif untuk calon dan mahasiswa aktif STIA Abdul Haris Makassar. Diperbarui setiap hari.",
+    "Tips kuliah, info karier, dan beasiswa — konten edukatif untuk calon dan mahasiswa aktif STIA YPA-AH MAKASSAR. Diperbarui setiap hari.",
   alternates: { canonical: "https://stiaahmakassar.ac.id/article" },
   openGraph: {
-    title: "Artikel & Insight | STIA Abdul Haris Makassar",
+    title: "Artikel & Insight | STIA YPA-AH MAKASSAR",
     description:
-      "Tips kuliah, info karier, dan beasiswa untuk mahasiswa STIA Abdul Haris Makassar.",
+      "Tips kuliah, info karier, dan beasiswa untuk mahasiswa STIA YPA-AH MAKASSAR.",
     url: "https://stiaahmakassar.ac.id/article",
   },
 };

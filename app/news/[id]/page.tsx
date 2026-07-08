@@ -76,7 +76,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!news) return {};
   const desc = stripHtml(news.content);
   return {
-    title: `${news.title} - STIA Abdul Haris Makassar`,
+    title: `${news.title} - STIA YPA-AH MAKASSAR`,
     description: desc,
     alternates: { canonical: `${BASE_URL}/news/${id}` },
     openGraph: {

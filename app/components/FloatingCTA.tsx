@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 const WA_NUMBER = process.env.NEXT_PUBLIC_WA_NUMBER ?? "";
 const DEFAULT_MSG =
-  "Halo, saya ingin bertanya tentang informasi pendaftaran kampus STIA Abdul Haris Makassar";
+  "Halo, saya ingin bertanya tentang informasi pendaftaran kampus STIA YPA-AH MAKASSAR";
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_API_URL ?? "https://stiaahmakassar.ac.id";
 

@@ -22,13 +22,13 @@ async function fetchSiteSettings(): Promise<SiteSettingsOverrides> {
 export const metadata: Metadata = {
   title: {
     default: "STIA YPA-AH MAKASSAR — Sekolah Tinggi Ilmu Administrasi",
-    template: "%s | STIA Abdul Haris Makassar",
+    template: "%s | STIA YPA-AH MAKASSAR",
   },
   description:
     "STIA YPA-AH MAKASSAR adalah perguruan tinggi terakreditasi BAIK oleh BAN-PT yang mencetak sarjana profesional di bidang Ilmu Administrasi Negara (Publik) dan Ilmu Administrasi Niaga (Bisnis). Beroperasi sejak 2004, berlokasi di Makassar, Sulawesi Selatan.",
   keywords: [
-    "STIA Abdul Haris Makassar",
-    "STIA YPA-AH Makassar",
+    "STIA YPA-AH MAKASSAR",
+    "STIA YPA-AH MAKASSAR",
     "sekolah tinggi ilmu administrasi makassar",
     "kampus administrasi makassar",
     "S1 administrasi negara makassar",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "id_ID",
     url: "https://stiaahmakassar.ac.id",
-    siteName: "STIA Abdul Haris Makassar",
+    siteName: "STIA YPA-AH MAKASSAR",
     title: "STIA YPA-AH MAKASSAR — Terakreditasi BAIK BAN-PT",
     description:
       "Bergabunglah bersama STIA YPA-AH MAKASSAR. Raih gelar Sarjana Administrasi Negara atau Niaga dengan pendidikan berkualitas, terakreditasi BAIK oleh BAN-PT, di jantung Kota Makassar.",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "STIA Abdul Haris Makassar",
+    title: "STIA YPA-AH MAKASSAR",
     description:
       "Perguruan tinggi administrasi terakreditasi BAIK BAN-PT di Makassar. Daftar sekarang!",
   },

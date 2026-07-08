@@ -4,7 +4,7 @@ export default function SchemaOrg() {
     "@type": "CollegeOrUniversity",
     "@id": "https://stiaahmakassar.ac.id/#organization",
     name: "STIA YPA-AH MAKASSAR",
-    alternateName: "STIA Abdul Haris Makassar",
+    alternateName: "STIA YPA-AH MAKASSAR",
     url: "https://stiaahmakassar.ac.id",
     logo: {
       "@type": "ImageObject",

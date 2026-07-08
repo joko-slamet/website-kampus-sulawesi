@@ -51,11 +51,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const program = await fetchProgram(id);
   if (!program) return {};
   return {
-    title: `${program.name} — STIA Abdul Haris Makassar`,
+    title: `${program.name} — STIA YPA-AH MAKASSAR`,
     description: program.description,
     alternates: { canonical: `${BASE_URL}/program/${id}` },
     openGraph: {
-      title: `${program.name} — STIA Abdul Haris Makassar`,
+      title: `${program.name} — STIA YPA-AH MAKASSAR`,
       description: program.description,
       url: `${BASE_URL}/program/${id}`,
     },

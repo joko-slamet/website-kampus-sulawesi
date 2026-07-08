@@ -6,12 +6,12 @@ import NewsHero from "./NewsHero";
 import NewsList from "./NewsList";
 
 export const metadata: Metadata = {
-  title: "Berita & Pengumuman - STIA Abdul Haris Makassar",
+  title: "Berita & Pengumuman - STIA YPA-AH MAKASSAR",
   description:
-    "Informasi terkini, pengumuman resmi, dan liputan kegiatan kampus STIA YPA-AH Abdul Haris Makassar.",
+    "Informasi terkini, pengumuman resmi, dan liputan kegiatan kampus STIA YPA-AH MAKASSAR.",
   alternates: { canonical: "https://stiaahmakassar.ac.id/news" },
   openGraph: {
-    title: "Berita & Pengumuman - STIA Abdul Haris Makassar",
+    title: "Berita & Pengumuman - STIA YPA-AH MAKASSAR",
     description: "Informasi terkini dan pengumuman resmi kampus.",
     url: "https://stiaahmakassar.ac.id/news",
     type: "website",
