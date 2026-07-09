@@ -110,7 +110,7 @@ const id = {
     infoItems: [
       { icon: '📅', label: 'Tahun Akademik', val: '2025/2026' },
       { icon: '🎓', label: 'Program', val: 'S1 Adm. Negara & S1 Adm. Niaga' },
-      { icon: '📍', label: 'Kampus 1', val: 'Jl. Tanggul Patompo No. 19, Makassar' },
+      { icon: '📍', label: 'Kampus 1', val: 'Jl. Tanggul Patompo No. 9 & 19, Makassar' },
       { icon: '📍', label: 'Kampus 2', val: 'Jl. Gunung Bawakaraeng No. 72, Makassar' },
       { icon: '📧', label: 'Email', val: 'info@stiaahmakassar.ac.id' },
     ],
@@ -211,7 +211,7 @@ const id = {
     campusLabel: 'Alamat Kampus',
     campus1Title: 'Kampus 1',
     campus1Desc: 'Gedung Pimpinan Perguruan Tinggi & Staf Administrasi',
-    campus1Address: 'Jalan Tanggul Patompo No. 19, Kota Makassar 90224',
+    campus1Address: 'Jalan Tanggul Patompo No. 9 & 19, Kota Makassar 90224',
     campus2Title: 'Kampus 2',
     campus2Desc: 'Gedung Kaprodi, Dosen, Staf Administrasi & Perkuliahan',
     campus2Address: 'Jalan Gunung Bawakaraeng No. 72, Makassar',
@@ -305,7 +305,7 @@ const id = {
   contact: {
     phone: '089685894351 – 0882022506660',
     email: 'stiaabdulharis14@gmail.com',
-    address1: 'Jalan Tanggul Patompo No. 19, Kota Makassar 90224',
+    address1: 'Jalan Tanggul Patompo No. 9 & 19, Kota Makassar 90224',
     address2: 'Jalan Gunung Bawakaraeng No. 72, Makassar',
     facebook: 'STIA YPA-AH MAKASSAR',
     instagram: 'STIA YPA-AH MAKASSAR',
@@ -470,7 +470,7 @@ const en: typeof id = {
     infoItems: [
       { icon: '📅', label: 'Academic Year', val: '2025/2026' },
       { icon: '🎓', label: 'Programs', val: 'S1 Public Admin & S1 Business Admin' },
-      { icon: '📍', label: 'Campus 1', val: 'Jl. Tanggul Patompo No. 19, MAKASSAR' },
+      { icon: '📍', label: 'Campus 1', val: 'Jl. Tanggul Patompo No. 9 & 19, MAKASSAR' },
       { icon: '📍', label: 'Campus 2', val: 'Jl. Gunung Bawakaraeng No. 72, Makassar' },
       { icon: '📧', label: 'Email', val: 'info@stiaahmakassar.ac.id' },
     ],
@@ -571,7 +571,7 @@ const en: typeof id = {
     campusLabel: 'Campus Addresses',
     campus1Title: 'Campus 1',
     campus1Desc: 'Higher Education Leadership & Administrative Staff Building',
-    campus1Address: 'Jalan Tanggul Patompo No. 19, Makassar City 90224',
+    campus1Address: 'Jalan Tanggul Patompo No. 9 & 19, Makassar City 90224',
     campus2Title: 'Campus 2',
     campus2Desc: 'Program Head, Lecturers, Administrative Staff & Lectures Building',
     campus2Address: 'Jalan Gunung Bawakaraeng No. 72, Makassar',
@@ -665,7 +665,7 @@ const en: typeof id = {
   contact: {
     phone: '089685894351 – 0882022506660',
     email: 'stiaabdulharis14@gmail.com',
-    address1: 'Jalan Tanggul Patompo No. 19, Makassar City 90224',
+    address1: 'Jalan Tanggul Patompo No. 9 &19, Makassar City 90224',
     address2: 'Jalan Gunung Bawakaraeng No. 72, Makassar',
     facebook: 'STIA YPA-AH MAKASSAR',
     instagram: 'STIA YPA-AH MAKASSAR',

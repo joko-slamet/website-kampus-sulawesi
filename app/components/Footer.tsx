@@ -290,7 +290,7 @@ export default function Footer() {
             {[
               {
                 icon: "📍",
-                label: "Jl. Tanggul Patompo No. 19, Makassar 90224 (Kampus 1)",
+                label: "Jl. Tanggul Patompo No. 9 & 19, Makassar 90224 (Kampus 1)",
               },
               {
                 icon: "📍",
