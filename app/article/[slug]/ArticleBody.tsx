@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import DOMPurify from 'isomorphic-dompurify';
 import { useLanguage } from '../../i18n/LanguageContext';
 
 type Block =
@@ -15,7 +16,11 @@ type Block =
 import type { ArticleForPage } from './page';
 type Article = Pick<ArticleForPage, 'id' | 'category' | 'categoryColor' | 'title' | 'excerpt' | 'date' | 'readTime' | 'tag' | 'tagColor'>;
 
-export default function ArticleBody({ article, content }: { article: Article; content: Block[] }) {
+type Props =
+  | { article: Article; content: Block[]; html?: undefined }
+  | { article: Article; content?: undefined; html: string };
+
+export default function ArticleBody({ article, content, html }: Props) {
   const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
@@ -36,7 +41,31 @@ export default function ArticleBody({ article, content }: { article: Article; co
         borderRadius: '20px',
         padding: '2.5rem',
       }}>
-        {content.map((block, i) => {
+        {html !== undefined ? (
+          <>
+            <div
+              className="article-html-content"
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }}
+            />
+            <style>{`
+              .article-html-content { color: var(--text-body); font-size: 1rem; line-height: 1.85; }
+              .article-html-content p { margin: 0 0 1rem; }
+              .article-html-content h1 {
+                font-size: 1.35rem; font-weight: 800; color: var(--text-primary);
+                line-height: 1.3; margin: 0 0 0.75rem;
+              }
+              .article-html-content h1:not(:first-child) { margin-top: 2rem; }
+              .article-html-content h2, .article-html-content h3 {
+                font-size: 1.05rem; font-weight: 700; color: var(--text-heading);
+                line-height: 1.4; margin: 1.5rem 0 0.6rem;
+              }
+              .article-html-content ul, .article-html-content ol { padding-left: 1.25rem; margin: 0 0 1rem; }
+              .article-html-content li { font-size: 0.95rem; line-height: 1.75; margin-bottom: 0.4rem; }
+              .article-html-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+              .article-html-content strong { font-weight: 700; }
+            `}</style>
+          </>
+        ) : content.map((block, i) => {
           if (block.type === 'heading') {
             return (
               <h2 key={i} style={{

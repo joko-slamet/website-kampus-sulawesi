@@ -290,7 +290,8 @@ export default function Footer() {
             {[
               {
                 icon: "📍",
-                label: "Jl. Tanggul Patompo No. 9 & 19, Makassar 90224 (Kampus 1)",
+                label:
+                  "Jl. Tanggul Patompo No. 9 & 19, Makassar 90224 (Kampus 1)",
               },
               {
                 icon: "📍",
@@ -334,35 +335,31 @@ export default function Footer() {
           }}
         >
           <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.8rem" }}>
-            {t.footer.copyright}
+            © {new Date().getFullYear()} STIA YPA-AH MAKASSAR. Hak Cipta
+            Dilindungi Undang-Undang.
           </p>
           <div style={{ display: "flex", gap: "1.5rem" }}>
-            {[
-              { label: t.footer.linkNews, href: "/news" },
-              { label: t.footer.linkArticles, href: "/article" },
-              { label: t.footer.linkContact, href: "#kontak" },
-            ].map(({ label, href }) => (
-              <a
-                key={href}
-                href={href}
-                style={{
-                  color: "rgba(255,255,255,0.35)",
-                  fontSize: "0.8rem",
-                  textDecoration: "none",
-                  transition: "color 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color =
-                    "rgba(255,255,255,0.7)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color =
-                    "rgba(255,255,255,0.35)";
-                }}
-              >
-                {label}
-              </a>
-            ))}
+            <a
+              href="https://aksatechnology.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "rgba(255,255,255,0.3)",
+                fontSize: "0.75rem",
+                textDecoration: "none",
+                transition: "color 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.color =
+                  "rgba(255,255,255,0.6)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.color =
+                  "rgba(255,255,255,0.3)";
+              }}
+            >
+              Built by Aksa Technology
+            </a>
           </div>
         </div>
       </div>

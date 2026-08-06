@@ -86,6 +86,10 @@ export default function ArticleContent({ article }: { article: ArticleForPage })
 
   const dbContent = lang === 'en' ? (article.contentEn || article.content) : article.content;
 
+  if (dbContent && article.contentFormat === 'html') {
+    return <ArticleBody article={article} html={dbContent} />;
+  }
+
   let content: Block[];
   if (dbContent) {
     content = markdownToBlocks(dbContent);

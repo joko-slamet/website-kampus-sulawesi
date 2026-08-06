@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import Link from 'next/link';
 import { api } from '../../lib/api';
 
 interface Article {
@@ -159,6 +160,18 @@ export default function ArtikelManager() {
             )}
           </p>
         </div>
+        <Link
+          href="/dashboard/article/tulis"
+          style={{
+            display: 'flex', alignItems: 'center', gap: '0.4rem',
+            padding: '0.6rem 1rem',
+            background: 'linear-gradient(135deg,#0f2d6b,#1e40af)',
+            border: 'none', borderRadius: '10px',
+            fontSize: '0.85rem', fontWeight: 700, color: 'white',
+            cursor: 'pointer', whiteSpace: 'nowrap', textDecoration: 'none',
+            boxShadow: '0 4px 14px rgba(15,45,107,0.25)',
+          }}
+        >✍️ Tulis Artikel</Link>
       </div>
 
       {/* Filter bar */}
@@ -300,6 +313,18 @@ export default function ArtikelManager() {
 
             {/* Actions */}
             <div style={{ display: 'flex', gap: '0.35rem' }}>
+              <Link
+                href={`/dashboard/article/edit/${article.id}`}
+                data-tip="Edit Artikel"
+                className="icon-btn"
+                style={{
+                  width: '32px', height: '32px', borderRadius: '7px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: 'var(--bg-muted)', border: '1px solid var(--border)',
+                  color: 'var(--text-body)', textDecoration: 'none', flexShrink: 0,
+                }}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+              </Link>
               <button
                 onClick={() => handleTogglePublish(article)}
                 disabled={togglingId === article.id}

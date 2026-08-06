@@ -59,7 +59,6 @@ interface ContactContent {
 interface FooterContent {
   tagline: string;
   hours: string;
-  copyright: string;
 }
 
 interface TujuanContent {
@@ -156,7 +155,7 @@ function defaultContact(lang: 'id' | 'en'): ContactContent {
 
 function defaultFooter(lang: 'id' | 'en'): FooterContent {
   const t = translations[lang].footer;
-  return { tagline: t.tagline, hours: t.hours, copyright: t.copyright };
+  return { tagline: t.tagline, hours: t.hours };
 }
 
 function defaultTujuan(lang: 'id' | 'en'): TujuanContent {
@@ -762,7 +761,6 @@ function FooterTab({ data, onChange }: SectionTabProps<FooterContent>) {
         <Textarea value={d.tagline} onChange={v => onChange({ ...d, tagline: v })} rows={3} />
       </Field>
       <Field label="Jam Operasional"><Input value={d.hours} onChange={v => onChange({ ...d, hours: v })} /></Field>
-      <Field label="Teks Copyright"><Input value={d.copyright} onChange={v => onChange({ ...d, copyright: v })} /></Field>
     </div>
   );
 }

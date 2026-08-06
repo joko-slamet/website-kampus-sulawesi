@@ -25,6 +25,7 @@ export interface ArticleForPage {
   excerptEn: string | null;
   content: string | null;
   contentEn: string | null;
+  contentFormat: string;
   category: string;
   categoryColor: string;
   tag: string | null;
