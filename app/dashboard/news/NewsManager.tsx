@@ -756,7 +756,7 @@ export default function NewsManager() {
                 </button>
                 {item.published && (
                   <a
-                    href={`/news/${item.id}`}
+                    href={`/p/news/${item.id}`}
                     target="_blank"
                     data-tip="Lihat"
                     className="icon-btn"
